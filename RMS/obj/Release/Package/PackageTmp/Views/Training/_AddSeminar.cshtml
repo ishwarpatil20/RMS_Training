@@ -1,0 +1,281 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+@{
+    Layout = null;
+}
+
+<div class="col-md-12">
+		
+			
+    @*<span id="message">
+                                            @{
+       var msg = Convert.ToString(TempData["Result"]);
+       if (!string.IsNullOrWhiteSpace(msg))
+       {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+       }
+                                            }
+                                        </span>*@
+
+    <div class="row">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">Seminar Name</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                @Html.DropDownListFor(m => m.TrainingNameSemiKss, new SelectList(Model.ListTrainingName, "value", "text", Model.RaiseId), new { @class = "form-control Dropdownstyle" })
+                @Html.HiddenFor(m => m.TrainingTypeID)
+                <input type="hidden" id="HfldTrainingTypeId">
+            </div>
+            </div>
+        </div>
+                                            
+                                            
+    <div class="row">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">Seminar Start Date</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                                                <span id="SpanTrainingStartDate1" class="label-text" >
+                                                    @Model.TrainingStartDate.ToString("dd-MMM-yyyy")
+                                                </span>
+                                            </div>
+
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">Seminar End Date</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                                                <span id="SpanTrainingEndDate1" class="label-text"> @Model.TrainingEndDate.ToString("dd-MMM-yyyy") </span>
+                                            </div>
+
+            
+            </div>
+        </div>
+
+     @*@if (Model.SelectedAttendanceDate != null)
+                                    {
+                                        if (Model.SelectedAttendanceDate.Count == 0)
+                                        {
+                                            <span id="messagePartial">
+                                                Employee Attendance has not been added as yet.
+                                                <br />
+                                                <script>
+                                                    $("#messagePartial").addClass("MessageStyleSuccess");
+                                                </script>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                        *@
+   
+     <div class="row" id="dvAttendanceDate">
+                                        <div class="clearfix margin-b-10">
+                                            <div class=" col-md-2 col-sm-6">
+                                                <label class="form-label">Select Attendance Date</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                @if (Model.SelectedAttendanceDate != null)
+                                                {
+                                                    @Html.DropDownListFor(m => m.AttendanceDate, Model.SelectedAttendanceDate, new { @class = "form-control Dropdownstyle", @id="SelectedAttendanceDate" })
+                                                }
+                                            </div>
+                                            <div class=" col-md-2 col-sm-6"></div>
+                                            <div class="col-md-4 col-sm-6"></div>
+                                        </div>
+                                    </div>
+    
+                @*<div class=" col-md-2 col-sm-6">
+                <label class="form-label">Seminar start Date</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <span id="SpanTrainerName" class="label-text">
+                    @{
+                        var nominationduedate = string.Empty;
+                        if (!string.IsNullOrWhiteSpace(Convert.ToString(Model.TrainingStartDate)))
+                        {
+                            nominationduedate = Convert.ToDateTime(Model.TrainingStartDate).ToString("dd-MMM-yyyy");
+                        }
+                    }
+                    @nominationduedate
+                    @Html.DropDownListFor(m => m.AttendanceDate, new SelectList(Model.AttendanceDates, "value", "text", Model.AttendanceDates), new { @class = "form-control Dropdownstyle" })
+                    
+                </span>
+            </div>*@
+   <div class="form-group">
+    <div class="col-md-12" id ="dvSemi">
+
+   @{ Html.RenderPartial("_AddAttendance", Model); }
+        </div>
+</div>
+    
+<script type="text/javascript">
+
+$("#submitBtn1").click(function () {
+    var SaveAttendanceurl = '@Url.Action("SaveAttendance","Training")';
+    $.ajax({
+        type: "POST", 		//GET or POST or PUT or DELETE verb
+        url: SaveAttendanceurl, 		// Location of the service
+        data: $('form#frmSaveSemi').serialize(),
+        processdata: true, 	//True or False
+        success: function (result) {//On Successful service call
+            $("#dvSemiKss").html('');
+            $("#dvSemiKss").html(result);
+            //$("#dvTechSoft").hide();
+        }
+    })
+});
+
+    $(document).ready(function () {
+
+        $.validator.addMethod('date',
+          function (value, element) {
+              if (this.optional(element)) {
+                  return true;
+              }
+              var valid = true;
+              try {
+                  $.datepicker.parseDate('dd/mm/yy', value);
+              }
+              catch (err) {
+                  valid = false;
+              }
+              return valid;
+          });
+
+
+        $(function () {
+
+            // add multiple select / deselect functionality
+            $("#selectAll").click(function () {
+                $('.case').attr('checked', this.checked);
+            });
+
+            // if all checkbox are selected, check the selectall checkbox
+            // and viceversa
+            $(".case").click(function () {
+
+                if ($(".case").length == $(".case:checked").length) {
+                    $("#selectall").attr("checked", "checked");
+                } else {
+                    $("#selectall").removeAttr("checked");
+                }
+
+            });
+
+            if ($('#SpanTrainingEndDate1').html() != "01-Jan-0001") {
+                var minDates = $('#SpanTrainingEndDate1').html();
+
+                var newdate = new Date(minDates);
+                var d = newdate.getDate();
+                var m = newdate.getMonth();
+                m += 1;  // JavaScript months are 0-11
+                var y = newdate.getFullYear();
+                minDates = d + '/' + m + '/' + y;
+            }
+
+            $("#FeedbackLastDate").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: minDates
+                }).val()
+        });
+
+        if (($.trim($('#SpanTrainingStartDate1').html()) == '01-Jan-0001') || $.trim($('#SpanTrainingEndDate1').html()) == "01-Jan-0001") {
+            $('#SpanTrainingStartDate1').html('');
+            $('#SpanTrainingEndDate1').html('');
+
+            if ($("input[name='selectAllCheck']").length > 0) {
+                $('#submitBtn').show();
+            }
+            else {
+                $('#submitBtn').hide();
+            }
+        }
+        //Page Load Hide the  controls
+        if ($('#TrainingName').val() != '') {
+            $("#dvMode").show();
+        }
+    });
+
+    //On TrainingName,Load Trainer Name
+    $('#TrainingNameSemiKss').on('change', function () {
+        debugger;
+        var RaiseId = $(this).val();
+        TrainingTypeId = $("#TrainingTypeID").val();
+
+        if (RaiseId != '') {
+            //var viewattendanceurl = '@Url.Action("LoadSemiKss","Training")';
+            //var data = { _CourseId: CourseId };
+            // window.location.href = viewattendanceurl + "?TrainingTypeId=" + TrainingTypeId + "&RaiseId=" + RaiseId;
+            var gridurl = '@Url.Action("LoadSemiKss", "Training")';
+            showaiting();
+            $("#dvSemiKss").load(gridurl + "?TrainingTypeId=" + TrainingTypeId + "&RaiseId=" + RaiseId);
+            hidewaiting();
+        }
+        else {
+            $("#SpanTrainingStartDate1").html('');
+            $('#SpanTrainingEndDate1').html('');
+            $('#SelectedAttendanceDate').html('');
+
+        }
+    });
+
+    $('#SelectedAttendanceDate').on('change', function () {
+        var atten = $(this).val();
+        //debugger;
+        
+        var gridurl = '@Url.Action("AddAttendance", "training")';
+
+       //$("#AttendanceDate option:selected").text();
+        var AttendanceDate = $("#SelectedAttendanceDate option:selected").text();
+       var CourseId = $("#TrainingNameSemiKss").val();
+       var TrainingTypeID = $("#TrainingTypeID").val();
+       
+       if (atten != '') {
+           showaiting();
+           $("#dvSemi").load(gridurl + "?CourseId=" + CourseId + "&TrainingTypeID=" + TrainingTypeID + "&AddAttendanceDate=" + AttendanceDate);
+           $("#dvSemi").show();
+       } else { $("#dvSemi").html(''); }
+   });
+
+
+    //On TrainingName,Load Trainer Name
+    $('#spnExport').click(function () {
+        var _TrainingTypeId = $("#TrainingTypeID").val();
+        var _CourseId= $("#TrainingNameSemiKss").val();
+        if (_CourseId != '') {
+            var viewattendanceurl = '@Url.Action("ExportExcel","Training")';
+            window.location.href = viewattendanceurl + "?TrainingTypeId=" + TrainingTypeId + "&RaiseId=" + _CourseId;
+        }
+    });
+
+
+    @*var Viewurl = '@Url.Action("CloseTrainingRequest", "training")';*@
+    //var totalRecord = 'Model.Count';
+    var RaiseId = '';
+    var Status = '';
+    var Comment = '';
+    $(document).ready(function () {
+        hidewaiting();
+        //if (totalRecord > 0) {
+        //    $('#viewreport').dataTable();
+        //}
+
+
+        $(function () {
+            //var iddd = $("#TrainingTypeID").val();
+            //if (iddd==1209)
+            //    $(".jq_Semi").click();
+        });
+
+
+    });
+</script>

@@ -1,0 +1,166 @@
+﻿@model  RMS.Models.InterviewPanelViewModel
+@using RMS.Common.Constants
+@{
+    Layout = null;
+}
+
+@Html.ValidationSummary(true)
+
+
+<table id="tblCourse" class="table table-striped">
+    <thead>
+        <tr class="trGrid" valign="top">
+            @*<td style="display:none" ></td>*@
+            <th>Emp Name</th>
+            <th>Designation</th>
+            <th>Emp Secondary Skill</th>
+            <th>Business Vertical</th>
+            <th>Line Manager</th>
+            <th>Primary Skill</th>
+            @*<th>Department Name</th>            *@
+            <th>Candidate Designation</th>
+            <th>Panelist Secondary Skill</th>
+            <th>Level</th>
+            <th>Inducted</th>
+            <th>Trained</th>
+            @if (Model.ListAllIP != null  )
+            {
+                if(Model.ListAllIP.Count >0 )
+                {
+                    if(Model.ListAllIP[0].PageMode == "V")
+                    {
+                        //if(Model.ListAllIP[0].CandidateDeptId == 0)
+                        //{
+                            @*<th>Add</th>
+                            <th>Delete</th>*@
+                        //}
+                        //else
+                        //{
+                    <th>Add</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                        //}
+                    }
+                }
+            }
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListAllIP != null)
+        {
+            foreach (var item in Model.ListAllIP)
+            {
+            <tr>
+                @*<td style="display:none" >@Html.DisplayFor(modelItem => item.EmpName )</td>*@
+                <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+                <td>@Html.DisplayFor(modelItem => item.DesignationName)</td>
+                <td>@Html.DisplayFor(modelItem => item.EmpSecondarySkill)</td>
+                <td>@Html.DisplayFor(modelItem => item.BusinessVertical)</td>
+                <td>@Html.DisplayFor(modelItem => item.LINEMANAGER)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrimarySkillName)</td>
+                @*<td>@Html.DisplayFor(modelItem => item.DEPTName)</td>*@
+                <td>@Html.DisplayFor(modelItem => item.CandidateDesignationName)</td>
+                <td>@Html.DisplayFor(modelItem => item.SecondarySkillname)</td>
+                <td>@Html.DisplayFor(modelItem => item.levelidName)</td>
+                <td>@Html.DisplayFor(modelItem => item.InductedName)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrainingAttendedName)</td>
+               
+                @if (item.PageMode == "V")
+                {
+                     <td class="add" style="text-align:center;" data-InterviewPanelId="@item.PanelIdEncr"  data-EmpId="@item.EmpIdEncr"   >
+                            <a href="#"><img src="@Url.Content("~/Content/css/Images/file_add.png")" alt="Add" width="20" title="Add"/></a>
+                     </td>
+                    if (item.CandidateDeptId == 0)
+                    {
+                        <td class="edit" style="text-align:center;" data-InterviewPanelId="@item.PanelIdEncr"   >
+                            <img src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20"alt="Edit" title="Edit"/>
+                        </td>
+                        <td class="minus" style="text-align:center;" data-InterviewPanelId="@item.EmpIdEncr"  >
+                            <img  src="@Url.Content("~/Content/css/Images/minus.JPG")" alt="Delete" width="20" title="Delete"/>
+                            @Html.Hidden("HfldPanelId", RMS.Helpers.CheckAccessAttribute.Encode(Convert.ToString(item.PanelId)))                
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="edit" style="text-align:center;" data-InterviewPanelId="@item.PanelIdEncr"   >
+                            <a href="#"><img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a>
+                        </td>
+                        <td class="delete" style="text-align:center;" data-InterviewPanelId="@item.PanelIdEncr"  >
+                            <a href="#"><img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a>
+                            @Html.Hidden("HfldPanelId", RMS.Helpers.CheckAccessAttribute.Encode(Convert.ToString(item.PanelId)))                
+                        </td>
+                    }
+                }
+               
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+@*<div class="col-md-12" id="dvExportToExcel" style="text-align: center">
+    <a href='@Url.Action("ExportExcel", "TrainingPlan", new { @year = @Model.Year, @Quarter = Model.Quarter })'>
+        <span class="btn btn-submit">Export to excel</span>
+    </a>
+</div>*@
+
+<script type="text/javascript">
+    var success = @((TempData["passedArray"] != null).ToString().ToLower());
+    
+    jQuery.fn.dataTable.Api.register('page.jumpToData()', function (data, column) {
+        var pos = this.column(column, {order: 'current'}).data().indexOf(data);
+
+        if (pos >= 0) {
+            var page = Math.floor(pos / this.page.info().length);
+            this.page(page).draw(false);
+        }
+
+        return this;
+    });
+
+    $(document).ready(function () {
+        var table = $('#tblCourse').DataTable();
+      
+        if (success == true) {
+            var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   
+             //ar data1=[data.TrainingType,data.TrainingName,data.Quarter,data.Priority,data.Status,data.RequestedBy]
+             //var row = table.row.add(data).node();
+             // table.row(row).draw(false);
+             table.page.jumpToData( data, 0 );
+         }
+    })
+
+    $(".add").bind("click", function (event) {
+        // showaiting();
+        //debugger;
+        var editurl = '@Url.Action("EditInterviewPanel", "InterviewPanel")';
+        var EmpId = $(this).data("empid");
+        $("#message").html('');
+        window.location.href = editurl + "?Mode=A&InterviewPanelId=" + EmpId  
+        return true;
+     });
+
+    $(".edit").bind("click", function (event) {
+        // showaiting();
+        //debugger;
+        var editurl = '@Url.Action("EditInterviewPanel", "InterviewPanel")';
+        var InterviewPanelId = $(this).data("interviewpanelid");
+        $("#message").html('');
+        window.location.href     = editurl + "?Mode=U&InterviewPanelId=" + InterviewPanelId
+        return true;
+    });
+
+    $(".delete").bind("click", function (event) {
+        if (confirm('Are you sure you want to Delete this Interview panel.')) {
+            var deleteurl = '@Url.Action("DeleteInterviewPanel", "InterviewPanel")';
+            var InterviewPanelId = $(this).data("interviewpanelid");
+            //var InterviewPanelId = parseInt($(this).data("interviewpanelid"));
+            window.location.href = deleteurl + "?Mode=U&InterviewPanelId=" + InterviewPanelId
+            return true;
+        }
+    });
+
+
+</script>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RMS.Common.BusinessEntities.Menu.Menu>
+
+<link  href="@Url.Content("~/Content/css/menu.css")" type="text/css" rel="stylesheet" />
+
+<div class="float-right menu-bg" id="divMenu">
+
+    <ul >
+        @{
+            foreach (var menu in Model)
+            {
+                if (menu.ParentID == 0)
+                {                              
+                <li class="menu">@menu.PageName
+                    @if (menu.SubMenu != null)
+                    {
+                        <ul>
+                            @foreach (var submenu in menu.SubMenu)
+                            {
+                                if(submenu.PageName !="Start Assessment")
+                                {
+                                     <li><a href="@string.Concat(submenu.baseUrl, submenu.PageURL)">@submenu.PageName</a></li>
+                            }
+                                else
+                                {
+                                    <li><a href="@string.Concat(submenu.baseUrl, submenu.PageURL)" onclick="window.open(this.href, 'mywin','left=20,top=20,width=screen.width,toolbar=1,resizable=0'); return false;">@submenu.PageName</a></li>
+                            }
+                            }
+                        </ul>
+                    }
+                </li>
+                }
+            }
+        }
+    </ul>
+  
+
+     @*<ul>
+        @{
+            foreach (var menu in Model)
+            {
+                if (menu.ParentID == 0)
+                {                              
+            <a href="@string.Concat(menu.baseUrl, menu.PageURL)" >
+                <li>@menu.PageName
+                    @if (menu.SubMenu != null)
+                    {
+                        <ul>
+                            @foreach (var submenu in menu.SubMenu)
+                            {
+                                <a href="@string.Concat(submenu.baseUrl, submenu.PageURL)"><li>@submenu.PageName</li></a>
+                            }
+                        </ul>
+                    }
+                </li>
+            </a>
+                }
+            }
+        }
+    </ul>*@
+</div>

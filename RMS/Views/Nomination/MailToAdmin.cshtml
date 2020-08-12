@@ -1,0 +1,724 @@
+﻿@model RMS.Models.AccomodationTravelViewModel
+@{
+    ViewBag.Title = "MailToAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class ="container">
+    @using (Html.BeginForm("MailToAdmin", "Nomination", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-12">
+            <div class=" training-title margin-b-10">
+               Mail To Admin
+               <img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+            </div>
+         </div>
+
+         <div class="col-md-12">
+            <div class="panel panel-default">
+               <div class="panel-heading">Mail To Admin For Course Name : @ViewBag.CourseName</div>
+                    <div class="panel-body">
+                        
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span id="message">
+                                            @{
+        var msg = Convert.ToString(TempData["Result"]);
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+        }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                              </div>
+ 
+     <div class="row">
+            <div class="clearfix margin-b-10">
+                @Html.HiddenFor(model => model.NominationModel.CourseID)
+            <div class="col-md-4"  id ="AccomodationDetails">
+
+       @*<div class="form-group" id ="AccomodationDetails" style="width: auto;">*@
+           
+                @Html.CheckBoxFor(model => model.NominationModel.IsAccomodationTrainer, "chkAccomodation_Trainer")
+                @Html.Label("lblAcc_Trainer", "Accomodation of Trainer")</div>
+                <div class="col-md-2"><label class="form-label">@Html.Label("lblFrmDate", "From Date: ")
+                    <span class="asterisk-color" style="display:none" id="spanFromDate"> *</span>
+                    </label>
+                </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.NominationModel.AccomodationFromDate, "{0:dd/MM/yyyy}", Model.NominationModel.IsAccomodationTrainer ? (object)new { @class = "form-control required", @readonly = "readonly" } : (object)new { @class = "form-control", @readonly = "readonly", @disabled = "disabled"})</div>
+            
+                <div class="col-md-2"><label class= "form-label">@Html.Label("lblEnddate", "End Date: ")
+                    <span class="asterisk-color" style="display:none" id="spanToDate"> *</span>
+                    </label>
+                    </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.NominationModel.AccomodationToDate,"{0:dd/MM/yyyy}", Model.NominationModel.IsAccomodationTrainer ? (object)new { @class = "form-control required", @readonly = "readonly" } : (object)new { @class = "form-control", @readonly = "readonly", @disabled = "disabled"})</div>
+            </div>
+         <div class="col-md-12 margin-b-10">
+                        <div class="divider"></div>
+                     </div>
+         </div>
+           
+            <div class="row">
+                <div class="clearfix margin-b-10" id ="TravelDetails" style="width: auto;">
+                <div class="col-md-12">@Html.CheckBoxFor(model => model.NominationModel.IsTravelDetailsTrainer, "chkTravel_Details")
+                    @Html.Label("lblTravelDetails", "Travel details of Trainer")</div>
+                 </div>
+                  <div class="clearfix margin-b-10">
+                    <div id="First">
+                       <div hidden>@Html.EditorFor(model=> model.TravelDetailModel[0].TravelDetailID)</div>
+                <div class="col-md-2"><label class="form-label"> @Html.Label("lblFrmLocation", "From Location: ")
+                     
+                    <span class="asterisk-color" style="display:none" id="spanFromLocation"> *</span>
+                     </label>
+                </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[0].FromLocation, Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", maxlength = 150 } : (object)new { @class = "form-control textstyle", @disabled = "disabled", maxlength = 150})</div>
+                <div class="col-md-2"><label class = "form-label">@Html.Label("lblToLocation", "To Location: ")
+                     
+                    <span class="asterisk-color" style="display:none" id="spanToLocation"> *</span>
+                     </label>
+                </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[0].ToLocation, Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", maxlength = 150 } : (object)new { @class = "form-control textstyle", @disabled = "disabled", maxlength = 150}) </div>
+                <div class="col-md-2"><label class="form-label">@Html.Label("lblFrmDate", "Date of travel: ")
+                     
+                    <span class="asterisk-color" style="display:none" id="spanDate_0"> *</span>
+                    </label>
+
+                </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[0].Date,"{0:dd/MM/yyyy}", Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", @readonly = "readonly" } : (object)new { @class = "form-control textstyle", @readonly = "readonly", @disabled = "disabled"}) </div>
+               
+                </div>
+                  </div>
+                
+        
+          <div class="clearfix margin-b-10">
+                <div id = "Second">
+                    <div hidden>@Html.EditorFor(model => model.TravelDetailModel[1].TravelDetailID)</div>
+                            <div class="col-md-2">@Html.Label("lblFrmLocation", "From Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanFromLocation 1"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[1].FromLocation, Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", maxlength = 150 } : (object)new { @class = "form-control textstyle", @disabled = "disabled", maxlength = 150 })</div>
+                <div class="col-md-2">@Html.Label("lblToLocation", "To Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanToLocation 1"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[1].ToLocation, Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", maxlength = 150 } : (object)new { @class = "form-control textstyle", @disabled = "disabled", maxlength = 150 }) </div>
+                <div class="col-md-2">@Html.Label("lblFrmDate", "Date of travel: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanDate_1"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[1].Date, "{0:dd/MM/yyyy}", Model.NominationModel.IsTravelDetailsTrainer ? (object)new { @class = "form-control textstyle required", @readonly = "readonly", maxlength = 150 } : (object)new { @class = "form-control textstyle", @readonly = "readonly", @disabled = "disabled", maxlength = 150 }) </div>
+                </div>
+            </div>
+            
+        
+            <div class="clearfix margin-b-10">
+                <div id = "Third" hidden>
+                    <div hidden>@Html.EditorFor(model => model.TravelDetailModel[2].TravelDetailID)</div>
+                <div class="col-md-2">@Html.Label("lblFrmLocation", "From Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanFromLocation 3"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[2].FromLocation, new { @class = "form-control textstyle", maxlength = 150 })</div>
+                <div class="col-md-2">@Html.Label("lblToLocation", "To Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanToLocation 3"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[2].ToLocation, new { @class = "form-control textstyle", maxlength = 150 }) </div>
+                <div class="col-md-2">@Html.Label("lblFrmDate", "Date of travel: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanDate_2"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[2].Date, "{0:dd/MM/yyyy}", new { @class = "form-control textstyle", @readonly = "readonly" }) </div>
+                
+                </div>
+            </div>
+       <div class="clearfix margin-b-10">
+                <div id = "Fourth" hidden>
+                    <div hidden>@Html.EditorFor(model => model.TravelDetailModel[3].TravelDetailID)</div>
+                <div class="col-md-2">@Html.Label("lblFrmLocation", "From Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanFromLocation 4"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[3].FromLocation, new { @class = "form-control textstyle", maxlength = 150 })</div>
+                <div class="col-md-2">@Html.Label("lblToLocation", "To Location: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanToLocation 4"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[3].ToLocation, new { @class = "form-control textstyle", maxlength = 150 }) </div>
+                <div class="col-md-2">@Html.Label("lblFrmDate", "Date of travel: ", new { @class = "form-label"})<span class="asterisk-color" style="display: none" id="spanDate_3"> *</span></div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.TravelDetailModel[3].Date, "{0:dd/MM/yyyy}", new { @class = "form-control textstyle", @readonly = "readonly" }) </div>
+                    
+                </div>        
+                </div>
+
+                <div class="clearfix margin-b-10">
+                        <div class="col-md-12">
+                           @*<a href="#" class="add-row pull-right"> <span> Add Row </span> </a>*@
+                            @if(Model.NominationModel.IsTravelDetailsTrainer == false)
+                            {
+                                <input id="btnAddRow" class="add-row pull-right" type="button" value="Add Row" disabled="disabled" />
+                            }
+                            else
+                            {
+                                <input id="btnAddRow"  type="button" value="Add Row" />
+                            }
+                        </div>
+                        <div class="col-md-12">
+                    <a href ="#" hidden class="add-row pull-right" id="Delete_1">Delete</a>
+                </div>
+                        
+                     </div>
+                <div class="col-md-12 margin-b-10">
+                        <div class="divider"></div>
+                     </div>
+                </div>
+                
+           <div class="row">
+                <div class="clearfix margin-b-10" id ="TrainerFoodDetails" style="width: 100%;">
+                
+                <div class="col-md-4"> @Html.CheckBoxFor(model => model.NominationModel.IsFoodTrainer, "chkFood_Trainer")
+    @Html.Label("lblFoodTrainer", "Food for Trainer")
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">@Html.Label("lblPreference", "Comments: ")
+                     
+                    <span class="asterisk-color" style="display:none" id="spanTrainerComments">*</span>
+                    </label>
+                    
+                </div>
+                <div class="col-md-2">@Html.TextBoxFor(model => model.NominationModel.TrainerPreference, Model.NominationModel.IsFoodTrainer ? (object)new { @class = "form-control textstyle required" } : (object)new { @class = "form-control textstyle", @disabled = "disabled" })</div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    </div>
+
+               <div class="col-md-12 margin-b-10">
+                        <div class="divider"></div>
+                     </div>
+
+           </div>
+                            
+                    <div class="row">
+            
+                <div class="clearfix margin-b-10" id ="PartcipantsFoodDetails">
+                <div class="col-md-4">@Html.CheckBoxFor(model => model.NominationModel.IsFoodParticipants, "chkFood_Participants")
+    @Html.Label("lblFoodPartcipants", "Food for Participants")</div>
+                <div class="col-md-2"><label class="form-label">
+                    @Html.Label("lblPreference", "Comments: ")
+                     
+                    <span class="asterisk-color" style="display:none" id="spanParticipantsComments"> *</span>
+                     </label>
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.NominationModel.ParticipantsPreference, Model.NominationModel.IsFoodParticipants ? (object)new { @class = "form-control textstyle required" } : (object)new { @class = "form-control textstyle", @disabled = "disabled" })
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-2"></div>
+
+
+                </div>
+                        <div class="col-md-12 margin-b-10">
+                        <div class="divider"></div>
+                     </div>
+                </div>
+                
+        
+                            <div class ="row">
+        <div class="clearfix margin-b-10" id ="tblComments">
+                    <div class="col-md-2">@Html.Label("lblComments", "Comments (if any)", new { @class = "form-label"})</div>
+                    <div class="col-md-6">@Html.TextAreaFor(model => model.NominationModel.CommentsFoodAccomodaion, new { @class = "form-control TextAreastyle" })
+                       <div class="checkbox">
+                           <label>
+                           @Html.CheckBoxFor(model => model.NominationModel.IsSendMail, "chkSendMail") Send Mail
+
+                               </label>
+                           @*@Html.Label("lblSendMail", "Send Mail")*@
+                        </div>
+                        </div>
+                    <div class="col-md-4">
+                        </div>
+
+
+@*                </tr>
+            </tbody>*@
+        </div>
+                                <div class="clearfix margin-b-10">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-submit margin-r-10 " id ="btnSave" type="submit" value="Save" class="buttonstyle" />
+                            <input class="btn btn-reset" id="btnCancel" type="button" value="Cancel" class ="buttonstyle" />
+                           @*<button type="button" class="btn btn-submit margin-r-10 ">Save</button><button type="button" class="btn btn-reset">Cancel</button>*@
+                        </div>
+                     </div>
+
+        </div>
+        
+       </div>
+            
+          
+    
+                            </div>
+                        
+                    </div>
+            </div>   
+    }
+    
+    
+</div>
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>  
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(function () {
+
+                $.validator.addMethod('date', function (value, element) {
+                    if (this.optional(element)) {
+                        return true;
+                    }
+                    var valid = true;
+                    try {
+                        $.datepicker.parseDate('dd/mm/yy', value);
+                    }
+                    catch (err) {
+                        valid = false;
+                    }
+                    return valid;
+                });
+                
+                $("#NominationModel_AccomodationFromDate").datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+                $("#NominationModel_AccomodationToDate").datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+
+                $("#TravelDetailModel_0__Date").datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+                $('#TravelDetailModel_1__Date').datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+
+                $('#TravelDetailModel_2__Date').datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+
+                $('#TravelDetailModel_3__Date').datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: 0
+                    }).val();
+
+
+                $('#NominationModel_IsAccomodationTrainer').click(function () {
+                    if ($(this).is(":checked")) {
+                        $('#NominationModel_AccomodationFromDate').removeAttr("disabled");
+                        $('#NominationModel_AccomodationToDate').removeAttr("disabled");
+                        $("#spanFromDate").show();
+                        $("#spanToDate").show();
+                    } else {
+                        $('#NominationModel_AccomodationFromDate').attr("disabled", "disabled");
+                        $('#NominationModel_AccomodationToDate').attr("disabled", "disabled");
+                        $("#spanFromDate").hide();
+                        $("#spanToDate").hide();
+                    }
+                });
+
+                $('#NominationModel_IsTravelDetailsTrainer').click(function () {
+                    if ($(this).is(":checked")) {
+                        $('#TravelDetailModel_0__FromLocation').removeAttr("disabled");
+                        $('#TravelDetailModel_0__ToLocation').removeAttr("disabled");
+                        $('#TravelDetailModel_0__Date').removeAttr("disabled");
+                        $('#TravelDetailModel_1__FromLocation').removeAttr("disabled");
+                        $('#TravelDetailModel_1__ToLocation').removeAttr("disabled");
+                        $('#TravelDetailModel_1__Date').removeAttr("disabled");
+
+                        $('#btnAddRow').removeAttr("disabled");
+                        $("#spanFromLocation").show();
+                        $("#spanToLocation").show();
+                        $("#spanDate_0").show();
+
+
+                    } else {
+                        $('#TravelDetailModel_0__FromLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_0__ToLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_0__Date').attr("disabled", "disabled");
+                        $('#TravelDetailModel_1__FromLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_1__ToLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_1__Date').attr("disabled", "disabled");
+                        $('#TravelDetailModel_2__FromLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_2__ToLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_2__Date').attr("disabled", "disabled");
+                        $('#TravelDetailModel_3__FromLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_3__ToLocation').attr("disabled", "disabled");
+                        $('#TravelDetailModel_3__Date').attr("disabled", "disabled");
+
+                        $('#btnAddRow').attr("disabled", "disabled");
+                        $("#spanFromLocation").hide();
+                        $("#spanToLocation").hide();
+                        $("#spanDate_0").hide();
+                    }
+                        
+                });
+
+                $('#NominationModel_IsFoodTrainer').click(function () {
+                    if ($(this).is(":checked")) {
+                        $('#NominationModel_TrainerPreference').removeAttr("disabled");
+                        $('#spanTrainerComments').show();
+                    } else {
+                        $('#NominationModel_TrainerPreference').attr("disabled", "disabled");
+                        $('#spanTrainerComments').hide();
+                    }
+                });
+
+                $('#NominationModel_IsFoodParticipants').click(function () {
+                    if ($(this).is(":checked")) {
+                        $('#NominationModel_ParticipantsPreference').removeAttr("disabled");
+                        $('#spanParticipantsComments').show();
+                    } else {
+                        $('#NominationModel_ParticipantsPreference').attr("disabled", "disabled");
+                        $('#spanParticipantsComments').hide();
+                    }
+                });
+                
+                
+            });
+            
+            $('#btnAddRow').click(function () {
+
+                if ($('#TravelDetailModel_1__FromLocation').val() != "" && $('#TravelDetailModel_1__ToLocation').val() != "" && $('#TravelDetailModel_0__FromLocation').val() != "" && $('#TravelDetailModel_0__ToLocation').val() != "") {
+                    $('#Third').show();
+                    $('#Fourth').show();
+                    $('#btnAddRow').hide();
+                    $('#Delete_1').show();
+                }
+                else {
+                    if ($('#TravelDetailModel_0__FromLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_0__FromLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                    }
+                    else {
+                        isValid = true;
+                        $("#TravelDetailModel_0__FromLocation").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+
+                    if ($('#TravelDetailModel_0__ToLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_0__ToLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                    }
+                    else {
+                        if (isValid == false) {
+                            isValid = false;
+                        }
+                        else {
+                            isValid = true;
+                            $("#TravelDetailModel_0__ToLocation").css({
+                                "border": "",
+                                "background": ""
+                            });
+                        }
+                    }
+
+                    if ($('#TravelDetailModel_1__FromLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_1__FromLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                    }
+                    else {
+                        if (isValid == false) {
+                            isValid = false;
+                        }
+                        else {
+                            isValid = true;
+                            $("#TravelDetailModel_1__FromLocation").css({
+                                "border": "",
+                                "background": ""
+                            });
+                        }
+                    }
+
+                    if ($('#TravelDetailModel_1__ToLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_1__ToLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                    }
+                    else {
+                        if (isValid == false) {
+                            isValid = false;
+                        }
+                        else {
+                            isValid = true;
+                            $("#TravelDetailModel_1__ToLocation").css({
+                                "border": "",
+                                "background": ""
+                            });
+                        }
+                    }
+
+                }
+                
+           
+            });
+            $('#Delete_1').click(function () {
+                
+                $('#TravelDetailModel_2__FromLocation').val("");
+                $('#TravelDetailModel_2__ToLocation').val("");
+                $('#TravelDetailModel_2__Date').val("");
+
+                $('#TravelDetailModel_3__FromLocation').val("");
+                $('#TravelDetailModel_3__ToLocation').val("");
+                $('#TravelDetailModel_3__Date').val("");
+
+                $('#Third').hide();
+                $('#Fourth').hide();
+                $('#btnAddRow').show();
+                $('#Delete_1').hide();
+
+
+            });
+
+            //redirect to confirm nomaination page on cancel button click
+            $("#btnCancel").attr("onClick", "document.location.href='@Html.Raw(Url.Action("ViewConfirmNominationForTraining", "nomination"))'");
+
+            $("form").submit(function (e) {
+                var flag = SaveClickValidation();
+                if ($('#NominationModel_IsAccomodationTrainer').is(':checked')) {
+                    var accomodationValid = ValidateDate();
+                    if (accomodationValid == false) {
+                        e.preventDefault();
+                    }
+                }
+                if (flag == false) {
+                    if ($('#NominationModel_IsAccomodationTrainer').is(':checked') || $('#NominationModel_IsTravelDetailsTrainer').is(':checked') || $('#NominationModel_IsFoodTrainer').is(':checked') || $('#NominationModel_IsFoodParticipants').is('checked')) {
+                        $("#message").html("Please fill mandatory details.");
+                        $("#message").addClass("MessageStyleFail");
+                        e.preventDefault();
+                    }
+                }
+                
+            });
+
+        });
+
+        function removeRow(id) {
+            var controlToBeRemoved = "#TravelDetailModel" + id;
+            $(controlToBeRemoved).remove();
+        };
+
+
+        function SaveClickValidation()
+        {
+            var isValid = true;
+            if ($('#NominationModel_IsAccomodationTrainer').is(':checked')) {
+                if ($('#NominationModel_AccomodationFromDate').val() == "") {
+                    isValid = false;
+                    $("#NominationModel_AccomodationFromDate").css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+
+                    $("#message").html("Please fill mandatory details.");
+                    $("#message").addClass("MessageStyleFail");
+                    
+                }
+                else {
+                    if (isValid == false) {
+                        isValid = false;
+                    }
+                    else {
+                        isValid = true;
+                        $("#NominationModel_AccomodationFromDate").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                }
+
+                if ($('#NominationModel_AccomodationToDate').val() == "") {
+                    isValid = false;
+                    $("#NominationModel_AccomodationToDate").css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+
+                    $("#message").html("Please fill mandatory details.");
+                    $("#message").addClass("MessageStyleFail");
+                    
+
+                }
+                else {
+                    if (isValid == false) {
+                        isValid = false;
+                    }
+                    else {
+                        isValid = true;
+                        $("#NominationModel_AccomodationToDate").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                }
+
+            }
+
+            if ($('#NominationModel_IsTravelDetailsTrainer').is(':checked')) {
+                    if ($('#TravelDetailModel_0__FromLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_0__FromLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+
+                        $("#message").html("Please fill mandatory details.");
+                        $("#message").addClass("MessageStyleFail");
+                       
+                    }
+                    else {
+                        if (isValid == false) {
+                            isValid = false;
+                        }
+                        else {
+                            isValid = true;
+                            $("#TravelDetailModel_0__FromLocation").css({
+                                "border": "",
+                                "background": ""
+                            });
+                        }
+                    }
+
+                    if ($('#TravelDetailModel_0__ToLocation').val() == "") {
+                        isValid = false;
+                        $("#TravelDetailModel_0__ToLocation").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+
+                        $("#message").html("Please fill mandatory details.");
+                        $("#message").addClass("MessageStyleFail");
+                        
+                    }
+                    else {
+                        if (isValid == false) {
+                            isValid = false;
+                        }
+                        else {
+                            isValid = true;
+                            $("#TravelDetailModel_0__ToLocation").css({
+                                "border": "",
+                                "background": ""
+                            });
+                        }
+                    }
+            }
+
+
+            if ($('#NominationModel_IsFoodTrainer').is(':checked')) {
+                if ($('#NominationModel_TrainerPreference').val() == "") {
+                    isValid = false;
+                    $("#NominationModel_TrainerPreference").css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+                    $("#message").html("Please fill mandatory details.");
+                    $("#message").addClass("MessageStyleFail");
+
+                }
+                else {
+                    if (isValid == false) {
+                        isValid = false;
+                    }
+                    else {
+                        isValid = true;
+                        $("#NominationModel_TrainerPreference").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                }
+                
+            }
+
+            if ($('#NominationModel_IsFoodParticipants').is(':checked')) {
+                if ($('#NominationModel_ParticipantsPreference').val() == "") {
+                    isValid = false;
+                    $("#NominationModel_ParticipantsPreference").css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+
+                    $("#message").html("Please fill mandatory details.");
+                    $("#message").addClass("MessageStyleFail");
+                }
+                else {
+                    if (isValid == false) {
+                        isValid = false;
+                    }
+                    else {
+                        isValid = true;
+                        $("#NominationModel_ParticipantsPreference").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                }
+
+            }
+            
+            return isValid;
+            
+        }
+
+        function ValidateDate() {
+            var accomodationValid = false;
+            if ($('#NominationModel_IsAccomodationTrainer').is(':checked')) {
+                if ($('#NominationModel_AccomodationFromDate').val() != "" || $('#NominationModel_AccomodationToDate').val() != "") {
+
+                    //var startdate = new Date($('#NominationModel_AccomodationToDate').val());
+                    //var enddate = new Date($('#NominationModel_AccomodationFromDate').val());
+
+                    //var msDateA = Date.UTC(startdate.getFullYear(), startdate.getMonth() + 1, startdate.getDate());
+                    //var meDateB = Date.UTC(enddate.getFullYear(), enddate.getMonth() + 1, enddate.getDate());
+
+                    if ($("#NominationModel_AccomodationFromDate").datepicker("getDate") > $('#NominationModel_AccomodationToDate').datepicker("getDate"))
+                    {
+                        accomodationValid = false;
+                        $("#NominationModel_AccomodationToDate").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                        $("#message").html("Accomodation to date should be greater than accomodation from date.");
+                        $("#message").addClass("MessageStyleFail");
+
+                    }
+                    else {
+                        accomodationValid = true;
+                        $("#NominationModel_AccomodationToDate").css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                }
+            }
+
+            return accomodationValid;
+        }
+
+    </script>

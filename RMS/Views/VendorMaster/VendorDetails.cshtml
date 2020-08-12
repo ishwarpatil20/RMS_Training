@@ -1,0 +1,99 @@
+﻿@model IList<Domain.Entities.VendorModel>
+@{
+    ViewBag.Title = "VendorDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="container">
+    
+        <fieldset>
+            <legend></legend>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Vendor Details Form</div>
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span id="message">
+                                            @{
+                                                var msg = Convert.ToString(TempData["Result"]);
+                                                if (!string.IsNullOrWhiteSpace(msg))
+                                                {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                </div>
+                           
+                            <div class="row">
+                                <div class="form-group">
+                                    <a href="@Url.Action("EditVendorDetails", "VendorMaster", new { @VendorId = 0 })">Add New Vendor </a>
+                                </div>
+                            </div>
+                           <div id="divGrid">
+                               <div class ="container">
+                            
+                                <table id="viewreport" class="table table-striped" style="border: thin;">
+                                <thead>
+                                    <tr>
+                                        @*<th>VendorID</th>*@
+                                        <th>VendorName</th>
+                                        <th>VendorEmailId</th>
+                                        <th>ContactPerson</th>
+                                        <th>ContactPersonNumber</th>
+                                        <th>Expertise</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBody">
+                                    @if (Model.Count > 0)
+                                    {
+                                        foreach (var vendor in Model)
+                                        {                     
+                                        <tr>
+                                            @*<td hidden>@vendor.VendorId</td>*@
+                                            <td>@vendor.VendorName</td>
+                                            <td>@vendor.VendorEmailId</td>
+                                            <td>@vendor.ContactPersonName</td>
+                                            <td>@vendor.ContactPersonNumber</td>
+                                            <td>@vendor.Expertise</td>
+                                            <td data-id="@vendor.VendorId" class="edit" style="text-align:center;" ><a href="@Url.Action("EditVendorDetails", "VendorMaster", new { @VendorId = @vendor.VendorId })">
+                                            <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit" width="20"/></a></td>
+
+                                            <td data-id="@vendor.VendorId" class="delete" style="text-align:center;"><a href="@Url.Action("DeleteVendorDetails", "VendorMaster", new { @VendorId = @vendor.VendorId })">
+                                            <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete" width="20"/></a></td>
+
+                                        </tr>
+                                        }
+                                    }
+                                </tbody>
+                                </table>
+                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </fieldset>
+
+</div>
+<script type="text/ecmascript">
+    $(document).ready(function () {
+        var totalRecord = '@Model.Count';
+        hidewaiting();
+        if (totalRecord > 0) {
+            $('#viewreport').dataTable();
+        }
+    });
+</script>

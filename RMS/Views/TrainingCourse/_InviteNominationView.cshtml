@@ -1,0 +1,37 @@
+﻿@model RMS.Models.InviteNominationViewModel
+
+<fieldset>
+    <legend>InviteNominationViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NominationEndDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NominationEndDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AllRave)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AllRave)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PM)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PM)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Employees)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employees)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

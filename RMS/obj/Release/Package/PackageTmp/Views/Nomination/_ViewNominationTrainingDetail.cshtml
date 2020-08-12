@@ -1,0 +1,165 @@
+﻿@model Domain.Entities.NominationModel
+@using System.Collections;
+@using RMS.Common.Constants
+
+@{
+    Layout = null;
+}
+
+
+<script type="text/javascript">
+    var nominationtype = '@Model.NominationTypeID';
+    var validationrequired = '@Model.IsValidationRequired'.toLowerCase();
+    var isrmologin = '@Model.IsRMOLoggedIn';
+    var isEditable = '';
+    var isConfirmNominationPage = '@Model.IsConfirmNominationPage';
+    hidewaiting();
+</script>
+
+
+
+@Html.HiddenFor(model => model.CourseID)
+@Html.HiddenFor(model => model.TrainingNameID)
+@Html.HiddenFor(model => model.TrainingTypeID)
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @*<div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label pull-right">Course Name</label>
+                        </div>
+                    <div class="col-md-2 col-sm-6">
+                        <span class="label-text">@Html.DisplayFor(model=>Model.CourseName, new { @class = "label-text"})</span>
+                    </div>
+                    </div>*@
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Training Name</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@Html.DisplayFor(model => model.CourseName, new { @class = "label-text" })</span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Training Mode</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@Html.DisplayFor(model => model.TrainingMode, new { @class = "label-text" })</span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">No. of Days</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@Html.DisplayFor(model => model.NoOfDays, new { @class = "label-text" })</span>
+                </div>
+            </div>
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Start Date</label>
+                </div>
+                <div class="col-md-2 col-sm-6 label-text">
+                    <span class="label-text">@Model.StartDate.ToString("dd/MM/yyyy") </span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">End Date</label>
+                </div>
+                <div class="col-md-2 col-sm-6 label-text">
+                    <span class="label-text">@Model.EndDate.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Total Training Hour(s)</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@Html.DisplayFor(model => model.TotalTrainingHours, new { @class = "label-text" })</span>
+                </div>
+            </div>
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Course Content</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@{Html.RenderPartial(CommonConstants.CourseContentView, Model.CourseFile);}</span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Course Comment</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@Html.DisplayFor(model => model.Comments, new { @class = "label-text" })</span>
+                </div>
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Nomination Due Date</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@{   
+                        var nominationduedate = string.Empty;
+                        if (!string.IsNullOrWhiteSpace(Convert.ToString(Model.NominationDueDate)))
+                        {
+                            nominationduedate = Convert.ToDateTime(Model.NominationDueDate).ToString("dd/MM/yyyy");
+                        }                 
+                    }
+                        @nominationduedate</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@{ if (!Model.IsConfirmNominationPage)
+   {
+
+       // Changed by : Venkatesh  : Start
+       bool IsManagerRole = false;
+       if (Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+       {
+           ArrayList arrRolesForUser = new ArrayList();
+           arrRolesForUser = (ArrayList)Session[AuthorizationManagerConstants.AZMAN_ROLES];
+           if (arrRolesForUser.Contains("manager"))
+           {
+               IsManagerRole = true;
+           }
+       }
+       // Changed by : Venkatesh  : End
+
+    <div id="addemployee">
+        @if (Model.IsRMOLoggedIn)
+        {
+            Html.RenderAction("showemployeenominationform", "nomination", new { @trainingtypeid = Model.TrainingTypeID, @trainingcourseid = Model.CourseID, @trainingnameid = Model.TrainingNameID, @isrmologin = @Model.IsRMOLoggedIn, @NominationTypeID = @Model.NominationTypeID });
+        }
+        else if (Model.NominationTypeID == CommonConstants.SelfNomination)
+        {
+          
+            Html.RenderAction("showemployeenominationform", "nomination", new { @trainingtypeid = Model.TrainingTypeID, @trainingcourseid = Model.CourseID, @trainingnameid = Model.TrainingNameID, @isrmologin = @Model.IsRMOLoggedIn, @NominationTypeID = @Model.NominationTypeID });
+           
+            
+        }
+        else if (Model.NominationTypeID == CommonConstants.ManagerNomination && (IsManagerRole== true))
+        {
+            Html.RenderAction("addnomination", "nomination", new { @trainingtypeid = Model.TrainingTypeID, @Model.IsRMOLoggedIn, @nominationtypeid = Model.NominationTypeID, @isrmologin = @Model.IsRMOLoggedIn });
+        }
+
+    </div>        
+        
+   
+    <div id="employeegrid">
+        @*Neelam : 25/07/2017 Starts. IssueId 59566*@
+        
+         @if (Model.IsRMOLoggedIn == true || IsManagerRole == true)
+         {
+             Html.RenderAction("showemployeegrid", "nomination", new { @trainingnameid = Model.TrainingNameID, @trainingcourseid = Model.CourseID });
+         }
+         else
+         {
+              Html.RenderAction("ShowResult", "nomination");
+         }
+       @*Neelam : 25/07/2017 Ends. IssueId 59566*@
+    </div>
+    
+   }
+   else
+   {
+    <div id="employeegrid">
+        @{ Html.RenderAction("ShowConfirmNominationEmployeeGrid", "nomination", new { @trainingnameid = Model.TrainingNameID, @trainingcourseid = Model.CourseID }); }
+    </div>
+   }
+}

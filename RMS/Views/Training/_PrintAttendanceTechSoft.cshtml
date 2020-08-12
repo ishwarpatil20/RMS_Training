@@ -1,0 +1,184 @@
+﻿@model Domain.Entities.AttendanceModel
+@using System.Data;
+
+<div class="row">
+    <div class="clearfix margin-b-10">
+        <div class="row">
+            <div class="clearfix margin-b-10">
+                <div class="col-md-2 col-sm-6">
+                    <label class="form-label">Training Name</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    @Html.DropDownListFor(m => m.TrainingName, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingName), new { @class = "form-control Dropdownstyle" })
+                </div>
+
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label">Trainer Name</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanTrainerName" class="label-text">@Model.objTrainingCourseModel.TrainerName</span>
+                    <input type="hidden" name="TrainerName" value="@Model.objTrainingCourseModel.TrainerName" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label">Training Start Date</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanTrainingStartDate" class="label-text">
+                        @Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")
+                        <input type="hidden" name="startDate" value="@Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")" />
+                    </span>
+                </div>
+
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label">Training End Date</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanTrainingEndDate" class="label-text">@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy") </span>
+                    <input type="hidden" name="endDate" value="@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy")" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-12 col-sm-6">
+                    @if (Model.SelectedAttendanceDate != null)
+                    {
+                        int count = 0;
+                        <span id="AttendanceDate">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        @{
+                        var index = 0;
+                                        }
+
+                                        @foreach (var item in Model.SelectedAttendanceDate)
+                                        {
+                                            if ((index % 7) == 0)
+                                            {
+                                            @Html.Raw("</tr>");
+                                            @Html.Raw("<tr>");
+                                            }
+
+                                            try
+                                            {
+                                            <td style="text-align:center;">
+
+                                                @Convert.ToDateTime(item.Text).ToString("dd-MMM-yyyy").Trim()
+                                                <input id="@(Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy"))" type="checkbox" name="SelectedChoices" class="case required"  
+                                                                                    value="@Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy")" />
+                                            </td>
+                                            }
+                                            catch { }
+                                            index++;
+                                        }
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3" id="dvExportToExcel">
+                @if (Model.SelectedAttendanceDate != null)
+                {
+                    if (Model.SelectedAttendanceDate.Any())
+                    {
+                    <input class="btn btn-submit" id="btnExportToExcel" type="submit" value="Export To Excel" />
+                    }
+                }
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    if (($.trim($('#SpanTrainingStartDate').html()) == '01-Jan-0001') || $.trim($('#SpanTrainingEndDate').html()) == "01-Jan-0001") {
+        $('#SpanTrainingStartDate').html('');
+        $('#SpanTrainingEndDate').html('');
+    }
+    $('#btnExportToExcel').click(function () {
+        var selectedcheckbox = $('input[name=SelectedChoices]:checked').length;
+
+        //if no checkbox is selected
+        if (selectedcheckbox == 0) {
+            $('<div></div>').appendTo('body')
+            .html('<div><h6>Please select at least one single date for exporting to excel.</h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Attendance',
+                zIndex: 10000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).remove();
+                }
+            });
+            return false;
+        }
+        //if more than 7 checkbox is selected
+        if (selectedcheckbox > 7) {
+            $('<div></div>').appendTo('body')
+            .html('<div><h6>Dates selected with more than 7 will not be printed in excel properly. Do you wish to Continue?</h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Attendance',
+                zIndex: 10000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Yes: function () {
+                        $(this).dialog("close");
+                        $('form#frmPrintAttendance').submit();
+                    },
+                    No: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).remove();
+                }
+            });
+            return false;
+        }
+        return true;
+
+    });
+
+        $('#TrainingName').on('change', function () {
+            var CourseId = $(this).val();       //var selectedPriority = $("#Priority option:selected").text();
+            var TrainingTypeId = document.querySelector('input[name="category"]:checked').value;
+            if (CourseId != '') {
+                var setattendanceurl = '@Url.Action("OnTrainingChange_PrintAttendanceDetail", "Training")';
+        var data = { _CourseId: CourseId };
+        window.location.href = setattendanceurl + "?_CourseId=" + CourseId + "&_TrainingTypeID=" + TrainingTypeId;
+    }
+    else {
+        $("#SpanTrainerName").html('');
+        $("#SpanTrainingStartDate").html('');
+        $("#SpanTrainingEndDate").html('');
+        $("#SpanNoOfDays").html('');
+
+        $("#AttendanceDate").html('');
+        $("#dvExportToExcel").html('');
+    }
+        });
+</script>

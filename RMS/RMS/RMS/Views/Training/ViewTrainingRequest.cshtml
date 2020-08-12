@@ -1,0 +1,75 @@
+﻿@model List<Domain.Entities.TrainingModel>
+@using RMS.Common.Constants
+
+
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ViewTrainingRequest";
+}
+
+
+<div class="container">
+
+    <strong class="large">View Traning Request</strong>
+    <br />
+
+    <div id="category">
+
+        <table style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 120px">
+                        <b>Training Type  : </b>
+                    </td>
+                    <td align="left">
+                        <table border="0" id="ctl00_cphMainContent_RBLTrainingType">
+                            <tbody>
+                                <tr>
+                                    <td>@Html.RadioButton("category", CommonConstants.TechnicalTrainingID, true, new { @class = "" })<label for="TermsAndConditions_true">Technical</label></td>
+                                    <td>@Html.RadioButton("category", CommonConstants.SoftSkillsTrainingID, new { @class = "" })<label for="TermsAndConditions_true">Soft Skill</label></td>
+                                    <td>@Html.RadioButton("category", CommonConstants.SeminarsID, new { @class = "" })<label for="TermsAndConditions_true">Seminar</label></td>
+                                    <td>@Html.RadioButton("category", CommonConstants.KSSID, new { @class = "" })<label for="TermsAndConditions_true">Knowledge Sharing Session</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+    <br />
+    <br />
+
+   
+
+    <div id="divGrid">
+        @{Html.RenderPartial("_viewTrainingGrid", Model);}
+    </div>
+
+
+    
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var gridurl = '@Url.Action("ViewTechnicalTrainingRequestGrid", "training")';
+
+        $("input[name='category']").click(function () {
+            $('#message').html('');
+            var trainingid = $(this).val();
+            $("#divGrid").html('');
+            showaiting();
+            $("#divGrid").load(gridurl + "?trainingTypeID=" + trainingid);             
+        })
+
+    });
+
+
+
+
+</script>

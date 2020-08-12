@@ -1,0 +1,123 @@
+﻿@model Domain.Entities.MyTrainingView
+
+@using RMS.Common.Constants
+@using RMS.Helpers;
+@using System.Collections;
+@{
+    Layout = null;
+}
+
+<table id="tblCourse" class="table table-striped">
+    <thead>
+        <tr class="trGrid">
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TrainingType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TrainingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TrainingStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TrainingEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TotalHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.Website)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyTrainingModel.TrainingComments)
+            </th>
+            <th>
+                @Html.Label("Edit")
+            </th>
+            @*<th>
+                @Html.Label("View")
+            </th> *@              
+            <th>
+                @Html.Label("Delete")
+            </th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MyTrainings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingStartDate, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingEndDate, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Website)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingComments)
+                </td>
+                <td class="edit" style="text-align: center;">
+                    <a href="@Url.Action("EditMyTraining", new { trainingId = CheckAccessAttribute.Encode(Convert.ToString(item.TrainingId))})" >
+                        <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                    </a>
+                </td>                         
+               @* <td class="view" style="text-align: center;">
+                    <a href="@Url.Action("EditCourse", new { trainingId = CheckAccessAttribute.Encode(Convert.ToString(item.TrainingId))})" >
+                        <img src="@Url.Content("~/Content/css/Images/view.png")" alt="View" title="View" />
+                    </a>
+                </td>*@
+                <td class="delete" style="text-align: center;">
+                    <a href="#" onclick="return DeleteMyTraining(@item.TrainingId, '@item.CertificateGuid');">
+                        <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#MyTrainingModel_Operation').val() == 'update') {
+            $("#BtnCancel").show();
+            $("#BtnReset").hide();
+        }
+        else {
+            $("#BtnCancel").hide();
+            $("#BtnReset").show();
+        }
+    });
+        var MyTrainingsUrl = '@Url.Action("MyTraining", "Training")'       
+
+        function DeleteMyTraining(trainingId, certificate) {
+            if (confirm('Are you sure you want to delete this training?')) {
+                showaiting();
+                $.ajax({
+                    url: "@Url.Action("DeleteMyTraining", "Training")",
+                    type: 'GET',
+                    cache: false,
+                    data: { trainingId: trainingId, certificate: certificate },
+                    success: function (data) {
+                        if (data) {
+                            alert("Your training deleted successfully.");
+                            window.location.href = MyTrainingsUrl;
+                        }
+                        else {
+                            alert("Error occured while deleting your training.");
+                        }
+                    }
+                });
+            }
+        }    
+</script>

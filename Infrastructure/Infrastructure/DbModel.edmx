@@ -1,0 +1,901 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RMS_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="RMS_ModelStoreContainer">
+          <EntitySet Name="T_Category" EntityType="RMS_Model.Store.T_Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_Departments" EntityType="RMS_Model.Store.T_Departments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_DesignationMaster" EntityType="RMS_Model.Store.T_DesignationMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_Domain" EntityType="RMS_Model.Store.T_Domain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_EmployeeSkillTypeCategory" EntityType="RMS_Model.Store.T_EmployeeSkillTypeCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_InterviewPanel" EntityType="RMS_Model.Store.T_InterviewPanel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_IP_PanelDesignation" EntityType="RMS_Model.Store.T_IP_PanelDesignation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_IP_PanelLevel" EntityType="RMS_Model.Store.T_IP_PanelLevel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_Master" EntityType="RMS_Model.Store.T_Master" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_SubDomain" EntityType="RMS_Model.Store.T_SubDomain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_Technology" EntityType="RMS_Model.Store.T_Technology" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CategoryID_T_Technology_PK_ID_T_Category" Association="RMS_Model.Store.FK_CategoryID_T_Technology_PK_ID_T_Category">
+            <End Role="T_Category" EntitySet="T_Category" />
+            <End Role="T_Technology" EntitySet="T_Technology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainID_T_SubDomain_PK_ID_T_Domain" Association="RMS_Model.Store.FK_DomainID_T_SubDomain_PK_ID_T_Domain">
+            <End Role="T_Domain" EntitySet="T_Domain" />
+            <End Role="T_SubDomain" EntitySet="T_SubDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Departments_T_Master" Association="RMS_Model.Store.FK_T_Departments_T_Master">
+            <End Role="T_Master" EntitySet="T_Master" />
+            <End Role="T_Departments" EntitySet="T_Departments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="T_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Created_Date" Type="datetime" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_Departments">
+          <Key>
+            <PropertyRef Name="DEPTId" />
+          </Key>
+          <Property Name="DEPTId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DEPTName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupMasterId" Type="int" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="IsEditedEmailId" Type="bit" />
+          <Property Name="StatusID" Type="bit" />
+          <Property Name="ResourceBusinessUnit" Type="int" />
+          <Property Name="ProjectHeadId" Type="int" />
+        </EntityType>
+        <EntityType Name="T_DesignationMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="DesignationGroup" Type="varchar" MaxLength="50" />
+          <Property Name="IsReportHead" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Domain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Domain" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_EmployeeSkillTypeCategory">
+          <Key>
+            <PropertyRef Name="EmpSkillCategoryID" />
+          </Key>
+          <Property Name="EmpSkillCategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmpSkillCategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmpSkillTypeID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedByID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_InterviewPanel">
+          <Key>
+            <PropertyRef Name="PanelId" />
+          </Key>
+          <Property Name="PanelId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="int" />
+          <Property Name="CandidateDeptId" Type="int" />
+          <Property Name="CandidateDesignations" Type="nvarchar" MaxLength="100" />
+          <Property Name="SecondarySkills" Type="nvarchar" MaxLength="100" />
+          <Property Name="LevelIds" Type="nvarchar" MaxLength="100" />
+          <Property Name="Inducted" Type="int" />
+          <Property Name="TrainingAttended" Type="int" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_IP_PanelDesignation">
+          <Key>
+            <PropertyRef Name="PanelDesignationId" />
+          </Key>
+          <Property Name="PanelDesignationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PanelId" Type="int" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="DesignationId" Type="int" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Empid" Type="int" />
+        </EntityType>
+        <EntityType Name="T_IP_PanelLevel">
+          <Key>
+            <PropertyRef Name="PanelLevelId" />
+          </Key>
+          <Property Name="PanelLevelId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PanelId" Type="int" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Empid" Type="int" />
+        </EntityType>
+        <EntityType Name="T_Master">
+          <Key>
+            <PropertyRef Name="MasterID" />
+          </Key>
+          <Property Name="MasterID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="varchar" MaxLength="50" />
+          <Property Name="GroupMasterID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedByID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedByID" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="Details" Type="varchar" MaxLength="20" />
+          <Property Name="OrderBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_SubDomain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SubDomainName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DomainID" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_Technology">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TechnologyName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedById" Type="int" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_CategoryID_T_Technology_PK_ID_T_Category">
+          <End Role="T_Category" Type="RMS_Model.Store.T_Category" Multiplicity="1" />
+          <End Role="T_Technology" Type="RMS_Model.Store.T_Technology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_Technology">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainID_T_SubDomain_PK_ID_T_Domain">
+          <End Role="T_Domain" Type="RMS_Model.Store.T_Domain" Multiplicity="1" />
+          <End Role="T_SubDomain" Type="RMS_Model.Store.T_SubDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_SubDomain">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Departments_T_Master">
+          <End Role="T_Master" Type="RMS_Model.Store.T_Master" Multiplicity="1" />
+          <End Role="T_Departments" Type="RMS_Model.Store.T_Departments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="T_Master">
+              <PropertyRef Name="MasterID" />
+            </Principal>
+            <Dependent Role="T_Departments">
+              <PropertyRef Name="DEPTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="USP_Employee_BillingTillDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Flag" Type="char" Mode="In" />
+          <Parameter Name="BillingTillDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="EpaId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_IP_GetEmpSkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SkillType" Type="varchar" Mode="In" />
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_IP_GetInterviewPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PanelId" Type="int" Mode="In" />
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_IP_GetInterviewPanelDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PanelId" Type="int" Mode="In" />
+          <Parameter Name="Type" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_IP_GetInterviewPanelSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Technology" Type="int" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+          <Parameter Name="DeptId" Type="int" Mode="In" />
+          <Parameter Name="Designation" Type="int" Mode="In" />
+          <Parameter Name="BusinessVertical" Type="int" Mode="In" />
+          <Parameter Name="Skill" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Usp_IP_UpdateIP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PanelId" Type="int" Mode="In" />
+          <Parameter Name="EmpId" Type="int" Mode="In" />
+          <Parameter Name="CandidateDeptId" Type="int" Mode="In" />
+          <Parameter Name="DesignationIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="SecondarySkillIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="LevelIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="Inducted" Type="int" Mode="In" />
+          <Parameter Name="TrainingAttended" Type="int" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RMS_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RMS_Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="T_InterviewPanel" EntityType="RMS_Model.T_InterviewPanel" />
+          <EntitySet Name="T_IP_PanelLevel" EntityType="RMS_Model.T_IP_PanelLevel" />
+          <EntitySet Name="T_IP_PanelDesignation" EntityType="RMS_Model.T_IP_PanelDesignation" />
+          <FunctionImport Name="GetInterviewPanel" >
+          <Parameter Name="PanelId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="T_Master" EntityType="RMS_Model.T_Master" />
+          <FunctionImport Name="Usp_IP_UpdateIP" ReturnType="Collection(Int32)">
+            <Parameter Name="PanelId" Mode="In" Type="Int32" />
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="CandidateDeptId" Mode="In" Type="Int32" />
+            <Parameter Name="DesignationIds" Mode="In" Type="String" />
+            <Parameter Name="SecondarySkillIds" Mode="In" Type="String" />
+            <Parameter Name="LevelIds" Mode="In" Type="String" />
+            <Parameter Name="Inducted" Mode="In" Type="Int32" />
+            <Parameter Name="TrainingAttended" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="T_EmployeeSkillTypeCategory" EntityType="RMS_Model.T_EmployeeSkillTypeCategory" />
+          <FunctionImport Name="USP_IP_GetInterviewPanelDetail" ReturnType="Collection(RMS_Model.USP_IP_GetInterviewPanelDetail_Result)">
+            <Parameter Name="PanelId" Mode="In" Type="Int32" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_IP_GetEmpSkills" ReturnType="Collection(RMS_Model.USP_IP_GetEmpSkills_Result)">
+            <Parameter Name="SkillType" Mode="In" Type="String" />
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_IP_GetInterviewPanel" ReturnType="Collection(RMS_Model.USP_IP_GetInterviewPanel_Result)">
+            <Parameter Name="PanelId" Mode="In" Type="Int32" />
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_IP_GetInterviewPanelSearch" ReturnType="Collection(RMS_Model.USP_IP_GetInterviewPanelSearch_Result)">
+            <Parameter Name="Technology" Mode="In" Type="Int32" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+            <Parameter Name="DeptId" Mode="In" Type="Int32" />
+            <Parameter Name="Designation" Mode="In" Type="Int32" />
+            <Parameter Name="BusinessVertical" Mode="In" Type="Int32" />
+            <Parameter Name="Skill" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_Report_AvgUtilBillingforGivenPeriod_BB">
+            <Parameter Name="Start_Day" Mode="In" Type="Int32" />
+            <Parameter Name="Start_Month" Mode="In" Type="Int32" />
+            <Parameter Name="Start_Year" Mode="In" Type="Int32" />
+            <Parameter Name="End_Day" Mode="In" Type="Int32" />
+            <Parameter Name="End_Month" Mode="In" Type="Int32" />
+            <Parameter Name="End_Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_GetDomain_SubDomain" ReturnType="Collection(RMS_Model.USP_GetDomain_SubDomain_Result)">
+            <Parameter Name="DomainId" Mode="In" Type="Int32" />
+            <Parameter Name="SubDomainId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="T_Departments" EntityType="RMS_Model.T_Departments" />
+          <EntitySet Name="T_DesignationMaster" EntityType="RMS_Model.T_DesignationMaster" />
+          <AssociationSet Name="FK_T_Departments_T_Master" Association="RMS_Model.FK_T_Departments_T_Master">
+            <End Role="T_Master" EntitySet="T_Master" />
+            <End Role="T_Departments" EntitySet="T_Departments" />
+          </AssociationSet>
+          <EntitySet Name="T_Category" EntityType="RMS_Model.T_Category" />
+          <EntitySet Name="T_Technology" EntityType="RMS_Model.T_Technology" />
+          <AssociationSet Name="FK_CategoryID_T_Technology_PK_ID_T_Category" Association="RMS_Model.FK_CategoryID_T_Technology_PK_ID_T_Category">
+            <End Role="T_Category" EntitySet="T_Category" />
+            <End Role="T_Technology" EntitySet="T_Technology" />
+          </AssociationSet>
+          <EntitySet Name="T_Domain" EntityType="RMS_Model.T_Domain" />
+          <EntitySet Name="T_SubDomain" EntityType="RMS_Model.T_SubDomain" />
+          <AssociationSet Name="FK_DomainID_T_SubDomain_PK_ID_T_Domain" Association="RMS_Model.FK_DomainID_T_SubDomain_PK_ID_T_Domain">
+            <End Role="T_Domain" EntitySet="T_Domain" />
+            <End Role="T_SubDomain" EntitySet="T_SubDomain" />
+          </AssociationSet>
+          <FunctionImport Name="USP_Employee_BillingTillDate" ReturnType="Collection(RMS_Model.USP_Employee_BillingTillDate_Result)">
+            <Parameter Name="Flag" Mode="In" Type="String" />
+            <Parameter Name="BillingTillDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EmpId" Mode="In" Type="Int32" />
+            <Parameter Name="EpaId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="T_InterviewPanel">
+          <Key>
+            <PropertyRef Name="PanelId" />
+          </Key>
+          <Property Type="Int32" Name="PanelId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EmpId" />
+          <Property Type="Int32" Name="CandidateDeptId" />
+          <Property Type="String" Name="CandidateDesignations" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SecondarySkills" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LevelIds" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Inducted" />
+          <Property Type="Int32" Name="TrainingAttended" />
+          <Property Type="Int32" Name="IsActive" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="UpdatedBy" />
+          <Property Type="DateTime" Name="UpdatedDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="T_IP_PanelLevel">
+          <Key>
+            <PropertyRef Name="PanelLevelId" />
+          </Key>
+          <Property Type="Int32" Name="PanelLevelId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PanelId" />
+          <Property Type="Int32" Name="LevelId" />
+          <Property Type="Int32" Name="IsActive" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="UpdatedBy" />
+          <Property Type="DateTime" Name="UpdatedDate" Precision="3" />
+          <Property Type="Int32" Name="Empid" />
+        </EntityType>
+        <EntityType Name="T_IP_PanelDesignation">
+          <Key>
+            <PropertyRef Name="PanelDesignationId" />
+          </Key>
+          <Property Type="Int32" Name="PanelDesignationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PanelId" />
+          <Property Type="Int32" Name="LevelId" />
+          <Property Type="Int32" Name="DesignationId" />
+          <Property Type="Int32" Name="IsActive" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="UpdatedBy" />
+          <Property Type="DateTime" Name="UpdatedDate" Precision="3" />
+          <Property Type="Int32" Name="Empid" />
+        </EntityType>
+        <EntityType Name="T_Master">
+          <Key>
+            <PropertyRef Name="MasterID" />
+          </Key>
+          <Property Type="Int32" Name="MasterID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Category" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="GroupMasterID" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="Int32" Name="CreatedByID" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedByID" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <Property Type="String" Name="Details" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OrderBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Departments" Relationship="RMS_Model.FK_T_Departments_T_Master" FromRole="T_Master" ToRole="T_Departments" />
+        </EntityType>
+        <EntityType Name="T_EmployeeSkillTypeCategory">
+          <Key>
+            <PropertyRef Name="EmpSkillCategoryID" />
+          </Key>
+          <Property Type="Int32" Name="EmpSkillCategoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="EmpSkillCategory" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EmpSkillTypeID" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="Int32" Name="CreatedByID" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+        </EntityType>
+        <ComplexType Name="USP_IP_GetInterviewPanelDetail_Result">
+          <Property Type="Int32" Name="PanelId" Nullable="true" />
+          <Property Type="Int32" Name="ListId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IpType" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="USP_IP_GetEmpSkills_Result">
+          <Property Type="Int32" Name="MasterID" Nullable="false" />
+          <Property Type="String" Name="MasterName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SkillType" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="USP_IP_GetInterviewPanel_Result">
+          <Property Type="Int32" Name="panelid" Nullable="false" />
+          <Property Type="Int32" Name="empid" Nullable="true" />
+          <Property Type="String" Name="EmpName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="DesignationName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SecondarySkill" Nullable="true" />
+          <Property Type="String" Name="LINEMANAGER" Nullable="true" />
+          <Property Type="String" Name="BusinessVertical" Nullable="true" />
+          <Property Type="Int32" Name="EmpSkillID" Nullable="false" />
+          <Property Type="String" Name="PrimarySkillName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CandidateDeptId" Nullable="true" />
+          <Property Type="String" Name="CandidateDesignations" Nullable="true" />
+          <Property Type="String" Name="CandidateDesignationName" Nullable="true" />
+          <Property Type="String" Name="SecondarySkills" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SecondarySkillname" Nullable="true" />
+          <Property Type="String" Name="levelids" Nullable="true" />
+          <Property Type="String" Name="levelidName" Nullable="true" />
+          <Property Type="Int32" Name="Inducted" Nullable="true" />
+          <Property Type="String" Name="InductedName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TrainingAttended" Nullable="true" />
+          <Property Type="String" Name="TrainingAttendedName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_IP_GetInterviewPanelSearch_Result">
+          <Property Type="Int32" Name="PANELID" Nullable="false" />
+          <Property Type="Int32" Name="EMPID" Nullable="true" />
+          <Property Type="String" Name="EMPNAME" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="DesignationName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SECONDARYSKILL" Nullable="true" />
+          <Property Type="String" Name="LINEMANAGER" Nullable="true" />
+          <Property Type="String" Name="BUSINESSVERTICAL" Nullable="true" />
+          <Property Type="Int32" Name="EMPSKILLID" Nullable="false" />
+          <Property Type="String" Name="PRIMARYSKILLNAME" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CANDIDATEDEPTID" Nullable="true" />
+          <Property Type="String" Name="DEPTNAME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CANDIDATEDESIGNATIONS" Nullable="true" />
+          <Property Type="String" Name="CANDIDATEDESIGNATIONNAME" Nullable="true" />
+          <Property Type="String" Name="SECONDARYSKILLS" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SECONDARYSKILLNAME" Nullable="true" />
+          <Property Type="String" Name="LEVELIDS" Nullable="true" />
+          <Property Type="String" Name="LEVELIDNAME" Nullable="true" />
+          <Property Type="Int32" Name="INDUCTED" Nullable="true" />
+          <Property Type="String" Name="INDUCTEDNAME" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TRAININGATTENDED" Nullable="true" />
+          <Property Type="String" Name="TRAININGATTENDEDNAME" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_GetDomain_SubDomain_Result">
+          <Property Type="Int32" Name="DomainId" Nullable="false" />
+          <Property Type="String" Name="Domain" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SubDomainId" Nullable="true" />
+          <Property Type="String" Name="SubDomainName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="T_Departments">
+          <Key>
+            <PropertyRef Name="DEPTId" />
+          </Key>
+          <Property Type="Int32" Name="DEPTId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DEPTName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="GroupMasterId" />
+          <Property Type="Int32" Name="CreatedById" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <Property Type="Boolean" Name="IsEditedEmailId" />
+          <Property Type="Boolean" Name="StatusID" />
+          <Property Type="Int32" Name="ResourceBusinessUnit" />
+          <Property Type="Int32" Name="ProjectHeadId" />
+          <NavigationProperty Name="T_Master" Relationship="RMS_Model.FK_T_Departments_T_Master" FromRole="T_Departments" ToRole="T_Master" />
+        </EntityType>
+        <EntityType Name="T_DesignationMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedById" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="DepartmentID" />
+          <Property Type="String" Name="DesignationGroup" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsReportHead" />
+        </EntityType>
+        <Association Name="FK_T_Departments_T_Master">
+          <End Type="RMS_Model.T_Master" Role="T_Master" Multiplicity="1" />
+          <End Type="RMS_Model.T_Departments" Role="T_Departments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="T_Master">
+              <PropertyRef Name="MasterID" />
+            </Principal>
+            <Dependent Role="T_Departments">
+              <PropertyRef Name="DEPTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="T_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Created_Date" Precision="3" />
+          <Property Type="String" Name="Created_By" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isActive" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <NavigationProperty Name="T_Technology" Relationship="RMS_Model.FK_CategoryID_T_Technology_PK_ID_T_Category" FromRole="T_Category" ToRole="T_Technology" />
+        </EntityType>
+        <EntityType Name="T_Technology">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TechnologyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="Boolean" Name="isActive" />
+          <Property Type="Int32" Name="CreatedById" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <NavigationProperty Name="T_Category" Relationship="RMS_Model.FK_CategoryID_T_Technology_PK_ID_T_Category" FromRole="T_Technology" ToRole="T_Category" />
+        </EntityType>
+        <Association Name="FK_CategoryID_T_Technology_PK_ID_T_Category">
+          <End Type="RMS_Model.T_Category" Role="T_Category" Multiplicity="1" />
+          <End Type="RMS_Model.T_Technology" Role="T_Technology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_Technology">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="T_Domain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Domain" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isActive" />
+          <Property Type="Int32" Name="CreatedById" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <NavigationProperty Name="T_SubDomain" Relationship="RMS_Model.FK_DomainID_T_SubDomain_PK_ID_T_Domain" FromRole="T_Domain" ToRole="T_SubDomain" />
+        </EntityType>
+        <EntityType Name="T_SubDomain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SubDomainName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DomainID" Nullable="false" />
+          <Property Type="Boolean" Name="isActive" />
+          <Property Type="Int32" Name="CreatedById" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="Int32" Name="LastModifiedById" />
+          <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
+          <NavigationProperty Name="T_Domain" Relationship="RMS_Model.FK_DomainID_T_SubDomain_PK_ID_T_Domain" FromRole="T_SubDomain" ToRole="T_Domain" />
+        </EntityType>
+        <Association Name="FK_DomainID_T_SubDomain_PK_ID_T_Domain">
+          <End Type="RMS_Model.T_Domain" Role="T_Domain" Multiplicity="1" />
+          <End Type="RMS_Model.T_SubDomain" Role="T_SubDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_SubDomain">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="USP_Employee_BillingTillDate_Result">
+          <Property Type="Int32" Name="EPAId" Nullable="false" />
+          <Property Type="Int32" Name="EmpId" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="AllocationDate" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="ReleaseDate" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="BillingTillDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="PageMode" Nullable="false" MaxLength="1" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RMS_ModelStoreContainer" CdmEntityContainer="RMS_Entities">
+          <EntitySetMapping Name="T_InterviewPanel">
+            <EntityTypeMapping TypeName="RMS_Model.T_InterviewPanel">
+              <MappingFragment StoreEntitySet="T_InterviewPanel">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TrainingAttended" ColumnName="TrainingAttended" />
+                <ScalarProperty Name="Inducted" ColumnName="Inducted" />
+                <ScalarProperty Name="LevelIds" ColumnName="LevelIds" />
+                <ScalarProperty Name="SecondarySkills" ColumnName="SecondarySkills" />
+                <ScalarProperty Name="CandidateDesignations" ColumnName="CandidateDesignations" />
+                <ScalarProperty Name="CandidateDeptId" ColumnName="CandidateDeptId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_IP_PanelLevel">
+            <EntityTypeMapping TypeName="RMS_Model.T_IP_PanelLevel">
+              <MappingFragment StoreEntitySet="T_IP_PanelLevel">
+                <ScalarProperty Name="Empid" ColumnName="Empid" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="PanelLevelId" ColumnName="PanelLevelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_IP_PanelDesignation">
+            <EntityTypeMapping TypeName="RMS_Model.T_IP_PanelDesignation">
+              <MappingFragment StoreEntitySet="T_IP_PanelDesignation">
+                <ScalarProperty Name="Empid" ColumnName="Empid" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="PanelDesignationId" ColumnName="PanelDesignationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Master">
+            <EntityTypeMapping TypeName="RMS_Model.T_Master">
+              <MappingFragment StoreEntitySet="T_Master">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedByID" ColumnName="LastModifiedByID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GroupMasterID" ColumnName="GroupMasterID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Usp_IP_UpdateIP" FunctionName="RMS_Model.Store.Usp_IP_UpdateIP" />
+          <EntitySetMapping Name="T_EmployeeSkillTypeCategory">
+            <EntityTypeMapping TypeName="RMS_Model.T_EmployeeSkillTypeCategory">
+              <MappingFragment StoreEntitySet="T_EmployeeSkillTypeCategory">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EmpSkillTypeID" ColumnName="EmpSkillTypeID" />
+                <ScalarProperty Name="EmpSkillCategory" ColumnName="EmpSkillCategory" />
+                <ScalarProperty Name="EmpSkillCategoryID" ColumnName="EmpSkillCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanelDetail" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanelDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanelDetail_Result">
+                <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+                <ScalarProperty Name="ListId" ColumnName="ListId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IpType" ColumnName="IpType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_IP_GetEmpSkills" FunctionName="RMS_Model.Store.USP_IP_GetEmpSkills">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetEmpSkills_Result">
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="MasterName" ColumnName="MasterName" />
+                <ScalarProperty Name="SkillType" ColumnName="SkillType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanel" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanel_Result">
+                <ScalarProperty Name="panelid" ColumnName="panelid" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="SecondarySkill" ColumnName="SecondarySkill" />
+                <ScalarProperty Name="LINEMANAGER" ColumnName="LINEMANAGER" />
+                <ScalarProperty Name="BusinessVertical" ColumnName="BusinessVertical" />
+                <ScalarProperty Name="EmpSkillID" ColumnName="EmpSkillID" />
+                <ScalarProperty Name="PrimarySkillName" ColumnName="PrimarySkillName" />
+                <ScalarProperty Name="CandidateDeptId" ColumnName="CandidateDeptId" />
+                <ScalarProperty Name="CandidateDesignations" ColumnName="CandidateDesignations" />
+                <ScalarProperty Name="CandidateDesignationName" ColumnName="CandidateDesignationName" />
+                <ScalarProperty Name="SecondarySkills" ColumnName="SecondarySkills" />
+                <ScalarProperty Name="SecondarySkillname" ColumnName="SecondarySkillname" />
+                <ScalarProperty Name="levelids" ColumnName="levelids" />
+                <ScalarProperty Name="levelidName" ColumnName="levelidName" />
+                <ScalarProperty Name="Inducted" ColumnName="Inducted" />
+                <ScalarProperty Name="InductedName" ColumnName="InductedName" />
+                <ScalarProperty Name="TrainingAttended" ColumnName="TrainingAttended" />
+                <ScalarProperty Name="TrainingAttendedName" ColumnName="TrainingAttendedName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanelSearch" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanelSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanelSearch_Result">
+                <ScalarProperty Name="PANELID" ColumnName="PANELID" />
+                <ScalarProperty Name="EMPID" ColumnName="EMPID" />
+                <ScalarProperty Name="EMPNAME" ColumnName="EMPNAME" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="SECONDARYSKILL" ColumnName="SECONDARYSKILL" />
+                <ScalarProperty Name="LINEMANAGER" ColumnName="LINEMANAGER" />
+                <ScalarProperty Name="BUSINESSVERTICAL" ColumnName="BUSINESSVERTICAL" />
+                <ScalarProperty Name="EMPSKILLID" ColumnName="EMPSKILLID" />
+                <ScalarProperty Name="PRIMARYSKILLNAME" ColumnName="PRIMARYSKILLNAME" />
+                <ScalarProperty Name="CANDIDATEDEPTID" ColumnName="CANDIDATEDEPTID" />
+                <ScalarProperty Name="DEPTNAME" ColumnName="DEPTNAME" />
+                <ScalarProperty Name="CANDIDATEDESIGNATIONS" ColumnName="CANDIDATEDESIGNATIONS" />
+                <ScalarProperty Name="CANDIDATEDESIGNATIONNAME" ColumnName="CANDIDATEDESIGNATIONNAME" />
+                <ScalarProperty Name="SECONDARYSKILLS" ColumnName="SECONDARYSKILLS" />
+                <ScalarProperty Name="SECONDARYSKILLNAME" ColumnName="SECONDARYSKILLNAME" />
+                <ScalarProperty Name="LEVELIDS" ColumnName="LEVELIDS" />
+                <ScalarProperty Name="LEVELIDNAME" ColumnName="LEVELIDNAME" />
+                <ScalarProperty Name="INDUCTED" ColumnName="INDUCTED" />
+                <ScalarProperty Name="INDUCTEDNAME" ColumnName="INDUCTEDNAME" />
+                <ScalarProperty Name="TRAININGATTENDED" ColumnName="TRAININGATTENDED" />
+                <ScalarProperty Name="TRAININGATTENDEDNAME" ColumnName="TRAININGATTENDEDNAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="T_Departments">
+            <EntityTypeMapping TypeName="RMS_Model.T_Departments">
+              <MappingFragment StoreEntitySet="T_Departments">
+                <ScalarProperty Name="ProjectHeadId" ColumnName="ProjectHeadId" />
+                <ScalarProperty Name="ResourceBusinessUnit" ColumnName="ResourceBusinessUnit" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="IsEditedEmailId" ColumnName="IsEditedEmailId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="GroupMasterId" ColumnName="GroupMasterId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DEPTName" ColumnName="DEPTName" />
+                <ScalarProperty Name="DEPTId" ColumnName="DEPTId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_DesignationMaster">
+            <EntityTypeMapping TypeName="RMS_Model.T_DesignationMaster">
+              <MappingFragment StoreEntitySet="T_DesignationMaster">
+                <ScalarProperty Name="IsReportHead" ColumnName="IsReportHead" />
+                <ScalarProperty Name="DesignationGroup" ColumnName="DesignationGroup" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Category">
+            <EntityTypeMapping TypeName="RMS_Model.T_Category">
+              <MappingFragment StoreEntitySet="T_Category">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Technology">
+            <EntityTypeMapping TypeName="RMS_Model.T_Technology">
+              <MappingFragment StoreEntitySet="T_Technology">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="TechnologyName" ColumnName="TechnologyName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Domain">
+            <EntityTypeMapping TypeName="RMS_Model.T_Domain">
+              <MappingFragment StoreEntitySet="T_Domain">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SubDomain">
+            <EntityTypeMapping TypeName="RMS_Model.T_SubDomain">
+              <MappingFragment StoreEntitySet="T_SubDomain">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="SubDomainName" ColumnName="SubDomainName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_Employee_BillingTillDate" FunctionName="RMS_Model.Store.USP_Employee_BillingTillDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RMS_Model.USP_Employee_BillingTillDate_Result">
+                <ScalarProperty Name="EPAId" ColumnName="EPAId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="AllocationDate" ColumnName="AllocationDate" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="BillingTillDate" ColumnName="BillingTillDate" />
+                <ScalarProperty Name="PageMode" ColumnName="PageMode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

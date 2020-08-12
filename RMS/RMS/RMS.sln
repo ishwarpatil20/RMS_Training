@@ -1,0 +1,137 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS", "RMS\RMS.csproj", "{FEB7B681-AEBF-4A7F-877A-C0CA8ADD3B71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS.Tests", "RMS.Tests\RMS.Tests.csproj", "{2A075317-87D8-4B30-98FE-92C5F014D421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BF2DC625-AFC7-4285-96AE-728B465A4DCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C237CE0A-A71B-4D2E-989D-89313DD75502}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CDB854C4-B4D0-4922-AFAD-B8E646C7962F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Entities", "Domain.Entities\Domain.Entities.csproj", "{B8B39AC8-3FEA-4578-A794-863244050567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Interfaces", "Domain.Interfaces\Domain.Interfaces.csproj", "{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E} = {AD488038-9609-4948-AC3F-CDC4E9A5366E}
+		{B8B39AC8-3FEA-4578-A794-863244050567} = {B8B39AC8-3FEA-4578-A794-863244050567}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data", "Infrastructure.Data\Infrastructure.Data.csproj", "{5592B8D8-3350-4063-B09B-9FE9EB4E58F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E} = {AD488038-9609-4948-AC3F-CDC4E9A5366E}
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383} = {3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}
+		{EF2954BB-6928-435B-9F7E-4619711EDE26} = {EF2954BB-6928-435B-9F7E-4619711EDE26}
+		{B8B39AC8-3FEA-4578-A794-863244050567} = {B8B39AC8-3FEA-4578-A794-863244050567}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{C0FEC61B-608C-4864-B3F1-F757B969820B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS.Common", "RMS.Common\RMS.Common.csproj", "{EF2954BB-6928-435B-9F7E-4619711EDE26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{EFCF1A53-15C1-4491-A159-F839212DFA64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS.Common.BusinessEntities", "RMS.Common.BusinessEntities\RMS.Common.BusinessEntities.csproj", "{AD488038-9609-4948-AC3F-CDC4E9A5366E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services.Interfaces", "Services.Interfaces", "{3C2D2C91-31F1-407F-AB1C-B2F7171F3D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Interfaces", "Services.Interfaces\Services.Interfaces.csproj", "{E55FAD02-9DAD-44CD-94DA-F631B618B79A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://rav-dsk-386:8080/tfs/rms
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Domain.Entities\\Domain.Entities.csproj
+		SccProjectTopLevelParentUniqueName1 = RMS.sln
+		SccProjectName1 = Domain.Entities
+		SccLocalPath1 = Domain.Entities
+		SccProjectUniqueName2 = Domain.Interfaces\\Domain.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName2 = RMS.sln
+		SccProjectName2 = Domain.Interfaces
+		SccLocalPath2 = Domain.Interfaces
+		SccProjectUniqueName3 = Infrastructure.Data\\Infrastructure.Data.csproj
+		SccProjectTopLevelParentUniqueName3 = RMS.sln
+		SccProjectName3 = Infrastructure.Data
+		SccLocalPath3 = Infrastructure.Data
+		SccProjectUniqueName4 = RMS.Tests\\RMS.Tests.csproj
+		SccProjectName4 = RMS.Tests
+		SccLocalPath4 = RMS.Tests
+		SccProjectUniqueName5 = RMS\\RMS.csproj
+		SccProjectName5 = RMS
+		SccLocalPath5 = RMS
+		SccProjectUniqueName6 = Services\\Services.csproj
+		SccProjectTopLevelParentUniqueName6 = RMS.sln
+		SccProjectName6 = Services
+		SccLocalPath6 = Services
+		SccProjectUniqueName7 = RMS.Common\\RMS.Common.csproj
+		SccProjectTopLevelParentUniqueName7 = RMS.sln
+		SccProjectName7 = RMS.Common
+		SccLocalPath7 = RMS.Common
+		SccProjectUniqueName8 = RMS.Common.BusinessEntities\\RMS.Common.BusinessEntities.csproj
+		SccProjectTopLevelParentUniqueName8 = RMS.sln
+		SccProjectName8 = RMS.Common.BusinessEntities
+		SccLocalPath8 = RMS.Common.BusinessEntities
+		SccProjectUniqueName9 = Services.Interfaces\\Services.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName9 = RMS.sln
+		SccProjectName9 = Services.Interfaces
+		SccLocalPath9 = Services.Interfaces
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB7B681-AEBF-4A7F-877A-C0CA8ADD3B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB7B681-AEBF-4A7F-877A-C0CA8ADD3B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB7B681-AEBF-4A7F-877A-C0CA8ADD3B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB7B681-AEBF-4A7F-877A-C0CA8ADD3B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A075317-87D8-4B30-98FE-92C5F014D421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A075317-87D8-4B30-98FE-92C5F014D421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A075317-87D8-4B30-98FE-92C5F014D421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A075317-87D8-4B30-98FE-92C5F014D421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B39AC8-3FEA-4578-A794-863244050567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B39AC8-3FEA-4578-A794-863244050567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B39AC8-3FEA-4578-A794-863244050567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B39AC8-3FEA-4578-A794-863244050567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5592B8D8-3350-4063-B09B-9FE9EB4E58F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5592B8D8-3350-4063-B09B-9FE9EB4E58F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5592B8D8-3350-4063-B09B-9FE9EB4E58F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5592B8D8-3350-4063-B09B-9FE9EB4E58F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FEC61B-608C-4864-B3F1-F757B969820B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FEC61B-608C-4864-B3F1-F757B969820B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FEC61B-608C-4864-B3F1-F757B969820B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FEC61B-608C-4864-B3F1-F757B969820B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2954BB-6928-435B-9F7E-4619711EDE26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2954BB-6928-435B-9F7E-4619711EDE26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2954BB-6928-435B-9F7E-4619711EDE26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2954BB-6928-435B-9F7E-4619711EDE26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E55FAD02-9DAD-44CD-94DA-F631B618B79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55FAD02-9DAD-44CD-94DA-F631B618B79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55FAD02-9DAD-44CD-94DA-F631B618B79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55FAD02-9DAD-44CD-94DA-F631B618B79A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B8B39AC8-3FEA-4578-A794-863244050567} = {BF2DC625-AFC7-4285-96AE-728B465A4DCF}
+		{3E4FF975-3EA5-4207-A5C0-D2B1E07B7383} = {BF2DC625-AFC7-4285-96AE-728B465A4DCF}
+		{C0FEC61B-608C-4864-B3F1-F757B969820B} = {C237CE0A-A71B-4D2E-989D-89313DD75502}
+		{5592B8D8-3350-4063-B09B-9FE9EB4E58F2} = {CDB854C4-B4D0-4922-AFAD-B8E646C7962F}
+		{EF2954BB-6928-435B-9F7E-4619711EDE26} = {EFCF1A53-15C1-4491-A159-F839212DFA64}
+		{AD488038-9609-4948-AC3F-CDC4E9A5366E} = {EFCF1A53-15C1-4491-A159-F839212DFA64}
+		{E55FAD02-9DAD-44CD-94DA-F631B618B79A} = {3C2D2C91-31F1-407F-AB1C-B2F7171F3D94}
+	EndGlobalSection
+EndGlobal

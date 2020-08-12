@@ -1,0 +1,216 @@
+﻿@model RMS.Models.AssessmentQuestionsViewModel
+
+
+
+
+@if (Model != null)
+{
+
+    var inputName = ViewData["prefix"] + ".Index";
+    var fieldPrefix = string.Format("{0}[{1}].", ViewData["prefix"], Model.QuestionId);
+    var QuestionImg = fieldPrefix + "QuestionImg";
+    var Option1ImageId = fieldPrefix + "Option1Image";
+    var Option2ImageId = fieldPrefix + "Option2Image";
+    var Option3ImageId = fieldPrefix + "Option3Image";
+    var Option4ImageId = fieldPrefix + "Option4Image";
+    var Option5ImageId = fieldPrefix + "Option5Image";
+    var Option6ImageId = fieldPrefix + "Option6Image";
+    <div>
+        @Html.Hidden(inputName, Model.QuestionId)
+        @Html.Hidden(fieldPrefix + "QuestionId", Model.QuestionId)
+        @Html.Hidden(fieldPrefix + "IsMultiChoiceAnswer", Model.IsMultiChoiceAnswer, new { @class = "jq_MuliChoiceAnswer" })
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Question)</div>
+                <div class="col-md-5">
+
+                    @Html.TextArea(fieldPrefix + "Question", Model.Question, new { @rows = "4", @class = "col-md-12 required" })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Model.QuestionImg, "Question Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.QuestionImgFileName))
+                    { 
+                        <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentQuestionImgPath].ToString() + "/") + Model.QuestionImgFileName)" width="250px" height="200px" />
+                        <br />
+                        @Html.Hidden(fieldPrefix + "QuestionImgFileName", Model.QuestionImgFileName)
+                    }
+                    <input type="file" id="@QuestionImg" name="@QuestionImg" class="fileUpload" />
+                    @Html.Hidden("HfldQuestionId", @QuestionImg)
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option1Description, "Option 1")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option1Description", Model.Option1Description, new { @rows = "4", @class = "col-md-12 " })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option1Image, "Option 1 Image") </div>*@
+                <div class="col-md-3">
+
+                    @if (!string.IsNullOrEmpty(Model.Option1ImageFileName))
+                    { 
+                        <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option1ImageFileName)" width="250px" height="200px" />
+                        <br />
+                        @Html.Hidden(fieldPrefix + "Option1ImageFileName", Model.Option1ImageFileName)
+                    }
+                    <input type="file" id="@Option1ImageId" name="@Option1ImageId"  class="fileUpload" />
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption1Correct, "Is Correct Answer")
+                    @Html.CheckBox(fieldPrefix + "IsOption1Correct", Model.IsOption1Correct, new { @class = "jq_AnsweOption" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option2Description, "Option 2")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option2Description", Model.Option2Description, new { @rows = "4", @class = "col-md-12 " })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option2Image, "Option 2 Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.Option2ImageFileName))
+                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option2ImageFileName)" width="250px" height="200px" /><br />@Html.Hidden(fieldPrefix + "Option2ImageFileName", Model.Option2ImageFileName)}
+                    <input type="file" id="@Option2ImageId" name="@Option2ImageId" class="fileUpload" />
+
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption2Correct, "Is Correct Answer")
+                    @Html.CheckBox(fieldPrefix + "IsOption2Correct", Model.IsOption2Correct, new { @class = "jq_AnsweOption" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="Option3">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option3Description, "Option 3 ")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option3Description", Model.Option3Description, new { @rows = "4", @class = "col-md-12 " })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option3Image, "Option 3 Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.Option3ImageFileName))
+                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option3ImageFileName)" width="250px" height="200px" /><br />@Html.Hidden(fieldPrefix + "Option3ImageFileName", Model.Option3ImageFileName)}
+                    <input type="file" id="@Option3ImageId" name="@Option3ImageId" class="fileUpload" />
+
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption3Correct, "Is Correct Answer")
+                    @Html.CheckBox(fieldPrefix + "IsOption3Correct", Model.IsOption3Correct, new { @class = "jq_AnsweOption" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="Option4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option4Description, "Option 4")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option4Description", Model.Option4Description, new { @rows = "4", @class = "col-md-12 " })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option4Image, "Option 4 Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.Option4ImageFileName))
+                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option4ImageFileName)" width="250px" height="200px" /><br />@Html.Hidden(fieldPrefix + "Option4ImageFileName", Model.Option4ImageFileName)}
+                    <input type="file" id="@Option4ImageId" name="@Option4ImageId" class="fileUpload" />
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption4Correct, "Is Correct Answer")
+                    @Html.CheckBox(fieldPrefix + "IsOption4Correct", Model.IsOption4Correct, new { @class = "jq_AnsweOption" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="Option5">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option5Description, "Option 5")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option5Description", Model.Option5Description, new { @rows = "4", @class = "col-md-12" })
+
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option5Image, "Option 5 Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.Option5ImageFileName))
+                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option5ImageFileName)" width="250px" height="200px" /><br />@Html.Hidden(fieldPrefix + "Option5ImageFileName", Model.Option5ImageFileName)}
+                    <input type="file" id="@Option5ImageId" name="@Option5ImageId" class="fileUpload" />
+
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption5Correct, "Is Correct Answer")
+
+                    @Html.CheckBox(fieldPrefix + "IsOption5Correct", Model.IsOption5Correct, new { @class = "jq_AnsweOption" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="Option6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => Model.Option6Description, "Option 6")</div>
+                <div class="col-md-5">
+                    @Html.TextArea(fieldPrefix + "Option6Description", Model.Option6Description, new { @rows = "4", @class = "col-md-12" })
+                </div>
+                @*<div class="col-md-1">@Html.LabelFor(model => Question.Option6Image, "Option 6 Image") </div>*@
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.Option6ImageFileName))
+                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + Model.Option6ImageFileName)" width="250px" height="200px" /><br />@Html.Hidden(fieldPrefix + "Option6ImageFileName", Model.Option6ImageFileName)}
+                    <input type="file" id="@Option6ImageId" name="@Option6ImageId" class="fileUpload" />
+
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => Model.IsOption6Correct, "Is Correct Answer")
+                    @Html.CheckBox(fieldPrefix + "IsOption6Correct", Model.IsOption6Correct, new { @class = "jq_AnsweOption" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="AddMoreOption">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input id="btnAddMoreOption" type="button" value="Add More Option" class="buttonstyle" /></div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script >
+    $(document).ready(function () { 
+        $("input:file").change(function () {
+            var fileName = $(this).val();
+            var id = $(this).attr('id');
+            
+            var HfldQuestionId = $("#HfldQuestionId");
+            if (id == HfldQuestionId.val()  ){ //"AssessmentQuestions[0].QuestionImg") {
+                id = id.replace("[", "_").replace("].", "__").replace("Img", "");
+                $("#" + id).val('NA');
+            }
+            else {
+                id = id.replace("[", "_").replace("].", "__").replace("Image", "Description");
+                $("#" + id).val('NA');
+            }
+            
+            $(".filename").html(fileName);
+        });
+ });
+    </script>

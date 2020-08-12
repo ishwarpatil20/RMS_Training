@@ -1,0 +1,335 @@
+﻿@using RMS.Common.Constants
+@model Domain.Entities.MyTrainingView
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        My Trainings
+			<img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+<div class="col-md-12">
+    @using (Html.BeginForm("MyTraining", "Training", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @id = "frmMyTraining" }))
+    {
+        @Html.HiddenFor(model => model.MyTrainingModel.TrainingId)
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Enter New Training Details</div>
+            <div class="panel-body">
+                <div class="col-md-12 margin-b-10">
+                    <span class="asterisk-text">All fields marked with asterisk (*) are mandatory</span>
+                </div>
+                <div class="col-md-12 margin-b-10">
+                    <span id="message">
+                        @{
+                            var msg = Convert.ToString(TempData["Result"]);
+                            var style = Convert.ToString(TempData["ResultStyle"]);
+                            }
+                                
+                            
+                            @if (!string.IsNullOrWhiteSpace(msg))
+                            {   
+                                @msg
+                                <br />
+                            }
+                            @if (string.IsNullOrWhiteSpace(style))
+                            {
+                                <script>
+                                    $("#message").addClass("MessageStyleSuccess");
+                                </script>
+                            }
+                            else
+                            {
+                                <script>
+                                    $("#message").addClass("MessageStyleFail");
+                                </script>
+                            }
+                        
+                        
+                    </span>
+                </div>
+                <div class="col-md-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="clearfix margin-b-10">
+                            <div class=" col-md-2 col-sm-6">
+                                <label class="form-label">Training Type<span class="asterisk-color"> *</span></label>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                @Html.DropDownListFor(m => m.MyTrainingModel.TrainingTypeID, Model.MyTrainingModel.TrainingType, (object)new { @class = "form-control Dropdownstyle required", @id = "ddlTrainingType" })
+                                @Html.HiddenFor(m => m.MyTrainingModel.Operation)
+                                @*@Html.ValidationMessageFor(m => m.TrainingType)
+
+                                @Html.HiddenFor(m => m.RaiseID)
+                                @Html.HiddenFor(m => m.Operation)
+                                @Html.HiddenFor(m => m.TrainingType)*@
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-md-12">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">Training Name<span class="asterisk-color"> *</span></label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextBoxFor(m => m.MyTrainingModel.TrainingName, (object)new { maxlength = 200, @class = "form-control Textboxstyle required" })
+                                    @*@Html.ValidationMessageFor(m => m.TrainingName, "", new { @style = "color:red;" })*@
+                                </div>
+                            </div>
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">No. of Hours<span class="asterisk-color"> *</span></label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextBoxFor(m => m.MyTrainingModel.TotalHours, (object)new { maxlength = 200, @class = "form-control Textboxstyle required" })
+                                    @*@Html.ValidationMessageFor(m => m.TotalHours, "", new { @style = "color:red;" })*@
+                                </div>
+                            </div>
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">URL or Website Name<span class="asterisk-color"> *</span></label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextBoxFor(m => m.MyTrainingModel.Website, (object)new { maxlength = 200, @class = "form-control Textboxstyle required" })
+                                    @*@Html.ValidationMessageFor(m => m.Website)*@
+                                </div>
+                            </div>
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">Comments (If any)</label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextAreaFor(m => m.MyTrainingModel.TrainingComments, (object)new { maxlength = 2000, @class = "form-control TextAreastyle" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">Training Start Date<span class="asterisk-color"> *</span></label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextBoxFor(model => model.MyTrainingModel.TrainingStartDate, "{0:dd/MM/yyyy}", new { @class = "datepicker required", @readonly = "readonly" })
+                                    @*@Html.ValidationMessageFor(m => m.TrainingStartDate, "", new { @style = "color:red;" })*@
+                                </div>
+                            </div>                            
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label">Training End Date<span class="asterisk-color"> *</span></label>
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                    @Html.TextBoxFor(model => model.MyTrainingModel.TrainingEndDate, "{0:dd/MM/yyyy}", new { @class = "datepicker required", @readonly = "readonly" })
+                                    @*@Html.ValidationMessageFor(m => m.TrainingEndDate, "", new { @style = "color:red;" })*@
+                                </div>
+                            </div>
+
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">                                    
+                                    @if (Model.MyTrainingModel.Operation == "update" && !string.IsNullOrEmpty(Model.MyTrainingModel.CertificateGuid))
+                                    {
+                                        <label class="form-label">Change Certificate</label>
+                                    }
+                                    @if (Model.MyTrainingModel.Operation == "submit" || string.IsNullOrEmpty(Model.MyTrainingModel.CertificateGuid))
+                                    {
+                                        <label class="form-label">Upload Certificate</label>
+                                    }
+                                </div>
+                                <div class="col-md-8 col-sm-6">
+                                     <input type="file" id="fileCertificate" name="fileCertificate" class="fileUpload" />
+                                </div>
+                            </div>
+                            @if (Model.MyTrainingModel.Operation == "update" && !string.IsNullOrEmpty(Model.MyTrainingModel.CertificateGuid))
+                            {
+                                <div class="clearfix margin-b-10">
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label">Uploaded Certificate</label>
+                                    </div>
+                                    <div class="col-md-8 col-sm-6">
+                                        @Html.ActionLink(Model.MyTrainingModel.CertificateName, "DownloadFile", "Training", new { file = Model.MyTrainingModel.CertificateGuid }, new { @class="form-label", @style="float:left;" })                                    
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                        </div>
+                </div>
+                <br />
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-offset-2 col-md-10 col-sm-6">
+                        <input type="submit" value="Save" id="BtnSubmit" class="btn btn-submit" />
+                        <input type="button" value="Reset" id="BtnReset" class="btn btn-reset" />
+                        <input type="button" value="Cancel" id="BtnCancel" class="btn btn-reset" />
+                    </div>
+                </div>
+            </div>            
+        </div>
+        
+        <div  >
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Your Submitted Training List</div>
+                <div class="panel-body">
+                    <div id="divGrid" >
+                        @{Html.RenderPartial(CommonConstants.MyTrainingGridView, Model);}
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {           
+        if ($('#MyTrainingModel_TrainingStartDate').val() == "01/01/1900" || $('#MyTrainingModel_TrainingStartDate').val() == "01/01/1900 00:00:00"
+            || $('#MyTrainingModel_TrainingStartDate').val() == "01/01/0001" || $('#MyTrainingModel_TrainingStartDate').val() == "01/01/0001 00:00:00") {
+            $('#MyTrainingModel_TrainingStartDate').val('');
+        }
+
+        if ($('#MyTrainingModel_TrainingEndDate').val() == "01/01/1900" || $('#MyTrainingModel_TrainingEndDate').val() == "01/01/1900 00:00:00"
+            || $('#MyTrainingModel_TrainingEndDate').val() == "01/01/0001" || $('#MyTrainingModel_TrainingEndDate').val() == "01/01/0001 00:00:00") {
+            $('#MyTrainingModel_TrainingEndDate').val('');
+        }
+
+        $('#MyTrainingModel_TrainingStartDate').datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                }).val();
+
+        $('#MyTrainingModel_TrainingEndDate').datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                }).val();
+
+        $.validator.addMethod('date',
+           function (value, element) {
+               if (this.optional(element)) {
+                   return true;
+               }
+               var valid = true;
+               try {
+                   $.datepicker.parseDate('dd/mm/yy', value);
+               }
+               catch (err) {
+                   valid = false;
+               }
+               return valid;
+           });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $(".fileUpload").change(function () {
+            var ext = $(this).val().split('.').pop().toLowerCase();
+            var fileListToUpload = new Array('pdf', 'jpg', 'jpeg', 'png', 'gif');
+
+
+            var isValidFile = $.inArray(ext, fileListToUpload);
+            if (isValidFile == -1) {
+                //alert('Please select a valid file of type pdf/jpg/jpeg/png/gif.');
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Please select a valid file of type pdf/jpg/jpeg/png/gif.");
+                $(this).replaceWith($(this).val('').clone(true));
+            }
+            else {
+                // Restrict the file size to 10 MB.
+                if ($(this).get(0).files[0].size > (1024 * 1024 * 2)) {
+                    //alert('File size should not exceed 2MB.');
+                    $("#message").addClass("MessageStyleFail");
+                    $("#message").html("File size should not exceed 2MB.");
+                    $(this).replaceWith($(this).val('').clone(true));
+                }
+            }
+        });
+       
+        $("#BtnSubmit").click(function () {
+            if (Validation() == false) {
+                return false;
+            };
+
+            $("#message").html("");
+
+            if ($("#MyTrainingModel_TrainingEndDate").datepicker("getDate") < $("#MyTrainingModel_TrainingStartDate").datepicker("getDate")) {
+                //alert("Training End Date should not be less than Training Start Date.");
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Training End Date should not be less than Training Start Date.");
+                return false;
+            }
+
+            var startDate = $("#MyTrainingModel_TrainingStartDate").datepicker("getDate");
+            var endDate = $("#MyTrainingModel_TrainingEndDate").datepicker("getDate");
+            var oneDayHours = 60 * 60 * 1000;
+
+            var hours = Math.abs(((endDate.getTime() - startDate.getTime()) / oneDayHours) + 24);            
+
+            if ($("#MyTrainingModel_TotalHours").val() > hours) {
+                //alert("Training No. Of hours should lie in the range of training start date and training end date");
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Training No. Of hours should lie in the range of training start date and training end date.");
+                return false;
+            }
+
+            var website = $("#MyTrainingModel_Website").val();            
+            if (!IsValidUrl(website)) {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Please enter valid URL.");
+                return false;
+            }
+        });
+
+        $('#BtnReset').click(function (e) {
+            $("#message").html("");
+            $("input[type=text]").val("");
+            $("textarea").val("");
+            $("select").val("");
+            $("#fileCertificate").val('');
+
+            $('#TrainingType').focus();
+            
+            ClearBorderColor();
+
+            $("#message").html("");            
+        });
+
+
+        $("#BtnCancel").click(function () {
+            window.location.href = '@Url.Action("MyTraining", "Training")';
+        });
+
+        $("#frmMyTraining").submit(function (e) {
+            var flag = Validation();
+            if (flag == false) {
+                $("#message").html("Please fill all mandatory fields.");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+                e.preventDefault();
+            }
+        });
+    });
+
+</script>

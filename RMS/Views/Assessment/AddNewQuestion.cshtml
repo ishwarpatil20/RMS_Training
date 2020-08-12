@@ -1,0 +1,168 @@
+﻿@model RMS.Models.AssessmentViewModel
+@{
+    ViewBag.Title = "Add New Question";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="training-title margin-b-10">
+        Add Assessment Question
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+            </div>
+</div>
+
+        @using (Html.BeginForm("AddNewQuestion", "Assessment", new { id = Model.AssessmentPaper.AssessmentPaperId }, FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", id = "frmAssessmentDetails" }))
+        {
+            @Html.AntiForgeryToken()     
+            @Html.HiddenFor(model => model.AssessmentPaper.AssessmentPaperId)      
+            
+            <div  class="col-md-12" id="divCourse">
+                    <div class="panel-group">
+                        <div class="panel panel-default" id="pnlAssessmentPaperDetails">
+                            <div class="panel-heading">Assessment Paper Details</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.CourseId, "Course")</div>
+                                            <div class="col-md-3">
+                                                @Html.DisplayFor(model => model.AssessmentPaper.CourseName)
+                                                @Html.HiddenFor(model => model.AssessmentPaper.CourseId)  
+                                                @Html.HiddenFor(model => model.AssessmentPaper.CourseName)  
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.AssessmentDate, "Assessment Date")</div>
+                                            <div class="col-md-3">
+                                                @Html.DisplayFor(model => model.AssessmentPaper.AssessmentDate, "{0:dd/MM/yyyy}")
+                                                @Html.HiddenFor(model => model.AssessmentPaper.AssessmentDate)  
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.TimeDuration, "Time Duration")</div>
+                                            <div class="col-md-3">
+                                                @Html.DisplayFor(model => model.AssessmentPaper.TimeDuration) Minutes
+                                                @Html.HiddenFor(model => model.AssessmentPaper.TimeDuration)  
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group">
+                        <div class="panel panel-default" id="pnlAssessmentQuestion">
+                            <div class="panel-heading">Assessment Question</div>
+                            <div class="panel-body">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <span id="message">
+                                            @{
+            var msg = Convert.ToString(TempData["Result"]);
+            if (!string.IsNullOrWhiteSpace(msg))
+            {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+            }
+                                            }
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.Partial("_AddQuestion", Model.AssessmentQuestions, new ViewDataDictionary(ViewData.Model.AssessmentQuestions) { { "prefix", "AssessmentQuestions" } })
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <input id="btnSave" type="submit" value="Save" class="buttonstyle" />&nbsp;
+                                    <input id="btnCancel" type="button" value="Cancel" class="buttonstyle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+            </div> 
+        }
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Option5").hide();
+        $("#Option6").hide();
+
+        $("#btnCancel").click(function () {
+            window.location.href = '@Url.Action("ShowAssessmentPaperDetails", "Assessment", new { id = RMS.Helpers.CheckAccessAttribute.Encode(Convert.ToString(Model.AssessmentPaper.AssessmentPaperId )) })';
+        });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+
+        //$('input[type=file]').change(function () {
+        //    // select the form and submit
+        //    debugger;
+        //    $('form').submit();
+        //});
+
+
+        $("#frmAssessmentDetails").submit(function (e) {
+            var flag = Validation();
+            var isAnswerSelected = true;
+            if ($("input[type=checkbox]:checked").length === 0) {
+                isAnswerSelected = false;
+            }
+            else if ($("input[type=checkbox]:checked").length >1) {
+                $(".jq_MuliChoiceAnswer").val(true);
+            }
+            if (flag == false && isAnswerSelected== false) {
+                $("#message").html("Please fill mandatory details.<br/>Please select correct answer for the question.");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+                e.preventDefault();
+            }
+            else if (isAnswerSelected == false) {
+                $("#message").html("Please select correct answer for the question.");
+                $("#message").addClass("MessageStyleFail");
+                $(".jq_AnsweOption").first().focus();
+                e.preventDefault();
+            }
+            
+        });
+        $("#btnAddMoreOption").click(function (e) {
+            if ($("#Option5").is(':visible') == false) {
+                $("#Option5").show();
+                $("#Option6").hide();
+            }
+            else {
+                $("#Option6").show();
+                $("#AddMoreOption").hide();
+            }
+        });
+    });
+
+    
+</script>

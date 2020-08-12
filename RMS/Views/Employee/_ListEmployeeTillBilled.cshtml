@@ -1,0 +1,77 @@
+﻿@model RMS.Models.EmployeeTillBilledViewModel
+@using RMS.Common.Constants
+@{
+    Layout = null;
+}
+
+<table id="tblEmpBilled" class="table table-striped">
+    <thead>
+        <tr class="trGrid">
+            <th>Emp Name</th>
+            <th>Project Name</th>
+            <th>Allocation Date</th>
+            <th>Release Date</th>
+            <th>Billing Till Date</th>
+            @if (Model.ListEmployeeBilled!= null  )
+            {
+                if(Model.ListEmployeeBilled .Count >0 )
+                {
+                <th>Edit</th>
+                <th>Delete</th>                 
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ListEmployeeBilled != null)
+        {
+            foreach (var item in Model.ListEmployeeBilled)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.EmployeeName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Projects.ProjectName)</td>
+                <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.StartDate))</td> 
+                <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.ActualRelDate))</td> 
+                <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.BillingTillDate))</td> 
+                @*<td>@Html.DisplayFor(modelItem => item.ActualRelDate, "{0:dd/MMM/yyyy}"  )</td> 
+                <td>@Html.DisplayFor(modelItem => item.BillingTillDate, "{0:dd/MMM/yyyy}"  )</td>                 *@
+                <td class="edit" style="text-align:center;" data-EPAId="@item.EPAIdEncr"   >
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a>
+                </td>
+                <td class="delete" style="text-align:center;" data-EPAId="@item.EPAIdEncr"  >
+                    <a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a>
+                </td>
+            </tr>
+        }
+             
+        }
+    </tbody>
+</table>
+         
+<script type ="text/javascript">
+    $(document).ready(function (){
+        //    $('#tblEmpBilled').dataTable();
+
+        $('.edit').on("click", function (event) {
+            var editurl='@Url.Action("EditEmployeeTillBilled", "Employee")';
+            var EPAID = $(this).data("epaid");
+            $('#HfldEPAID').val(EPAID);
+            $('#message').html('');
+            window.location.href = editurl + "?Mode=V&EPAID=" + EPAID;
+            return;
+        });
+
+        $('.delete').on("click", function (event) {
+            if (confirm("Are you sure you want to delete billing extended date?")) {
+                var editurl = '@Url.Action("DeleteEmployeeTillBilled", "Employee")';
+                var EPAID = $(this).data("epaid");
+                $('#HfldEPAId').value = EPAID;
+                $('#message').html('');
+                window.location.href = editurl + "?Mode=D&EPAID=" + EPAID;
+                return;
+            }
+          });
+    })
+</script>

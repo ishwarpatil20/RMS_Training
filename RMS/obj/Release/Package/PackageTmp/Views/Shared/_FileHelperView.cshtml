@@ -1,0 +1,57 @@
+﻿@model Domain.Entities.FileUploadModel
+@using RMS.Common.BusinessEntities.Common;
+
+@{ if (Model.FileViewMode == 0)
+   {
+    <table class="table table-striped">
+        <tr>
+            <th style="width: 250px;">File Name</th>
+            <th style="width: 150px;">Download File </th>
+            @if (Model.DeleteFlag)
+            {
+                <th style="width: 150px;">Delete</th>    
+            }
+        </tr>
+
+        @foreach (var item in Model.FileDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td class="actionlink">
+                    @Html.ActionLink("Download", "DownloadFile", "Common", new { filePath = item.FilePath, fileName = item.FileName }, new {/* id=item.PrimaryKey */ })
+                </td>
+                @if (Model.DeleteFlag)
+                {
+                    <td class="actionlink">
+                        @Ajax.ActionLink("Delete", "DeleteFile", "Common", new { fileId = item.FileId, filePath = item.FilePath, fileName = item.FileName, physicalFile = item.PhysicalFileName, module = Model.Module, entityId = Model.EntityID, targetId = Model.TargetId, dir = Model.FileDirectory }, new AjaxOptions { UpdateTargetId = Model.TargetId, InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
+                </td>
+                }
+            </tr>
+        }
+
+    </table>
+   }
+   else
+   {
+       
+       
+    <table>
+        @foreach (var item in Model.FileDetails)
+        {     
+            if (!string.IsNullOrWhiteSpace(item.FileName))
+            {
+            @Html.ActionLink(item.FileName, "DownloadFile", "Common", new { filePath = item.FilePath, fileName = item.FileName }, new { @style = "color: Blue;text-decoration: underline;" }) 
+            <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>   
+        }
+        }
+
+    </table>
+   
+   }
+    
+}
+
+
+

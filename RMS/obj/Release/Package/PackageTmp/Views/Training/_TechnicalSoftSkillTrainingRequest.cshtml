@@ -1,0 +1,283 @@
+﻿@model Domain.Entities.TrainingModel
+@using RMS.Common.Constants;
+ 
+@*<div class="container">*@
+<div class="col-md-6">
+    <div class="row">
+       @* <div class="form-group">
+             <div class="col-md-2">
+                <label class="control-label">Training Name  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-5">@Html.DropDownListFor(m => m.TrainingName, Model.ListTrainingName, (Model.Operation == CommonConstants.Submit) || (Model.Operation == null) ? (object)new { @class = "Dropdownstyle required" } : (object)new { @class = "Dropdownstyle", disabled = "true" })
+                                    @Html.ValidationMessageFor(m => m.TrainingName)
+                                    @Html.HiddenFor(m => m.TrainingName)
+                                    @Html.HiddenFor(m => m.RoleName)
+            </div>
+            <div class="col-md-5">
+                <div style='display: none;' id='divOtherTrainingName'>
+                    <span style="color: Red">*</span>
+                    @Html.TextBoxFor(m => m.TrainingNameOther, Model.Operation == CommonConstants.View ? (object)new { maxlength = 200, @class = "Textboxstyle", disabled = "true" } : (object)new { maxlength = 200, @class = "Textboxstyle" })
+                </div>
+            </div>
+        </div>*@
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Training Name<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.TrainingName, Model.ListTrainingName, (Model.Operation == CommonConstants.Submit) || (Model.Operation == null) ? (object)new { @class = "form-control Dropdownstyle required" } : (object)new { @class = "form-control Dropdownstyle", disabled = "true" })
+                @Html.ValidationMessageFor(m => m.TrainingName)
+                @Html.HiddenFor(m => m.TrainingName)
+                @Html.HiddenFor(m => m.RoleName)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Quarter<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.Quarter, Model.ListQuarter, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Quarter)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Category<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.Category, Model.ListCategory, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Category)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Priority<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.Priority, Model.ListPriority, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Priority)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Comment (If any)</label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(m => m.Comments, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "form-control TextAreastyle" })
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="row">
+        <div class="clearfix margin-b-10">
+            <div style='display: none;' id='divOtherTrainingName'>
+            <div class=" col-md-4 col-sm-6">
+                <span class="asterisk-color"> *</span>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(m => m.TrainingNameOther, Model.Operation == CommonConstants.View ? (object)new { maxlength = 200, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 200, @class = "form-control Textboxstyle" })
+            </div>
+                </div>
+        </div>
+        
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">No. of Participants<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.NoOfParticipant, Model.ListParticipants, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.NoOfParticipant)
+            </div>
+        </div>
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Requested By<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.RequestedBy, Model.ListRequestedBy, Model.Operation == CommonConstants.View || Model.RoleName.ToLower() != CommonConstants.AdminRole ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.RequestedBy)
+                @Html.Hidden("hdnRequestedBy", Model.RequestedBy)
+            </div>
+        </div>
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Business Impact <span style="display: none" id="spanBusinessImpact" class="asterisk-color"> *</span>
+                </label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(m => m.BusinessImpact, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "form-control TextAreastyle" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label">Quarter  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">@Html.DropDownListFor(m => m.Quarter, Model.ListQuarter, Model.Operation == CommonConstants.View ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                   @Html.ValidationMessageFor(m => m.Quarter)
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">No. of participants : <span style="color: Red">*</span></label></div>
+            <div class="col-md-5">@Html.DropDownListFor(m => m.NoOfParticipant, Model.ListParticipants, Model.Operation == CommonConstants.View ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.NoOfParticipant)
+            </div>
+        </div>*@
+
+
+        @*<div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label">Category : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">@Html.DropDownListFor(m => m.Category, Model.ListCategory, Model.Operation == CommonConstants.View ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Category)
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Requested By : <span style="color: Red">*</span></label></div>
+            <div class="col-md-5">@Html.DropDownListFor(m => m.RequestedBy, Model.ListRequestedBy, Model.Operation == CommonConstants.View || Model.RoleName.ToLower() != CommonConstants.AdminRole ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.RequestedBy)
+            </div>
+            @Html.Hidden("hdnRequestedBy",Model.RequestedBy)
+        </div>*@
+
+        @*<div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label">Priority : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">@Html.DropDownListFor(m => m.Priority, Model.ListPriority, Model.Operation == CommonConstants.View ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Priority)
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Business Impact : <span style="color: Red; display: none" id="spanBusinessImpact">*</span></label></div>
+            <div class="col-md-5">@Html.TextAreaFor(m => m.BusinessImpact, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "TextAreastyle" })
+            
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label">Comments (if any) : </label>
+            </div>
+            <div class="col-md-10">@Html.TextAreaFor(m => m.Comments, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "TextAreastyle" })</div>
+        </div>*@
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        hidewaiting();
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("textarea.required").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $("textarea").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $('#BtnSubmit').click(function (e) {
+
+            var selectedPriority = $("#Priority option:selected").text();
+            var selectedTrainingName = $("#TrainingName option:selected").text();
+
+            Validation();
+
+            if (selectedPriority == 'High') {
+                if ($('#BusinessImpact').val() == "") {
+                    $('#BusinessImpact').css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+
+                    $("#message").addClass("MessageStyleFail");
+                    $('#message').html("Please fill all mandatory fields.");
+
+                    return false;
+                }
+            }
+            else {
+                $('#BusinessImpact').css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+
+            if (selectedTrainingName == 'Others') {
+                if ($('#TrainingNameOther').val() == "") {
+                    $('#TrainingNameOther').css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+
+                    $("#message").addClass("MessageStyleFail");
+                    $('#message').html("Please fill all mandatory fields.");
+
+                    return false;
+                }
+            }
+            else {
+                $('#TrainingNameOther').css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+    });
+
+    $('#TrainingName').on('change', function () {
+        var selectedTrainingName = $("#TrainingName option:selected").text();
+        if (selectedTrainingName == 'Others') {
+            $("#divOtherTrainingName").show();
+            $('#TrainingNameOtherID').val('');
+            $('#TrainingNameOtherID').focus();
+        }
+        else {
+            $("#divOtherTrainingName").hide();
+            $('#TrainingNameOtherID').val('');
+            $('#TrainingNameOther').val('');
+            $("#message").html('');
+        }
+    });
+
+    $('#Priority').on('change', function () {
+        var selectedPriority = $("#Priority option:selected").text();
+        if (selectedPriority == 'High') {
+            $("#spanBusinessImpact").show();
+        }
+        else {
+            $("#spanBusinessImpact").hide();
+        }
+    });
+
+    var CheckDublicateValues = '@Url.Action("CheckduplicateForTrainingName", "training")';
+    $('#TrainingNameOther').on('change', function () {
+        $.ajax({
+            url: CheckDublicateValues,
+            type: 'POST',
+            cache: false,
+            data: { trainingtypeid: $("#TrainingType option:selected").val(), trainingothername: $('#TrainingNameOther').val() },
+            success: function (result) {
+
+                if (result == 1) {
+                    $("#message").addClass("MessageStyleFail");
+                    $("#message").html($('#TrainingNameOther').val() + " training already exist in the training list.");
+                    $('#TrainingNameOther').val('');
+                }
+                else {
+                    $("#message").html('');
+                }
+            }
+        });
+    });
+</script>

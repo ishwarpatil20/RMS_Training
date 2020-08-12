@@ -1,0 +1,694 @@
+﻿
+/****************************** For RP **************************************/
+.alternatingrowStyleRP 
+{
+	background-color: #D4DEFA;
+	font-family: Verdana;
+	font-size: 9pt;
+	padding-left: 5px;
+}
+/****************************** For RP **************************************/
+
+/*******************************Standard CSS ************************************/
+.Messagetext
+{
+	color: #0000FF;
+	font-family: Verdana;
+	font-size: 9pt;
+}
+.text
+{
+	color: #FF0000;
+	font-family: Verdana;
+	font-size: 9pt;
+}
+
+.tablePager
+{
+	background-color: #003399;
+	color: White;
+	height: 30px;
+	width: 100%;
+}
+
+/************* CSS for paging 4C ******************************/
+.tablePager td table tbody tr td span
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 9pt;
+			font-weight: bold;
+			border: 1px solid white;
+			margin-left: 2px;
+			padding-left: 8px;
+			padding-right: 8px;
+			padding-top: 4px;
+			padding-bottom: 4px;
+			text-decoration:none;
+			color:White;
+}
+/************* CSS for paging ******************************/
+
+pagingLink
+{
+	color: White;
+	text-decoration: underline;
+}
+
+ /* Sanju:Issue Id 50201
+   Added cursor property as pointer */
+.button
+{
+	color: #FFFFFF;
+	background-color: #003399;
+	font-weight: bold;
+	font-size: 9pt;
+	width: 119px;
+	cursor:pointer;
+}
+
+.header
+{
+	color: White;
+	vertical-align: middle;
+	font-size: 9pt;
+	font-weight: bold;
+	font-family: Verdana;
+}
+
+tr.headerStyle th
+{
+	height: 25px;
+	background-color: #BFBFBF;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: 5px;
+	font-family :Verdana;
+}
+
+tr.headerStyleFreeze th
+{
+	height: 25px;
+	background-color: #BFBFBF;
+	font-size: 9pt;
+	font-weight: bold;
+	font-family :Verdana;
+}
+
+tr.alternatingrowStyle td
+{
+	background-color: #D4DEFA;
+	font-family: Verdana;
+	font-size: 9pt;
+	padding-left: 5px;
+}
+
+tr.alternatingrowStyleFreeze td
+{
+	background-color: #D4DEFA;
+	font-family: Verdana;
+	font-size: 9pt;
+}
+
+.detailsheader
+{
+	font-weight: bold;
+	font-family: Verdana;
+	font-size: 10pt;
+}
+
+.detailsbg
+{
+	background-color: #BFBFBF;
+}
+
+.detailsborder
+{
+	border: solid 1px black;
+}
+
+tr.textstyle td
+{
+	font-family: Verdana;
+	font-size: 9pt;
+	padding-left : 5px;
+}
+
+tr.textstyleFreeze td
+{
+	font-family: Verdana;
+	font-size: 9pt;
+}
+
+.mandatorymark
+{
+	color: Red;
+}
+
+.addrowheader
+{
+	background-color: #BFBFBF;
+	font-weight: bold;
+	font-family: Verdana;
+	font-size: 10pt;
+}
+
+.childgridRow
+{
+	background-color: #E0FFFF;
+	font-family: Verdana;
+	font-size: 9pt;
+	height: 20px;
+}
+
+.childgridAlternatingRow
+{
+	background-color: #F2F2F2;
+	font-family: Verdana;
+	font-size: 9pt;
+	height: 20px;
+}
+
+.gridheaderStyle
+{
+	height: 25px;
+	background-color: #BFBFBF;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: 5px;
+	font-family:Verdana;
+}
+
+.txtstyle
+{
+	font-family: Verdana;
+	font-size: 9pt;
+	padding-left: 5px;
+}
+
+.childgridheader
+{
+	height: 25px;
+	background-color: #4EE2EC;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: 5px;
+	font-family:Verdana;
+	
+}
+
+.rowbgStyle
+{
+	background-color: #D4DEFA;
+	font-family: Verdana;
+	font-size: 9pt;
+	padding-left: 5px;
+	height: 20px;
+}
+/* CR 31837 Updating end date in RP Sachin Start */
+.repeaterheader
+{
+    background-color: #5170B8;
+    color: white;
+    font-family: tahoma;
+    font-size: 13px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.repeaterrow
+{
+    background-color: White;
+    color: Black;
+    font-family: tahoma;
+    font-size: 13px;
+    vertical-align: middle;
+}
+/* CR 31837 Updating end date in RP Sachin End */
+/*******************************Standard CSS End*************************************/
+
+a:link
+{
+	color: black;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: black;
+	text-decoration: none;
+}
+
+a:visited
+{
+	color: #01ADED;
+	text-decoration: none;
+}
+
+.logo_border
+{
+	border-color: #01ADED;
+	border-style: solid;
+	border-width: 1px;
+}
+
+
+.header_link
+{
+	height: 60px;
+	width: 487px;
+	text-align: right;
+	font-size: 10pt;
+	font-family: Verdana;
+}
+
+.header_link a
+{
+	color: Gray;
+	text-decoration: none;
+}
+
+.header_link:active
+{
+	color: Gray;
+	text-decoration: none;
+}
+
+.header_link a:visited
+{
+	color: #01ADED;
+	text-decoration: none;
+}
+
+.tab_links
+{
+	height: 19px;
+	width: 981px;
+	font-size: 10pt;
+	font-family: Verdana;
+	text-decoration: none;
+}
+
+.tab_links a
+{
+	color: #666666;
+	text-decoration: none;
+}
+
+.tab_links:active
+{
+	color: #666666;
+	text-decoration: none;
+}
+
+.tab_links a:visited
+{
+	color: #01ADED;
+	text-decoration: none;
+}
+
+.user_id
+{
+	height: 25px;
+	background-color: #0D1175;
+	font-size: 10pt;
+	font-family: Verdana;
+	color: White;
+}
+
+.vertical_menu
+{
+	height: 230px;
+	width: 180px;
+	vertical-align: top;
+	color: black;
+	border-right-style: solid;
+	border-right-width: thin;
+	border-right-color: Gray;
+}
+
+.vertical_menu a
+{
+	color: black;
+	text-decoration: none;
+}
+
+.vertical_menu a:active
+{
+	color: Black;
+	text-decoration: none;
+}
+
+.vertical_menu a:visited
+{
+	color: #01ADED;
+	text-decoration: none;
+}
+
+.vertical_menu a:focus
+{
+	color: Black;
+	text-decoration: none;
+}
+
+.content_place_holder
+{
+	height: 399px;
+	width: 100%;
+	vertical-align: top;
+	font-size: 11pt;
+}
+
+.footer_links
+{
+	height: 19px;
+	width: 487px;
+	text-align: left;
+	font-size: 10pt;
+	font-family: Verdana;
+	background-color: navy;
+	color: White;
+	text-decoration: none;
+}
+
+.copyright_text
+{
+	height: 19px;
+	width: 487px;
+	text-align: right;
+	font-size: 10pt;
+	font-family: Verdana;
+	background-color: navy;
+	color: White;
+}
+
+.pipe
+{
+	color: #FFFFFF;
+}
+.horizontal_line
+{
+	color: Gray;
+	width: 100%;
+}
+.Label
+{
+	font-family: Calibri;
+	font-size: 10pt;
+}
+.TextBox
+{
+	font-family: Calibri;
+	font-size: 10pt;
+	border: 1px solid #88BBEE;
+	width: 80px;
+	text-align: right;
+}
+/*
+.Button
+{
+	font-family: Calibri;
+	font-size: 10pt;
+	border: 1px solid #88BBEE;
+	text-align: center; 
+	background-color: #F0F8FF;
+}
+*/
+
+/* Following code is added by kanchan to implement new javascript tab functionality */
+.basictab
+{
+	padding: 3px 0;
+	margin-left: 0;
+	font: 9pt Verdana;
+	border-bottom: 1px solid gray;
+	list-style-type: none;
+	margin-bottom: 0;
+	text-align: left; /*set to left, center, or right to align the menu as desired*/
+	font-weight: bold;
+}
+
+.basictab li
+{
+	display: inline;
+	margin: 0;
+	padding-bottom: 0px;
+}
+
+.basictab li a
+{
+	text-decoration: none;
+	padding: 2px 7px;
+	margin-right: 2px;
+	border: 1px solid gray;
+	border-bottom: none;
+	background-color: white;
+	color: black;
+	vertical-align: bottom;
+	padding-bottom: 3px;
+}
+
+.basictab li a:visited
+{
+	color: black;
+}
+
+.basictab li a:hover
+{
+	background-color: #dbffff;
+	/*background-color:#848484;*/
+	color: black;
+}
+
+.basictab li a:active
+{
+	color: black;
+}
+
+.basictab li.selected a
+{
+	/*selected tab effect*/
+	position: relative;
+	top: 1px;
+	padding-top: 4px;
+	background-color: #dbffff;
+	color: black;
+}
+
+.basictab li span
+{
+	text-decoration: none;
+	padding: 2px 7px;
+	margin-right: 2px;
+	border: 1px solid gray;
+	border-bottom: none;
+	background-color: white;
+	color: black;
+	vertical-align: bottom;
+	cursor: hand;
+	padding-bottom: 3px;
+}
+
+.basictab li span:hover
+{
+	background-color: #dbffff;
+	color: black;
+}
+
+.submenustyle
+{
+	padding: 2px 1px;
+	border: 1px solid black;
+	border-top-width: 0;
+	width: auto;
+	display: none;
+	filter: alpha(opacity=0);
+	-moz-opacity: 0;
+}
+
+* html .submenustyle
+{
+	/*IE only width definition*/
+	width: 100%;
+}
+
+.submenustyle a
+{
+	/*border-right: 1px dashed black;*/ /*border-right: 1px solid black;*/
+	padding: 1px 5px;
+	text-decoration: none; /*cursor:default;*/
+}
+
+.submenustyle a:hover
+{
+	background-color: #ebffff; /*cursor:default;*/
+}
+
+a.HeaderLink
+{
+	color: #58ACFA;
+	padding: 0px 0px 0px 1px;
+	/*
+   Sanju:Issue Id 50201
+   changed cursor property as pointer */
+	cursor: pointer;
+	/** End    ***/
+	text-decoration: underline;
+	font: Verdana;
+	font-size: 9pt;
+}
+
+.submenustyle1
+{
+	padding: 2px 1px;
+	border: 1px solid black;
+	border-top-width: 0;
+	width: auto;
+	background-color: #848484;
+	font: verdana;
+	color: Black;
+}
+
+.submenutext
+{
+	font-family: Verdana;
+	font-size: 9pt;
+	font-weight: bold;
+	color: Black;
+}
+
+submenutext:link
+{
+	font-family: Verdana, helvetica;
+	font-size: 11px;
+	font-weight: normal;
+	color: Black;
+}
+submenutext:visited
+{
+	font-family: Verdana, helvetica;
+	font-size: 11px;
+	font-weight: normal;
+	color: Black;
+}
+submenutext:hover
+{
+	font-family: Verdana, helvetica;
+	font-size: 11px;
+	font-weight: normal;
+	color: Black;
+}
+submenutext:active
+{
+	font-family: Verdana, helvetica;
+	font-size: 11px;
+	font-weight: normal;
+	color: Black;
+}
+
+.marquee
+{
+	font-family: Verdana;
+	font-size: 10pt;
+}
+
+/*************************************For Employee Menu User Control*************************************/
+
+a.employeeMenu:link
+	{
+		font-family: Verdana;
+		font-size: 9pt;
+		color:Blue; 
+	}
+
+
+a.employeeMenu:hover 
+	{
+      color:Blue;
+      font-weight:bold
+	}
+
+a.employeeMenu:active 
+	{
+      color:Green;
+	} 
+
+/*************************************For Employee Menu User Control*************************************/
+
+/****************************** Filter Styles Start*************************************/
+.filter_main
+{
+	width: 215px;
+	margin: 0;
+	padding: 5px;
+	overflow: hidden;
+	z-index: 100;
+	position: absolute;
+}
+
+.filter_title
+{
+	background-color: #7590C8;
+	padding: 2px;
+	height: 18px;
+}
+
+.filter_content
+{
+	width: 215px;
+	margin-left: -2;
+	padding: 2px;
+	position: absolute;
+	overflow: hidden;
+	visibility: hidden;
+	filter: progid:DXImageTransform.Microsoft.Gradient(endColorstr=      '#DDE3FC' , startColorstr= '#779DF3' , gradientType= '1' );
+	background-color: #779DF3;
+}
+/****************************** Filter Styles End **************************************/
+
+/****************************** Mandatory Fields Start *********************************/
+.mandatoryField
+{
+	border-color: #7F9DB9;
+	border-width: thin;
+	border-style: solid;
+}
+/****************************** Mandatory Fields End ***********************************/
+
+
+/****************************Sanju:Issue Id 50201 (Start)
+
+                            new class added (browsers related issue) *************************************************/
+
+.cursor_pointer
+{
+	cursor:pointer;
+}
+
+.header_employee_profile
+{
+	height: 25px; 
+	width: 80%;
+	background: -webkit-gradient(linear, left center, right center, from(#0C359A), to(#7590C8));
+	background: -moz-linear-gradient(left, #0C359A, #7590C8);
+	background: -ms-linear-gradient(left, #0C359A 0%,#7590C8 80%, #7590C8 100%); 
+	
+}
+.header_filter_title
+{
+	background: -webkit-gradient(linear, left center, right center, from(#12379A), to(#5C7CBD));
+	background: -moz-linear-gradient(left, #12379A, #5C7CBD);
+	background: -ms-linear-gradient(left, #12379A 0%,#5C7CBD 80%, #5C7CBD 100%); 
+}
+.contract_document_name
+{
+	width: 8.5%;
+	width:6.5%\9;
+	-moz-width:6.5%;
+}
+@-moz-document url-prefix() {
+
+    .contract_document_name { width: 6.5%; }
+
+}
+
+/******************************Sanju:Issue Id 50201 (End)***************************************************/

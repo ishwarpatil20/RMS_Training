@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RMS_ModelStoreContainer" CdmEntityContainer="RMS_Entities">
+    <EntitySetMapping Name="T_InterviewPanel">
+      <EntityTypeMapping TypeName="RMS_Model.T_InterviewPanel">
+        <MappingFragment StoreEntitySet="T_InterviewPanel">
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TrainingAttended" ColumnName="TrainingAttended" />
+          <ScalarProperty Name="Inducted" ColumnName="Inducted" />
+          <ScalarProperty Name="LevelIds" ColumnName="LevelIds" />
+          <ScalarProperty Name="SecondarySkills" ColumnName="SecondarySkills" />
+          <ScalarProperty Name="CandidateDesignations" ColumnName="CandidateDesignations" />
+          <ScalarProperty Name="CandidateDeptId" ColumnName="CandidateDeptId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_IP_PanelLevel">
+      <EntityTypeMapping TypeName="RMS_Model.T_IP_PanelLevel">
+        <MappingFragment StoreEntitySet="T_IP_PanelLevel">
+          <ScalarProperty Name="Empid" ColumnName="Empid" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+          <ScalarProperty Name="PanelLevelId" ColumnName="PanelLevelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_IP_PanelDesignation">
+      <EntityTypeMapping TypeName="RMS_Model.T_IP_PanelDesignation">
+        <MappingFragment StoreEntitySet="T_IP_PanelDesignation">
+          <ScalarProperty Name="Empid" ColumnName="Empid" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+          <ScalarProperty Name="PanelDesignationId" ColumnName="PanelDesignationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Master">
+      <EntityTypeMapping TypeName="RMS_Model.T_Master">
+        <MappingFragment StoreEntitySet="T_Master">
+          <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedByID" ColumnName="LastModifiedByID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="GroupMasterID" ColumnName="GroupMasterID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Usp_IP_UpdateIP" FunctionName="RMS_Model.Store.Usp_IP_UpdateIP" />
+    <EntitySetMapping Name="T_EmployeeSkillTypeCategory">
+      <EntityTypeMapping TypeName="RMS_Model.T_EmployeeSkillTypeCategory">
+        <MappingFragment StoreEntitySet="T_EmployeeSkillTypeCategory">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EmpSkillTypeID" ColumnName="EmpSkillTypeID" />
+          <ScalarProperty Name="EmpSkillCategory" ColumnName="EmpSkillCategory" />
+          <ScalarProperty Name="EmpSkillCategoryID" ColumnName="EmpSkillCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanelDetail" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanelDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanelDetail_Result">
+          <ScalarProperty Name="PanelId" ColumnName="PanelId" />
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IpType" ColumnName="IpType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_IP_GetEmpSkills" FunctionName="RMS_Model.Store.USP_IP_GetEmpSkills">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetEmpSkills_Result">
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+          <ScalarProperty Name="MasterName" ColumnName="MasterName" />
+          <ScalarProperty Name="SkillType" ColumnName="SkillType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanel" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanel_Result">
+          <ScalarProperty Name="panelid" ColumnName="panelid" />
+          <ScalarProperty Name="empid" ColumnName="empid" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="SecondarySkill" ColumnName="SecondarySkill" />
+          <ScalarProperty Name="LINEMANAGER" ColumnName="LINEMANAGER" />
+          <ScalarProperty Name="BusinessVertical" ColumnName="BusinessVertical" />
+          <ScalarProperty Name="EmpSkillID" ColumnName="EmpSkillID" />
+          <ScalarProperty Name="PrimarySkillName" ColumnName="PrimarySkillName" />
+          <ScalarProperty Name="CandidateDeptId" ColumnName="CandidateDeptId" />
+          <ScalarProperty Name="CandidateDesignations" ColumnName="CandidateDesignations" />
+          <ScalarProperty Name="CandidateDesignationName" ColumnName="CandidateDesignationName" />
+          <ScalarProperty Name="SecondarySkills" ColumnName="SecondarySkills" />
+          <ScalarProperty Name="SecondarySkillname" ColumnName="SecondarySkillname" />
+          <ScalarProperty Name="levelids" ColumnName="levelids" />
+          <ScalarProperty Name="levelidName" ColumnName="levelidName" />
+          <ScalarProperty Name="Inducted" ColumnName="Inducted" />
+          <ScalarProperty Name="InductedName" ColumnName="InductedName" />
+          <ScalarProperty Name="TrainingAttended" ColumnName="TrainingAttended" />
+          <ScalarProperty Name="TrainingAttendedName" ColumnName="TrainingAttendedName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_IP_GetInterviewPanelSearch" FunctionName="RMS_Model.Store.USP_IP_GetInterviewPanelSearch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RMS_Model.USP_IP_GetInterviewPanelSearch_Result">
+          <ScalarProperty Name="PANELID" ColumnName="PANELID" />
+          <ScalarProperty Name="EMPID" ColumnName="EMPID" />
+          <ScalarProperty Name="EMPNAME" ColumnName="EMPNAME" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="SECONDARYSKILL" ColumnName="SECONDARYSKILL" />
+          <ScalarProperty Name="LINEMANAGER" ColumnName="LINEMANAGER" />
+          <ScalarProperty Name="BUSINESSVERTICAL" ColumnName="BUSINESSVERTICAL" />
+          <ScalarProperty Name="EMPSKILLID" ColumnName="EMPSKILLID" />
+          <ScalarProperty Name="PRIMARYSKILLNAME" ColumnName="PRIMARYSKILLNAME" />
+          <ScalarProperty Name="CANDIDATEDEPTID" ColumnName="CANDIDATEDEPTID" />
+          <ScalarProperty Name="DEPTNAME" ColumnName="DEPTNAME" />
+          <ScalarProperty Name="CANDIDATEDESIGNATIONS" ColumnName="CANDIDATEDESIGNATIONS" />
+          <ScalarProperty Name="CANDIDATEDESIGNATIONNAME" ColumnName="CANDIDATEDESIGNATIONNAME" />
+          <ScalarProperty Name="SECONDARYSKILLS" ColumnName="SECONDARYSKILLS" />
+          <ScalarProperty Name="SECONDARYSKILLNAME" ColumnName="SECONDARYSKILLNAME" />
+          <ScalarProperty Name="LEVELIDS" ColumnName="LEVELIDS" />
+          <ScalarProperty Name="LEVELIDNAME" ColumnName="LEVELIDNAME" />
+          <ScalarProperty Name="INDUCTED" ColumnName="INDUCTED" />
+          <ScalarProperty Name="INDUCTEDNAME" ColumnName="INDUCTEDNAME" />
+          <ScalarProperty Name="TRAININGATTENDED" ColumnName="TRAININGATTENDED" />
+          <ScalarProperty Name="TRAININGATTENDEDNAME" ColumnName="TRAININGATTENDEDNAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="T_Departments">
+      <EntityTypeMapping TypeName="RMS_Model.T_Departments">
+        <MappingFragment StoreEntitySet="T_Departments">
+          <ScalarProperty Name="ProjectHeadId" ColumnName="ProjectHeadId" />
+          <ScalarProperty Name="ResourceBusinessUnit" ColumnName="ResourceBusinessUnit" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="IsEditedEmailId" ColumnName="IsEditedEmailId" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="GroupMasterId" ColumnName="GroupMasterId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DEPTName" ColumnName="DEPTName" />
+          <ScalarProperty Name="DEPTId" ColumnName="DEPTId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DesignationMaster">
+      <EntityTypeMapping TypeName="RMS_Model.T_DesignationMaster">
+        <MappingFragment StoreEntitySet="T_DesignationMaster">
+          <ScalarProperty Name="IsReportHead" ColumnName="IsReportHead" />
+          <ScalarProperty Name="DesignationGroup" ColumnName="DesignationGroup" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Category">
+      <EntityTypeMapping TypeName="RMS_Model.T_Category">
+        <MappingFragment StoreEntitySet="T_Category">
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Technology">
+      <EntityTypeMapping TypeName="RMS_Model.T_Technology">
+        <MappingFragment StoreEntitySet="T_Technology">
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="TechnologyName" ColumnName="TechnologyName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Domain">
+      <EntityTypeMapping TypeName="RMS_Model.T_Domain">
+        <MappingFragment StoreEntitySet="T_Domain">
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_SubDomain">
+      <EntityTypeMapping TypeName="RMS_Model.T_SubDomain">
+        <MappingFragment StoreEntitySet="T_SubDomain">
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+          <ScalarProperty Name="SubDomainName" ColumnName="SubDomainName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_Employee_BillingTillDate" FunctionName="RMS_Model.Store.USP_Employee_BillingTillDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RMS_Model.USP_Employee_BillingTillDate_Result">
+          <ScalarProperty Name="EPAId" ColumnName="EPAId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="AllocationDate" ColumnName="AllocationDate" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="BillingTillDate" ColumnName="BillingTillDate" />
+          <ScalarProperty Name="PageMode" ColumnName="PageMode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

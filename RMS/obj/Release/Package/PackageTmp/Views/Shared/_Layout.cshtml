@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title Training Module</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="bootstrapcss/bootstrap.min.css" rel="stylesheet">
+
+
+    <meta name="viewport" content="width=device-width" />
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+    <script src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    @Styles.Render("~/Content/css")
+
+
+</head>
+<body>
+    <header>
+        <div class="header-right-image img-responsive margin-b5">
+            <div class="pull-left logo">
+                <img src="~/Content/css/Images/Rave-logo.png" class="img-responsive">
+            </div>
+            <div class="pull-right rm">
+                Resource Management
+            </div>
+        </div>
+        <div class="header-strip margin-b-10">
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="pull-right">
+                    Welcome! <span class="UserNameStyle"><i>@{
+                        string[] words = User.Identity.Name.ToString().Replace("RAVE-TECH.CO.IN\\", "").Split('.');
+                        string a = words[0].Substring(0, 1).ToUpper() + words[0].Substring(1) + "." + words[1].Substring(0, 1).ToUpper() + words[1].Substring(1);
+                        @a;
+                    }
+                    </i></span>
+                </p>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            @{
+                Services.CommonService objservice = new Services.CommonService();
+                List<RMS.Common.BusinessEntities.Menu.Menu> MenuList = objservice.GetAuthoriseMenuList(Convert.ToInt32(Session["EmpID"]));
+                bool IsAuthoriseUser = MenuList.Exists(m => string.Concat(m.baseUrl, m.PageURL, Convert.ToString(HttpContext.Current.Request.Url.Query)).Equals(Convert.ToString(HttpContext.Current.Request.Url.OriginalString), StringComparison.InvariantCultureIgnoreCase));
+                //if (!IsAuthoriseUser)
+                //{
+                //Response.Redirect(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.OldRMSBaseUrl]);
+                //}
+                //else {
+                Html.RenderAction("GetMenu", "Common");
+                        //}
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" id="body">
+                <div id="wait" class="wait">
+                    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+                </div>
+                @RenderSection("featured", required: false)
+                @*<section class="content-wrapper main-content clear-fix">*@
+                <div class="row">
+                    @RenderBody()
+                </div>
+                @*</section>*@
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                @*<p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>*@
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    var username = $(".UserNameStyle").html();
+    //    username = username.replace("RAVE-TECH.CO.IN", "");
+
+    //    alert(username);
+    //    $(".UserNameStyle").html() = username;
+
+    //});
+
+</script>

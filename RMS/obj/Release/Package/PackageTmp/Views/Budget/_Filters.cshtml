@@ -1,0 +1,39 @@
+﻿@model RMS.Models.BudgetViewModel
+
+
+<div class="col-md-12 margin-b-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        	 
+					<label for="exampleInputEmail1">
+						Year                        
+					</label>
+                        @Html.Hidden("hdMonth",Model.MonthId)
+					@Html.DropDownListFor(model => model.YearId, Model.Years, new { id = "ddlYear", @class = "form-control Dropdownstyle required" })
+
+                    </div>
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1">
+						Month                        
+					</label>
+                        @Html.DropDownListFor(model => model.MonthId, Model.Months, new { id = "ddlMonths", @class = "form-control Dropdownstyle required" })
+                    </div>
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1">
+						Project                        
+					</label>
+                        @Html.DropDownListFor(model => model.Projects , Model.Projects, "-Select-", new { id = "ddlProjects", @class = "form-control Dropdownstyle required" })
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

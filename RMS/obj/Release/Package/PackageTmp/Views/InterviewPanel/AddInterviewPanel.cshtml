@@ -1,0 +1,425 @@
+﻿@model RMS.Models.InterviewPanelViewModel
+@using RMS.Common.Constants
+@using RMS.Helpers 
+@{
+    ViewBag.Title = "AddInterviewPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*@using (Html.BeginForm("AddInterviewPanel", "InterviewPanel", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @id = "frmInterviewPanel" }))*@
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="col-md-12">
+        <div class=" training-title margin-b-10">
+            Interview Panel
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+        </div>
+    </div>
+    <div id="_divmsg" class="col-md-12 margin-b-10">
+        @{
+    var message = Convert.ToString(TempData["Message"]);
+    if (!string.IsNullOrWhiteSpace(message))
+    {         
+            <span class="Messagetext" id="message">@message</span> <br />
+    }           
+        }
+    </div>
+    if(Model.Mode =="List")
+    {
+     <div id="dvIP" class="col-md-12">
+        @{Html.RenderPartial(RMS.Common.Constants.CommonConstants._PartialIP, Model);}
+    </div>
+    }
+else
+{
+    
+    <div class="col-md-12 margin-b-10">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Selected Employee</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        
+                        @Html.DropDownListFor(m => m.EmpId, Model.ListEmpName, new { id = "ddlEmpId", @class = "form-control Dropdownstyle required", disabled = "true" })
+                         @*@if (Model.Mode == "U")
+                         {
+                            @Html.DropDownListFor(m => m.EmpId, Model.ListEmpName, new { id = "ddlEmpId", @class = "form-control Dropdownstyle required", disabled = "true" })
+                         }
+                         else
+                         {
+                            @Html.DropDownListFor(m => m.EmpId, Model.ListEmpName, new { id = "ddlEmpId", @class = "form-control Dropdownstyle required" })
+                         }*@
+                        @Html.HiddenFor(model => model.EmpId, new { id="hfldEmpid"})
+                    </div>
+
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label">Designation</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span class="label-text" id="spDesignation">
+                            @*@if (Model.Mode == "U")
+                            {*@
+                               @Model.EmpDesignation
+                            @*}*@
+                        </span>
+                    </div>
+                </div>
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Primary Skill</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span class="label-text" id="spTechnology">
+                            @Model.EmpTechnology
+                           @* @if (Model.Mode == "U")
+                            {@*
+                                @Model.EmpTechnology
+                            @*}*@
+                        </span>
+                    </div>
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Candidate Department<span class="asterisk-color"> *</span></label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        @if (Model.Mode == "U")
+                        {
+                            @Html.DropDownListFor(m => m.CandidateDeptId, Model.ListDeptName, new { id = "DdlCandidateDeptId", @class = "required form-control  Dropdownstyle", disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(m => m.CandidateDeptId, Model.ListDeptName, new { id = "DdlCandidateDeptId", @class = "required form-control  Dropdownstyle" })
+                        }
+
+                        @*Html.ValidationMessageFor(model => model.CandidateDeptId)*@
+                    </div>
+                </div>
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Candidate Designation<span class="asterisk-color"> *</span></label>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        @Html.DropDownListFor(m => m.CandidateDesignations, Model.ListDesignationName, new { id = "DdlDesignation", @class = "form-control  Dropdownstyle" })
+                    </div>
+                    <div class="col-md-1 col-sm-6">
+                        <input type="button" value="&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;" id="btnAddDesign" class="button validator btn btn-submit" />
+                    </div>
+
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Secondary Skill</label>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        @Html.DropDownListFor(m => m.SecondarySkills, Model.ListSecondarySkills, new { id = "DdlSecondarySkill", @class = "form-control  Dropdownstyle" })
+                    </div>
+                    <div class="col-md-1 col-sm-6">
+                        <input type="button" value="&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;" id="btnAddSkill" class="button validator btn btn-submit" />
+                    </div>
+                </div>
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        @if (Model.CandidateDesignations != null)
+                        {
+                            @Html.ListBox("lstDesignation", Model.ListSingleIp[0].ListCollectionDesign, new { id = "lstDesignation", @style = "width:200px;height:100px;", @class = "required form-control form-control" })
+                        }
+                        else
+                        {
+                            var foo = new List<SelectListItem> { };
+                            @Html.ListBox("lstDesignation", foo, new { id = "lstDesignation", @style = "width:200px;height:100px;", @class = "required form-control form-control" })
+                        }
+                    </div>
+                    <div class="col-md-1 col-sm-6">
+                        <input type="button" value="Remove" id="btnRemoveDesign" class="button validator btn btn-submit" />
+                    </div>
+
+                    <div class=" col-md-2 col-sm-6"></div>
+                    <div class="col-md-3 col-sm-6">
+                        @if (Model.SecondarySkills != null)
+                        {
+                            @Html.ListBox("lstSkill", Model.ListSingleIp[0].ListCollectionSecSkill, new { id = "lstSkill", @style = "width:200px;height:100px;", @class = "form-control form-control" })
+                        }
+                        else
+                        {
+                            var _Skill = new List<SelectListItem> { };
+                            @Html.ListBox("lstSkill", _Skill, new { id = "lstSkill", @style = "width:200px;height:100px;", @class = "form-control form-control" })
+                        }
+
+
+                    </div>
+                    <div class="col-md-1 col-sm-6">
+                        <input type="button" value="Remove" id="btnRemoveSkill" class="button validator btn btn-submit" />
+                    </div>
+                </div>
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Inducted<span class="asterisk-color"> *</span></label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        @Html.DropDownListFor(m => m.InductedId, Model.ListInducted, new { id = "DdlInductedId", @class = "form-control Dropdownstyle required" })
+                    </div>
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Trained<span class="asterisk-color"> *</span></label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        @Html.DropDownListFor(m => m.TrainingAttendedId, Model.ListAttended, new { id = "DDlAttended", @class = "required form-control Dropdownstyle" })
+                    </div>
+                </div>
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label ">Level<span class="asterisk-color"> *</span></label>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <table width="100%" border="0">
+                            <tr>
+                                @foreach (var names in @Model.ListLevel)
+                                {
+                                    var checkBoxId = "chk" + names.Value;
+                                    var tdId = "td" + names.Value;
+                                    var Selectedvalue = "," + @Model.LevelIds;
+
+                                    bool selected = false;
+                                    if (Selectedvalue.Contains(names.Value))
+                                        selected = true;
+                                    <td>
+                                        <input type="checkbox" id="@checkBoxId" class="chkclass required" name="chkLevel" value="@names.Value" checked="@selected"   />
+                                        @names.Text
+                                    </td>
+                                }
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-12 col-sm-6" style="text-align: center">
+                        <input type="submit" value="Submit" id="Submit" class="button validator btn btn-submit" />
+                        @Html.HiddenFor(m => m.InterviewPanelId)
+                        @*@Html.Hidden("InterviewPanelId")*@
+                        @Html.HiddenFor(m => m.Mode, new { id = "HfldMode" })
+                        <input type="button" value="Cancel" id="BtnReset" class="btn btn-reset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+        <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+    </div>
+   
+}
+
+<script lang="javascript">
+    $(document).ready(function () {
+        var URLEmpDetails = '@Url.Action("LoadEmpDetail", "InterviewPanel")';
+        var URLDesination = '@Url.Action("FillDesignationList", "InterviewPanel")';
+
+
+        $('#ddlEmpId').change(function () {
+            var selectedValue = $(this).val();
+            //showaiting();
+            $.ajax({
+                url: URLEmpDetails,
+                //url: URLEmpDetails + "Empid=" + CheckAccessAttribute.Encode(selectedValue),
+                type: 'POST',
+                cache: true,
+                data: { EmpId: selectedValue },
+                success: function (result) {
+                    var PrimarySkills = result.PrimarySkill;
+                    var Designation = result.Designation;
+                    $('#spDesignation').html(Designation);
+                    $('#spTechnology').html(PrimarySkills)
+
+                    var select = $("#DdlSecondarySkill");
+                    select.empty();
+
+                    $.each(result.ListData, function (index, item) {
+                        select.append($('<option/>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                },
+                error: function (msg) {
+                    //debugger;
+                }
+            });
+
+
+        });
+
+        //On department change, load designation        
+        $('#DdlCandidateDeptId').change(function () {
+            var selectedValue = $(this).val();
+            //showaiting();
+            debugger;
+            $.ajax({
+                url: URLDesination,
+                //url: URLEmpDetails + "Empid=" + CheckAccessAttribute.Encode(selectedValue),
+                type: 'POST',
+                cache: true,
+                data: { DeptId: selectedValue },                
+                success: function (result) {
+                    var select = $("#DdlDesignation");
+                    select.empty();
+                    $.each(result, function (index, item) {
+                        select.append($('<option/>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+                },
+                error: function (msg) {
+                    //debugger;
+                }
+            });
+
+
+        });
+
+        //Add Dropdown select value to listbox
+        $("#btnAddDesign").click(function () {
+            var txt = $("#DdlDesignation");
+            var svc = $(txt).val();  //Its Let you know the textbox's value   
+            var svctext = $('#DdlDesignation option:selected').html();
+            if (svctext != "Select") {
+                var lst = $("#lstDesignation");
+                var ul = $("#itemList");
+                var options = $("#lstDesignation option");
+                var iList = $("#itemList li");
+                var alreadyExist = false;
+                $(options).each(function () {
+                    if ($(this).val() == svc) {
+                        alreadyExist = true;
+                        txt.val("");
+                        return alreadyExist;
+                    }
+                });
+                if (!alreadyExist) {
+                    $(lst).append('<option value="' + svc + '" selected=true>' + svctext + '</option>');
+                    $(ul).append('<li id="' + svc + '"><label>' + svctext + '<input type="checkbox" id="' + svc + '" onclick="removeItem(this.id)"/></label>')
+                    txt.val("");
+                    return false;
+                }
+            }
+        });
+
+        //Add Dropdown select value to listbox
+        $('#btnRemoveDesign').click(function () {
+            $("#lstDesignation option:selected").remove();
+        });
+
+        //Add Dropdown select value to listbox
+        $("#btnAddSkill").click(function () {
+            var txt = $("#DdlSecondarySkill");
+            var svc = $(txt).val();  //Its Let you know the textbox's value   
+            var svctext = $('#DdlSecondarySkill option:selected').html();
+            if (svctext != "Select") {
+                var lst = $("#lstSkill");
+                var ul = $("#itemList");
+                var options = $("#lstSkill option");
+                var iList = $("#itemList li");
+                var alreadyExist = false;
+                $(options).each(function () {
+                    if ($(this).val() == svc) {
+                        alreadyExist = true;
+                        txt.val("");
+                        return alreadyExist;
+                    }
+                });
+                if (!alreadyExist) {
+                    $(lst).append('<option value="' + svc + '" selected=true>' + svctext + '</option>');
+                    $(ul).append('<li id="' + svc + '"><label>' + svctext + '<input type="checkbox" id="' + svc + '" onclick="removeItem(this.id)"/></label>')
+                    txt.val("");
+                    return false;
+                }
+            }
+        });
+        //Add Dropdown select value to listbox
+        $('#btnRemoveSkill').click(function () {
+            $("#lstSkill option:selected").remove();
+        });
+
+
+        $("#Submit").click(function (e) {
+            //debugger;
+            $('#btnAddSkill').trigger('click');
+            $('#btnAddDesign').trigger('click');
+            $('#lstDesignation option').prop('selected', true);
+            $('#lstSkill option').prop('selected', true);
+
+            var flag = Validation();
+            //debugger;
+            if (flag == false) {
+                $("#message").html("Please fill mandatory details.");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+
+                if ($("#ddlEmpId option:selected").val() > 0) {
+                    if ($("#DdlCandidateDeptId option:selected").val() > 0) {
+
+                        //if ($('#lstDesignation option').length <= 0) {
+                        //    alert('Designation cannot be blank');
+                        //    return false;
+                        //}
+                        ////else if ($('#lstSkill option').length <= 0) {
+                        ////    alert('Secondary Skill cannot be blank');
+                        ////    return false;
+                        ////}
+                        //else {
+                        //    $('#lstDesignation option').prop('selected', true);
+                        //    $('#lstSkill option').prop('selected', true);
+                        //}
+                        e.preventDefault();
+                    }
+                }
+            }
+        });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("textarea.required").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $("textarea").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $('#BtnReset').click(function (e) {
+            var viewtrainingurl = '@Url.Action("AddInterviewPanel", "InterviewPanel")';
+           // window.location.href = viewtrainingurl;// + "?trainingTypeID=" + selectedTrainingType;
+
+            var EmpId = $('#ddlEmpId option:selected').text();
+           
+           
+            var gridurl = '@Url.Action("Responsearr", "InterviewPanel")';
+            $.ajax({
+                url: gridurl,
+                type: 'POST',
+                data: { EmpId: EmpId },
+                success: function (response) {
+                    //$("#divGrid").load(gridurl + "?trainingTypeID=" + selectedTrainingType);
+                       @* window.location.href = '@Request.UrlReferrer.LocalPath';*@
+                    if (response.ok)
+                        window.location = response.newurl;
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+            return false;
+        });
+
+         
+    });
+
+</script>

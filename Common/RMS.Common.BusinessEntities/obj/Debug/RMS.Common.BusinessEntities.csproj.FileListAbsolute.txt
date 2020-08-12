@@ -1,0 +1,63 @@
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMS\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTrainingMerge\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.dll
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Debug\RMS.Common.pdb
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.dll
+D:\Shared\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Debug\RMS.Common.BusinessEntities.pdb

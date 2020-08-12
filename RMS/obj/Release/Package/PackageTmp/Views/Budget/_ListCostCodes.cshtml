@@ -1,0 +1,71 @@
+﻿@model  IEnumerable<Domain.Entities.BudgetResult>
+
+<div>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div id="divSucess" class="alert alert-success" style="display: none">
+           
+            </div>
+
+
+            <div class="alert alert-danger" id="divError" style="display: none">
+            </div>
+            <div class="panel-heading">Cost Codes </div>
+            <div class="panel-body">
+                <div id="divGrid">
+                    <table id="tblCostCodes" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <td style="display: none"></td>
+                                <th>@Html.CheckBox("chkHeader", new { @class = "Headercheckedbox" })</th>
+                                <th > Cost Code
+                                </th>
+                                @if (ViewData["BusinessVerticals"] != null){
+                                  <th>Business Vertical
+                                </th>
+                                }
+                                <th>Budget
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="display: none">@Html.DisplayFor(modelItem => item.BudgetId)</td>
+                                    <td>
+                                        @Html.CheckBox("chkSave", new { @class = "checkedbox" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    @if (ViewData["BusinessVerticals"] != null){
+                                    <td>
+                                        @Html.DropDownListFor(modelItem => item.BusinessVerticalId, new SelectList(ViewData["BusinessVerticals"] as IEnumerable<SelectListItem>, "value", "text", item.BusinessVerticalId), new { @disabled = "disabled",@class = "form-control Dropdownstyle" })
+                                    </td>
+                                    }
+                                    <td>
+                                        
+                                        <input type="text" class="form-control Dropdownstyle required " disabled value="@item.Budget"  data-costcodeId ="@item.MasterID" data-budgetId="@item.BudgetId"/>
+                                            
+                                        @*@Html.TextBoxFor(modelItem => item.Budget, new { @class = "form-control Dropdownstyle required " })*@
+                                    </td>
+
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-md-12 text-center">
+    <input id="btnSave" class="btn btn-submit margin-r-10 " type="submit" value="Submit" /><input id="btnCancel" type="button" class="btn btn-reset" value="Reset" />
+    <input id="btnDelete" class="btn btn-submit margin-r-10 " type="button" value="Delete" />
+</div>

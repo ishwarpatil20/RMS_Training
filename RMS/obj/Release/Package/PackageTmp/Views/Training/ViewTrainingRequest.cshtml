@@ -1,0 +1,75 @@
+﻿@model List<Domain.Entities.TrainingModel>
+
+
+
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ViewTrainingRequest";
+}
+
+
+
+
+    <div class="col-md-12">
+		 <div class=" training-title margin-b-10">
+			View Training Request 
+			<img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+		 </div>	
+		 </div>
+        <div class="col-md-12 margin-b-10">
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="training-type">
+                                    <span>Training Type :</span>
+
+                                </div>
+                            </div>
+                                                        <div class="media-body">
+                                <div class="media-heading">
+                                    <div class="nav-div" style="color: #ffffff">
+                                        <span class="training-radio-div">
+                                            @Html.RadioButton("category", "1207", true, new { @class = string.Empty })<label  for="TermsAndConditions_true">Technical</label>
+                                        </span>
+                                        <span class="training-radio-div">
+                                            @Html.RadioButton("category", "1208", new { @class = string.Empty })<label for="TermsAndConditions_true">Soft Skill</label>
+                                            </span>
+                                        <span class="training-radio-div">
+                                        
+                                            @Html.RadioButton("category", "1209", new { @class = string.Empty })<label for="TermsAndConditions_true">Seminar</label>
+                                           </span>
+                                        <span class="training-radio-div">                                              
+                                            @Html.RadioButton("category", "1210", new { @class = string.Empty })<label for="TermsAndConditions_true">Knowledge Sharing Session</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+     
+    <div id="divGrid">
+        @{Html.RenderPartial(RMS.Common.Constants.CommonConstants.PartialViewTrainingGrid, Model);}
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var trainingTypeId = @Html.Raw(Json.Encode(Convert.ToInt32(this.ViewData["Training Type"])));
+        $("input[name=category][value=" + trainingTypeId + "]").prop('checked', true);
+       
+        var gridurl = '@Url.Action("ViewTechnicalTrainingRequestGrid", "training")';
+
+        $("input[name='category']").click(function () {
+            $('#message').html('');
+            var trainingid = $(this).val();
+            $("#divGrid").html('');
+            showaiting();
+            $("#divGrid").load(gridurl + "?trainingTypeID=" + trainingid);             
+        })
+
+    });
+
+
+
+
+</script>

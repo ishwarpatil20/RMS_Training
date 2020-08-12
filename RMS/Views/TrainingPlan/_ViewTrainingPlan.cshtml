@@ -1,0 +1,125 @@
+﻿@*@model IEnumerable<Domain.Entities.TrainingPlanModel>*@
+@model  RMS.Models.TrainingPlanViewModel
+@using RMS.Common.Constants
+@{
+    Layout = null;
+}
+
+<div id="_divmsg">
+    @{
+        var message = Convert.ToString(TempData["Message"]);
+        if (!string.IsNullOrWhiteSpace(message))
+        {         
+        <span class="Messagetext" id="message"></span> <br />
+        }           
+    }
+</div>
+<table id="tblCourse" class="table table-striped">
+    <thead>
+
+        <tr class="trGrid">
+            <td style="display:none" ></td>
+            <th>Month</th>
+            <th>Name of training</th>
+            <th>No of hours</th>
+            <th>Trainer Int/Ext</th>
+@*            <th>Month</th>*@
+            <th>Target participants</th>
+            @if (Model.FlagEmployeePage == true)
+            {
+                <th>Year</th>
+                <th>Quarter</th>
+            }
+            @if (Model.FlagEdit == true)
+            {
+                <th>
+                    @Html.Label("Edit")
+                </th>
+                <th>
+                    @Html.Label("Delete")
+                </th>   
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListTrainingPan)
+        {
+            <tr>
+                <td style="display:none" >@Html.DisplayFor(modelItem => item.Month )</td>
+                <td>@Html.DisplayFor(modelItem => item.MonthName)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrainingName)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrainingHour)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrainingTypeName)</td>
+                @*<td>@Html.DisplayFor(modelItem => item.MonthName)</td>*@
+                <td>@Html.DisplayFor(modelItem => item.Target)</td>
+                @if (Model.FlagEmployeePage == true)
+                {
+                    <td>@Html.DisplayFor(modelItem => item.YearFinancial)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QuarterName)</td>
+                }
+
+                @if (Model.FlagEdit == true)
+                {
+                    <td class="edit" style="text-align:center;" 
+                data-TrainingPlanId="@item.TrainingPlanId"  data-Year="@item.Year" data-Quarter ="@item.Quarter" >
+                        @*<a href="@Url.Action("EditPlan", new { TrainingPlanId  = item.TrainingPlanId, Year= item.Year,Quarter=item.Quarter   })" >*@
+                        <a href="#">
+                            <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                        </a>
+                    </td>     
+            
+                    <td class="delete" style="text-align:center;"
+                         data-TrainingPlanId="@item.TrainingPlanId"  data-Year="@item.Year" data-Quarter ="@item.Quarter" >
+                        <a href="#">
+                            <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/>
+                        </a>
+                    </td>  
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="col-md-12" id="dvExportToExcel" style="text-align: center">
+    <a href='@Url.Action("ExportExcel", "TrainingPlan", new { @year = @Model.Year, @Quarter = Model.Quarter })'>
+        <span class="btn btn-submit">Export to excel</span>
+        @*<input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button" value="Export to excel" id="exportoexcel" />*@
+    </a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+         $('#tblCourse').dataTable();
+    })
+
+
+    $(".edit").bind("click", function (event) {
+        // showaiting();
+        var editurl = '@Url.Action("EditPlan", "TrainingPlan")';
+        var TrainingPlanId = parseInt($(this).data("trainingplanid"));
+        var Year = parseInt($(this).data("year"));
+        var Quarter = parseInt($(this).data("quarter"));
+        var trainingplandetail = $("#trainingplandetail");
+        $("#message").html('');
+        //showwaiting();
+        trainingplandetail.load(editurl + "?Mode=U&TrainingPlanId=" + TrainingPlanId + "&Year=" + Year + "&Quarter=" + Quarter);
+        return true;
+    });
+
+    $(".delete").bind("click", function (event) {
+        if (confirm('Are you sure you want to Delete this training plan.')) {
+            // showaiting();
+            var deleteurl = '@Url.Action("DeletePlan", "TrainingPlan")';
+            var TrainingPlanId = parseInt($(this).data("trainingplanid"));
+            var Year = parseInt($(this).data("year"));
+            var Quarter = parseInt($(this).data("quarter"));
+            var trainingplandetail = $("#trainingplandetail");
+            $("#message").html('');
+            //showwaiting();
+            trainingplandetail.load(deleteurl + "?Mode=U&TrainingPlanId=" + TrainingPlanId + "&Year=" + Year + "&Quarter=" + Quarter);
+            return true;
+        }
+    });
+
+
+</script>

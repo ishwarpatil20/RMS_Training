@@ -1,0 +1,249 @@
+﻿@using RMS.Common.Constants;
+@model Domain.Entities.TrainingModel
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+		 <div class=" training-title margin-b-10">
+			Raise Training Request
+			<img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+		 </div>	
+		 </div>
+
+
+<div class="col-md-12">
+    @*using (Ajax.BeginForm("RaiseTrainingRequest", "Training", FormMethod.Post, new AjaxOptions { UpdateTargetId = "" }, new { @class = "form-horizontal" }))
+    *@
+    @using (Html.BeginForm("RaiseTrainingRequest", "Training", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+       
+        @*<fieldset>
+            <legend></legend>
+            <div class="row">
+                <div class="col-md-12">*@
+                <div class="panel panel-default">
+                    <div class="panel-heading">Raise Training Request Details</div>
+                    <div class="panel-body">
+
+                            <div class="col-md-12 margin-b-10">
+                                <span class="asterisk-text">All fields marked with asterisk (*) are mandatory</span>
+                            </div>
+
+                            @*                        <div class="container">
+                            <div class="row">
+                                <div class="form-group">*@
+                            <div class="col-md-12 margin-b-10">
+                                        <span id="message">
+                                            @{
+        var msg = Convert.ToString(TempData["Result"]);
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+        }
+                                            }
+                                        </span>
+                                    </div>
+                            @*</div>*@
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="clearfix margin-b-10">
+                                        <div class=" col-md-2 col-sm-6">
+                                            <label class="form-label">Training Type<span class="asterisk-color"> *</span></label>
+                                </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            @Html.DropDownListFor(m => m.TrainingType, Model.ListTrainingType, Model.Operation != CommonConstants.Submit ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                                            @Html.ValidationMessageFor(m => m.TrainingType)
+
+                                            @Html.HiddenFor(m => m.RaiseID)
+                                            @Html.HiddenFor(m => m.Operation)
+                                            @Html.HiddenFor(m => m.TrainingType)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* <div class="form-group">
+                                    <div id="category">
+                                        <div class="col-md-2">
+                                            <label class="control-label">Training Type  : <span style="color: Red">*</span></label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.TrainingType, Model.ListTrainingType, Model.Operation != CommonConstants.Submit ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                                            @Html.ValidationMessageFor(m => m.TrainingType)
+
+                                            @Html.HiddenFor(m => m.RaiseID)
+                                            @Html.HiddenFor(m => m.Operation)
+                                            @Html.HiddenFor(m => m.TrainingType)
+                                        </div>
+                                    </div>
+                                </div>*@
+                            @*<div class="form-group">*@
+                                    <div class="col-md-12">
+                                <div class="row">
+                                        <div id="divGrid">
+                                            @{if (Convert.ToInt32(Model.TrainingType) == CommonConstants.TechnicalTrainingID ||
+                                Convert.ToInt32(Model.TrainingType) == CommonConstants.SoftSkillsTrainingID ||
+                                Convert.ToInt32(Model.TrainingType) == CommonConstants.DefaultFlagZero ||
+                                string.IsNullOrEmpty(Model.TrainingType))
+                                              {
+                                                  Html.RenderPartial("_TechnicalSoftSkillTrainingRequest", Model);
+                                              }
+                                              else if (Convert.ToInt32(Model.TrainingType) == CommonConstants.SeminarsID ||
+                                                  Convert.ToInt32(Model.TrainingType) == CommonConstants.DefaultFlagOne)        ////Training Type = One => Reset Training Type Dropdown)  
+                                              {
+                                                  Html.RenderPartial("_SeminarTrainingRequest", Model);
+                                              }
+                                              else if (Convert.ToInt32(Model.TrainingType) == CommonConstants.KSSID ||
+                                                  Convert.ToInt32(Model.TrainingType) == CommonConstants.DefaultFlagTwo)         ////Training Type = Two => Reset Training Type Dropdown)  
+                                              {
+                                                  Html.RenderPartial("_KSSTrainingRequest", Model);
+                                              }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            @*</div>*@
+                                @* <div class="form-group">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4">
+                                        <input type="submit" value="Submit" id="BtnSubmit" />
+                                        <input type="submit" value="Cancel" id="BtnCancel" />
+                                    </div>
+                                </div>*@
+                         <div class="clearfix margin-b-10">
+					<div class=" col-md-offset-2 col-md-10 col-sm-6">
+                         <input type="submit" value="Submit" id="BtnSubmit" class="btn btn-submit" />
+                        <input type="button" value="Reset" id="BtnReset" class="btn btn-reset" />
+                        <input type="button" value="Cancel" id="BtnCancel" class="btn btn-reset" />
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+            @*    </div>
+            </div>
+        </fieldset>*@
+    }
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var data;
+            if ($('#RaiseID').val() == 0) {
+                $("#BtnCancel").hide();
+                $("#BtnReset").show();
+            }
+            else {
+                if ($('#Operation').val() == 'view') {
+                    $("#BtnCancel").show();
+                    $("#BtnReset").hide();
+                    $("#BtnSubmit").hide();
+                }
+                else {
+                    $("#BtnCancel").show();
+                    $("#BtnReset").hide();
+                }
+            }
+
+            if ($('#Operation').val() == 'update' && $('#Quarter').val() == '') {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Training quarter is past.");
+            }
+            else if ($('#Operation').val() == 'sumbit') {
+                $("#message").html("");
+            }
+
+            $('#BtnCancel').click(function (e) {
+                var selectedTrainingType = $("#TrainingType option:selected").val();
+                if (selectedTrainingType == "") {
+                    selectedTrainingType = 0;
+                }
+                var Raiseid = $("#RaiseID").val();
+              
+                var gridurl = '@Url.Action("Responsearr", "training")';
+                $.ajax({
+                    url: gridurl,
+                    type: 'POST',
+                    data: { Raiseid: Raiseid, trainingTypeID: selectedTrainingType },
+                    success: function (response) {
+                         //$("#divGrid").load(gridurl + "?trainingTypeID=" + selectedTrainingType);
+                       @* window.location.href = '@Request.UrlReferrer.LocalPath';*@
+                        if (response.ok)
+                            window.location = response.newurl;
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                return false;
+            });
+
+            $('#BtnReset').click(function (e) {
+                var selectedTrainingType = $("#TrainingType option:selected").val();
+                if (selectedTrainingType == "") {
+                    selectedTrainingType = 0;
+                }
+
+                $("input[type=text]").val("");
+                $("textarea").val("");
+                $("select").val("");
+
+                $('#TrainingType').focus();
+
+                $('#BusinessImpact').css({
+                    "border": "",
+                    "background": ""
+                });
+
+                $("#divOtherTrainingName").hide();
+                $("#spanBusinessImpact").hide();
+
+                ClearBorderColor();
+
+                $("#message").html("");
+
+                var viewtrainingurl = '@Url.Action("ResetRequestedBy", "Training")';
+                window.location.href = viewtrainingurl + "?trainingTypeID=" + selectedTrainingType;
+            });
+
+
+            $('.required').change(function () {
+                clearvalidation(this);
+            });
+
+            $("textarea.required").on('change keyup paste', function () {
+                clearvalidation(this);
+            });
+
+            $("textarea").on('change keyup paste', function () {
+                clearvalidation(this);
+            });
+
+
+            $(function () {
+                var trainingtype = '@Url.Action("RaiseTrainingRequestAction", "training")';
+
+                $('#TrainingType').change(function () {
+                    $('#divGrid').html('');
+                    $('#message').html('');
+                    var selectedValue = $(this).val();
+                    showaiting();
+                    $.ajax({
+                        url: trainingtype,
+                        type: 'POST',
+                        cache: true,
+                        data: { value: selectedValue },
+                        success: function (result) {
+                            $('#divGrid').html(result);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,445 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/MasterPage/MasterPage.master.cs"
+    Inherits="MasterPage" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <script type="text/javascript">
+        javascript: window.history.forward(1);
+    </script>
+
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <title>Resource Management</title>
+    <link href="../CSS/MRFCommon.css" rel="stylesheet" />
+    <!--Umesh: Issue 'Modal Popup issue in chrome' Starts -->
+    <link href="../CSS/jquery.modalDialog.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/jquery.modalDialog.skins.css" rel="stylesheet" type="text/css" />
+    <!--Umesh: Issue 'Modal Popup issue in chrome' Ends -->
+
+    <script type="text/javascript" src="~/../JavaScript/CommonValidations.js"></script>
+
+    <script type="text/javascript" src="~/../JavaScript/DatePicker.js"></script>
+
+    <link rel="shortcut icon" href="http://rave-tech.com/images/favicon.ico" />
+    <!-- This function checks the Browser Used -->
+
+    <script language="JavaScript">
+
+        var navName = navigator.appName;
+        var brVer = navigator.userAgent; var brNum; var reg = new RegExp('/');
+        var lastPos = '';
+        var brVerId = '';
+        var lastPos = '';
+        function verNumIE() {
+
+            var brVerId = brVer.indexOf('MSIE');
+            //brNum = brVer.substr(brVerId, 8); allowing for IE 10 onwards browser as well
+            brNum = brVer.substr(brVerId, 15);
+            // Name:Sanju:Issue Id 50201  
+            // Start: Added variable lastPos to get the position of semicolon and to get that data e.g "MSIE 10.0".
+            lastPos = brNum.indexOf(';');
+            brNum = brVer.substr(brVerId, lastPos);
+        }
+        function verNumOt() {
+            window.location = '../RaveHR/BrowserNotSupported.htm'
+        }
+        function openWindow() {
+            window.open('Help.htm', 'Help', 'location=center,toolbar=no,menubar=no,directories=yes,status=yes,resizable=no,scrollbars=yes,height=570,width=400, top=0,left=250', false);
+        }
+
+        function logout(LogOffPage) {
+            var IsInternetExplorer = false;
+
+            try {
+                var agt = navigator.userAgent.toLowerCase();
+                if (agt.indexOf("msie") != -1) { IsInternetExplorer = true; }
+            }
+            catch (e) {
+                IsInternetExplorer = false;
+            };
+
+            if (IsInternetExplorer) {
+                // Logoff Internet Explorer
+                document.execCommand("ClearAuthenticationCache");
+                window.location = LogOffPage;
+            }
+            else {
+                // Logoff every other browsers
+                $.ajax({
+                    username: 'unknown',
+                    password: 'WrongPassword',
+                    url: './cgi-bin/PrimoCgi',
+                    type: 'GET',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic AAAAAAAAAAAAAAAAAAA=");
+                    },
+
+                    error: function(err) {
+                        window.location = LogOffPage;
+                    }
+                });
+            }
+        }
+        
+    </script>
+
+</head>
+<body onload="scroll(90)">
+    <form id="form1" runat="server">
+    <!-- This Function Checks the version of the browser-->
+    <%--Sanju:Issue Id 50201:Commented the below code so that rms portal can work in other browsers also--%>
+    <%--<script language="JavaScript">
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            verNumIE();
+        } else {
+            verNumOt();
+        }
+        if (!(navigator.javaEnabled())) {
+            java = "No";
+        } else {
+            java = "Yes";
+        }
+        if (brNum == 'MSIE 6.0') {
+
+        }
+        else {
+            if (brNum == 'MSIE 7.0') {
+
+            }
+            else {
+                if (brNum == 'MSIE 8.0') {
+                }
+                else {
+                    if (brNum == 'MSIE 9.0') {
+                    }
+                    else {
+                        if (brNum == 'MSIE 10.0') {
+                        }
+                        else {
+                            if (brNum == 'MSIE 11.0') {
+                            }
+                            else {
+                                if (brNum == 'MSIE 12.0') {
+                                }
+                                else {
+                                    verNumOt();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>--%>
+    <%--Sanju:Issue Id 50201:End--%>
+    <!-- This function is moved here from <HEAD> tag as it contains server tags beacause of which there was a problem
+    loading AJAX calendar control -->
+    <cc1:ToolkitScriptManager ID="ScriptManagerMaster" runat="server">
+    </cc1:ToolkitScriptManager>
+    <div style="height: 550px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td colspan="2" align="center" width="100%">
+                    <asp:Image runat="server" ID="imgRaveLogo" ImageUrl="~/Images/logo.JPG" Style="width: 990px;
+                        height: 72px;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="user_id" align="left" style="width: 309px;">
+                                &nbsp;&nbsp;<asp:Label ID="lblUserName" runat="server" Text="Welcome!"></asp:Label>
+                                <asp:Label ID="lblRole" runat="server" CssClass="Label" Visible="false"></asp:Label>
+                            </td>
+                            <td class="user_id" align="right" style="width: 682px">
+                                <a href="mailto:rave.rm.group@northgateps.com" class="HeaderLink">Contact Us</a>
+                                <asp:Label ID="lblPipe2" runat="server" Text="Label" CssClass="pipe"> | </asp:Label>
+                                <a href="#" class="HeaderLink" onclick="javascript:openWindow();">Help</a>
+                                <%--<asp:HyperLink ID="lnkHeaderHelp" runat="server" NavigateUrl="~/Help.htm" Target="_blank"
+                                    CssClass="HeaderLink">Help</asp:HyperLink>--%>
+                                <asp:Label ID="lblPipe3" runat="server" Text="Label" CssClass="pipe"> | </asp:Label>
+                                <asp:LinkButton ID="lbtnLogout" runat="server" Text="Log Out" CssClass="HeaderLink"
+                                    OnClick="lbtnLogout_Click"></asp:LinkButton>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="color: Red;">
+                    <%--<marquee scrolldelay="150" class="marquee">Please do not use browser <span style="font-weight:bold;">Back</span> and <span style="font-weight:bold;">Forward</span> buttons</marquee>--%>
+                    <asp:Label runat="server" ID="lblMessage" Visible="false"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="100%">
+                    <ul id="maintab" class="basictab" onmouseover="clear_delayhide()" onmouseout="resetit(event)">
+                        <li rel="homesubmenu" onmouseover="showit(0)"><a href="~/Home.aspx" runat="server"
+                            id="tabHome">Home</a></li>
+                        <li rel="contractSubMenu"><a href="~/#" runat="server" id="tabContract" onmouseover="showit(7)">
+                            Contract</a></li>
+                        <li rel="projectsubmenu"><a href="~/#" runat="server" id="tabProject" onmouseover="showit(1)">
+                            Project</a></li>
+                        <li rel="MRFSubMenu"><a href="~/#" runat="server" id="tabMRF" onmouseover="showit(2)">
+                            MRF</a></li>
+                        <li rel="RecruitmentSubMenu"><a href="~/#" runat="server" id="tabRecruitment" onmouseover="showit(3)">
+                            Recruitment</a> </li>
+                        <li rel="div3" onmouseover="showit(4)" style="display: none;"><a href="~/#" runat="server"
+                            id="tabAppraisal">Appraisal</a> </li>
+                        <li rel="div4" onmouseover="showit(5)"><a href="~/#" runat="server" id="tabEmployee">
+                            Employee</a></li>
+                        <li rel="div5" onmouseover="showit(6)" style="display: none;"><a href="~/#" runat="server"
+                            id="tabLeave">Leave</a></li>
+                        <li rel="divRMSReports"><a href="~/#" runat="server" id="tabRMSReports" onmouseover="showit(9)">
+                            Reports</a></li>
+                        <%-- Venkatesh : Start Hide Seat allocation                         
+                        <li rel="SeatAllocationSubMenu"><a href="~/#" runat="server" id="tabSeatAllocation"
+                                onmouseover="showit(8)">Seat Allocation</a></li>
+                             Venkatesh : End Hide Seat allocation --%>
+                        <li rel="divFourCSubMenu"><a href="~/#" runat="server" id="tab4C" onmouseover="showit(10)">
+                            4C</a> </li>
+                        <li rel="homesubmenu" onmouseover="showit(0)"><a href="http://rav-vm-srv-096:8024/" runat="server" id="tabTraining" Visible =false>
+                            Training</a></li>
+                    </ul>
+                    <div id="displaysubmenu" class="submenustyle1" style="position: absolute; visibility: hidden;"
+                        onmouseover="clear_delayhide()" onmouseout="resetit(event)">
+                    </div>
+                    <!--
+                    <div id="homesubmenu" style="position: absolute; display: none;"> <%--fnRedirectToProjSummary--%>
+                    </div>-->
+                    <div id="projectsubmenu" class="submenustyle1" style="position: absolute; display: none;">
+                        <span id="divProjectSummary" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnProjectSummary" Text="Project Summary" CssClass="submenutext" OnClick="fnRedirectToProjSummary"
+                            Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span runat="server" id="spProjectSummary"><br />
+                            </span><span id="divApproveRejectResourcePlan" runat="server">&nbsp;&nbsp;<asp:LinkButton
+                                runat="server" ID="btnApproveRejectResourcePlan" Text="Approve/Reject ResourcePlan"
+                                CssClass="submenutext" OnClick="fnRedirectToApproveRejectResourcePlan" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span
+                                    runat="server" id="spApproveRejectResourcePlan"><br />
+                                </span><span id="divReports" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                                    ID="btnReports" Text="Reports" CssClass="submenutext" OnClick="fnRedirectToReports"
+                                    Width="200"></asp:LinkButton>&nbsp;&nbsp;</span>
+                    </div>
+                    <div id="MRFSubMenu" class="submenustyle1" style="position: absolute; display: none;">
+                        <span id="spanRaiseMRF" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnRaiseMRF" Text="Raise MRF" CssClass="submenutext"
+                                OnClick="fnRedirectToRaiseMRF" Width="200"></asp:LinkButton>
+                            &nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span3"></span><span id="spanMRFPendingApproval" runat="server">
+                            &nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnMRFPendingApproval" Text="Approve/Reject MRF"
+                                CssClass="submenutext" OnClick="fnRedirectMrfPendingApproval" Width="200"></asp:LinkButton>
+                            &nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span13"></span><span id="spanMRFSummary" runat="server">
+                            &nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="LinkButton2" Text="MRF Summary" CssClass="submenutext"
+                                OnClick="fnRedirectMrfSummary" Width="200"></asp:LinkButton>
+                            &nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span15"></span><span id="spanAppRejHeadCount" runat="server">
+                            &nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnARHeadCount" Text="Approve/Reject Head Count"
+                                CssClass="submenutext" OnClick="fnRedirectMrfApproveRejectHeadCount" Width="200"></asp:LinkButton>
+                            &nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span14"></span><span id="spanMRFPendingAllocation"
+                            runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnMRFPendingAllocation" Text="Pending Allocation"
+                                CssClass="submenutext" OnClick="fnRedirectMrfPendingAllocation" Width="200"></asp:LinkButton>
+                            &nbsp;&nbsp;</span>
+                    </div>
+                    <div id="RecruitmentSubMenu" class="submenustyle1" style="position: absolute; display: none;">
+                        <span id="spanPipelineDetails" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton ID="lbtnPipelineDetails" runat="server" Text="Add Pipeline Details"
+                                CssClass="submenutext" OnClick="fnRedirectToPipelineDetails" Width="170"></asp:LinkButton>
+                            &nbsp;&nbsp;</span><span id="spanPD" runat="server"></span>
+                        <br />
+                        <span id="spanRecruitmentSummary" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton ID="lbtnRecruitmentSummary" runat="server" Text="Recruitment Summary"
+                                CssClass="submenutext" OnClick="fnRedirectToRecruitmentSummary" Width="170"></asp:LinkButton>
+                            &nbsp;&nbsp;</span>
+                    </div>
+                    <div id="Div3" class="submenustyle1" style="position: absolute; display: none;">
+                        <a href="#" class="submenutext">Project Summary3&nbsp;&nbsp;<span runat="server"
+                            id="Span5"></span><br />
+                        </a><a href="#" class="submenutext">Approve/Reject Resource Plan3&nbsp;&nbsp;<span
+                            runat="server" id="Span6"></span><br />
+                        </a><a href="#" class="submenutext">Reports3&nbsp;&nbsp;</a>
+                    </div>
+                    <div id="Div4" class="submenustyle1" style="position: absolute; display: none;">
+                        <a href="#" class="submenutext">Project Summary4&nbsp;&nbsp;<span runat="server"
+                            id="Span7"></span><br />
+                        </a><a href="#" class="submenutext">Approve/Reject Resource Plan4&nbsp;&nbsp;<span
+                            runat="server" id="Span8"></span><br />
+                        </a><a href="#" class="submenutext">Reports4&nbsp;&nbsp;</a>
+                    </div>
+                    <div id="EmpSubMenu" class="submenustyle1" align="center" style="position: absolute;
+                        display: none;">
+                        <%-- Sanju:Issue Id 50201: Added align left so that tabs text are aligned to left--%>
+                        <span id="SpanEmpSummary" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnEmpSummary" Text="Employee Summary" align="left" CssClass="submenutext"
+                            OnClick="fnRedirectToEmpSummary" Width="140"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span id="SpanEmployeeProfile" runat="server">&nbsp;&nbsp;<asp:LinkButton
+                            runat="server" ID="LinkButton1" Text="Employee Profile" align="left" CssClass="submenutext"
+                            OnClick="fnRedirectToEmpDetailsProfile" Width="140"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span><span runat="server" id="Span17"></span><span id="SpanAddEmployee" runat="server">
+                            &nbsp;&nbsp;<asp:LinkButton runat="server" ID="btnAddEmployee" Text="Add Employee"
+                                align="left" CssClass="submenutext" OnClick="fnRedirectToAddEmployee" Width="140"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span><span runat="server" id="Span11"></span><span id="spanViewMy4C" runat="server">
+                            &nbsp;&nbsp;<asp:LinkButton runat="server" ID="btnView4C" Text="View My 4C" align="left"
+                                CssClass="submenutext" OnClick="fnRedirectTo4CEmployee" Width="140"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span>
+                        <%--  Sanju:Issue Id 50201:End--%>
+                        <span runat="server" id="Span18"></span>
+                        <%--  Ishwar :NIS RMS : 11112014 Start--%>
+                        <span id="spanSkillSearchReport" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnSkillSearchReport" Text="Employee Skill Search" align="left" CssClass="submenutext"
+                            OnClick="fnRedirectToSkillSearchReport" Width="160"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span>
+                        <%--  Ishwar:NIS RMS : 11112014 End--%>
+                    </div>
+                    <div id="Div5" class="submenustyle1" style="position: absolute; display: none;">
+                        <a href="#" class="submenutext">Project Summary&nbsp;&nbsp;<span runat="server" id="Span9"></span><br />
+                        </a><a href="#" class="submenutext">Approve/Reject Resource Plan5&nbsp;&nbsp;<span
+                            runat="server" id="Span10"></span><br />
+                        </a><a href="#" class="submenutext">Reports5&nbsp;&nbsp;</a>
+                    </div>
+                    <div id="contractSubMenu" class="submenustyle1" style="position: absolute; display: none;">
+                        <span id="spanContractSummary" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="lbtnContractSummary" Text="Contract Summary" CssClass="submenutext" OnClick="fnRedirectToContractSummary"
+                            Width="130"></asp:LinkButton>&nbsp;&nbsp; </span><span runat="server" id="spanContract">
+                            </span>
+                        <br />
+                        <span id="spanAddContract" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="lbtnAddContract" Text="Add Contract" CssClass="submenutext" OnClick="fnRedirectToAddContract"
+                            Width="130"></asp:LinkButton>&nbsp;&nbsp; </span>
+                    </div>
+                    <div id="divSeatAllocationSubMenu" class="submenustyle1" align="center" style="position: absolute;
+                        display: none;">
+                        <span id="spanSeatAllocation" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnSeatAllocation" Text="Seat Allocation" CssClass="submenutext" OnClick="fnRedirectToSeatAllocation"
+                            Width="130"></asp:LinkButton><asp:HiddenField runat="server" ID="hhdAmenus" Value="" />
+                        </span>
+                    </div>
+                    <div id="divRMSReports" class="submenustyle1" align="center" style="position: absolute;
+                        display: none;">
+                        <span id="spanRMSReports" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnRMSReports" Text="RMS Reports" CssClass="submenutext" OnClick="fnRedirectToRMSReports"
+                            Width="130"></asp:LinkButton>&nbsp;&nbsp;<br /></span>
+                        <span id="spanHeadCountReport" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnHeadCountReport" Text="Head Count Report" CssClass="submenutext" OnClick="fnRedirectToHeadCountReport"
+                            Width="130"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span>
+                        <%--  Venkatesh:NIS RMS :Start--%>
+                        <span id="spanConsolidated" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnConsolidated" Text="Consolidated Report by Project" align="left" CssClass="submenutext"
+                            OnClick="fnRedirectToConsolidated" Width="260"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span19"></span>
+                        <%--  Venkatesh:NIS RMS :End--%>
+                        
+                         <%--  Siddharth:NIS RMS :Start 27th April 2015--%>
+                        <span id="spanConsolidatedByCostCode" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="LinkButton5" Text="Consolidated Report by CostCode" align="left" CssClass="submenutext"
+                            OnClick="fnRedirectToConsolidatedbyCostcode" Width="260"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span23"></span>
+                        <%--  Siddharth:NIS RMS :End 27th April 2015--%>
+                        
+                        <%--  Mohamed:NIS RMS :Start--%>
+                        <span id="spanSkillReport" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnSkillReport" Text="Skill Report" align="left" CssClass="submenutext" OnClick="fnRedirectToSkillReport"
+                            Width="140"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span20"></span>
+                        <%--  Mohamed:NIS RMS :End--%>
+                        <%--  Ishwar:NIS RMS :Start--%>
+                        <span id="spanMRFAgingReport" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="btnMRFAgingReport" Text="MRF Aging Report" align="left" CssClass="submenutext" OnClick="fnRedirectToMRFAgingReport"
+                            Width="140"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span21"></span>
+                        
+                        <span id="spanMRFAgingForOpenPositionReport" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            ID="LinkButton4" Text="MRF Aging Report For Open Positions" align="left" CssClass="submenutext" OnClick="fnRedirectToMRFAgingForOpenPositionReport"
+                            Width="260"></asp:LinkButton>&nbsp;&nbsp;<br />
+                        </span><span runat="server" id="Span22"></span>
+                        <%--  Ishwar:NIS RMS :End--%>
+                    </div>
+                    <%--Ishwar Patil : Trainging Module 23/04/2014 : Starts--%>
+                   <%-- <div id="divTraining" class="submenustyle1" align="center" style="position: absolute;
+                        display: none;">
+                        <span id="spanRaiseTraining" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnRaiseTraining" Text="Raise Training Request"
+                                CssClass="submenutext" Width="230" OnClick="fnRedirectToRaiseTraining"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span><span id="spanRaiseTrainingSummary" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="btnRaiseTrainingSummary" Text="View Training Request"
+                                CssClass="submenutext" Width="230" OnClick="fnRedirectToRaiseTrainingSummary"></asp:LinkButton>&nbsp;&nbsp;
+                            <br />
+                        </span><span id="spanApprovRejectRequest" runat="server">&nbsp;&nbsp;
+                            <asp:LinkButton runat="server" ID="LinkButton3" Text="Approve/Reject Training Request"
+                                CssClass="submenutext" Width="230" OnClick="fnRedirectToApproveReject"></asp:LinkButton>&nbsp;&nbsp;
+                        </span>
+                    </div>--%>
+                    <%--Ishwar Patil : Trainging Module 23/04/2014 : End--%>
+                    <div id="divFourCSubMenu" class="submenustyle1" style="position: absolute; display: none;">
+                        <span id="spanAddFeedback" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                            CausesValidation="false" ID="lnkFeedback" Text="Add 4C Feedback" CssClass="submenutext"
+                            OnClick="fnRedirectToFourCFeedback" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span
+                                runat="server" id="Span2"><br />
+                            </span><span id="span4CAdmin" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                                ID="lnk4CAdmin" Text="4C Admin" OnClick="fnRedirectToFourCAdmin" CausesValidation="false"
+                                CssClass="submenutext" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span runat="server"
+                                    id="Span12"><br />
+                                </span><span id="spanViewFourC" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                                    CausesValidation="false" ID="lnkViewFourC" Text="View 4C Feedback" CssClass="submenutext"
+                                    OnClick="fnRedirectToFourCView" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span
+                                        runat="server" id="Span1">
+                                        <br />
+                                    </span><span id="span4CReports" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                                        CausesValidation="false" ID="lnk4CReports" Text="4C Reports" CssClass="submenutext"
+                                        OnClick="fnRedirectToFourCReports" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span><span
+                                            runat="server" id="Span4">
+                                            <br />
+                                        </span><span id="span4CLogin" runat="server">&nbsp;&nbsp;<asp:LinkButton runat="server"
+                                            CausesValidation="false" ID="lnkLoginAnotherUser" Text="4C Login" CssClass="submenutext"
+                                            OnClick="fnRedirectToLoginPageOfAnotherUser" Width="200"></asp:LinkButton>&nbsp;&nbsp;</span>
+                    </div>
+
+                    <script type="text/javascript" src="~/../JavaScript/menu.js"></script>
+
+                    <%--<script type="text/javascript" src="<%= Server.MapPath("~/JavaScript/menu.js")%>"></script>--%>
+                    <%--<script type="text/javascript" src="~/RaveHR/JavaScript/menu.js"></script>--%>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="100%">
+                    <table cellspacing="0" width="100%" cellpadding="0" border="0">
+                        <tr>
+                            <td class="content_place_holder" width="100%">
+                                <asp:ContentPlaceHolder ID="cphMainContent" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <%--<tr>
+                    <td colspan="2">
+                        <table style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: Gray;
+                            height: 9px; vertical-align: bottom;" width="100%">
+                            <tr>
+                                <td>
+                                    &nbsp;<asp:HiddenField runat="server" ID="hhdSubmenu" Value="0" /><asp:HiddenField runat = "server" ID = "hhdTab" Value="0" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>--%>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

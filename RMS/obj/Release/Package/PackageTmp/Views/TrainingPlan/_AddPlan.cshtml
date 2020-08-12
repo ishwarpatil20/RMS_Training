@@ -1,0 +1,166 @@
+﻿@model  RMS.Models.TrainingPlanViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row margin-b-10">
+            <div class=" col-md-12">
+                <span class="asterisk-text">All fields marked with asterisk (*) are mandatory</span>
+            </div>
+        </div>
+        <div>
+            @Html.ValidationSummary(true)
+            <table style="width: 100%" border="0">
+                <tr class="submit-form-greenbg1">
+                    <td style="padding: 10px 15px ! important;">
+                        <label class="control-label pull-right">Training Name <span  class="validate" style="color: Red">*</span> :</label></td>
+                    <td>
+                        @Html.DropDownListFor(m => m.TrainingName, Model.ListTrainingName, new { @class = "required form-control Dropdownstyle", style = "" })
+                    </td>
+                    <td>
+                        <div style='display: none;' id='divOtherTrainingName'>
+                            <label class="control-label pull-right">Training Name <span  class="validate" style="color: Red">*</span> :</label></div></td>
+                    <td>
+                        <div style='display: none;' id='divOtherTrainingNameTextBox'>
+                                @Html.TextBoxFor(m => m.TrainingNameOther, Model.Operation == RMS.Common.Constants.CommonConstants.View ? (object)new { maxlength = 200, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 200, @class = "form-control Textboxstyle required" })
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <label class="control-label pull-right" style="float: left">No of hours<span style="color: Red">*</span> :</label></td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Hrs, new { @class = "required   form-control Textboxstyle", style = "" })
+                    </td>
+
+                    <td>
+                        <label class="control-label pull-right" style="float: left">Trainer Int/Ext <span style="color: Red">*</span> :</label></td>
+                    <td>
+                        @Html.DropDownListFor(m => m.TrainingType, Model.ListTrainingType, new { @class = "required form-control Dropdownstyle" })
+                    </td>
+                </tr>
+                <tr class="submit-form-greenbg1">
+                    <td>
+                        <label class="control-label pull-right" style="float: left">Month <span class="validate" style="color: Red;">*</span> :</label></td>
+                    <td>
+                        @Html.DropDownListFor(m => m.Month, Model.ListMonth, new { @class = "required form-control Dropdownstyle", style = "" })
+                    </td>
+                    <td>
+                        <label class="control-label  pull-right" style="float: left">Target participants<span class="validate" style="color: Red;">*</span> :</label></td>
+                    <td>@Html.TextAreaFor(m => m.Target, new { @class = "required form-control TextAreastyle" })
+                        @Html.ValidationMessageFor(m => m.Target, string.Empty, new { style = "color: red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: center">
+                         @if (Model.FlagEdit ==true )
+                         {
+                             <input type="submit" value="Submit" id="submitTrainingplan" class="button validator btn btn-submit" />
+                         }
+                        @Html.HiddenFor(m => m.TrainingPlanId)
+                        @Html.Hidden("TrainingPlanId")
+                        @Html.HiddenFor(m => m.Mode)
+                        <input type="button" value="Reset" id="BtnReset" class="btn btn-reset" />
+                    </td>
+
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+@*=======================================================================================List Training Plan=======================================================================================*@
+<div>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Training Plan List</div>
+            <div class="panel-body">
+                <div id="divGrid">
+                    @{
+                        var message = Convert.ToString(TempData["Message"]);
+                        if (!string.IsNullOrWhiteSpace(message))
+                        {
+                            <span class="Messagetext" id="message">@message</span> <br />
+                        }           
+                    }
+                    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants._ViewTrainingPlan, Model);}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        hidewaiting();
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+
+        $('#submitTrainingplan').click(function (e) {
+            Validation();
+        });
+
+
+        $('#TrainingName').on('change', function () {
+            var selectedTrainingName = $("#TrainingName option:selected").text();
+            if (selectedTrainingName == 'Others') {
+                $("#divOtherTrainingName").show();
+                $("#divOtherTrainingNameTextBox").show();
+                $('#TrainingNameOtherID').val('');
+                $('#TrainingNameOtherID').focus();
+            }
+            else {
+                $("#divOtherTrainingName").hide();
+                $("#divOtherTrainingNameTextBox").hide();
+                $('#TrainingNameOtherID').val('');
+                $('#TrainingNameOther').val('');
+                $("#message").html('');
+            }
+        });
+
+        $('#BtnReset').click(function (e) {
+            var Quarter = $("#Quarter option:selected").val();
+            if (Quarter == "") {
+                Quarter = 0;
+            }
+
+            var Year = $("#Year option:selected").val();
+            if (Year == "") {
+                Year = 0;
+            }
+            
+            $("input[type=text]").val("");
+            $("textarea").val("");
+            $("select").val("");
+
+            $('#TrainingType').focus();
+
+            $('#BusinessImpact').css({
+                "border": "",
+                "background": ""
+            });
+
+            $("#divOtherTrainingName").hide();
+            $("#spanBusinessImpact").hide();
+
+            ClearBorderColor();
+
+            $("#message").html("");
+            var trainingplandetail = $("#trainingplandetail");
+            trainingplandetail.html("");
+
+            var viewtrainingurl = '@Url.Action("ResetRequestedBy", "Training")';
+                window.location.href = viewtrainingurl + "?trainingTypeID=" + selectedTrainingType;
+         });
+
+    });
+
+</script>

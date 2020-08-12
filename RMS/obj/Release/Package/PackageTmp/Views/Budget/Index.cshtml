@@ -1,0 +1,23 @@
+﻿@model RMS.Models.BudgetViewModel
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Manage Budget
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+  
+</div>
+<div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+</div>
+<div id="divBudgetFilters" class="col-md-12">
+    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants.BudgetFilters, Model);}
+</div>
+
+<div id="divCostCodeList" class="col-md-12" style="display:none;padding-bottom:30px;">
+    @*@{Html.RenderPartial(RMS.Common.Constants.CommonConstants.PartialListCostCodes, Model.ListBudgets);}*@
+</div>
+
+  
+
+<script src="~/Js/Budget.js"></script>

@@ -1,0 +1,296 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+
+<span id="messagePartial">
+    @{
+        var msg = Convert.ToString(TempData["ResultPartial"]);
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+        @msg
+        <br />
+        <script>
+            $("#messagePartial").addClass("MessageStyleSuccess");
+        </script>
+        }
+    }
+</span>
+<!--<div class="col-md-12 margin-b-10">
+    <div class="divider">v</div>vv
+</div>-->
+@if (Model.dtAttendance != null)
+{
+    if (Model.dtAttendance.Rows.Count > 0)
+    {       
+    <table width="80%" class="table">
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.dtAttendance.Columns)
+                {
+                    bool dateflag = false;
+                    try
+                    {
+                        DateTime dt = Convert.ToDateTime(@col.ColumnName);
+                        dateflag = true;
+                    }
+                    catch { }
+
+                    if (@col.ColumnName == "Employee Name" || @col.ColumnName == "Send Feedback Form" || @col.ColumnName == "Dropout" || @col.ColumnName == "Percentage" || dateflag == true)
+                    {
+
+                        if (@col.ColumnName == "Dropout")
+                        {
+                    <th>
+                        <input id="dropAll" type="checkbox" name="dropAllCheck" value="2" />
+                        Dropout
+                    </th>
+                        }
+                        else if (@col.ColumnName == "Send Feedback Form")
+                        {
+                            string parameterValue = "Send Feedback Form";
+                            if (Model.NoOfdays == Model.NoOfDaysFilled)
+                            {
+                    <th>
+                        @*@Html.DisplayFor(model => parameterValue)
+                                                (*@
+                        <input id="selectAll" type="checkbox" name="selectAllCheck" value="1" />
+                        Feedback
+                                                @*)*@
+                    </th> 
+                            }
+                        }
+                        else
+                        { 
+                    <th>
+                        @col.ColumnName
+                    </th> 
+                        }
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.dtAttendance.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.dtAttendance.Columns)
+                    {
+                        bool dateflag = false;
+                        try
+                        {
+                            DateTime dt = Convert.ToDateTime(@col.ColumnName);
+                            dateflag = true;
+                        }
+                        catch { }
+                        if (@col.ColumnName == "Employee Name" || @col.ColumnName == "Send Feedback Form" || @col.ColumnName == "Dropout" || @col.ColumnName == "Percentage" || dateflag == true)
+                        {
+                            if (@col.ColumnName == "Dropout")
+                            {
+                                string parameterValue1 = Convert.ToString(@Model.AttendanceDate);
+
+                                string Empid = row["Empid"].ToString();
+                                string Values = row["Dropout"].ToString();
+                                string parameterValue2 = Empid;// +"_" + Values;
+                                bool b = false;
+                                bool disabled = false;
+                                if (Values == "1") //For Dropout
+                                {
+                                    b = true;
+                                    disabled = true;
+                                }
+                               
+                        <td>
+                            <input id="choice2@(parameterValue1)"type="checkbox" name="dropout" class="drop"  
+                                                        value="@(parameterValue2)" checked="@b" disabled="@disabled" />
+                        </td>
+                               
+                            }
+                            else if (@col.ColumnName == "Send Feedback Form")
+                            {
+                                string parameterValue1 = Convert.ToString(@Model.AttendanceDate);
+
+                                string Empid = row["Empid"].ToString();
+                                string Values = row["Send Feedback Form"].ToString();
+                                //Neelam Issue:60342 Start
+                                string DropoutValues = row["Dropout"].ToString();
+                                bool disabled = false;
+                                //Neelam Issue:60342 End
+                                string parameterValue2 = Empid;// +"_" + Values;
+                                bool a = false;
+                                if (Values == "1")
+                                {
+                                    a = true;
+                                }
+                                //Neelam Issue:60342 Start
+                                if (DropoutValues == "1") //For Dropout
+                                {
+                                    disabled = true;
+                                }
+                                //Neelam Issue:60342 End
+                                if (Model.NoOfdays == Model.NoOfDaysFilled)
+                                {
+                        <td>
+                            @*Neelam Issue:60342 Start*@
+                            <input id="choice1@(parameterValue1)"type="checkbox" name="Feedback" class="case"  
+                                                        value="@(parameterValue2)" checked="@a" disabled="@disabled" />
+                            @*Neelam Issue:60342 End*@
+                        </td>
+                                }
+                            }
+                            else
+                            {
+                                if (Convert.ToString(@row[col.ColumnName]) == Convert.ToString(CommonConstants.DefaultFlagOne))
+                                {
+                        <td>P  </td> 
+                                }
+                                else if (Convert.ToString(@row[col.ColumnName]) == "")
+                                {
+                        <td>A  </td> 
+                                }
+                                else
+                                {
+                        <td>@row[col.ColumnName]  </td> 
+                                }
+
+                            }
+                        }
+                    }
+                </tr> 
+            }
+            @*<tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit" name="submitBtn" id="submitBtn" class="btn btn-submit" /></td>
+            </tr>*@
+        </tbody>
+    </table> 
+    
+    
+    
+    
+            /////////////////////////////
+    
+    <div class="form-group">
+        @if (Model.NoOfdays == Model.NoOfDaysFilled)
+        {
+            <div class="col-md-3"></div> 
+            <div class="col-md-3">
+                <input type="submit" value="Send Dropout" name="dropBtn" id="dropBtn" class="btn btn-submit" />
+            </div>
+            <div class="col-md-3">
+                <input type="submit" value="Send Feedback" name="submitBtn" id="submitBtn" class="btn btn-submit" />
+                @Html.HiddenFor(m => m.FbkSaveUpdateMode)
+            </div> 
+            <div class="col-md-3" id="dvExportToExcel">
+                <a href='@Url.Action("exportexcel", "Training", new { @TrainingTypeId = @Model.TrainingTypeID, @RaiseId = Model.TrainingID })'>
+                    <span class="btn btn-submit">Export to excel</span>
+                    @*<input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button" value="Export to excel" id="exportoexcel" />*@
+                </a>
+            </div>
+            <div class="col-md-3"></div> 
+        }
+        else
+        {
+            <div class="col-md-9">
+                <span class="MessageStyleSuccess">Attendance for all training days has not been entered, Kindly check.</span>
+            </div> 
+            <div class="col-md-3" id="dvExportToExcel">
+                <a href='@Url.Action("exportexcel", "Training", new { @TrainingTypeId = @Model.TrainingTypeID, @RaiseId = Model.TrainingID })'>
+                    <span class="btn btn-submit">Export to excel</span>
+                    @*<input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button" value="Export to excel" id="exportoexcel" />*@
+                </a>
+            </div>
+            <div class="col-md-3"></div> 
+        }
+    </div> 
+        ////////////////////////
+
+    }
+}
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        var RaiseId = '';
+        var Status = '';
+        var Comment = '';
+        $(document).ready(function () {
+            hidewaiting();
+            //if (totalRecord > 0) {
+            //    $('#viewreport').dataTable();
+            //}
+
+            //Added by ramesh for selecting only one checkbox either Feedback or Dropout
+            $(".table input[type=checkbox]").click(function () {
+                if (this.checked) {
+                    $(this).closest('tr').find('input[type=checkbox]').attr('checked', false);
+                    this.checked = true;
+                }
+            });
+        });
+
+
+        // add multiple select / deselect functionality
+        //Neelam Issue ID:60342 Start
+        $("#selectAll").click(function () {
+            var checked_status = this.checked;
+            $('.case').not("[disabled]").each(function () {
+                this.checked = checked_status;
+            });
+            // $('.case').attr('checked', this.checked);
+        });
+        //Neelam Issue ID:60342 End
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".case").click(function () {
+
+            if ($(".case").length == $(".case:checked").length) {
+                $("#selectall").attr("checked", "checked");
+            } else {
+                $("#selectall").removeAttr("checked");
+            }
+
+        });
+
+        //Added by ramesh - For Dropout Functionality
+        $("#dropAll").click(function () {
+            $('.drop').attr('checked', this.checked);
+        });
+
+        $(".drop").click(function () {
+
+            if ($(".drop").length == $(".drop:checked").length) {
+                $("#dropall").attr("checked", "checked");
+            } else {
+                $("#dropall").removeAttr("checked");
+            }
+
+        });
+
+        $("#submitBtn").bind("click", function (event) {
+            var count = $('input[type="checkbox"]:checked.case').length;
+
+            if (count <= 0) {
+                alert("Please select at least one employee.");
+                return false;
+            }
+        });
+
+        $("#dropBtn").bind("click", function (event) {
+            var count = $('input[type="checkbox"]:checked.drop').length;
+
+            if (count <= 0) {
+                alert("Please select at least one employee.");
+                return false;
+            }
+        });
+    });
+
+
+</script>

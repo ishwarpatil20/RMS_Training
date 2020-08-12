@@ -1,0 +1,183 @@
+﻿@model RMS.Models.EmployeeTillBilledViewModel 
+@{
+    ViewBag.Title = "EmployeeTillBilled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Employee Till Billed
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+            </div>
+</div>
+
+<div id="_divmsg" class="col-md-12 margin-b-10">
+    @{
+        var message = Convert.ToString(TempData["Message"]);
+        if (!string.IsNullOrWhiteSpace(message))
+        {         
+            <span class="Messagetext" id="message">@message</span> <br />
+        }
+    }
+</div>
+
+@*START Update Form *@
+
+<div class="col-md-12 margin-b-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="clearfix margin-b-10">
+                <div class="col-md-2 col-sm-6">
+                    <label class="form-label ">Employee Name</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanEmployeeName" class="label-text">@Model.EmployeeName</span>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <label class="form-label ">Project Name</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanProjectName" class="label-text">@Model.ProjectName</span>
+                </div>
+            </div>
+             <div class="clearfix margin-b-10">
+                <div class="col-md-2 col-sm-6">
+                    <label class="form-label ">Allocation Date</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <span id="SpanStartDate" class="label-text">
+                            @Model.StartDate.ToString("dd-MMM-yyyy")
+                        </span>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <label class="form-label ">ReleaseDate</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                     <span id="SpanActualRelDate" class="label-text">
+                            @Model.ActualRelDate.ToString("dd-MMM-yyyy")
+                        </span>
+                </div>
+            </div>
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label ">Billing Extended Date<span class="asterisk-color"> *</span></label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                     <div id="datepicker">
+                        @Html.TextBoxFor(model => model.BillingTillDate, "{0:dd/MM/yyyy}", new { @class = "Textboxstyle", @readonly = "true" })
+                        @Html.ValidationMessageFor(m => m.BillingTillDate)  
+                        @Html.HiddenFor(model => model.EPAId)
+                    </div>
+                </div>                 
+            </div>
+            <div class="clearfix margin-b-10">               
+            </div>
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-12 col-sm-6" style="text-align: center">
+                    <input type="submit" value="Submit" id="Submit" class="button validator btn btn-submit" />
+                    <input type="button" value="Reset" id="BtnReset" class="btn btn-reset" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*END Update Form *@
+<div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+</div>
+<div id="trainingplandetail" class="col-md-12">
+    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants._PartialViewAListEmployeeTillBilled );}
+    @Html.Hidden("HfldEPAID",Model.EPAIdEncrp )
+</div>
+ @*}*@
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">
+    
+  @*  $(document).ready(function () {
+        var trainingplandetail = $("#trainingplandetail");
+        var link = '@Url.Action("ShowPlan", "TrainingPlan")';
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+    });*@
+
+
+    $(document).ready(function(){       
+        $('#Submit').click(function (e) {
+            var flag = Validation();
+            debugger;
+            if (flag == false) {
+                $("#message").html("Please enter the billing till date");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+                return false;
+                e.preventDefault();
+            }
+
+            //Update Billing
+            var editurl = '@Url.Action("UpdateEmployeeTillBilled", "Employee")';
+            var EPAID = $('#HfldEPAID').val();
+
+            var BillingTillDate = $('#BillingTillDate').val();
+            $('#message').html('');
+            window.location.href = editurl + "?PageMode=U&EPAID=" + EPAID + "&Billingdate=" + BillingTillDate;
+            return;
+        });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("textarea.required").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $("textarea").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+
+        if ($.trim($('#SpanStartDate').html()) == '01-Jan-0001') {
+            $('#SpanStartDate').html('');
+            $('#SpanActualRelDate').html('');
+            $('#BillingTillDate').val('');
+            $('#Submit').prop('disabled', true);
+        }
+
+
+        //Start : Add DTP
+        $("#BillingTillDate").datepicker(
+               {
+                   dateFormat: "dd/mm/yy",
+                   autoclose: true,
+                   minDate: 0
+               }).val();
+
+        $.validator.addMethod('date',
+         function (value, element) {
+             if (this.optional(element)) {
+                 return true;
+             }
+             var valid = true;
+             try {
+                 $.datepicker.parseDate('dd/mm/yy', value);
+             }
+             catch (err) {
+                 valid = false;
+             }
+             return valid;
+         });
+        //End : Add DTP
+        
+
+
+    //if (($.trim($('#SpanTrainingStartDate').html()) == '01-Jan-0001') || $.trim($('#SpanTrainingEndDate').html()) == "01-Jan-0001") {
+    //    $('#SpanTrainingStartDate').html('');
+    //    $('#SpanTrainingEndDate').html('');
+    })
+
+</script>

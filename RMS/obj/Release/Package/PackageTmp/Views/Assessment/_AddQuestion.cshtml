@@ -1,0 +1,180 @@
+﻿@model List<RMS.Models.AssessmentQuestionsViewModel>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var Question in Model)
+    {
+        var inputName = ViewData["prefix"] + ".Index";
+        var fieldPrefix = string.Format("{0}[{1}].", ViewData["prefix"], Question.QuestionId);
+        var QuestionImg = fieldPrefix + "QuestionImg";
+        var Option1Image = fieldPrefix + "Option1Image";
+        var Option2Image = fieldPrefix + "Option2Image";
+        var Option3Image = fieldPrefix + "Option3Image";
+        var Option4Image = fieldPrefix + "Option4Image";
+        var Option5Image = fieldPrefix + "Option5Image";
+        var Option6Image = fieldPrefix + "Option6Image";
+        <div>
+            @Html.Hidden(inputName, Question.QuestionId)
+            @Html.Hidden(fieldPrefix + "IsMultiChoiceAnswer", Question.IsMultiChoiceAnswer, new {@class="jq_MuliChoiceAnswer" })
+        </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Question)</div>
+            <div class="col-md-5">                 
+                 @Html.TextArea(fieldPrefix +"Question",Question.Question, new { @rows = "4", @class = "col-md-12 required" })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.QuestionImg, "Question Image")</div>*@ 
+            <div class="col-md-3">
+                <input type="file" id="@QuestionImg" name="@QuestionImg" class="fileUpload" />
+                @Html.Hidden("HfldQuestionId", @QuestionImg)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option1Description, "Option 1")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option1Description", Question.Option1Description, new { @rows = "4", @class = "col-md-12" })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option1Image, "Option 1 Image") </div>*@
+            <div class="col-md-3">
+                 <input type="file" id="@Option1Image" name="@Option1Image"  class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption1Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption1Correct", Question.IsOption1Correct, new  {  @class = "jq_AnsweOption"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option2Description, "Option 2")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option2Description", Question.Option2Description, new { @rows = "4", @class = "col-md-12 " })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option2Image, "Option 2 Image") </div>*@
+            <div class="col-md-3">
+                    <input type="file" id="@Option2Image" name="@Option2Image" class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption2Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption2Correct", Question.IsOption2Correct, new  {  @class = "jq_AnsweOption"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="Option3">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option3Description, "Option 3 ")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option3Description",Question.Option3Description, new { @rows = "4", @class = "col-md-12 " })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option3Image, "Option 3 Image") </div>*@
+            <div class="col-md-3">
+                <input type="file" id="@Option3Image" name="@Option3Image" class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption3Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption3Correct", Question.IsOption3Correct, new  {  @class = "jq_AnsweOption"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="Option4">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option4Description, "Option 4")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option4Description", Question.Option4Description, new { @rows = "4", @class = "col-md-12 " })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option4Image, "Option 4 Image") </div>*@
+            <div class="col-md-3">
+                <input type="file" id="@Option4Image" name="@Option4Image" class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption4Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption4Correct", Question.IsOption4Correct, new  {  @class = "jq_AnsweOption"})
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="Option5">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option5Description, "Option 5")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option5Description", Question.Option5Description, new { @rows = "4", @class = "col-md-12" })
+                
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option5Image, "Option 5 Image") </div>*@
+            <div class="col-md-3">
+                <input type="file" id="@Option5Image" name="@Option5Image" class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption5Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption5Correct", Question.IsOption5Correct, new  {  @class = "jq_AnsweOption"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row"  id="Option6">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-1">@Html.LabelFor(model => Question.Option6Description, "Option 6")</div>
+            <div class="col-md-5">
+                @Html.TextArea(fieldPrefix + "Option6Description",  Question.Option6Description, new { @rows = "4", @class = "col-md-12" })
+            </div>
+            @*<div class="col-md-1">@Html.LabelFor(model => Question.Option6Image, "Option 6 Image") </div>*@
+            <div class="col-md-3">
+                <input type="file" id="@Option6Image" name="@Option6Image" class="fileUpload" />
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => Question.IsOption6Correct, "Correct Answer")
+                @Html.CheckBox(fieldPrefix + "IsOption6Correct", Question.IsOption6Correct, new  {  @class = "jq_AnsweOption"})
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}
+<div class="row"  id="AddMoreOption">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-12"><input id="btnAddMoreOption" type="button" value="Add More Option" class="buttonstyle" /></div>
+        </div>
+    </div>
+</div>
+}
+
+<script >
+    $(document).ready(function () {           
+
+
+        $("input:file").change(function () {
+            var fileName = $(this).val();
+            var id = $(this).attr('id');
+
+            var HfldQuestionId = $("#HfldQuestionId");
+            if (id == HfldQuestionId.val()) { //"AssessmentQuestions[0].QuestionImg") {
+                id = id.replace("[", "_").replace("].", "__").replace("Img", "");
+                $("#" + id).val('NA');
+            }
+            else {
+                id = id.replace("[", "_").replace("].", "__").replace("Image", "Description");
+                $("#" + id).val('NA');
+            }
+            
+            $(".filename").html(fileName);
+        });
+ });
+    </script>

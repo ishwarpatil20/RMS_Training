@@ -1,0 +1,100 @@
+﻿@model RMS.Models.MasterViewModel
+@using System.Data;
+
+@{
+    ViewBag.Title = "Role Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-horizontal">
+    @*<div class="panel-group1">*@
+
+    <div class="form-group">
+        <div class="col-md-12">
+            @{ Html.RenderAction("EmployeeList", "Common");}
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="pnlrolemgmt">
+        <div class="panel-heading">Role Management</div>
+        @using (Html.BeginForm("GetMasterRoles", "master", FormMethod.Post, new { @masterViewModel = Model,  @class = "form-horizontal" }))
+        {
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">Role Name</div>
+                    <div class="col-md-3">@Html.DropDownListFor(m => m.Roles, new SelectList(Model.Roles, "value", "text", Model.SelectedRole))
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">EmployeeName  : <span style="color: Red">*</span></div>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.SelectedEmployeeName, new { @class = "TextAreastyle", @readonly = true })
+                        @Html.HiddenFor(model => model.SelectedEmployeeID)
+                        <a href="#login-box" class="login-window" id="check">
+                            <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                        </a>
+                        @Html.ValidationMessageFor(m => m.SelectedEmployeeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="submit" value="Submit" name="SubmitRoles" id="submitKss" class="buttonstyle" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        hidewaiting();
+
+        // Employee Popup   BtnSecondSelect
+        $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+            checkbox_id = '';
+            checkbox_value = '';
+            var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                checkbox_value += ',' + $(elem).attr("name");
+                checkbox_id += ',' + $(elem).attr("class");
+            });
+            checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+            checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+            $('#SelectedEmployeeID').val(checkbox_id);
+            $("#SelectedEmployeeName").val(checkbox_value);
+            $('#login-box').dialog('close');
+        })
+
+        $(function () {
+            var dialog, form
+            dialog = $("#login-box").dialog({
+                autoOpen: false,
+                height: 750,
+                width: 1000,
+                left: 500,
+                modal: true,
+                dialogClass: 'dlgfixed',
+                //position: ['center', 'top'],
+                //position: ({ my: 'center', of: 'center', collison: 'fit' }),
+                close: function () {
+                    //form[0].reset();
+                    //allFields.removeClass("ui-state-error");
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+
+            });
+
+            $("#check").bind("click", function () {
+                dialog.dialog("open");
+            });
+        });
+
+    });
+</script>

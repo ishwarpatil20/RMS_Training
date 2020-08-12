@@ -1,0 +1,172 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+<div class="row">
+    <div class="clearfix margin-b-10">
+        @try
+        {
+            <div class="row">
+                <div class="clearfix margin-b-10">
+                    <div class="col-md-2 col-sm-6">
+                        <label class="form-label">Training Name</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        @Html.DropDownListFor(m => m.TrainingName, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingName), new { @class = "form-control Dropdownstyle" })
+                    </div>
+
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label">Trainer Name</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span id="SpanTrainerName" class="label-text">@Model.objTrainingCourseModel.TrainerName</span>
+                        <input type="hidden" name="TrainerName" value="@Model.objTrainingCourseModel.TrainerName" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label">Training Start Date</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span id="SpanTrainingStartDate" class="label-text">
+                            @Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")
+                            <input type="hidden" name="startDate" value="@Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")" />
+                        </span>
+                    </div>
+
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label">Training End Date</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span id="SpanTrainingEndDate" class="label-text">@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy") </span>
+                        <input type="hidden" name="endDate" value="@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy")" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="clearfix margin-b-10">
+                    <div class=" col-md-2 col-sm-6">
+                        <label class="form-label">No. Of Days</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <span id="SpanNoOfDays" class="label-text">
+                            @Model.objTrainingCourseModel.NoOfdays
+                            <input type="hidden" name="NoOfdays" value="@Model.objTrainingCourseModel.NoOfdays" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        }
+        catch { }
+
+
+        @if (Model.ListAttendanceDate != null)
+        {
+            <span id="AttendanceDate">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            @{
+            var index = 0;
+                            }
+
+                            @foreach (var item in Model.ListAttendanceDate)
+                            {
+                                var selected = false;
+
+                                if ((index % 7) == 0)
+                                {
+                                @Html.Raw("</tr>");
+                                @Html.Raw("<tr>");
+                                }
+                                <td>&nbsp;</td>
+                                <td>
+                                    @if (item.Text != "Select")
+                                    {
+                                        @item.Text
+                                                                
+                                        if (Model.SelectedAttendanceDate != null)
+                                        {
+                                            foreach (var attendanceDate in Model.SelectedAttendanceDate)
+                                            {
+                                                try
+                                                {
+                                                    if (Convert.ToDateTime(attendanceDate.Text) == Convert.ToDateTime(item.Text))
+                                                    {
+                                                        selected = true;
+                                                    }
+                                                }
+                                                catch { }
+                                            }
+                                        }
+                                        <input id="@(item.Value)" type="checkbox" name="SelectedChoices" class="case required"  
+                                                                    value="@item.Value" checked="@selected" />
+                                    }
+                                </td>
+                                    index++;
+                            }
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align: center">
+                                <input type="submit" value="Submit" name="submitBtn" id="submitBtn" class="btn btn-submit" /></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </span>
+        }
+    </div>
+</div>
+ <script type="text/javascript">
+
+        //On TrainingType Load Course TrainningName
+        var TrainingType;
+        $("input[name='category']").click(function () {
+            var tID = $(this).val();
+            TrainingType = $(this).val();
+            if (tID == 1207 || tID == 1208)// For Technical and Softskill
+            {
+                $("#dvTechSoft").show();
+                $("#dvSemi").hide();
+                $("#SpanTrainerName").html('');
+                $("#SpanTrainingStartDate").html('');
+                $("#SpanTrainingEndDate").html('');
+                $("#SpanNoOfDays").html('');
+                $("#AttendanceDate").html('');
+
+                //$("#dvMode").hide();
+                
+                var gridurl = '@Url.Action("OnRadioChangeBindConfirmedTraining", "training")';
+
+                $("#dvTechSoft").load(gridurl + "?value=" + tID + "&PageName=Set");
+                $("#dvTechSoft").show();
+                $('#TrainingTypeID').val(tID);
+                $("#TrainingName").val(data.TrainingName);
+            } $("#message").html();
+        });
+
+     $('#TrainingName').on('change', function () {
+         //debugger;
+         var CourseId = $(this).val();       //var selectedPriority = $("#Priority option:selected").text();
+         var TrainingTypeId = $("#category").val();
+         if (CourseId != '') {
+             var setattendanceurl = '@Url.Action("OnTrainingChange_SetAttendanceDetail", "Training")';
+            var data = { _CourseId: CourseId }; //, _TrainingTypeID : TrainingType};
+            window.location.href = setattendanceurl + "?_CourseId=" + CourseId + "&_TrainingTypeID=" + TrainingTypeId;
+        }
+        else {
+            $("#SpanTrainerName").html('');
+            $("#SpanTrainingStartDate").html('');
+            $("#SpanTrainingEndDate").html('');
+            $("#SpanNoOfDays").html('');
+
+            $("#AttendanceDate").html('');
+        }
+       });
+     </script>

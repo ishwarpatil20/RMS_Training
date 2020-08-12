@@ -1,0 +1,381 @@
+﻿@model List<Domain.Entities.TrainingModel>
+@using RMS.Common.Constants;
+@using RMS.Helpers;
+@using System.Collections;
+
+@{
+    Layout = null;
+}
+
+
+@* bootstrap gridview*@
+
+            <div class="col-md-12">
+
+                @{
+                    var message = Convert.ToString(ViewData["Result"]);
+                    if (!string.IsNullOrWhiteSpace(message))
+                    {
+                    <span class="Messagetext" id="message">@message</span> <br />
+                    }
+                }
+
+
+                <table id="viewreport" class="table table-striped" style="border: thin;">
+                    <thead>
+                        <tr>
+
+                            @{                    
+                                var tablehead = string.Empty;
+                                int trainingtypeID = Convert.ToInt32(ViewData[CommonConstants.TrainingType]);
+                                switch (trainingtypeID)
+                                {
+                                    case (CommonConstants.TechnicalTrainingID):
+                                    
+                                <th>Name</th>
+                                <th>Quarter</th>
+                                <th>Priority</th> <th>Status</th>
+                                <th>Requested By</th>
+                                <th>Raised On</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>View</th>
+@*<th>Close</th>*@ <th></th> 
+                                        break;
+                                    case (CommonConstants.SoftSkillsTrainingID):
+                                       
+                                <th>Name</th>
+                                <th>Quarter</th>
+                                <th>Priority</th> <th>Status</th>
+                                <th>Requested By</th>
+                                <th>Raised On</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>View</th>
+@*<th>Close</th>*@<th></th>  
+                                        break;
+                                    case (CommonConstants.SeminarsID):
+                                    
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Requested By</th>
+                                <th>Raised On</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>View</th>
+@*<th>Close</th>*@<th></th>  
+                                        break;
+                                    case (CommonConstants.KSSID):
+                                   
+                                <th>Type</th>
+                                <th>Topic</th> 
+                                <th>Date</th>
+                                <th>Raised On</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>View</th>
+                   <th></th>  
+                                        break;
+                                }                   
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblBody">
+
+                        @if (Model.Count > 0)
+                        {
+                            foreach (var report in Model)
+                            {                     
+                    
+                            <tr>
+
+                                @{
+                                       
+                                switch (trainingtypeID)
+                                {
+                                    case (CommonConstants.TechnicalTrainingID):
+                                      
+                                    <td>@report.TrainingName</td>
+                                    <td>@report.Quarter</td>
+                                    <td>@report.Priority</td>
+                                    <td>@report.Status</td>
+                                    <td>@report.RequestedBy</td>
+                                    <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                 
+                                        break;
+                                    case (CommonConstants.SoftSkillsTrainingID):
+                                    
+                                    <td>@report.TrainingName</td>
+                                    <td>@report.Quarter</td>
+                                    <td>@report.Priority</td>
+                                    <td>@report.Status</td>
+                                    <td>@report.RequestedBy</td>
+                                    <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                            
+                                        break;
+                                    case (CommonConstants.SeminarsID):
+                                    
+                                    <td>@report.SeminarsName</td>
+                                    <td>@report.Date.ToString("dd/MM/yyyy")</td>
+                                    <td>@report.Status</td>
+                                    <td>@report.RequestedBy</td>
+                                    <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                               
+                                        break;
+                                    case (CommonConstants.KSSID):
+                                   
+                                    <td>@report.Type</td>
+                                    <td>@report.Topic</td>
+                                    <td>@report.Date.ToString("dd/MM/yyyy")</td>
+                                    <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                  
+                                        break;
+                                }
+
+
+
+                                // Changed by : Venkatesh  : Start
+                                string Role = string.Empty;
+                                if (System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+                                {
+                                    ArrayList arrRolesForUser = new ArrayList();
+                                    arrRolesForUser = (ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+                                    if (arrRolesForUser.Contains("admin"))
+                                    {
+                                        Role = "Admin";
+                                    }
+                                }
+                                // Changed by : Venkatesh  : End
+
+
+
+
+                                if ((report.IsDeleteEnable &&
+                                    report.Status.ToLower() == CommonConstants.Open.ToLower()) ||
+                                    ((Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower()) && (report.Flag == CommonConstants.DefaultFlagZero)
+                                    ))
+                                {
+                        
+                                    <td data-id="@report.RaiseID" class="edit" style="text-align:center;" ><a href="@Url.Action("EditRaiseTrainingRequest", "training", new { @pRaiseId = CheckAccessAttribute.Encode(Convert.ToString(@report.RaiseID)), @ptrainingtypeid = CheckAccessAttribute.Encode(Convert.ToString(@trainingtypeID)), @pOperation = CheckAccessAttribute.Encode(CommonConstants.Update) })">
+                                        <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit" width="20"/></a></td>
+
+                                    <td data-id="@report.RaiseID" class="delete" style="text-align:center;"><a href="#">
+                                        <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete" width="20"/></a></td>
+                                }
+                                else
+                                {
+                                    <td data-id="@report.RaiseID" class="none" style="text-align:center;" ><a href="#">
+                                        <img src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+
+                                    <td data-id="@report.RaiseID" class="none" style="text-align:center;"><a href="#">
+                                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                                }
+                    
+
+                                    <td data-id="@report.RaiseID" class="view" style="text-align:center;"><a href="@Url.Action("EditRaiseTrainingRequest", "training", new { @pRaiseId = CheckAccessAttribute.Encode(Convert.ToString(@report.RaiseID)), @ptrainingtypeid = CheckAccessAttribute.Encode(Convert.ToString(@trainingtypeID)), @pOperation = CheckAccessAttribute.Encode(CommonConstants.View) })">
+                                        <img src="@Url.Content("~/Content/css/Images/view.png")" alt="View" title="View"  width="20"/></a></td>
+
+                                 <td>@report.RaiseID</td>
+
+@*if (report.Status.ToString().ToLower() == CommonConstants.Closed.ToString().ToLower())
+                    { 
+                        <td data-id="@report.RaiseID" class="none"  style="text-align:center;"><a href="#">
+                            <img src="@Url.Content("~/Content/css/Images/minus.JPG")" /></a></td>
+
+                    }
+                    else
+                    {
+
+                        if (CommonConstants.KSSID != trainingtypeID)
+                        {
+                        <td data-id="@report.RaiseID" class="closerequest"  style="text-align:center;"><a href="#">
+                            <img src="@Url.Content("~/Content/css/Images/Close.jpg")" alt="Close" title="Close" /></a></td>
+                        }
+
+                    }*@
+                        
+                                }
+                            </tr>
+                            }
+
+                        }
+
+                        else
+                        {                          
+                    
+                            <tr>
+                                <td>No Record Found</td>
+                            </tr>
+               
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+<script type="text/javascript">
+   
+    var deleteurl = '@Url.Action("DeleteTrainingRequest", "training")';
+    var closeurl = '@Url.Action("CloseTrainingRequest", "training")';
+    //var editurl = '@Url.Action("RaiseTrainingRequest", "training")';
+    var totalRecord = '@Model.Count';
+    jQuery.fn.dataTable.Api.register('page.jumpToData()', function (data, column) {
+        var pos = this.column(column, {order: 'current'}).data().indexOf(data);
+
+        if (pos >= 0) {
+            var page = Math.floor(pos / this.page.info().length);
+            this.page(page).draw(false);
+        }
+
+        return this;
+    });
+   
+    $(document).ready(function () {
+
+     
+
+        hidewaiting();
+
+       
+
+        //Poonam : 26/04/2016 Starts
+        //Issue : Sorting not working on start date, end date and last date of nomination on View Course page
+        
+        if (totalRecord > 0) {        
+            //Harsha Issue Id- 58739- Start
+            //Description- Training module - Error occurs when Seminar radio button is selected on view  training request page.            
+            var trainingTypeId = @Html.Raw(Json.Encode(Convert.ToInt32(this.ViewData[CommonConstants.TrainingType])));
+           
+           var success = @((TempData["passedArray"] != null).ToString().ToLower());
+           
+            if(trainingTypeId == 1207 || trainingTypeId == 1208) { //Technical or soft skill            
+                var table =$('#viewreport').DataTable({
+                    "aoColumns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    { "sType": "date-uk" },
+                    null,
+                    null,
+                    null,
+                    {"visible": false },
+                    ]
+                });
+                if (success == true) {
+                    var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   
+                    //ar data1=[data.TrainingType,data.TrainingName,data.Quarter,data.Priority,data.Status,data.RequestedBy]
+                    //var row = table.row.add(data).node();
+                   // table.row(row).draw(false);
+                    table.page.jumpToData( data, 9 );
+                }
+            }
+            if(trainingTypeId == 1209) { //seminar                
+                var table = $('#viewreport').DataTable({
+                    "aoColumns": [
+                     null,
+                    { "sType": "date-uk" },
+                    null,
+                    null,
+                    { "sType": "date-uk" },
+                    null,
+                    null,
+                    null,
+                     {"visible": false },
+                    ]
+                });
+                if (success == true) {
+                    var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   // var data1=[data.TrainingType,data.SeminarsName,data.Status,data.RequestedBy]
+                   // var row = table.row.add(data).node();
+                   // table.row(row).draw(false);
+                    table.page.jumpToData(data, 8 );
+                }
+            }
+
+            if(trainingTypeId== 1210) { //KSS                
+                var table = $('#viewreport').DataTable({
+                    "aoColumns": [
+                    null,
+                    null,                    
+                    { "sType": "date-uk" },
+                    { "sType": "date-uk" },
+                    null,
+                    null,
+                    null,
+                     {"visible": false },
+                    ]
+                });
+                if (success == true) {
+                    var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                    //var data1=[data.Type,data.Topic]
+                   // var row = table.row.add(data).node();
+                    //table.row(row).draw(false);
+                    table.page.jumpToData(data, 6 );
+                }
+            }
+            //Harsha Issue Id- 58739- End
+        }
+    });
+
+    DatatableSorting();
+    //Poonam : 26/04/2016 Ends
+
+    //$(".edit").bind("click", function (event) {
+    //    var selectedValue = $(this).data("id");
+
+    //    $(location).attr('href', url);
+
+    //    $.ajax({
+    //        url: editurl,
+    //        type: 'POST',
+    //        cache: false,
+    //        data: { trainingtypeid: selectedValue },
+    //        success: function (result) {
+    //        }
+    //    });
+    //})
+
+
+
+    $(".delete").live("click", function (event) {
+        var id = $(this).data("id");
+        var catid = $("input[name='category']:checked").val();
+
+        var conf = confirm("Are you sure you want to delete this training request?");
+        if (conf == true) {
+            $("#divGrid").html('');
+            $("#wait").show();
+            $("#divGrid").load(deleteurl + "?raiseID=" + id + "&trainingTypeID=" + catid);
+            return true;
+        } else {
+            return false;
+        }
+
+    })
+
+
+    $(".closerequest").live("click", function (event) {
+        var id = $(this).data("id");
+        var catid = $("input[name='category']:checked").val();
+        var conf = confirm("Are you sure you want to close this training request?");
+        if (conf == true) {
+            $("#divGrid").html('');
+            $("#wait").show();
+            $("#divGrid").load(closeurl + "?raiseID=" + id + "&trainingTypeID=" + catid);
+            return true;
+        } else {
+            return false;
+        }
+
+    })
+
+
+</script>
+
+
+

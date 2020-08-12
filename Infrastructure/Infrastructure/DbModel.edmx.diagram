@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5b6fc8b24a9e4e45a2eed0da4a105b51" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="RMS_Model.T_InterviewPanel" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="RMS_Model.T_IP_PanelLevel" Width="1.5" PointX="2.25" PointY="0.5" />
+        <EntityTypeShape EntityType="RMS_Model.T_IP_PanelDesignation" Width="1.5" PointX="2.375" PointY="3.375" />
+        <EntityTypeShape EntityType="RMS_Model.T_Master" Width="1.5" PointX="4.25" PointY="0.5" />
+        <EntityTypeShape EntityType="RMS_Model.T_EmployeeSkillTypeCategory" Width="1.5" PointX="4.375" PointY="4" />
+        <EntityTypeShape EntityType="RMS_Model.T_Departments" Width="1.5" PointX="8.7826075389900282" PointY="5.9930413244259739" />
+        <EntityTypeShape EntityType="RMS_Model.T_DesignationMaster" Width="1.5" PointX="7.4456994195681538" PointY="0.83759029248617134" />
+        <AssociationConnector Association="RMS_Model.FK_T_Departments_T_Master" />
+        <EntityTypeShape EntityType="RMS_Model.T_Category" Width="1.5" PointX="10.524148413224214" PointY="10.377095614735547" />
+        <EntityTypeShape EntityType="RMS_Model.T_Technology" Width="1.5" PointX="4.059605203596691" PointY="31.826417565264933" />
+        <AssociationConnector Association="RMS_Model.FK_CategoryID_T_Technology_PK_ID_T_Category" />
+        <EntityTypeShape EntityType="RMS_Model.T_Domain" Width="1.5" PointX="3.4550143254245698" PointY="15.79870908698007" />
+        <EntityTypeShape EntityType="RMS_Model.T_SubDomain" Width="1.5" PointX="9.1462122188630577" PointY="20.119569176863678" />
+        <AssociationConnector Association="RMS_Model.FK_DomainID_T_SubDomain_PK_ID_T_Domain" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

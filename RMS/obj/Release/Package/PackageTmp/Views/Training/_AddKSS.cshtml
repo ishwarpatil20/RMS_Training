@@ -1,0 +1,191 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+@{
+    Layout = null;
+}
+ 
+<div class="col-md-12">
+
+ <div class="row">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">Topic Name</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+               @Html.DropDownListFor(m => m.TrainingNameSemiKss, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingID), new { @class = "form-control Textboxstyle required" })
+                @Html.HiddenFor(m => m.TrainingTypeID)
+                <input type="hidden" id="HfldTrainingTypeId">
+            </div>
+
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">KSS Date</label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <span id="SpanTrainingStartDate1" class="label-text">
+                @{
+                    var nominationduedate = string.Empty;
+                    if (!string.IsNullOrWhiteSpace(Convert.ToString(Model.TrainingStartDate)))
+                    {
+                        nominationduedate = Convert.ToDateTime(Model.TrainingStartDate).ToString("dd-MMM-yyyy");
+                    }            
+                }
+                @nominationduedate
+                    @Html.HiddenFor(m => m.TrainingStartDate)
+            </span>
+            </div>
+
+        </div>
+    </div>
+
+<div class="row">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label">Participant  : <span style="color: Red">*</span></label>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                @Html.TextAreaFor(model => model.Attender, new { @class = "TextAreastylePopup  required form-controls", @readonly = true })
+                @Html.HiddenFor(model => model.AttenderId )
+                <a href="#login-box" class="login-window" id="check">
+                    <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                </a>
+                @Html.ValidationMessageFor(m => m.Attender)
+            </div>
+
+        </div>
+    </div>
+<div class="form-group">
+    <div class="col-md-12" style="text-align:center">
+        <input type="submit" value="Submit" name="submitKss" id="submitKss" class="btn btn-submit" onclientclick="" />
+     
+        <a href='@Url.Action("exportexcel", "Training", new { @TrainingTypeId = @Model.TrainingTypeID, @RaiseId = Model.RaiseId })'>
+            <span class="btn btn-submit">Export to excel</span>
+            @*<input data-courseid="@Model[0].courseID"  data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button" value="Export to excel" id="exportoexcel" />*@
+        </a>
+    </div>
+</div>
+    <div class="form-group">
+    <div class="col-md-12" id="EmployeeList">
+         @{if (Model.objCommonModel != null)
+              {
+                  Html.RenderPartial("EmployeeList", Model.objCommonModel);
+              }
+            }
+        @*@{ Html.RenderAction("EmployeeList", "Common");}*@
+    </div>
+</div>
+    </div> 
+<script type="text/javascript">
+
+    $("#submitKss").click(function () {
+        $('select.required').each(function () {
+            var bg = false;
+            if ($.trim($(this).val()) == "" || $.trim($(this).val()) == "0") {
+               //return false;
+                $(this).addClass("requiredHiglight");
+            }
+            else {
+                $(this).removeClass("requiredHiglight");
+                bg = true;
+            }
+        });
+        if (bg == false) { return false; }
+        var SaveAttendanceurl = '@Url.Action("SaveAttendance", "Training")';
+        $.ajax({
+            type: "POST", 		//GET or POST or PUT or DELETE verb
+            url: SaveAttendanceurl, 		// Location of the service
+            data: $('form#frmSaveSemi').serialize(),
+            processdata: true, 	//True or False
+            success: function (result) {//On Successful service call
+                $("#dvSemiKss").html('');
+                $("#dvSemiKss").html(result);
+                //$("#dvTechSoft").hide();
+            }
+        })
+    });
+
+
+
+    //On TrainingName,Load Trainer Name
+    $('#TrainingNameSemiKss').on('change', function () {
+        debugger;
+        var RaiseId = $(this).val();
+        TrainingTypeId = $("#TrainingTypeID").val();
+
+        if (RaiseId != '') {
+            //var viewattendanceurl = '@Url.Action("LoadSemiKss", "Training")';
+            //var data = { _CourseId: CourseId };
+            // window.location.href = viewattendanceurl + "?TrainingTypeId=" + TrainingTypeId + "&RaiseId=" + RaiseId;
+            var gridurl = '@Url.Action("LoadSemiKss", "Training")';
+            showaiting();
+            $("#dvSemiKss").load(gridurl + "?TrainingTypeId=" + TrainingTypeId + "&RaiseId=" + RaiseId);
+            hidewaiting();
+        }
+        else {
+            $("#Attender").val('');
+            $("#AttenderId").val('');
+        }
+    });
+
+    var RaiseId = '';
+    var Status = '';
+    var Comment = '';
+
+
+    $(document).ready(function () {        
+        hidewaiting();
+        //Harsha Issue Id- 58014 - Start
+        if ($.trim($('#SpanTrainingStartDate1').html()).indexOf('01-Jan-0001') > -1) {            
+            $('#SpanTrainingStartDate1').html(' ');            
+        }
+        //Harsha Issue Id- 58014 - End
+
+        // Employee Popup   BtnSecondSelect
+        $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+            checkbox_id = '';
+            checkbox_value = '';
+            var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                checkbox_value += ',' + $(elem).attr("name");
+                checkbox_id += ',' + $(elem).attr("class");
+            });
+            checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+            checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+            $('#AttenderId').val(checkbox_id);
+            $("#Attender").val(checkbox_value);
+            $('#login-box').dialog('close');
+            $('#login-box').dialog('close');
+            $("#login-box").hide("slow", function () {
+            });
+        })
+
+        $(function () {
+            var dialog, form
+            dialog = $("#login-box").dialog({
+                autoOpen: false,
+                height: 750,
+                width: 1000,
+                left: 500,
+                modal: true,
+                dialogClass: 'dlgfixed',
+                //position: ['center', 'top'],
+                //position: ({ my: 'center', of: 'center', collison: 'fit' }),
+                close: function () {
+                    //form[0].reset();
+                    //allFields.removeClass("ui-state-error");
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+
+            });
+
+            $("#check").bind("click", function () {
+                dialog.dialog("open");
+            });
+        });
+        
+    });
+</script>

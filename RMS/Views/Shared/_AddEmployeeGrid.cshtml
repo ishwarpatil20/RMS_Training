@@ -1,0 +1,1012 @@
+﻿@model List<RMS.Common.BusinessEntities.Employee>
+
+@using RMS.Common.BusinessEntities
+@using RMS.Common.Constants
+@using System.Collections
+
+@{
+    Layout = null;
+}
+
+
+@* bootstrap gridview*@
+<div class="well">
+    <br />
+    @{
+        var message = Convert.ToString(ViewData["Result"]);
+        if (!string.IsNullOrWhiteSpace(message))
+        {
+            <span class="Messagetext" id="message"><b>@message</b></span> <br />
+        }
+    }
+    @if(Model[0].IsConfirmNomination)
+    {
+    <table id="tblApproveComment" style="display:none">
+                            <tr>
+                                <td >
+                                    <span ID="lblComments" title="Comments (if any) :"></span>
+                                    <span ID="lblCommentValidate" style='color: Red'>*</span>                                   
+                                </td>
+                                <td >
+                                    <input type ="text" style="width:300px" id="txtComment" />&nbsp;
+                                </td>
+                                <td >
+                                    <input type ="hidden" id="hfldId" value="" />
+                                    <input type ="submit" id="btnsubmit" class="btn btn-submit" value="Save" /> &nbsp;
+                                </td>
+                                <td >
+                                    <input type ="button" id="btnCancelComment" class="btn btn-reset" value="Cancel"  />                                  
+                                </td>
+                            </tr>
+                        </table>
+    }
+       
+    <table id="viewreport" class="table table-striped  display select" style="border: thin; width:100%">
+        <thead>
+            <tr>
+
+                <th>Name
+                </th>
+                @*<th style="width:15%">Email ID
+                </th>*@
+                <th>Designation
+                </th>
+                <th>Project
+                </th>
+                <th>Priority
+                </th>
+                @*for RMO login*@
+                @{ 
+                    // Changed by : Venkatesh  : Start
+                    string RoleAdmin = string.Empty;
+                    string RoleManager = string.Empty;
+                    if (System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+                    {
+                        System.Collections.ArrayList arrRolesForUser = new System.Collections.ArrayList();
+                        arrRolesForUser = (System.Collections.ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+                        if (arrRolesForUser.Contains("admin"))
+                        {
+                            RoleAdmin = "Admin";
+                        }
+                        else if (arrRolesForUser.Contains("manager"))
+                        {
+                            RoleManager = "Manager";
+                        }
+                    }
+                    // Changed by : Venkatesh  : End
+
+                    
+                    if (Model.Count != 0 && Model[0].IsRMOLogin)
+                   {
+
+                       if (Model[0].NominationTypeID != CommonConstants.SelfNomination)
+                       {
+                           if (Model[0].TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                           {
+                               //Poonam : 27/04/2016 Starts
+                               //Issue : 57841 : On Submit Nomination page if pre rating check box is not ticked for that course still pre rating column appears in employee grid 
+                               if (Model[0].EffectivenessID != null && Model[0].EffectivenessID.Contains(CommonConstants.PreTrainingEffectiveness.ToString()))
+                               {
+                    <th>Pre Training Rating
+                    </th>}
+                               //Poonam : 27/04/2016 Ends
+                         }
+                               else
+                               {
+                    <th>Objective for softskill 
+                    </th>}
+                           }
+
+                       }@*for Manager login*@
+                    else if (Model[0].NominationTypeID == CommonConstants.ManagerNomination && (Convert.ToString(RoleManager).ToLower() == CommonConstants.ManagerRole.ToLower() || 
+                                        Convert.ToString(RoleAdmin).ToLower() == CommonConstants.AdminRole.ToLower()))
+                       {
+
+                           if (Model[0].NominationTypeID != CommonConstants.SelfNomination)
+                           {
+                               if (Model[0].TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                               {
+                                   //Poonam : 27/04/2016 Starts
+                                   //Issue : 57841 : On Submit Nomination page if pre rating check box is not ticked for that course still pre rating column appears in employee grid 
+                                   if (Model[0].EffectivenessID != null && Model[0].EffectivenessID.Contains(CommonConstants.PreTrainingEffectiveness.ToString()))
+                                   { 
+                    <th>Pre Training Rating
+                    </th>}
+                                    //Poonam : 27/04/2016 Ends
+                               }
+                               else
+                               {
+                    <th>Objective for softskill 
+                    </th>}
+                           }
+
+                       }
+@*for selfnomination *@
+@*else if (Model[0].NominationTypeID == CommonConstants.SelfNomination && (Convert.ToString(Session["_RoleName"]).ToLower() != CommonConstants.AdminRole))
+                   {
+                       if (Model[0].TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                       {
+                    <th>Pre Training Rating
+                    </th>}
+                       else
+                       {
+                    <th>Objective for softskill 
+                    </th>}
+
+
+                   }*@
+                    
+                   }
+
+
+                <th>Submit Status
+                </th>
+                <th>Comment
+                </th>
+                @{ if (!Model[0].IsConfirmNomination)
+                   {
+
+                       if (Model[0].IsRMOLogin)
+                       {
+                            <th>Submit Nominee</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                       }
+                       else if (Model[0].NominationTypeID == CommonConstants.ManagerNomination && (Convert.ToString(RoleManager).ToLower() == CommonConstants.ManagerRole.ToLower()))
+                       {
+                            <th>Edit</th>
+                    
+                           bool flag = false;
+                           foreach (Employee item in Model)
+                           {
+                               if (@item.SubmitStatus == CommonConstants.NominationSubmited || @item.SubmitStatus == CommonConstants.NominationSaved)
+                               {
+                                   flag = true;
+                               }
+                           }
+                           if (flag == true)
+                           { 
+                                <th>Delete</th>
+                           }
+                           /*else
+                           {
+                               <th>&nbsp;</th>
+                           }*/
+                       }
+                       else if (Model[0].NominationTypeID == CommonConstants.SelfNomination)
+                       {
+                            <th>Edit</th>
+                          
+                           bool flag = false;
+                           foreach (Employee item in Model)
+                           {
+                               if (@item.SubmitStatus == CommonConstants.NominationSubmited || @item.SubmitStatus == CommonConstants.NominationSaved)
+                               {
+                                   flag = true;
+                               }
+                           }
+                           if (flag == true)
+                           { 
+                                <th>Delete</th>
+                           }
+                           /*else
+                           {
+                               <th>&nbsp;</th>
+                           }*/
+                       }
+                   }
+                   else
+                   {
+                    <th>Nominated By
+                    </th>                     
+                    <th>Confirm<br />
+                        ALL @Html.CheckBox("selectall")
+                    </th>
+                    <th>Reject</th>
+                   }
+                   }
+
+            </tr>
+        </thead>
+        <tbody id="tblBody" style="box-sizing: border-box;">
+            @foreach (Employee item in Model)
+            {               
+                <tr @(@item.Confirmed ? "class = selected" : string.Empty) >
+                    <td>
+                        <div class="control-group">
+                            @item.EmployeeName
+                            @Html.HiddenFor(model => item.NominationID)
+                              @* Changed by : Neelam  : Start IssueId:59566*@
+                            @Html.HiddenFor(model => item.SubmitStatus)
+                              @* Changed by : Neelam  : End IssueId:59566*@
+                        </div>
+                    </td>
+                    @*<td>
+                        @item.EmailID
+                    </td>*@
+                    <td>
+                        @item.Designation
+                    </td>
+                    <td>
+                        @item.Project
+                    </td>
+                    <td>
+                        @item.Priority
+                    </td>
+                    
+                        
+                    @{ 
+                     
+                if (Model[0].IsRMOLogin)
+                {
+                    if (Model[0].NominationTypeID != CommonConstants.SelfNomination)
+                    {
+                        if (item.TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                        {
+                            //Poonam : 27/04/2016 Starts
+                            //Issue : 57841 : On Submit Nomination page if pre rating check box is not ticked for that course still pre rating column appears in employee grid 
+                            if (Model[0].EffectivenessID != null && Model[0].EffectivenessID.Contains(CommonConstants.PreTrainingEffectiveness.ToString()))
+                               {
+                        <td>@item.PreTraining
+                        </td>}
+                             //Poonam : 27/04/2016 Ends
+                             }
+                        else
+                        {
+                        <td>@item.ObjectiveForSoftSkill
+                        </td>}
+                    }
+                }
+                else if (Model[0].NominationTypeID == CommonConstants.ManagerNomination && ( Convert.ToString(RoleManager).ToLower() == CommonConstants.ManagerRole.ToLower() 
+                                                || Convert.ToString(RoleAdmin).ToLower() == CommonConstants.AdminRole.ToLower()))
+                {
+                    if (Model[0].NominationTypeID != CommonConstants.SelfNomination)
+                    {
+                        if (item.TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                        {
+                            //Poonam : 27/04/2016 Starts
+                            //Issue : 57841 : On Submit Nomination page if pre rating check box is not ticked for that course still pre rating column appears in employee grid 
+                            if (Model[0].EffectivenessID != null && Model[0].EffectivenessID.Contains(CommonConstants.PreTrainingEffectiveness.ToString()))
+                               {
+                        <td>@item.PreTraining
+                        </td>}
+                             //Poonam : 27/04/2016 Ends
+                             }
+                        else
+                        {
+                        <td>@item.ObjectiveForSoftSkill
+                        </td>}
+                    }
+                }
+                
+                
+@*else if (Model[0].NominationTypeID == CommonConstants.SelfNomination && (Convert.ToString(Session["_RoleName"]).ToLower() != CommonConstants.AdminRole))
+                {
+
+                    if (item.TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                    {
+                        <td>@item.PreTraining
+                        </td>
+                    }
+                    else
+                    {
+                        <td>@item.ObjectiveForSoftSkill
+                        </td>
+                    }
+
+                }*@
+                         
+                    }
+                    <td>
+                        @item.SubmitStatus
+                    </td>
+                    <td>
+                        @item.Comment
+                    </td>
+
+                    @{ if (!Model[0].IsConfirmNomination)
+                       {
+
+
+                           if (Model[0].IsRMOLogin)
+                           {
+                               if (@item.EmployeeID != 0)
+                               {
+                                   if (@item.SubmitStatus == CommonConstants.NominationSaved)
+                                   {
+                                       <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                         style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), false, new { @class = "submit" })</td>
+                                   }
+                                   else if(@item.SubmitStatus == CommonConstants.NominationSubmited)
+                                   {
+                                       <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                            style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), true, new { @class = "submit", @disabled = "disabled" })</td>
+                                   }
+                                   else if (@item.SubmitStatus == CommonConstants.NominationConfirmed)
+                                   {
+                                       <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                            style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), true, new { @class = "submit", @disabled = "disabled" })</td>
+                                   }
+                                                                     
+                                    <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                                     class="edit" style="text-align:center;"><a href="#">
+                                         <img  src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a></td>
+
+                                    <td data-courseid="@item.courseID" data-submitstatus="@item.SubmitStatus"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID" data-nominationid ="@item.NominationID" data-isconfirmNomination="@item.IsConfirmNomination"
+                                     class="delete" style="text-align:center;"><a href="#">
+                                         <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a></td>
+                               }
+                               else
+                               {
+                                   <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                               }
+                           }
+                           else if (Model[0].NominationTypeID == CommonConstants.ManagerNomination && (Convert.ToString(RoleManager ).ToLower() == CommonConstants.ManagerRole.ToLower()))
+                           {
+                                <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                                 class="edit" style="text-align:center;"><a href="#">
+                                     <img  src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a></td>
+
+                               if (@item.SubmitStatus == CommonConstants.NominationSubmited || @item.SubmitStatus == CommonConstants.NominationSaved)
+                               {
+                                <td data-courseid="@item.courseID" data-submitstatus="@item.SubmitStatus" data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID" data-nominationid ="@item.NominationID" data-isconfirmNomination="@item.IsConfirmNomination"
+                                 class="delete" style="text-align:center;"><a href="#">
+                                     <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a></td>
+                               }
+                               else
+                               {
+                                   <td>&nbsp;</td>
+                               }
+                           }
+                           else if (Model[0].NominationTypeID == CommonConstants.SelfNomination)
+                           { 
+                        <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                         class="edit" style="text-align:center;"><a href="#">
+                             <img  src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a></td>
+
+                               if (@item.SubmitStatus == CommonConstants.NominationSubmited || @item.SubmitStatus == CommonConstants.NominationSaved)
+                               {
+                        <td data-courseid="@item.courseID" data-submitstatus="@item.SubmitStatus"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID" data-nominationid ="@item.NominationID" data-isconfirmNomination="@item.IsConfirmNomination"
+                         class="delete" style="text-align:center;"><a href="#">
+                             <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a></td>
+                               }
+                               else
+                               {
+                                   <td>&nbsp;</td>
+                               }
+                           }
+                       }
+                       else
+                       {
+                        <td style="text-align: center;">@item.NominatorName</td> 
+                           if (@item.SubmitStatus == CommonConstants.NominationConfirmed)
+                           { 
+                        <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                            style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), item.Confirmed, new { @class = "confirm", @disabled = "disabled" })</td>
+                           }
+                           else
+                           { 
+                        <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID"
+                         style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), item.Confirmed, new { @class = "confirm" })</td>
+                           }
+                        
+                           @*Harsha Issue Id-59072 - Start
+                            Description: Training : provision to Re-approve the  Rejected Nomination for the courses*@
+                           if (@item.SubmitStatus == CommonConstants.NominationRejected)
+                           {
+                               <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID" data-nominationid ="@item.NominationID" data-isconfirmNomination="@item.IsConfirmNomination"
+                             class= "reject" style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), true, new { @class = "reject", @disabled = "disabled" })</td>
+                           }
+                           else {
+                           <td data-courseid="@item.courseID"  data-trainingnameid="@item.TrainingNameID" data-employeeid ="@item.EmployeeID" data-nominationid ="@item.NominationID" data-isconfirmNomination="@item.IsConfirmNomination"
+                         class= "reject" style="text-align:center;">@Html.CheckBox(item.EmployeeID.ToString(), new { @class = "reject"})
+                        </td>
+                        }
+                           @*Harsha Issue Id-59072 - Start*@
+                       }
+
+                    }
+
+                </tr>                
+            }
+
+        </tbody>
+    </table>
+
+    @{ if (!Model[0].IsConfirmNomination)
+       {
+           if (Model[0].IsRMOLogin)
+           {
+        <div style="margin: auto; width: 7%;">
+            <table>
+                <tr style="text-align: center">
+
+                    @if (ViewData["SavedFlag"] != null)
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" />&nbsp;
+                        </td>
+                                
+                    }
+                    else
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" disabled />&nbsp;
+                        </td>    
+                    }
+
+                    @* <td>
+                        &nbsp;<input type="button" class="btn btn-reset" value="Cancel" id="cancelnomination" />
+                    </td>*@
+                </tr>
+            </table>
+
+        </div>
+           }
+           else if (Model[0].NominationTypeID == CommonConstants.ManagerNomination && (Convert.ToString(RoleManager).ToLower() == CommonConstants.ManagerRole.ToLower()))
+           {
+        <div style="margin: auto; width: 7%;">
+            <table>
+                <tr>
+                    @if (ViewData["SavedFlag"] != null)
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" />
+                        </td>
+                                
+                    }
+                    else
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" disabled />&nbsp;
+                        </td>    
+                    }
+                    @*<td>
+                        <input type="button" class="btn btm-reset" value="Cancel" id="cancelnomination" />
+                    </td>*@
+                </tr>
+            </table>
+
+        </div>
+           }
+           else if (Model[0].NominationTypeID == CommonConstants.SelfNomination)
+           {
+        <div style="margin: auto; width: 7%;">
+            <table>
+                <tr style="text-align: center">
+                    @if (ViewData["SavedFlag"] != null)
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" />
+                        </td>
+                                
+                    }
+                    else
+                    {
+                        <td>
+                            <input data-courseid="@Model[0].courseID" data-trainingnameid="@Model[0].TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination" disabled />&nbsp;
+                        </td>    
+                    }
+
+                    @*         <td>
+                        <input type="button" class="btn btn-reset" value="Cancel" id="cancelnomination" />
+                    </td>*@
+                </tr>
+            </table>
+
+        </div>
+           }
+       }
+       else
+       {
+        <div style="margin: auto; width: 60%;">
+            <table>
+                <tr>
+
+                    <td>
+                        <input data-courseid="@Model[0].courseID"  data-trainingnameid="@Model[0].TrainingNameID" type="button" class="btn btn-submit margin-r-10" value="Confirm" id="confirmnomination" />
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn btn-reset margin-r-10" value="Cancel" id="cancelnomination" />
+                    </td>
+                    <td id="mail" style="display: none;">
+                        <a href='@Url.Action("MailToAdmin", "nomination", new { @CourseID = Model[0].courseID })'>
+                            <input data-courseid="@Model[0].courseID"  data-trainingnameid="@Model[0].TrainingNameID" type="button" class="btn btn-submit margin-r-10" value="Mail to admin" id="mailtoadmin" />
+                        </a>
+                    </td>
+                    <td id="export">
+                        <a href='@Url.Action("exportexcel", "nomination", new { @trainingnameid = Model[0].TrainingNameID, @trainingcourseid = Model[0].courseID })'>
+                            <input data-courseid="@Model[0].courseID"  data-trainingnameid="@Model[0].TrainingNameID" type="button" class="btn btn-submit margin-r-10" value="Export to excel" id="exportoexcel" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+       }
+                       
+    }
+       
+ </div>
+<div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+</div>
+    
+    @* Changed by : Venkatesh  : Start*@
+    @if (System.Web.HttpContext.Current. Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+    {        
+        ArrayList arrRolesForUser = new ArrayList();
+        arrRolesForUser = (ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+        if (arrRolesForUser.Contains("admin"))
+        {
+           <div id="dvroleAdmin" style="display:none" >Admin</div>  
+        }
+        else
+        {
+            <div id="dvroleAdmin" ></div>
+    }
+        if (arrRolesForUser.Contains("manager"))
+        {
+               <div id="dvroleManager" style="display:none">Manager</div>  
+        }
+        else        
+        {
+            <div id="dvroleManager" ></div>
+    }
+    }
+    @* Changed by : Venkatesh  : End*@
+
+
+<script type="text/javascript">
+    
+    var deleteurl = '@Url.Action("deletenomination", "nomination")';
+    var rejecturl = '@Url.Action("rejectnomination", "nomination")';
+    var editurl = '@Url.Action("editnomination", "nomination")';
+    var addurl = '@Url.Action("addNomination", "nomination")';
+    var submitnominationurl = '@Url.Action("submittrainingnomination", "nomination")';
+    var homeurl = '@Url.Action("home", "home")';
+    var totalRecord = '@Model.Count';
+    //var rolename = '@Session["_RoleName"]';
+    var checkbox_value = '';
+    var table;
+
+    
+    
+    var courseid;
+    var trainingnameid = parseInt($(this).data("trainingnameid"));;
+    var employeeID;
+    var nominationID = '';
+    var IsConfirmNomination;
+    var chk;
+   
+    hidewaiting();
+    if (isEditable == null || isEditable == '') { isEditable == 'false' }
+
+    $("#SelectedEmployee option[value='0']").attr("selected", true);
+    //Poonam : 28/04/2016 Starts
+    //Issue : 57555 : In Submit nomination-> after adding Employee, nominated by and priority value should be default
+    $("#SelectedPriority option[value='0']").attr("selected", true);
+    $("#SelectedPreTrainingRating option[value='0']").attr("selected", true);
+    $("#PreTrainingDropdown option[value='0']").attr("selected", true);
+    $("#SelectedNominator option[value='0']").attr("selected", true);
+    //Poonam : 28/04/2016 Ends
+
+    $('#Comment').val('');
+    $('#ObjectiveForSoftSkill').val('');
+    
+
+    if (isEditable.toUpperCase() == 'TRUE') {
+        var trainingnameid = $('#TrainingTypeID').val();
+        $('#addemployee').load(addurl + "?TrainingTypeID=" + trainingnameid + "&isrmologin=" + isrmologin + "&nominationtypeid=" + nominationtype);
+    };
+
+   
+
+    @*$(document).ready(function () {
+
+        if ((totalRecord > 0) && (nominationtype != '@CommonConstants.SelfNomination') && (rolename.toUpperCase() != '@CommonConstants.UserRole.ToUpper()')) {
+            $('#viewreport').dataTable();
+        }
+
+        if ((totalRecord > 0) && isConfirmNominationPage.toUpperCase() == 'TRUE')
+        { $('#viewreport').dataTable(); }
+
+    });*@
+
+    $(".delete").bind("click", function (event) {
+        courseid = parseInt($(this).data("courseid"));
+        trainingnameid = parseInt($(this).data("trainingnameid"));
+        employeeID = parseInt($(this).data("employeeid"));
+        nominationID = parseInt($(this).data("nominationid"));
+        var submitStatus =$(this).data("submitstatus");
+        //Issue ID : 57843 Ishwar Patil start
+        //desc : pass confirmation nomination parameter to detele nomination function in controller
+        IsConfirmNomination = '@Model[0].IsConfirmNomination'.toLowerCase();
+        //Issue ID : 57843 Ishwar Patil end
+
+        
+        if (IsConfirmNomination == "true") {
+            $("#tblApproveComment").show();
+            $("#lblComments").text("Reason for Rejection");
+            $("#lblCommentValidate").show();
+            $('#txtComment').css('border-color', '');
+            var id = $(this).data("id");
+            var catid = $("input[name='category']:checked").val();
+
+            @*RaiseId = id;
+            Status = "@CommonConstants.Rejected";*@
+        }
+        else {
+            var conf = confirm("Are you sure you want to delete Nomination?");
+            if (conf == true) {
+                showaiting();
+                $("#employeegrid").html('');
+                $("#employeegrid").load(deleteurl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid + "&deleteemployeeid=" + employeeID + "&NominationID=" + nominationID + "&IsConfirmNominationID=" + IsConfirmNomination + "&submitStatus=" + submitStatus);
+
+                if (isEditable == "true" && totalRecord == 1) {
+                    var trainingnameid = $('#TrainingTypeID').val();
+                    $('#addemployee').load(addurl + "?TrainingTypeID=" + trainingnameid + "&isrmologin=" + isrmologin + "&nominationtypeid=" + nominationtype);
+                }
+
+                hidewaiting();
+                return true;
+            }
+            else {
+                return false;
+            }
+            hidewaiting();
+        }
+    })
+
+
+    $('.reject').bind('change',function (event) {
+        var count = $('input[type="checkbox"]:checked.reject').length;
+        courseid = parseInt($('.reject').data("courseid"));
+        trainingnameid = parseInt($('.reject').data("trainingnameid"));
+        employeeID = parseInt($('.reject').data("employeeid"));
+        nominationID = parseInt($('.reject').data("nominationid")) + ',';
+        IsConfirmNomination = '@Model[0].IsConfirmNomination'.toLowerCase();
+        chk = '';
+        
+        if (count > 0) {
+            $("#tblApproveComment").show();
+            $("#lblComments").text("Reason for Rejection");
+            $("#lblCommentValidate").show();
+            $('#txtComment').css('border-color', '');
+            var id = $(this).data("id");
+            var catid = $("input[name='category']:checked").val();
+            
+        }
+        else {
+            $("#tblApproveComment").hide();
+            $('#txtComment').val('');
+        }
+    })
+
+
+    $('#btnsubmit').bind("click", function (event) {
+        debugger;
+        trainingnameid = $("#TrainingNameID").val();
+        var reason;
+        checkbox_value = '';
+        nominationID = '';
+        var rowcollection = table.$("input[type= 'checkbox']:checked.reject", { "page": "all" }); //table.$("input[type='checkbox']:checked.submit", { "page": "all" });
+        rowcollection.each(function (index, elem) {
+            if (! $(elem).is('[disabled=disabled]'))
+                checkbox_value += $(elem).attr("name") + ',';
+        });
+
+        if ($('#txtComment').val() == '' && Status == "@CommonConstants.Rejected") {
+            $('#txtComment').css('border-color', 'red');
+            return false;
+        }
+        else {
+            $('#txtComment').css('border-color', '');
+            reason = $("#txtComment").val();
+        }
+
+        var conf = confirm("Are you sure you want to reject Nomination?");
+        if (conf == true) {
+            showaiting();
+            $("#employeegrid").html('');
+            $("#employeegrid").load(rejecturl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid + "&deleteemployeeid=" + checkbox_value.toString() + "&IsConfirmNominationID=" + IsConfirmNomination + "&ReasonForRejection=" + encodeURIComponent(reason));
+
+            if (isEditable == "true" && totalRecord == 1) {
+                var trainingnameid = $('#TrainingTypeID').val();
+                $('#addemployee').load(addurl + "?TrainingTypeID=" + trainingnameid + "&isrmologin=" + isrmologin + "&nominationtypeid=" + nominationtype);
+            }
+
+            hidewaiting();
+            return true;
+        }
+        else {
+            return false;
+        }
+        hidewaiting();
+    });
+
+
+    $(".edit").bind("click", function (event) {
+        showaiting();
+        var courseid = parseInt($(this).data("courseid"));
+        var trainingnameid = parseInt($(this).data("trainingnameid"));
+        var employeeID = parseInt($(this).data("employeeid"));
+        $("#addemployee").html('');
+        $("#addemployee").load(editurl + "?trainingcourseid=" + courseid + "&trainingnameid=" + trainingnameid + "&editemployeeid=" + employeeID + "&isrmologin=" + isrmologin);
+        $('#message').html('');
+        return true;
+    })
+
+
+    $(document).ready(function () {
+       
+        // Array holding selected row IDs
+        var rows_selected = [];
+        dvroleAdmin
+        
+
+        if ((totalRecord > 0) && (nominationtype != '@CommonConstants.SelfNomination')
+            && (($('#dvroleManager').html().toUpperCase() == '@CommonConstants.ManagerRole.ToUpper()') ||
+                ($('#dvroleManager').html().toUpperCase() == '@CommonConstants.AdminRole.ToUpper()'))
+            && (isConfirmNominationPage.toUpperCase() != 'TRUE')) {
+            table = $('#viewreport').DataTable({});
+
+        @*if ((totalRecord > 0) && (nominationtype != '@CommonConstants.SelfNomination')
+            && ((rolenameManager.toUpperCase() == '@CommonConstants.ManagerRole.ToUpper()') || (rolenameAdmin.toUpperCase() == '@CommonConstants.AdminRole.ToUpper()'))
+            && (isConfirmNominationPage.toUpperCase() != 'TRUE')) {
+            table = $('#viewreport').DataTable({});*@
+        }
+
+        if ((totalRecord > 0) && isConfirmNominationPage.toUpperCase() == 'TRUE') {
+            table = $('#viewreport').DataTable({
+               "aaSorting": []
+            });
+        }
+
+
+        var checkboxcount = $('input[type="checkbox"]:checked.confirm').length;
+        if (checkboxcount > 0) { $('#mail').show() }
+
+      // Updates "Select all" control in a data table
+        function updateDataTableSelectAllCtrl(table) {
+
+            var $table = table.table().node();
+            var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+            var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+            var chkbox_selectall = $('thead input[name="selectall"]', $table).get(0);
+
+            // If none of the checkboxes are checked
+            if ($chkbox_checked.length === 0) {
+                chkbox_selectall.checked = false;
+                if ('indeterminate' in chkbox_selectall) {
+                    chkbox_selectall.indeterminate = false;
+                }
+
+                // If all of the checkboxes are checked
+            } else if ($chkbox_checked.length === $chkbox_all.length) {
+                chkbox_selectall.checked = true;
+                if ('indeterminate' in chkbox_selectall) {
+                    chkbox_selectall.indeterminate = false;
+                }
+
+                // If some of the checkboxes are checked
+            } else {
+                chkbox_selectall.checked = true;
+                if ('indeterminate' in chkbox_selectall) {
+                    chkbox_selectall.indeterminate = true;
+                }
+            }
+        }
+
+        //Poonam : Issue ID : 57840 
+        //Date : 21/04/2016 Starts
+        var item = $("#item_NominationID").val();
+        if (item == "0") {
+            $("#submitnomination").hide();
+           
+        }
+        //Poonam : Issue ID : 57840 Date : 21/04/2016 Ends
+
+        // Handle click on checkbox
+        $('#viewreport tbody').on('click', 'input[type="checkbox"]', function (e) {
+            var $row = $(this).closest('tr');
+
+            // Get row data
+            var data = table.row($row).data();
+
+            // Get row ID
+            var rowId = data[0];
+
+            // Determine whether row ID is in the list of selected row IDs 
+            var index = $.inArray(rowId, rows_selected);
+
+            // If checkbox is checked and row ID is not in list of selected row IDs
+            if (this.checked && index === -1) {
+                rows_selected.push(rowId);
+
+                // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+            } else if (!this.checked && index !== -1) {
+                rows_selected.splice(index, 1);
+            }
+
+            if (this.checked) {
+                $row.removeClass('selected')
+
+
+                //$row.addClass('selected');
+            } else {
+                $row.addClass('selected');
+
+
+                //$row.removeClass('selected');
+            }
+
+            // Update state of "Select all" control
+            updateDataTableSelectAllCtrl(table);
+
+            // Prevent click event from propagating to parent
+            e.stopPropagation();
+        });
+
+        // Handle click on table cells with checkboxes
+        //$('#viewreport').on('click', 'tbody td, thead th:first-child', function (e) {
+        //    //alert(rows_selected);
+        //    $(this).parent().find('input[type="checkbox"]').trigger('click');
+        //});
+
+        // Handle click on "Select all" control
+        $('#viewreport thead input[name="selectall"]').on('click', function (e) {           
+            var rejectedRows = table.$("input[type='checkbox'].reject")
+            var confirmedRows = table.$("input[type='checkbox'].confirm")
+
+            if (this.checked) {
+                confirmedRows.each(function (index, elem) {
+                    if (!rejectedRows[index].checked)
+                        elem.checked = true;
+                })
+            }
+            else {
+                $(".confirm").prop("checked", false);
+            }
+            
+            //if (this.checked) {
+            //    $(".confirm").prop("checked", true);
+            //    //$('#viewreport tbody input[type="checkbox"]:not(:checked).confirm').trigger('click');
+            //} else {
+            //    $(".confirm").prop("checked", false);
+            //    //$('#viewreport tbody input[type="checkbox"]:checked.confrim').trigger('click');
+            //}
+
+            // Prevent click event from propagating to parent
+            e.stopPropagation();
+        });
+
+        
+
+        // Handle table draw event
+        //table.on('draw', function () {
+        //    // Update state of "Select all" control
+        //    updateDataTableSelectAllCtrl(table);
+        //});
+
+
+    });
+
+
+    $("#submitnomination").bind("click", function (event) {
+        
+        if ('@Model[0].IsRMOLogin'.toLowerCase() == "true") {
+
+        table = $('#viewreport').DataTable({});
+        var confcheckboxcount = $('input[type="checkbox"]:enabled:checked.submit').length;
+        
+            if (confcheckboxcount > 0) {
+
+                var conf = confirm("Are you sure you wish to submit selected nomination?");
+                if (conf == true) {
+
+                    var rowcollection = table.$("input[type= 'checkbox']:checked.submit", { "page": "all" }); //table.$("input[type='checkbox']:checked.submit", { "page": "all" });
+                    rowcollection.each(function (index, elem) {
+                        if (!$(elem).is('[disabled=disabled]'))
+                            checkbox_value += $(elem).attr("name") + ',';
+                    });
+
+                    //var urlconfirmnomination = '@Url.Action("saveupdateconfirmednomination", "nomination")';
+                    var courseid = parseInt($(this).data("courseid"));
+                    var trainingnameid = parseInt($(this).data("trainingnameid"));
+                    var empid = '';
+
+                    $('#well').show();
+                    $('#well').css("top", "150%");
+                    $("#employeegrid").html('');
+
+                    window.location.href = submitnominationurl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid + "&selectedemployeeid=" + checkbox_value.toString();
+                    //$.ajax({
+                    //    //type: "POST", 		//GET or POST or PUT or DELETE verb
+                    //    url: submitnominationurl, 		// Location of the service
+                    //    data: '{ "trainingnameID":' + trainingnameid + ',"trainingcourseID":' + courseid + ',"selectedemployeeid":"' + checkbox_value.toString() + '"}',		//Data sent to server
+                    //    contentType: "application/json",		// content type sent to server             
+                    //    processdata: true, 	//True or False
+                    //    success: function (result) {//On Successful service call                                
+                    //        $('#well').hide();
+                    //        $("#employeegrid").html(result);
+                    //    },
+                    //    error: function () {
+                    //        $('#well').hide();
+                    //        $("#employeegrid").html('<p  style="border: thick;color:red;">Error occured while completing operation. Kindly contact system administrator. </p>');
+                    //    }
+
+                    //});
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                alert('Please select atleast one nominee to be submitted');
+                return false;
+            }
+        }
+        else {
+            var courseid = parseInt($(this).data("courseid"));
+            var trainingnameid = parseInt($(this).data("trainingnameid"));
+            window.location.href = submitnominationurl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid;
+            window.Location(submitnominationurl);        
+        }
+
+    });
+
+    $("#confirmnomination").bind("click", function (event) {
+        var confcheckboxcount = $('input[type="checkbox"]:checked.confirm').not(":disabled").length;
+        if (confcheckboxcount > 0) {
+
+            var conf = confirm("Are you sure you wish to confirm selected nomination?");
+            if (conf == true) {
+                var rowcollection = table.$("input[type='checkbox']:checked.confirm", { "page": "all" });
+                rowcollection.each(function (index, elem) {
+                    if (!$(elem).is('[disabled=disabled]'))
+                        checkbox_value += $(elem).attr("name") + ',';
+                });
+
+                var urlconfirmnomination = '@Url.Action("saveupdateconfirmednomination", "nomination")';
+                var courseid = parseInt($(this).data("courseid"));
+                var trainingnameid = parseInt($(this).data("trainingnameid"));
+                var empid = '';
+
+                $('#well').show();
+                $('#well').css("top", "150%");
+                $("#employeegrid").html('');
+
+                $.ajax({
+                    type: "POST", 		//GET or POST or PUT or DELETE verb
+                    url: urlconfirmnomination, 		// Location of the service
+                    data: '{ "trainingnameid":' + trainingnameid + ',"trainingcourseid":' + courseid + ',"selectedemployeeid":"' + checkbox_value.toString() + '"}',		//Data sent to server
+                    contentType: "application/json",		// content type sent to server             
+                    processdata: true, 	//True or False
+                    success: function (result) {//On Successful service call                                
+                        $('#well').hide();
+                        $("#employeegrid").html(result);
+                    },
+                    error: function () {
+                        $('#well').hide();
+                        $("#employeegrid").html('<p  style="border: thick;color:red;">Error occured while completing operation. Kindly contact system administrator. </p>');
+                    }
+
+                });
+
+            } else {
+                return false;
+            }
+
+        } else {
+            alert('Please select atleast one nominee to be confirmed');
+            return false;
+        }
+    })
+
+</script>
+
+
+
+

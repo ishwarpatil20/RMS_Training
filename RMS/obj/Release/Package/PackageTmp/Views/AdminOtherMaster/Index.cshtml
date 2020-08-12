@@ -1,0 +1,33 @@
+﻿@using RMS.Models ; 
+@model OtherMasterViewModel
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+         Master
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+
+@using (Ajax.BeginForm("Create", "AdminOtherMaster", new AjaxOptions { UpdateTargetId = "divMasterListings" }))
+//@using (Ajax.BeginForm(Model.EditMode ? "UpdateNomination" : "AddNomination", "nomination", new AjaxOptions { UpdateTargetId = "employeegrid" }))
+{
+
+
+  
+
+    <div id="divOtherMasterDtl" class="col-md-12">
+        @{Html.RenderPartial(RMS.Common.Constants.CommonConstants.PartialAddMaster, Model);}
+    </div>
+
+<div id="divMasterListings" class="col-md-12">
+    
+    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants.PartialListMasters, Model);}
+</div>
+}
+
+
+
+
+
+

@@ -1,0 +1,248 @@
+﻿@model List<Domain.Entities.TrainingModel>
+@using RMS.Common.Constants;
+@using RMS.Helpers;
+
+
+@{
+    Layout = null;
+}
+
+
+ 
+<div class="col-md-12">
+@{
+    var message = Convert.ToString(ViewData["Result"]);
+    //var messageStyle = Convert.ToString(ViewData["ResultStyle"]);
+    
+    if (!string.IsNullOrWhiteSpace(message))
+    {
+         <span id="message">@message</span>   <br />    
+    <script>        
+        $("#message").addClass("MessageStyleSuccess");
+    </script>
+    }
+}
+
+    <table id="tblApproveComment" style="display:none">
+                            <tr>
+                                <td >
+                                    <span ID="lblComments" title="Comments (if any) :"></span>
+                                    <span ID="lblCommentValidate" style='color: Red'>*</span>                                   
+                                </td>
+                                <td >
+                                    <input type ="text" style="width:300px" id="txtComment" />&nbsp;
+                                </td>
+                                <td >
+                                    <input type ="hidden" id="hfldId" value="" />
+                                    <input type ="submit" id="btnsubmit" class="btn btn-submit" value="Save" /> &nbsp;
+                                </td>
+                                <td >
+                                    <input type ="button" id="btnCancelComment" class="btn btn-reset" value="Cancel"  />                                  
+                                </td>
+                            </tr>
+                        </table>
+
+
+<table id="viewreport" class="table table-striped" style="border:thin;"> 
+    <thead>
+        <tr>
+            @{
+                var tableheaad = string.Empty;
+                int trainingTypeId = Convert.ToInt32(ViewData[CommonConstants.TrainingType]);
+                switch (trainingTypeId)
+                {
+                    case (CommonConstants.TechnicalTrainingID):
+                        <th>Name</th>
+                        <th>Quarter</th>
+                        <th>Priority</th> <th>Status</th>
+                        <th>Requested By</th>
+                        <th>Raised On</th>
+                        <th>Approve</th>
+                        <th>Reject</th>
+                        <th>View</th>                  
+                        break;
+                    case (CommonConstants.SoftSkillsTrainingID):
+                        <th>Name</th>
+                        <th>Quarter</th>
+                        <th>Priority</th> <th>Status</th>
+                        <th>Requested By</th>
+                        <th>Raised On</th>
+                        <th>Approve</th>
+                        <th>Reject</th>
+                        <th>View</th>
+                        break;
+                    case (CommonConstants.SeminarsID):
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Raised On</th>
+                    <th>Approve</th>
+                        <th>Reject</th>
+                        <th>View</th>
+                        break;
+                    case (CommonConstants.KSSID):
+                    <th>Type</th>
+                    <th>Topic</th> 
+                    <th>Date</th>
+                    <th>Raised On</th>                    
+                    <th>View</th>
+                    
+                        break;
+                }
+            }
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var report in Model)
+            {
+                <tr>
+                    @{
+                switch (trainingTypeId)
+                {
+                    case (CommonConstants.TechnicalTrainingID):
+                                <td>@report.TrainingName  </td>
+                                <td>@report.Quarter </td>
+                                <td>@report.Priority </td>
+                                <td>@report.Status</td>
+                                <td>@report.RequestedBy</td>
+                                <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        break;
+                    case (CommonConstants.SoftSkillsTrainingID):
+                                <td>@report.TrainingName</td>
+                                <td>@report.Quarter</td>
+                                <td>@report.Priority</td>
+                                <td>@report.Status</td>
+                                <td>@report.RequestedBy</td>
+                                <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        break;
+                    case (CommonConstants.SeminarsID):
+                                <td>@report.SeminarsName</td>
+                                <td>@report.Date.ToString("dd/MM/yyyy")</td>
+                                <td>@report.Status</td>
+                                <td>@report.RequestedBy</td>
+                                <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        break;
+                    case (CommonConstants.KSSID):
+                            <td>@report.Type</td>
+                            <td>@report.Topic</td>
+                            <td>@report.Date.ToString("dd/MM/yyyy")</td>
+                            <td>@report.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        break;
+                    default:
+                        break;
+                }
+                if (trainingTypeId != CommonConstants.KSSID)
+                {
+                        
+                        <td data-id="@report.RaiseID" class="approve" style="text-align:center;" >                            
+                            <a href="#"><img src="@Url.Content("~/Content/css/Images/Approve.gif")" alt="Approve" title="Approve" width="20" /></a></td>
+                        <td data-id="@report.RaiseID" class="reject" style="text-align:center;"><a href="#">
+                            <img  src="@Url.Content("~/Content/css/Images/reject.gif")" alt="Reject" title="Reject" width="20"/></a></td>
+                        <td data-id="@report.RaiseID" class="view" style="text-align:center;">
+                            <a href="@Url.Action("EditRaiseTrainingRequest", "training", new { @pRaiseId = CheckAccessAttribute.Encode(Convert.ToString(@report.RaiseID)), @ptrainingtypeid = CheckAccessAttribute.Encode(Convert.ToString(trainingTypeId)), @pOperation = CheckAccessAttribute.Encode(CommonConstants.View) })">
+                            <img src="@Url.Content("~/Content/css/Images/view.png")" class="Test" alt="View" title="View" width="20" /></a></td>
+                }
+                else
+                {
+                        <td data-id="@report.RaiseID" class="view" style="text-align:center;">
+                            <a href="@Url.Action("EditRaiseTrainingRequest", "training", new { @pRaiseId = CheckAccessAttribute.Encode(Convert.ToString(@report.RaiseID)), @ptrainingtypeid = CheckAccessAttribute.Encode(Convert.ToString(trainingTypeId)), @pOperation = CheckAccessAttribute.Encode(CommonConstants.View) })">
+                            <img src="@Url.Content("~/Content/css/Images/view.png")" alt="View" title="View" /></a></td>
+                        
+                }
+                }
+                </tr>
+            }
+        }
+        else
+        {
+         <tr><td>No Record Found</td></tr>   
+        }
+
+    </tbody>
+
+</table>
+</div> 
+
+<script type="text/javascript">
+    @*var Viewurl = '@Url.Action("CloseTrainingRequest", "training")';*@
+    var totalRecord = '@Model.Count';
+    var RaiseId = '';
+    var Status = '';
+    var Comment = '';
+
+    $(document).ready(function () {
+
+        hidewaiting();
+
+        if (totalRecord > 0) {
+            $('#viewreport').dataTable();
+        }
+
+        // Store the Id in Hidden
+        $(".approve").live("click", function (event) {
+            $("#tblApproveComment").show();
+            $("#lblComments").text("Comments (if any)");
+            $("#lblCommentValidate").hide();
+            $('#txtComment').css('border-color', '');
+
+            var id = $(this).data("id");
+            var catid = $("input[name='category']:checked").val();
+
+            RaiseId = id;
+            Status = "@CommonConstants.Approved";
+        });
+
+
+        // Store the Id in Hidden
+        $(".reject").live("click", function (event) {
+            $("#tblApproveComment").show();
+            $("#lblComments").text("Reason for Rejection");
+            $("#lblCommentValidate").show();
+            $('#txtComment').css('border-color', '');
+            var id = $(this).data("id");
+            var catid = $("input[name='category']:checked").val();
+
+            RaiseId = id;
+            Status = "@CommonConstants.Rejected";
+        });
+
+
+        $("#btnsubmit").bind("click", function (event) {
+            if ($('#txtComment').val() == '' && Status == "@CommonConstants.Rejected") {
+                $('#txtComment').css('border-color', 'red');
+                return false;
+            }
+            else {
+                $('#txtComment').css('border-color', '');
+            }
+
+            var ApproveRejecturl = '@Url.Action("SaveApproveRejectTrainingRequest", "training")';
+
+            var id = $(this).data("id");
+
+            var catid = $("input[name='category']:checked").val();
+
+            Comment = $("#txtComment").val();
+
+            $("#divGrid").html('');
+            $("#wait").show();
+            $("#divGrid").load(ApproveRejecturl + "?raiseID=" + RaiseId + "&Comments=" + Comment + "&Status=" + Status + "&trainingTypeid=" + catid);
+        });
+
+        $("#btnCancelComment").live("click", function (event) {
+            $('#txtComment').text = '';
+            $("#tblApproveComment").hide();
+            $("#lblComments").text("");
+            var id = 0;
+            RaiseId = 0;
+            Status = '';
+
+        });
+
+    });
+
+</script>

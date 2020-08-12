@@ -1,0 +1,27 @@
+﻿@model RMS.Models.TrainingPlanViewModel 
+@{
+    ViewBag.Title = "Training Planned";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Training Calendar
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+            </div>
+</div>
+
+<div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+</div>
+<div id="trainingplandetail" class="col-md-12">
+    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants._ViewTrainingPlan, Model);}
+</div>
+ 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#dvExportToExcel").html('');
+    });
+
+</script>

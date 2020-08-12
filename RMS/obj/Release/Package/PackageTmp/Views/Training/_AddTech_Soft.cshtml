@@ -1,0 +1,80 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+@{
+    Layout = "";
+}
+<div class="form-group">
+    <div class="col-md-3">Training Name</div>
+    <div class="col-md-3">@Html.DropDownListFor(m => m.TrainingName, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingName))   </div>
+    <div class="col-md-3">Trainer Name</div>
+    <div class="col-md-3">
+        <span id="SpanTrainerName">@Model.objTrainingCourseModel.TrainerName</span>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-3">Training Start Date</div>
+    <div class="col-md-3">
+        <span id="SpanTrainingStartDate">
+            @Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")
+        </span>
+    </div>
+    <div class="col-md-3">Training End Date</div>
+    <div class="col-md-3"><span id="SpanTrainingEndDate">@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy")</span></div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-3">No of Days</div>
+    <div class="col-md-9"><span id="SpanNoOfDays">@Model.objTrainingCourseModel.NoOfdays</span></div>
+</div>
+<div class="form-group" id="dvMode" style="display: none">
+    <div class="col-md-3">
+        Select Mode
+    </div>
+    <div class="col-md-9">
+        @Html.RadioButton("Mode", "1", @Model.Mode == 1 ? true : false, new { @class = string.Empty }) @Html.Label("Add Attendance")
+        @Html.RadioButton("Mode", "2", @Model.Mode == 2 ? true : false, new { @class = string.Empty }) @Html.Label("View or Send Feedback")
+
+    </div>
+</div>
+<div class="form-group" id="dvAttendanceDate" style="display: none">
+    <div class="col-md-3">
+        Select Attendance Date
+    </div>
+    <div class="col-md-9">
+        @if (Model.ListAttendanceDate != null)
+        {
+            @Html.DropDownListFor(m => m.AttendanceDate, Model.ListAttendanceDate)
+                                }
+    </div>
+</div>
+<div class="form-group" id="dvAttendanceFeedback" style="display: none">
+    <div class="col-md-3">
+        Last Date for Sending Feedback
+    </div>
+    <div class="col-md-9">
+        <div id="datepicker">
+            @Html.TextBoxFor(model => model.FeedbackLastDate, "{0:dd/MM/yyyy}", new { @class = "Textboxstyle", @readonly = "true" })
+            @Html.ValidationMessageFor(m => m.FeedbackLastDate)
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-12"></div>
+</div>
+<div class="form-group">
+    <div class="col-md-12">
+        <div id="dvAddAtten" style="text-align: center; display: none">
+            @{ Html.RenderPartial("_AddAttendance", Model);}
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-12">
+        <div id="dvViewAtten" style="text-align: center; display: none">
+            @{ Html.RenderPartial("_ViewAttendance", Model);}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,339 @@
+﻿@using RMS.Common.Constants;
+@model Domain.Entities.TrainingModel
+@{    
+       
+    Layout = "";
+}
+
+@*<div class="container">*@
+<div class="col-md-6">
+    <div class="row">
+       @* <div class="form-group">
+            <div id="diag" class="col-md-12">
+                @{if(Model.objCommonModel!=null)
+                  {
+                      Html.RenderPartial("EmployeeList", Model.objCommonModel);
+                  }
+                }
+            </div>
+            </div>*@
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Seminars Name<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.SeminarsName, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.SeminarsName)
+            </div>
+        </div>
+
+         <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Seminars End Date<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                <div id="datepicker1">
+                    @Html.TextBoxFor(model => model.SeminarsEndDate, "{0:dd/MM/yyyy}", Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Textboxstyle", disabled = "true", @readonly = true } : (object)new { @class = "form-control Textboxstyle required", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.SeminarsEndDate, String.Empty, new { @style="color:red;!important"})
+                </div>
+            </div>
+        </div>
+
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Name Of the Institute<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.NameOfInstitute, Model.Operation == CommonConstants.View ? (object)new { maxlength = 100, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.NameOfInstitute, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Total Number Of Hours<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.TotalNumberOfHours, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 2, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.TotalNumberOfHours, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Requested By<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(model => model.RequestedBy, Model.ListRequestedBy, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.RequestedBy, String.Empty, new { @style="color:red;!important"})
+                @Html.Hidden("hdnRequestedBy", Model.RequestedBy)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Seminar Cost<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.SeminarCost, Model.Operation == CommonConstants.View ? (object)new { maxlength = 10, @class = "form-control Textboxstyle", disabled = "true" } : (object)new {maxlength = 10, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.SeminarCost, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">URL</label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.URL, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "form-control Textboxstyle TextAreastyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control Textboxstyle TextAreastyle" })
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+            </div>
+            <div class="col-md-8 col-sm-6">
+               <div id="diag" class="col-md-12" style="z-index:999999;">
+                @{if (Model.objCommonModel != null)
+                  {
+                      Html.RenderPartial("EmployeeList", Model.objCommonModel);
+                  }
+                }
+            </div>
+            </div>
+        </div>
+        </div>
+</div>
+<div class="col-md-6">
+    <div class="row">
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Seminars Start Date<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                <div id="datepicker">
+                    @Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Textboxstyle", disabled = "true", @readonly = true } : (object)new { @class = "form-control Textboxstyle required", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.Date, String.Empty, new { @style="color:red;!important"})
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Location<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.Location, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.Location, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Total Number Of Days<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.TotalNumberOfDays, Model.Operation == CommonConstants.View ? (object)new { maxlength = 3, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 3, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.TotalNumberOfDays, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Name of Participants<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(model => model.NameOfParticipant, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control TextAreastyle", disabled = "true", @readonly = true } : (object)new { @class = "form-control TextAreastyle required", @readonly = true })
+                @Html.HiddenFor(model => model.NameOfParticipantID)
+                @Html.ValidationMessageFor(m => m.NameOfParticipant, String.Empty, new { @style="color:red;!important"})
+                <a href="#login-box" class="login-window" id="check">
+                    <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                </a>
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Additional Logistics<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextBoxFor(model => model.AdditionalLogistics, Model.Operation == CommonConstants.View ? (object)new { maxlength = 100, @class = "form-control Textboxstyle", disabled = "true" } : (object)new { maxlength = 100, @class = "form-control Textboxstyle required" })
+                @Html.ValidationMessageFor(m => m.AdditionalLogistics, String.Empty, new { @style="color:red;!important"})
+            </div>
+        </div>
+
+         <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Comments (if any)</label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+               @Html.TextAreaFor(model => model.Comments, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "form-control TextAreastyle TextAreastyle" })
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">
+    var checkbox_value = '';
+    var checkbox_id = '';
+
+    if ($('#Date').val() == "01/01/0001" || $('#Date').val() == "01/01/0001 00:00:00") {
+        $('#Date').val('');
+    }
+
+    if ($('#SeminarsEndDate').val() == "01/01/0001" || $('#SeminarsEndDate').val() == "01/01/0001 00:00:00") {
+        $('#SeminarsEndDate').val('');
+    }
+
+    $(document).ready(function () {
+
+        hidewaiting();
+
+        if ($('#TotalNumberOfDays').val() == '0') {
+            $('#TotalNumberOfDays').val('');
+        }
+        if ($('#TotalNumberOfHours').val() == '0') {
+            $('#TotalNumberOfHours').val('');
+        }
+        if ($('#SeminarCost').val() == '0') {
+            $('#SeminarCost').val('');
+        }
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("textarea.required").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $("#NameOfParticipant").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $.validator.addMethod('date',
+              function (value, element) {
+                  if (this.optional(element)) {
+                      return true;
+                  }
+                  var valid = true;
+                  try {
+                      $.datepicker.parseDate('dd/mm/yy', value);
+                  }
+                  catch (err) {
+                      valid = false;
+                  }
+                  return valid;
+              });
+
+        $("#Date").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val();
+
+        $("#SeminarsEndDate").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val();
+
+        $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+            checkbox_id = '';
+            checkbox_value = '';
+            var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                checkbox_value += ',' + $(elem).attr("name");
+                checkbox_id += ',' + $(elem).attr("class");
+            });
+            checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+            checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+            $('#NameOfParticipantID').val(checkbox_id);
+            $("#NameOfParticipant").val(checkbox_value);
+            $('#login-box').dialog('close');
+        });
+
+        $(function () {
+            var dialog, form
+            dialog = $("#login-box").dialog({
+                autoOpen: false,
+                height: 750,
+                width: 1000,
+                left: 500,
+                modal: true,
+                dialogClass: 'dlgfixed',
+                //position: ['center', 'top'],
+                //position: ({ my: 'center', of: 'center', collison: 'fit' }),
+                close: function () {
+                    //form[0].reset();
+                    //allFields.removeClass("ui-state-error");
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+
+            });
+
+            $("#check").bind("click", function () {
+                dialog.dialog("open");
+            });
+        });
+
+        $("#TotalNumberOfDays").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Numerical number required in total number of days.");
+                return false;
+            }
+            else {
+                $("#message").html('');
+                return true;
+            }
+        });
+
+        $("#TotalNumberOfHours").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Numerical number required in total number of hours.");
+                return false;
+            }
+            else {
+                $("#message").html('');
+                return true;
+            }
+        });
+
+        $("#SeminarCost").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Numerical number required in seminarcost.");
+                return false;
+            }
+            else {
+                $("#message").html('');
+                return true;
+            }
+        });
+
+        $('#BtnSubmit').click(function (e) {
+
+            if ($("#SeminarsEndDate").datepicker("getDate") < $("#Date").datepicker("getDate")) {
+                $("#message").addClass("MessageStyleFail");
+                $("#message").html("Seminars end date should not be less than seminars start date.");
+                return false;
+            }
+
+            Validation();
+
+        });
+    });
+</script>

@@ -1,0 +1,148 @@
+﻿@model RMS.Models.EmployeeTrainingNominationDetailsModel
+@using RMS.Common.Constants
+@*<h4>PartialView</h4>
+<p>The value of CourseId is- @Model.CourseId </p>*@
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        hidewaiting();
+        if (
+            $('#EndDate').html() == "01/01/0001" || $('#EndDate').html() == "01/01/0001 00:00:00" ||
+            $('#StartDate').html() == "01/01/0001" || $('#StartDate').html() == "01/01/0001 00:00:00"
+            ) {
+            $('#EndDate').html('');
+            $('#StartDate').html('');
+        }
+    });
+</script>
+
+
+@Html.HiddenFor(model => model.CourseId)
+@Html.HiddenFor(model => model.EmpId)
+@Html.HiddenFor(model => model.TrainingNameId)
+@Html.HiddenFor(model => model.TrainingTypeId)
+
+
+
+<div class="panel panel-default" id="pageDetails">
+    <div class="panel-body" id="trainingDetails">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Training Name</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.CourseName, new { @class = "label-text" })</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Training Mode</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.TrainingMode, new { @class = "label-text" })</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">No. of Days</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.NoOfDays, new { @class = "label-text" })</span>
+            </div>
+        </div>
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Start Date</label>
+            </div>
+            <div class="col-md-2 col-sm-6 label-text">
+                <span class="label-text" id="StartDate">@Model.StartDate.ToString("dd/MM/yyyy") </span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">End Date</label>
+            </div>
+            <div class="col-md-2 col-sm-6 label-text">
+                <span class="label-text" id="EndDate">@Model.EndDate.ToString("dd/MM/yyyy")</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Total Training Hour(s)</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.TrainingHours, new { @class = "label-text" })</span>
+            </div>
+        </div>
+        <div class="clearfix margin-b-10">
+            @* <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Course Content</label>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <span class="label-text">@{Html.RenderPartial(CommonConstants.CourseContentView, Model.CourseFile);}</span>
+                </div>*@
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Course Comment</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.CourseComments, new { @class = "label-text" })</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Nomination Due Date</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@{   
+                    var nominationduedate = string.Empty;
+                    if (!string.IsNullOrWhiteSpace(Convert.ToString(Model.LastDateOfNomination)))
+                    {
+                        nominationduedate = Convert.ToDateTime(Model.LastDateOfNomination).ToString("dd/MM/yyyy");
+                    }                 
+                }
+                    @nominationduedate</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="panel-body" id="employeeDetails">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Employee Name</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.EmployeeName, new { @class = "label-text" })</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Nominated By</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.NominatorName, new { @class = "label-text" })</span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Priority</label>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <span class="label-text">@Html.DisplayFor(model => model.Priority, new { @class = "label-text" })</span>
+            </div>
+        </div>
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Pre-Training Rating</label>
+            </div>
+            <div class="col-md-2 col-sm-6 label-text">
+                <span class="label-text">@Model.PreTrainingRating </span>
+            </div>
+            <div class=" col-md-2 col-sm-6">
+                <label class="form-label pull-right ">Comment</label>
+            </div>
+            <div class="col-md-2 col-sm-6 label-text">
+                <span class="label-text">@Model.NominationComments</span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ObjectiveForSoftSkill))
+            {
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label pull-right ">Objective For Softskill</label>
+                </div>
+                <div class="col-md-2 col-sm-6 label-text">
+                    <span class="label-text">@Model.ObjectiveForSoftSkill</span>
+                </div>           
+            }
+        </div>
+
+    </div>
+
+</div>

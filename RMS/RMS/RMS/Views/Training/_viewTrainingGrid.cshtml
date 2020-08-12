@@ -1,0 +1,236 @@
+﻿
+@model List<Domain.Entities.TrainingModel>
+@using RMS.Common.Constants;
+
+@{
+    Layout = null;
+}
+
+
+@* bootstrap gridview*@
+<div class="container">
+
+    @{
+        var message = Convert.ToString(ViewData["Result"]);
+        if (!string.IsNullOrWhiteSpace(message))
+        {
+        <span class="Messagetext" id="message">@message</span> <br />
+        }
+    }
+
+
+    <table id="viewreport" class="table table-striped" style="border: thin;">
+        <thead>
+            <tr>
+
+                @{                    
+                    var tablehead = string.Empty;
+                    int trainingtypeID = Convert.ToInt32(ViewData[CommonConstants.TrainingType]);
+                    switch (trainingtypeID)
+                    {
+                        case (CommonConstants.TechnicalTrainingID):
+                    <th>Name</th>
+                    <th>Quarter</th>
+                    <th>Priority</th> <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Raised On</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
+                    <th>Close</th>
+                            break;
+                        case (CommonConstants.SoftSkillsTrainingID):
+                    <th>Name</th>
+                    <th>Quarter</th>
+                    <th>Priority</th> <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Raised On</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
+                    <th>Close</th>
+                            break;
+                        case (CommonConstants.SeminarsID):
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Raised On</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
+                    <th>Close</th>
+                            break;
+                        case (CommonConstants.KSSID):
+                    <th>Type</th>
+                    <th>Topic</th> 
+                    <th>Date</th>
+                    <th>Raised On</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
+                    
+                            break;
+                    }                   
+                }
+
+            </tr>
+        </thead>
+        <tbody id="tblBody">
+
+            @if (Model.Count > 0)
+            {
+                foreach (var report in Model)
+                {                     
+                    
+                <tr>
+
+                    @{
+                                       
+                    switch (trainingtypeID)
+                    {
+                        case (CommonConstants.TechnicalTrainingID):
+                        <td>@report.TrainingName</td>
+                        <td>@report.Quarter</td>
+                        <td>@report.Priority</td>
+                        <td>@report.Status</td>
+                        <td>@report.RequestedBy</td>
+                        <td>@report.CreatedDate</td>
+                            break;
+                        case (CommonConstants.SoftSkillsTrainingID):
+                        <td>@report.TrainingName</td>
+                        <td>@report.Quarter</td>
+                        <td>@report.Priority</td>
+                        <td>@report.Status</td>
+                        <td>@report.RequestedBy</td>
+                        <td>@report.CreatedDate</td>
+                            break;
+                        case (CommonConstants.SeminarsID):
+                        <td>@report.SeminarsName</td>
+                        <td>@report.Date</td>
+                        <td>@report.Status</td>
+                        <td>@report.RequestedBy</td>
+                        <td>@report.CreatedDate</td>
+                            break;
+                        case (CommonConstants.KSSID):
+                        <td>@report.Type</td>
+                        <td>@report.Topic</td>
+                        <td>@report.Date</td>
+                        <td>@report.CreatedDate</td>
+                            break;
+                    }
+
+
+
+
+
+
+                    if (report.IsDeleteEnable)
+                    {
+                        
+                        <td data-id="@report.RaiseID" class="edit" style="text-align:center;" ><a href="#">
+                            <img src="@Url.Content("Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/></a></td>
+
+                        <td data-id="@report.RaiseID" class="delete" style="text-align:center;"><a href="#">
+                            <img  src="@Url.Content("Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/></a></td>
+                    }
+                    else
+                    {
+                        <td data-id="@report.RaiseID" class="none" style="text-align:center;" ><a href="#">
+                            <img src="@Url.Content("Content/css/Images/minus.JPG")" /></a></td>
+
+                        <td data-id="@report.RaiseID" class="none" style="text-align:center;"><a href="#">
+                            <img  src="@Url.Content("Content/css/Images/minus.JPG")" /></a></td>
+                    }
+                    
+
+                        <td data-id="@report.RaiseID" class="view" style="text-align:center;"><a href="#">
+                            <img src="@Url.Content("Content/css/Images/view.png")" alt="View" title="View" /></a></td>
+
+
+                    if (report.Status.ToString().ToLower() == CommonConstants.Closed.ToString().ToLower())
+                    { 
+                        <td data-id="@report.RaiseID" class="none"  style="text-align:center;"><a href="#">
+                            <img src="@Url.Content("Content/css/Images/minus.JPG")" /></a></td>
+
+                    }
+                    else
+                    {
+
+                        if (CommonConstants.KSSID != trainingtypeID)
+                        {
+                        <td data-id="@report.RaiseID" class="closerequest"  style="text-align:center;"><a href="#">
+                            <img src="@Url.Content("Content/css/Images/Close.jpg")" alt="Close" title="Close" /></a></td>
+                        }
+
+                    }
+
+              
+                    }
+                </tr>           
+                }
+
+            }
+
+            else
+            {                          
+                    
+                <tr>
+                    <td>No Record Found</td>
+                </tr>
+               
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var deleteurl = '@Url.Action("DeleteTrainingRequest", "training")';
+    var closeurl = '@Url.Action("CloseTrainingRequest", "training")';
+    var totalRecord = '@Model.Count';
+
+    $(document).ready(function () {
+        hidewaiting();
+        if (totalRecord > 0) {
+            $('#viewreport').dataTable();
+        }
+    });
+
+    $(".delete").bind("click", function (event) {
+        var id = $(this).data("id");
+        var catid = $("input[name='category']:checked").val();
+
+        var conf = confirm("Are you sure you want to delete this training request?");
+        if (conf == true) {
+            $("#divGrid").html('');
+            $("#wait").show();
+            $("#divGrid").load(deleteurl + "?raiseID=" + id + "&trainingTypeID=" + catid);
+            return true;
+        } else {
+            return false;
+        }
+
+    })
+
+
+    $(".closerequest").bind("click", function (event) {
+        var id = $(this).data("id");
+        var catid = $("input[name='category']:checked").val();
+        var conf = confirm("Are you sure you want to close this training request?");
+        if (conf == true) {
+            $("#divGrid").html('');
+            $("#wait").show();
+            $("#divGrid").load(closeurl + "?raiseID=" + id + "&trainingTypeID=" + catid);
+            return true;
+        } else {
+            return false;
+        }
+
+    })
+
+
+</script>
+
+
+

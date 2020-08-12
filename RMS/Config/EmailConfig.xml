@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Modules>
+  <defaulSetting>
+    <location>Mumbai</location>
+  </defaulSetting>
+   <!--Training Module-->
+  <!--Ishwar Patil : Training Module : 18/08/2014 Start-->
+  <Module ModuleTypeId="9" Name="TrainingModule">
+    <Emails>
+      <!--For Tech/Soft Skill request-->
+      <Email EmailTypeId="1" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills training request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skill request behalf of Line/Function Manager-->
+      <Email EmailTypeId="2" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills training request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training request has been raised on your behalf by RMGroup.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For KSS request-->
+      <Email EmailTypeId="3" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            KSS request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A KSS request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminar request-->
+      <Email EmailTypeId="4" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Seminar request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Approved Tech/Soft Skill request-->
+      <Email EmailTypeId="5" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request approved
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training request has been initiated and is in progress.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Rejected Tech/Soft Skill request-->
+      <Email EmailTypeId="6" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request rejected
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training request has been rejected.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Approved Seminar request-->
+      <Email EmailTypeId="7" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request approved
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar request has been initiated and is in progress.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Rejected Seminar request-->
+      <Email EmailTypeId="8" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request rejected
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar request has been rejected.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skills request updated-->
+      <Email EmailTypeId="9" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training '{1}' request has been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminors request Edited-->
+      <Email EmailTypeId="12" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            '{1}' details have been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For KSS request Edited-->
+      <Email EmailTypeId="13" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Knowledge Sharing Session request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Knowledge Sharing Session({1}) details have been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skills request Deleted-->
+      <Email EmailTypeId="10" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request deleted
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training '{1}' request has been deleted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminors request Deleted-->
+      <Email EmailTypeId="11" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request deleted
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar '{1}' request has been deleted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Ishwar Patil : Training Module : 18/08/2014 End-->
+      <!--Jagmohan Rawat : Training Module : 16/10/2015 End-->
+      <!--For Nomination Submitted-->
+      <Email EmailTypeId="14" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nominations submitted for Training on {0}
+          </Subject>
+          <Body>
+            Dear RMGroup,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, {0} has submitted nominations as given below for training on {1}.
+            <!--<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To confirm nominations, please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{2}'>{2}.</a>]]>-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {3}
+            <![CDATA[<br/>]]>
+            For more details employees can click on the below link-
+            <![CDATA[<br/>]]>
+            {4}
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Nomination Deleted-->
+      <Email EmailTypeId="15" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nominations deleted for Training on {0}
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, your nomination for {1} training has been deleted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Nomination Confirmed-->
+      <Email EmailTypeId="21" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nomination confirmed for {0}
+          </Subject>
+          <Body>
+            {1},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, your nomination has been confirmed for {0} training. You will receive a meeting request from RMGroup shortly.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            @Managers: Please note that to make any changes in the nomination details post the confirmation, you will need to contact the RMG team.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Nomination NonConfirmed-->
+      <Email EmailTypeId="22" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nomination not confirmed for {0} training
+          </Subject>
+          <Body>
+            Dear All,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Thank you for your nomination for the {0} training. Your nomination is not confirmed at this time as the nominations were accepted on a first come first basis and the current batch is full.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            We will consider your nomination if we plan another batch for this training. The inconvenience is regretted.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Jagmohan Rawat : Training Module : 16/10/2015 End-->
+      <!--For Mail to Admin -->
+      <Email EmailTypeId="16" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>rave.AdminTeam@northgateps.com,Pratiksha.Parab@northgate-is.com</To>
+          <CC></CC>
+          <Subject>
+            Arrangements to be made for {0}  <!--trainer name-->
+          </Subject>
+          <Body>
+            Dear Admin Team,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The below mentioned arrangements have to be made for {0} <!--Trainer Name=""-->
+            who will be conducting {1} training: <!--Training Name=""-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            In case of any queries, please contact RMGroup.
+
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+
+      <!--Training Courser Module Invite Nomination-->
+      <!--Siddhesh Arekar : Training Module Self Nomination : 02/11/2015 Start-->
+      <Email EmailTypeId="17" Description="InviteNomination">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Inviting nominations for training on  {0} training<!--training name-->
+          </Subject>
+          <Body>
+            Dear Colleagues,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {10} <!--Invitation Text=""-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Details for the training are as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Training Name: {0} <!--Training Name=""-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Trainer: {1} ({2} Trainer)  <!--Trainer Name, Training Mode-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Dates: {3} to {4} <!--Training Start and End Date-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Duration: {5} day(s)      <!--No of Days-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {9}
+            {6}<!--Request you to send in your nominations by {6} by clicking on the link below:--><!--Last Date of Nomination-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {7}  <!--Nomination Link-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {8}
+            Please note, nominations will be considered on first come first serve basis only.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Siddhesh Arekar : Training Module Self Nomination : 02/11/2015 end-->
+      <!--Training Courser Module Invite Nomination-->
+
+      <!--Start : Venkatesh :Attendance :10-Nov-2015-->
+      <Email EmailTypeId="19" Description="SendFeedback">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Feedback to be sent for {0} <!--trainer name-->
+          </Subject>
+          <Body>
+            Dear All,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Request you to provide feedback for {0} training. Please note, feedback has to be given by {1}. <!--Feedback lastdate-->
+
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2} <!--feedback link-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="20" Description="SendDropOut">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Dropout from  {0} <!--trainer name-->
+          </Subject>
+          <Body>
+            Hi,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please find below the list of Drop outs from  {0} training.<!--Participant name--> <!--trainer name-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {1}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <!--End : Venkatesh :Attendance :10-Nov-2015-->
+
+      <Email EmailTypeId="23" Description="sent to the managers for Post training rating">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Post Training Effectiveness for {0} training<!--trainer name-->
+          </Subject>
+          <Body>
+            <!--Dear {1},--> <!--LineManager Name-->
+            Dear All,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            As part of the training process, please fill in the post training effectiveness for {0} training<!--trainer name--> by {2}. <!--Last date for sending rating-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Link for filling post training effectiveness is as follows:
+            <![CDATA[<br/>]]>
+            {3} <!--Link-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,
+            <![CDATA[<br/>]]>
+            {4} <!--RMGroup--><![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="24" Description="PostTrainingRatingSubmited">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Post Training Effectiveness for {0} training has been filled.<!--training name-->
+          </Subject>
+          <Body>
+            Dear {2}, <!--RMGroup-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, {1}<!--LineManager name--> has filled the post training effectiveness for {0} training.<!--trainer name-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,
+            <![CDATA[<br/>]]>
+            {1}<!--LineManager name--><![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="25" Description="Effectiveness to be sent to participants">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Post Training Effectiveness for {0}.<!--trainer name-->
+          </Subject>
+          <Body>
+            Dear All, <!--RMGroup-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The post training effectiveness given by your respective managers for {0} is as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {1}<!--LineManager name--><![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="26" Description="TrainerFeedbackAvgRating">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Feedback for {0} training
+          </Subject>
+          <Body>
+            Dear {2},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please find below the feedback shared by the participants for {1} training which was conducted from {3} to {4}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {5}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="27" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nominations submitted for Training on {0}
+          </Subject>
+          <Body>
+            Dear RMGroup,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, the below mentioned nominations have been submitted for the training on {1}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly confirm/reject the nominations through RMS.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {3}
+            <![CDATA[<br/>]]>
+            For more details employees can click on the below link-
+            <![CDATA[<br/>]]>
+            {4}
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+    <Email EmailTypeId="28" Description="PostTrainingRatingSubmitedByRMGOnBehalfOfManager">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Post Training Effectiveness for {0} training has been filled.<!--training name-->
+          </Subject>
+          <Body>
+            Dear {1}, <!--RMGroup-->
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, RMG has filled the post training effectiveness for {0}<!--training name --> on your behalf.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="29" Description="RejectTrainingNomination">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Nomination rejected for {0} training
+          </Subject>
+          <Body>
+            {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note, your nomination for {1} training has been rejected as {3}.
+            
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMGroup<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+    </Emails>
+  </Module>
+
+</Modules>
+

@@ -1,0 +1,358 @@
+﻿@*@model RMS.Models.NominationViewModel*@
+@model Domain.Entities.NominationModel
+@using RMS.Common.Constants
+@*Neelam : 25/07/2017 start. IssueId 60562*@
+@using (Html.BeginForm("ViewTrainingEffectiveness", "Nomination", FormMethod.Post, new { @id = "TrainingEffectiveness", @class = "form-horizontal" }))
+{
+@*Neelam : 25/07/2017 end. IssueId 60562*@  
+    <br />
+    if (Model.employeeListModel.Count != CommonConstants.ZERO)
+    {
+    <div class="row">
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-2">
+                <label class="form-label pull-right">Date <span class="asterisk-color">*</span></label>
+            </div>
+            <div class="col-md-4 " id="datepicker">
+                <div>
+                    @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                    {
+                        @Html.TextBoxFor(model => Model.PostRatingDueDate, "{0:dd/MM/yyyy}", new { @class = "Textboxstyle required", @readonly = true })
+                        @Html.ValidationMessageFor(model => Model.PostRatingDueDate)
+                    }
+                    else
+                    {
+@*<span>@Model.PostRatingDueDate.ToString("{0:dd/MM/yyyy}")</span>*@
+                        <span>@Model.PostRatingDueDate.ToString("dd/MM/yyyy")</span>
+                    }
+                    @Html.HiddenFor(model => Model.TrainingTypeID)
+                    @Html.HiddenFor(model => Model.SendMailToAll)
+                    @Html.HiddenFor(model => Model.RoleName)
+                    @Html.HiddenFor(model => Model.SendMailToNewManager)
+                    <input type="hidden" id="isSelectionMode" value="0" />
+                </div>
+            </div>
+            <div class=" col-md-6">
+            </div>
+        </div>
+    </div>
+                  
+    }
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-tech" id="tbltrainingeffectiveness">
+
+                @for (int i = 0; i < Model.employeeListModel.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                    <thead>
+                        <tr>
+                            @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                            {
+                                <th>Select</th>
+                            }
+                            <th>Participant’s Name</th>
+
+                            @if (Model.employeeListModel[i].PreTrainingFlag == CommonConstants.DefaultFlagOne)
+                            {
+                                <th>Pre Rating Given By</th>
+                                <th>Pre Rating</th>
+                            }
+
+                            @if (Model.employeeListModel[i].AssessmentFlag == CommonConstants.DefaultFlagOne)
+                            {
+                                <th>Assessment</th>
+                            }
+                            @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                            {
+                                <th>Post Rating Given By</th>
+                            }
+                            @if (Model.employeeListModel[i].PostTrainingFlag == CommonConstants.DefaultFlagOne)
+                            {
+                                <th>Post Rating</th>
+                            }
+                            <th>Comments</th>
+                            @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                            {
+                                <th hidden>IsReportingManagerChanged</th>
+                            }
+                        </tr>
+                    </thead>
+                    }
+                    <tr>
+                        @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                        {
+                            <td>
+                                @Html.CheckBoxFor(model => Model.employeeListModel[i].IsAdminGroup, Model.employeeListModel[i].BehalfofManagerPostrating)
+                                @*@Html.CheckBox(Model.employeeListModel[i].IsAdminGroup.ToString(), Model.employeeListModel[i].BehalfofManagerPostrating, new { @class = "confirm" })*@</td>
+                        }
+
+                        <td>@Html.DisplayFor(model => Model.employeeListModel[i].EmployeeName)
+                            @Html.HiddenFor(model => Model.employeeListModel[i].CourseID)
+                            @Html.HiddenFor(model => Model.employeeListModel[i].EmpId)</td>
+
+                        @if (Model.employeeListModel[i].PreTrainingFlag == CommonConstants.DefaultFlagOne)
+                        {
+                            <td>@Html.DisplayFor(model => Model.employeeListModel[i].PreNominatorName)
+
+
+                            </td>
+                            <td>@Html.DropDownListFor(model => Model.employeeListModel[i].PreTrainingRating, new SelectList(Model.ListPreTrainingRating, "Value", "Text", Model.employeeListModel[i].PreTrainingRating), new { style = "width: 100px;", disabled = "true", @class = "form-control Dropdownstyle required" })</td>
+                        }
+
+
+                        @if (Model.employeeListModel[i].AssessmentFlag == CommonConstants.DefaultFlagOne)
+                        {
+                            <td class="text-center">@Html.DisplayFor(model => Model.employeeListModel[i].Assessment)</td>
+                        }
+
+                        @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                        {
+                            <td>
+                                @Html.DropDownListFor(model => Model.employeeListModel[i].PostNominatorNameID, new SelectList(Model.ListEmployeeList, "Value", "Text", Model.employeeListModel[i].PostNominatorNameID), new { style = "width: 120px;", @class = "form-control Dropdownstyle required" })
+
+                                @*else {   
+                                    @Html.DisplayFor(model => Model.employeeListModel[i].PostNominatorName)
+                                }*@
+                            </td>
+                        }
+                        @if (Model.employeeListModel[i].PostTrainingFlag == CommonConstants.DefaultFlagOne)
+                        {
+                            <td>@Html.DropDownListFor(model => Model.employeeListModel[i].PostTrainingRating, new SelectList(Model.ListPreTrainingRating, "Value", "Text", Model.employeeListModel[i].PostTrainingRating), new { style = "width: 100px;", @class = "form-control Dropdownstyle required" })
+
+                                @Html.ValidationMessageFor(model => Model.employeeListModel[i].PostTrainingRating)
+                            </td>
+                        }
+
+                        <td>@Html.TextAreaFor(model => Model.employeeListModel[i].Comments, new { @class = "form-control TextAreastyle", maxlength = 500 })</td>
+
+                        @if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                        {
+                            <td>
+                                @Html.HiddenFor(model => model.employeeListModel[i].IsReportingManagerUpdated)
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @if (Model.employeeListModel.Count != 0)
+            {
+                if (Model.RoleName.ToLower() == CommonConstants.AdminRole)
+                {
+                <input type="submit" value="Send" id="BtnSend" name="Command" class="btn btn-submit" />
+                }
+                    
+                <input type="submit" value="Submit" name="Command" id="BtnSubmit" class="btn btn-reset" />
+                    
+                <input type="submit" value="Send Mail To All" name="Command" id="BtnSendMailToAll" class="btn btn-reset" />
+                
+            }
+        </div>
+    </div>
+}
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        hidewaiting();
+        var roundcound = "@Model.employeeListModel.Count";
+        if (roundcound == 0) {
+            $("#message").addClass("MessageStyleFail");
+            $("#message").html("Record not found.");
+        }
+
+        if ($('#PostRatingDueDate').val() == "01/01/0001" || $('#PostRatingDueDate').val() == "01/01/0001 00:00:00") {
+            $('#PostRatingDueDate').val('');
+            $('#BtnSubmit').hide();
+            $('#BtnSendMailToAll').hide();
+        }
+        else {
+            $('#BtnSend').hide();
+        }
+
+        if ($('#SendMailToAll').val() == true) {
+            $('#BtnSendMailToAll').show();
+        }
+        else {
+            $('#BtnSendMailToAll').hide();
+        }
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $(function () {
+            $("#PostRatingDueDate").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val()
+        });
+
+        //$('#tbltrainingeffectiveness tbody').on('click', 'input[type="checkbox"]', function (e) {
+
+        //    debugger;
+
+        //    var rows_selected = [];
+
+        //    var $row = $(this).closest('tr');
+
+        //    table = $('#tbltrainingeffectiveness').DataTable({});
+
+        //    var data = table.row($row).data();
+
+        //    alert(data);
+
+        //    var rowId = data[6].row(1).val();
+
+        //    alert(rowId);
+        //});
+
+        $('#BtnSubmit').click(function (e) {
+
+            var rolename = '@Model.RoleName.ToLower()';
+
+            //debugger;
+
+            if (rolename == 'admin') {
+                var confcheckboxcount = $('input[type="checkbox"]:checked').length;
+
+                if (confcheckboxcount == 0) {
+
+                    alert('Please select atleast one participant’s name for post training rating.');
+
+                    return false;
+                }
+
+                //table = $('#tbltrainingeffectiveness').DataTable({});
+
+                //var rowcollection1 = table.$("input[type='checkbox']:checked", { "page": "all" });
+
+                //var rowcollection = table.$("select", { "page": "all" });
+
+                //rowcollection.each(function (index, elem) {
+
+                //    var a = $(elem).attr("name");
+
+                //    var b = $(elem).attr("id");
+
+                //    $(b).addClass("requiredHiglight");
+
+                //    //$(this).removeClass("requiredHiglight");
+
+                //    return false;
+                //});
+            }
+
+            if (rolename == 'manager') {
+                $('#message').html('');
+                var val = Validation();
+
+                if (val == false) {
+                    return false;
+                }
+            }
+        });
+          @*Neelam : 25/07/2017 start. IssueId 60562*@
+        $("[name*='PostNominatorNameID']").change(function () {
+
+            var i = ($(this).closest('tr').index());
+            if (this.value == "") {
+                $("#employeeListModel_" + i + "__IsAdminGroup").prop('checked', false);
+            }
+            else {
+
+
+                $("#employeeListModel_" + i + "__IsAdminGroup").prop('checked', true);
+            }
+        });
+          @*Neelam : 25/07/2017 end. IssueId 60562*@
+
+
+        $('#BtnSend').click(function (e) {
+            $('#message').html('');
+
+
+             @*Neelam : 25/07/2017 start. IssueId 60562*@
+            $("[name^='PostNominatorNameID']").each(function () {
+                $(this).rules('add', {
+                    required: true,
+                    messages: {
+                        required: "Please select manager"
+
+                    }
+                });
+            });
+
+            $("[name^='PostTrainingRating']").each(function () {
+                $(this).rules('remove')
+            });
+
+            var out = true;
+            $('#TrainingEffectiveness').valid();
+            if ($('#TrainingEffectiveness').valid() == true) {
+
+
+                if ($('#PostRatingDueDate').val() == '') {
+                    $("#message").addClass("MessageStyleFail");
+
+                    $('#message').html('Please fill post rating due date.');
+
+                    $('#PostRatingDueDate').css({
+                        "border": "1px solid red",
+                        "background": "#FFCECE"
+                    });
+                    out = false;
+                    return false;;
+                }
+                else {
+                    $('#PostRatingDueDate').css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+
+                if (!out) { event.preventDefault(); }
+
+                var selectNewManager = false;
+                var isManagerUpdated = false;
+                var roleName = '@Model.RoleName.ToLower()';
+                if (roleName == 'admin') {
+                    $('*[id*="IsReportingManagerUpdated"]').each(function () {
+                        if ($(this).val() == "True") {
+                            isManagerUpdated = true;
+                        }
+                    });
+
+                    if (isManagerUpdated && $("#isSelectionMode").val() == 0) {
+                        if (confirm("One or more employees have new reporting manager. Click OK to send mail to nominating managers or Cancel to select new manager(s)."))
+                            $("#SendMailToNewManager").val(false);
+                        else {
+                            $("#SendMailToNewManager").val(true);
+                            $("#isSelectionMode").val(1);
+                            isManagerUpdated = false;
+                            selectNewManager = true;
+                        }
+                    }
+                }
+
+                if (selectNewManager)
+                    return false;
+                return out;
+            }
+
+            @*Neelam : 25/07/2017 end. IssueId 60562*@
+        });
+    });
+</script>

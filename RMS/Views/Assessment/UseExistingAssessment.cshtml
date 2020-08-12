@@ -1,0 +1,350 @@
+﻿@model RMS.Models.AssessmentViewModel
+@{
+    ViewBag.Title = "View Existing Assessment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        View Existing Assessment Paper for the training
+			
+    </div>
+</div>
+@if (Model.AssessmentPaper.TrainingCourses.Count() > 1)
+{
+    <div class="col-md-12">
+        @using (Html.BeginForm("UseExistingAssessment", "Assessment", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @id = "frmExistingAssessment" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+         
+            <div class="panel panel-default">
+                <div class="panel-heading">View Assessment Paper</div>
+                <div class="panel-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <span id="message">
+                                @{
+            var msg = Convert.ToString(TempData["Result"]);
+            if (!string.IsNullOrWhiteSpace(msg))
+            {
+                                    @msg
+                                    <br />
+                                    <script>
+                                        $("#message").addClass("MessageStyleSuccess");
+                                    </script>
+            }
+                                }
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="editor-label">
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(model => model.AssessmentPaper.CourseId, "Course")<label style="color: red; padding-left: 2px;">*</label>
+                                    </div>
+                                </div>
+                                <div class="editor-field">
+                                    <div class="col-md-10">
+                                        @Html.HiddenFor(model => model.AssessmentPaper.CourseId, new { @class = "jq_CourseId" })
+                                        @Html.HiddenFor(model => model.AssessmentPaper.AssessmentPaperId)
+                                        @Html.HiddenFor(model => model.AssessmentPaper.AssessmentPaperIdEncrypt )
+                                        @Html.Hidden("OriginalAssessmentPaperId")
+                                        @Html.DropDownListFor(model => model.AssessmentPaper.CourseId, Model.AssessmentPaper.TrainingCourses, new { id = "ddlCourse", @class = "required" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <input id="btnView" type="submit" value="View" class="buttonstyle" />&nbsp;
+                                    <input id="btnBack" type="button" value="Back" class="buttonstyle" />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (Model.AssessmentQuestions != null && Model.AssessmentQuestions.Count > 0)
+            {
+            
+            <div class="panel-group">
+                <div class="panel panel-default" id="pnlAssessmentQuestione">
+                    <div class="panel-heading">Assessment Questions<br /><b><input id="selectAll" type="checkbox" class="text-right"  name="selectAllCheck"  value="1"   /> Select All</b></div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-1 text-center "><b>Sr.No</b></div>
+                                    <div class="col-md-4 "><b>Question</b></div>
+                                    <div class="col-md-3">
+                                        <b>Options</b>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Correct Answer</b>
+                                    </div>
+                                    <div class="col-md-1 text-left "><b>Select</b><br /></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <hr style="margin: 0px;" />
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                int index = 1;
+            
+                        }
+                        @foreach (var assessmentQuestion in Model.AssessmentQuestions)
+                        {
+
+                            var inputName = ViewData["prefix"] + ".Index";
+                            var fieldPrefix = string.Format("{0}[{1}].", ViewData["prefix"], assessmentQuestion.QuestionId);
+                            var QuestionImg = fieldPrefix + "QuestionImg";
+                            var Option1ImageId = fieldPrefix + "Option1Image";
+                            var Option2ImageId = fieldPrefix + "Option2Image";
+                            var Option3ImageId = fieldPrefix + "Option3Image";
+                            var Option4ImageId = fieldPrefix + "Option4Image";
+                            var Option5ImageId = fieldPrefix + "Option5Image";
+                            var Option6ImageId = fieldPrefix + "Option6Image";
+                            var Option1Description = fieldPrefix + "Option1Description";
+                            var Option2Description = fieldPrefix + "Option2Description";
+                            var Option3Description = fieldPrefix + "Option3Description";
+                            var Option4Description = fieldPrefix + "Option4Description";
+                            var Option5Description = fieldPrefix + "Option5Description";
+                            var Option6Description = fieldPrefix + "Option6Description";
+                            var IsOption1Correct = fieldPrefix + "IsOption1Correct";
+                            var IsOption2Correct = fieldPrefix + "IsOption2Correct";
+                            var IsOption3Correct = fieldPrefix + "IsOption3Correct";
+                            var IsOption4Correct = fieldPrefix + "IsOption4Correct";
+                            var IsOption5Correct = fieldPrefix + "IsOption5Correct";
+                            var IsOption6Correct = fieldPrefix + "IsOption6Correct";
+                            <div id="@assessmentQuestion.QuestionId">
+                                @Html.Hidden(inputName, assessmentQuestion.QuestionId)
+                                @Html.Hidden(fieldPrefix + "QuestionId", assessmentQuestion.QuestionId)
+                                @Html.Hidden(fieldPrefix + "IsMultiChoiceAnswer", assessmentQuestion.IsMultiChoiceAnswer, new { @class = "jq_MuliChoiceAnswer" })
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-1 text-center ">@index</div>
+                                            <div class="col-md-4">@Html.DisplayFor(model => assessmentQuestion.Question)
+                                                @if(!string.IsNullOrEmpty( assessmentQuestion.QuestionImgFileName)){<br /> <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentQuestionImgPath].ToString() + "/") + assessmentQuestion.QuestionImgFileName)" width="250px" height="200px" /><br />}
+                                                @Html.Hidden(fieldPrefix + "Question", assessmentQuestion.Question)
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.Label("A", "A.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option1Description)
+                                                @Html.Hidden(Option1Description, assessmentQuestion.Option1Description)<br />
+                                                @if(!string.IsNullOrEmpty( assessmentQuestion.Option1ImageFileName)){ <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option1ImageFileName)" width="250px" height="200px" /><br />}
+                                                @Html.Label("B", "B.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option2Description)
+                                                @Html.Hidden(Option2Description, assessmentQuestion.Option2Description)<br />
+                                                @if(!string.IsNullOrEmpty( assessmentQuestion.Option2ImageFileName)){ <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option2ImageFileName)" width="250px" height="200px" /><br />}
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description) || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                                {
+                                                    @Html.Label("C", "C.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option3Description)
+                                                    @Html.Hidden(Option3Description, assessmentQuestion.Option3Description)<br />
+                                                    if(!string.IsNullOrEmpty( assessmentQuestion.Option3ImageFileName)){ <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option3ImageFileName)" width="250px" height="200px" /><br />}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description) || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                                {
+                                                    @Html.Label("D", "D.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option4Description)
+                                                    @Html.Hidden(Option4Description, assessmentQuestion.Option4Description)<br />
+                                                    if(!string.IsNullOrEmpty( assessmentQuestion.Option4ImageFileName)){ <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option4ImageFileName)" width="250px" height="200px" /><br />}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description))
+                                                {
+                                                    @Html.Label("E", "E.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option5Description)
+                                                    @Html.Hidden(Option5Description, assessmentQuestion.Option5Description)<br />
+                                                    if (!string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option5ImageFileName)" width="250px" height="200px" /><br />}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description))
+                                                {
+                                                    @Html.Label("F", "F.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option6Description)
+                                                    @Html.Hidden(Option6Description, assessmentQuestion.Option6Description)<br />
+                                                    if (!string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                                    { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option6ImageFileName)" width="250px" height="200px" /><br />}
+                                                }
+                                            </div>
+                                            <div class="col-md-2">
+                                                @if (assessmentQuestion.IsOption1Correct)
+                                                {@Html.Label("Option A", "Option A")@Html.Hidden(IsOption1Correct, assessmentQuestion.IsOption1Correct)}
+                                                @if (assessmentQuestion.IsOption2Correct)
+                                                {@Html.Label("Option B", "Option B")@Html.Hidden(IsOption2Correct, assessmentQuestion.IsOption2Correct)}
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description)  || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                                {
+                                                    if (assessmentQuestion.IsOption3Correct)
+                                                    {@Html.Label("Option C", "Option C")@Html.Hidden(IsOption3Correct, assessmentQuestion.IsOption3Correct)}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description)  || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                                {
+                                                    if (assessmentQuestion.IsOption4Correct)
+                                                    {@Html.Label("Option D", "Option D")@Html.Hidden(IsOption4Correct, assessmentQuestion.IsOption4Correct)}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description)  || !string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                                {
+                                                    if (assessmentQuestion.IsOption5Correct)
+                                                    {@Html.Label("Option E", "Option E")@Html.Hidden(IsOption5Correct, assessmentQuestion.IsOption5Correct)}
+                                                }
+                                                @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description)  || !string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                                {
+                                                        if (assessmentQuestion.IsOption6Correct)
+                                                        {@Html.Label("Option F", "Option F")@Html.Hidden(IsOption6Correct, assessmentQuestion.IsOption6Correct)}
+                                                }
+                                            </div>
+                                            <div class="col-md-1 text-center ">
+                                                @if (assessmentQuestion.IsDisplaySelect)
+                                                {
+                                                @Html.CheckBox(fieldPrefix + "IsAddQuestion", assessmentQuestion.IsAddQuestion, new { @class = "jq_AddQuestion" })
+                                                }
+                                                else
+                                                {
+                                                    @Html.CheckBox(fieldPrefix + "IsAddQuestion", assessmentQuestion.IsAddQuestion, new { @disabled = "disabled" })
+                                                
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                index = index + 1;
+                        }
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        <input id="btnAddQuestion" type="button" value="Add Questions" class="buttonstyle" disabled="disabled" />
+                                    </div> 
+                                    <div class="col-md-2">
+                                           <input id="btnCancel" type="button" value="Cancel" class="buttonstyle" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            }
+        }
+    </div>
+}
+else
+{
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">No Assessment Paper exists for similar Training!!</div>
+            <div class="panel-body"><div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <div class="col-md-2">
+                                    
+                                <input id="btnBack" type="button" value="Back" class="buttonstyle" />
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div></div>
+        </div>
+    </div>
+    
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var original = '@TempData["OriginalAssessmentPaperId"]';
+        $("#OriginalAssessmentPaperId").val(original);
+      
+        // add multiple select / deselect functionality
+        $("#selectAll").click(function () {
+            $('.jq_AddQuestion').attr('checked', this.checked);
+        });
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".jq_AddQuestion").click(function () {
+
+            if ($(".jq_AddQuestion").length == $(".jq_AddQuestion:checked").length) {
+                $("#selectAll").attr("checked", "checked");
+            } else {
+                $("#selectAll").removeAttr("checked");
+            }
+
+        });
+
+        $("#btnBack").click(function () {
+                window.location.href = '@Url.Action("ShowAssessmentPaperDetails", "Assessment", new { id = RMS.Helpers.CheckAccessAttribute.Encode(Convert.ToString(TempData["OriginalAssessmentPaperId"])) })';
+        });
+        $("#btnCancel").click(function () {
+                window.location.href = '@Url.Action("ShowAssessmentPaperDetails", "Assessment", new { id = RMS.Helpers.CheckAccessAttribute.Encode(Convert.ToString(TempData["OriginalAssessmentPaperId"])) })';
+        });
+
+            $("#ddlCourse").change(function () {
+                $(".jq_CourseId").val($(this).val());
+            });
+            $("#frmExistingAssessment").submit(function (e) {
+                var original = '@TempData["OriginalAssessmentPaperId"]';
+                $("#OriginalAssessmentPaperId").val(original);
+                
+                
+            });
+        var checkboxes = $("#frmExistingAssessment input[type='checkbox']:not('#selectAll')");
+        
+        checkboxes.click(function () {
+            $("#btnAddQuestion").attr("disabled", !checkboxes.is(":checked"));
+        });
+        $('input:checkbox:("#selectAll")').click(function (event) {
+            $("#btnAddQuestion").attr("disabled", !checkboxes.is(":checked"));
+        });
+        var ShowAssessmentPaperUrl = '@Url.Action("ShowAssessmentPaperDetails", "Assessment")'
+        $("#btnAddQuestion").click(function () {
+            if (jQuery('#frmExistingAssessment input[type=checkbox]:checked').length > 0) {
+                $.ajax({
+                    url: "@Url.Action("AddExistingQuestion", "Assessment")",
+                    type: 'POST',
+                    cache: false,
+                    data: $("#frmExistingAssessment").serialize() + "&id=" + $("#OriginalAssessmentPaperId").val(),
+                    success: function (data) {
+                        if (data) {
+                            var idd = $("#AssessmentPaper_AssessmentPaperIdEncrypt").val();
+
+                            window.location.href = ShowAssessmentPaperUrl + "/" + idd;
+                            //window.location.href = ShowAssessmentPaperUrl + "/" + data.Id;                            
+                            //alert("Question for the selected course successfully added in the assessment paper.");
+                        }
+                        else {
+                            alert("Error occured while adding question.");
+                        }
+                    }
+                });
+            }
+            else {
+                alert("Please select question to be added.");
+                return false;
+            }
+
+        });
+
+        });
+</script>

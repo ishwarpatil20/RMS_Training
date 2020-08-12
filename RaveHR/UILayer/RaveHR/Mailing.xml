@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<MailMessage>
+ 
+  <Project_Updated>
+		<Subject>New Changes Made. [Project: (ProjectId) - (ClientName) - (ProjectName)]</Subject>
+		<Content>
+			Hi [User],<br /><br />
+			This is to inform you, that I have made some changes for the project [ProjectName] in the "Resource Management" system.<br /><br />
+			Regards,<br/>[LoggedInUser]
+	</Content>
+	</Project_Updated>
+
+	
+</MailMessage>

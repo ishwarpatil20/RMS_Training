@@ -1,0 +1,138 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+@* <div class="col-md-12 margin-b-10">
+     <div class="divider">A</div>
+     AA
+ </div>*@
+@if (Model.dtAttendance != null)
+{
+    if (Model.dtAttendance.Rows.Count > 0)
+    {    
+    <table  class="table">
+        <thead>
+            <tr  >
+                @foreach (DataColumn col in Model.dtAttendance.Columns)
+                {
+                    if ( @col.ColumnName == "Attendance" || @col.ColumnName == "EmployeeName")
+                    {
+                        if (@col.ColumnName == "Attendance")
+                        {
+
+                            string parameterValue = "Attendance"; //+ Convert.ToString(@Model.AttendanceDate);
+                            
+                    <th>
+                        @Html.DisplayFor(model => parameterValue)
+                        (<input id="selectAll" type="checkbox"  name="selectAllCheck"  value="1"   /> Select All)
+                    </th> 
+                        }
+                        else
+                        { 
+                        
+                    <th  >
+                            @col.ColumnName
+                        </th> 
+                        }
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.dtAttendance.Rows)
+            {         
+                <tr>
+                    @foreach (DataColumn col in Model.dtAttendance.Columns)
+                    {
+                        if (@col.ColumnName == "Attendance" || @col.ColumnName == "EmployeeName")
+                        {
+
+                            if (@col.ColumnName == "Attendance")
+                            {
+                                string parameterValue1 = Convert.ToString(@Model.AttendanceDate);
+
+                                string Empid = row["Empid"].ToString();
+                                string Values = row["Attendance"].ToString();
+                                string parameterValue2 = Empid;// +"_" + Values;
+                                bool a = false;
+                                if (Values == "1")
+                                {
+                                    a = true;
+                                }
+                        <td>
+                            @*@Html.CheckBoxFor(model => parameterValue1)
+                                    @Html.CheckBoxFor(model => model.ItemViewDataModel[i].Selected)*@
+                            <input id="choice1@(parameterValue1)"type="checkbox" name="SelectedChoices" class="case required"  
+                                value="@(parameterValue2)" checked="@a" />
+                        </td>
+                            }
+                            else
+                            {
+                        <td>@row[col.ColumnName]
+                        </td> }
+                        }
+                    }
+                </tr> 
+                
+            }
+            <tr><td colspan="2"  style="text-align:center" ><input type="submit" value="Submit" name="submitBtn" id="submitBtn" class="btn btn-submit" /></td>
+
+                </tr>
+        </tbody>
+    </table> 
+    }
+}
+  
+
+
+       
+    
+
+<script type="text/javascript">
+       
+    $(function () {
+
+        // add multiple select / deselect functionality
+        $("#selectAll").click(function () {
+            $('.case').attr('checked', this.checked);
+        });
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".case").click(function () {
+
+            if ($(".case").length == $(".case:checked").length) {
+                $("#selectall").attr("checked", "checked");
+            } else {
+                $("#selectall").removeAttr("checked");
+            }
+
+        });
+    });
+
+    @*var Viewurl = '@Url.Action("CloseTrainingRequest", "training")';*@
+    //var totalRecord = 'Model.Count';
+    var RaiseId = '';
+    var Status = '';
+    var Comment = '';
+    $(document).ready(function () {
+        hidewaiting();
+        //if (totalRecord > 0) {
+        //    $('#viewreport').dataTable();
+        //}
+    });
+</script>
+
+@*<ul>
+                                            @if (Model.objDynamicGrid != null)
+                                            {
+                                                foreach (var choice in Model.objDynamicGrid)
+                                                {
+                                                <li>
+
+                                                    <label for="operator@(choice.EmpName)">@choice.EmpName</label>
+                                                    <input id="choice@(choice.Empid )"type="checkbox" name="SelectedChoices" value="@choice.values" />
+                                                </li>
+                                                }
+                                            }
+                                        </ul>*@

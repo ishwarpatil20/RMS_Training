@@ -1,0 +1,110 @@
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.Web.Common.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.Web.Mvc.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\WebActivatorEx.dll
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.xml
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.Web.Common.xml
+D:\VRP\Project\RMS\Domain.Entities\bin\Debug\Ninject.Web.Mvc.xml
+D:\VRP\Project\RMS\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMS\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\VRP\Project\RMS\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\PROJECTS\RMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTrainingMerge\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\PROJECTS\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\System.Web.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.xml
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.xml
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Domain.Entities.pdb
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\RMS.Common.pdb
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\bin\Debug\System.Web.Mvc.xml
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.csprojResolveAssemblyReference.cache
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.dll
+D:\Shared\RaveRMSTraining\Domain\Domain.Entities\obj\Debug\Domain.Entities.pdb

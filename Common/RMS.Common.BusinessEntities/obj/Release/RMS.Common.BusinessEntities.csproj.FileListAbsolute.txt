@@ -1,0 +1,7 @@
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Release\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Release\RMS.Common.BusinessEntities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Release\RMS.Common.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\bin\Release\RMS.Common.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Release\RMS.Common.BusinessEntities.csprojResolveAssemblyReference.cache
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Release\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Common\RMS.Common.BusinessEntities\obj\Release\RMS.Common.BusinessEntities.pdb

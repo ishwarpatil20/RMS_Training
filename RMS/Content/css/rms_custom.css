@@ -1,0 +1,54 @@
+﻿
+/*CSS for highlighting mandatory field*/
+.requiredHiglight
+{
+    border: 1px solid red;
+    background: #FFCECE;
+}
+
+/*CSS for File Download partial view*/
+.tblFileDownload table{
+border-collapse: collapse;
+border: 1px solid black;
+}
+
+.tblFileDownload th{
+border: 1px solid black;
+text-align: center;
+}
+
+.tblFileDownload td{
+border: 1px solid black;
+padding-left:5px;
+text-align:left;
+}
+
+.tblFileDownload .actionlink{
+border: 1px solid black;
+text-align:center;
+padding-left:0px;
+}
+
+.tblFileDownload .actionlink a
+{
+color:blue;
+cursor:pointer;
+}
+
+/*CSS for Course Raise detail table*/
+.tblGrid table{
+border-collapse: collapse;
+border: 1px solid black;
+}
+
+.tblGrid th{
+border: 1px solid black;
+text-align: center;
+}
+
+.tblGrid td{
+border: 1px solid black;
+padding-left:5px;
+text-align:left;
+}
+

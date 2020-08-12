@@ -1,0 +1,322 @@
+﻿@using RMS.Common.Constants;
+@model Domain.Entities.TrainingModel
+
+@*<div class="container">*@
+<div class="col-md-6">
+    <div class="row">
+        @* <div class="form-group">
+            <div class="col-md-12">
+                @{if (Model.objCommonModel != null)
+                  {
+                      Html.RenderPartial("EmployeeList", Model.objCommonModel);
+                  }
+                }
+            </div>
+        </div>*@
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Type<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.DropDownListFor(m => m.Type, Model.ListKSSType, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control Dropdownstyle", disabled = "true" } : (object)new { @class = "form-control Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Type)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Agenda<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(model => model.Agenda, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control TextAreastyle required" })
+                @Html.ValidationMessageFor(m => m.Agenda)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Date<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                <div id="datepickerDate">
+                    @Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", Model.Operation == CommonConstants.View ? (object)new { maxlength = 10, @class = "form-control Textboxstyle", disabled = "true", @readonly = true } : (object)new { maxlength = 10, @class = "form-control Textboxstyle required", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.Date)
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Comments (if any)</label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(model => model.Comments, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "form-control TextAreastyle" })
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @{if (Model.objCommonModel != null)
+                  {
+                      Html.RenderPartial("EmployeeList", Model.objCommonModel);
+                  }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="row">
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Topic<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(model => model.Topic, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "form-control TextAreastyle", disabled = "true" } : (object)new { maxlength = 400, @class = "form-control TextAreastyle required" })
+                @Html.ValidationMessageFor(m => m.Topic)
+            </div>
+        </div>
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+                <label class="form-label">Presenter<span class="asterisk-color"> *</span></label>
+            </div>
+            <div class="col-md-8 col-sm-6">
+                @Html.TextAreaFor(model => model.Presenter, Model.Operation == CommonConstants.View ? (object)new { @class = "form-control TextAreastyle", disabled = "true", @readonly = true } : (object)new { @class = "form-control TextAreastyle required", @readonly = true })
+                @Html.HiddenFor(model => model.PresenterID)
+                <a href="#login-box" class="login-window" id="check">
+                    <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                </a>
+                @Html.ValidationMessageFor(m => m.Presenter)
+            </div>
+        </div>
+
+        
+
+        <div class="clearfix margin-b-10">
+            <div class=" col-md-4 col-sm-6">
+            </div>
+            <div class="col-md-8 col-sm-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="form-group">
+            <div class="col-md-2"><label class="control-label">Type  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">@Html.DropDownListFor(m => m.Type, Model.ListKSSType, Model.Operation == CommonConstants.View ? (object)new { @class = "Dropdownstyle", disabled = "true" } : (object)new { @class = "Dropdownstyle required" })
+                @Html.ValidationMessageFor(m => m.Type)
+            </div>
+
+            <div class="col-md-2"><label class="control-label">Topic  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-5">@Html.TextAreaFor(model => model.Topic, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "TextAreastyle", disabled = "true" } : (object)new { maxlength = 400, @class = "TextAreastyle required" })
+                @Html.ValidationMessageFor(m => m.Topic)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"><label class="control-label">Agenda  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">@Html.TextAreaFor(model => model.Agenda, Model.Operation == CommonConstants.View ? (object)new { maxlength = 400, @class = "TextAreastyle", disabled = "true" } : (object)new { maxlength = 400, @class = "TextAreastyle required" })
+                @Html.ValidationMessageFor(m => m.Agenda)
+            </div>
+
+            <div class="col-md-2"><label class="control-label">Presenter  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-5">
+                @Html.TextAreaFor(model => model.Presenter, Model.Operation == CommonConstants.View ? (object)new { @class = "TextAreastyle", disabled = "true", @readonly = true } : (object)new { @class = "TextAreastyle required", @readonly = true })
+                @Html.HiddenFor(model => model.PresenterID)
+                <a href="#login-box" class="login-window" id="check">
+                    <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                </a>
+                @Html.ValidationMessageFor(m => m.Presenter)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"><label class="control-label">Date  : <span style="color: Red">*</span></label></div>
+            <div class="col-md-3">
+                <div id="datepickerDate">
+                    @Html.TextBoxFor(model => model.Date, "{0:dd/MM/yyyy}", Model.Operation == CommonConstants.View ? (object)new { maxlength = 10, @class = "Textboxstyle", disabled = "true", @readonly = true } : (object)new { maxlength = 10, @class = "Textboxstyle required", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.Date)
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Comments (if any)  : </label>
+            </div>
+            <div class="col-md-5">@Html.TextAreaFor(model => model.Comments, Model.Operation == CommonConstants.View ? (object)new { maxlength = 2000, @class = "TextAreastyle", disabled = "true" } : (object)new { maxlength = 2000, @class = "TextAreastyle" })</div>
+        </div>*@
+
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    if ($('#Date').val() == "01/01/0001" || $('#Date').val() == "01/01/0001 00:00:00") {
+        $('#Date').val('');
+    }
+
+    $(document).ready(function () {
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("textarea.required").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $("textarea").on('change keyup paste', function () {
+            clearvalidation(this);
+        });
+
+        $('#BtnSubmit').click(function (e) {
+            Validation();
+        });
+
+        $.validator.addMethod('date',
+             function (value, element) {
+                 if (this.optional(element)) {
+                     return true;
+                 }
+                 var valid = true;
+                 try {
+                     $.datepicker.parseDate('dd/mm/yy', value);
+                 }
+                 catch (err) {
+                     valid = false;
+                 }
+                 return valid;
+             });
+
+        $(function () {
+            $("#Date").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val()
+        });
+
+        hidewaiting();
+
+           @*   $("#BtnSecondSelect").click(function () {
+                var commoncontrollerurl = "@Url.Action("Index", "common")";
+                 $.ajax({
+                     url: commoncontrollerurl,
+                     type: "POST",
+                     data: $("#form1").serialize(),
+                     success: function (result) {
+
+                         var values = result.split('~');
+                         $('#PresenterID').val(values[0]);
+                         $("#Presenter").val(values[1]);
+                         $("#login-box").dialog(
+                             function () {
+                                 $("#form1").reset();
+                                 allFields.removeClass("ui-state-error");
+                             });
+                     }
+                 });
+            });
+
+            $("#BtnFirstSelect").click(function () {
+                var commoncontrollerurl = "@Url.Action("Index","common")";
+                $.ajax({
+                    url: commoncontrollerurl,
+                    type: "POST",
+                    data: $("#form1").serialize(),
+                    success: function (result) {
+
+                        var values = result.split('~');
+                        $('#PresenterID').val(values[0]);
+                        $("#Presenter").val(values[1]);
+                        //dialog.close();
+                        //form[0].reset();
+                        $("#login-box").dialog(
+                            function () {
+                                //$("#form1").reset();
+                                //allFields.removeClass("ui-state-error");
+                                $(this).dialog("close");
+                                $("body").unbind("click");
+                            });
+                            //allFields.removeClass("ui-state-error");
+                    }
+                });
+
+            });*@
+
+
+
+            $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+                checkbox_id = '';
+                checkbox_value = '';
+                var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+                rowcollection.each(function (index, elem) {
+                    checkbox_value += ',' + $(elem).attr("name");
+                    checkbox_id += ',' + $(elem).attr("class");
+                });
+                checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+                checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+                $('#PresenterID').val(checkbox_id);
+                $("#Presenter").val(checkbox_value);
+                $('#login-box').dialog('close');
+
+            })
+
+
+            $(function () {
+                var dialog, form
+                dialog = $("#login-box").dialog({
+                    autoOpen: false,
+                    height: 750,
+                    width: 1000,
+                    left: 500,
+                    modal: true,
+                    dialogClass: 'dlgfixed',
+                    //position: ['center', 'top'],
+                    //position: ({ my: 'center', of: 'center', collison: 'fit' }),
+                    close: function () {
+                        //form[0].reset();
+                        //allFields.removeClass("ui-state-error");
+                    }
+                });
+
+                form = dialog.find("form").on("submit", function (event) {
+
+                });
+
+                $("#check").bind("click", function () {
+                    dialog.dialog("open");
+                });
+            });
+
+            //$(function () {
+            //    var dialog, form
+            //    dialog = $("#login-box").dialog({
+            //        autoOpen: false,
+            //        height: 350,
+            //        width: 1000,
+            //        left: 500,
+            //        position: 'center',
+            //        modal: true,
+            //        close: function () {
+            //            //form[0].reset();
+            //            allFields.removeClass("ui-state-error");
+            //        }
+            //    });
+
+            //    form = dialog.find("form").on("submit", function (event) {
+
+            //    });
+
+            //    $("#check").button().on("click", function () {
+            //        dialog.dialog("open");
+            //    });
+            //});
+        });
+</script>

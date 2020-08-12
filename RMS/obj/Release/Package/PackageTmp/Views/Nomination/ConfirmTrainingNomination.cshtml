@@ -1,0 +1,78 @@
+﻿@model RMS.Models.NominationViewModel
+
+@{
+    ViewBag.Title = "ConfirmTrainingNomination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Confirm Nomination
+            <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+
+    </div>
+
+<div class="col-md-12 margin-b-10">
+    <div >        
+        @{
+            var message = Convert.ToString(ViewData["Result"]);
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+            <span class="Messagetext" id="message">@message</span> <br />
+            }
+        }
+</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label ">Select Training</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    @Html.DropDownListFor(m => m.CourseName, Model.CourseName, new { @class = "form-control Dropdownstyle" })
+                </div>
+
+                <div class=" col-md-2 col-sm-6">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="wait"  style="top:317px;right:670px;position:absolute;display:none;">
+        <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+    </div>
+    <div id="trainingdetail">
+    </div>
+
+    </div> 
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('select option[value="0"]').attr("selected", true);
+
+        var gridurl = '@Url.Action("viewtrainingcoursedetailbyid", "nomination")';
+        var trainingdetail = $("#trainingdetail");
+
+        $("#CourseName").change(function () {            
+            $('#message').html('');
+            var trainingcourseid = $(this).val();
+            trainingdetail.html('');
+            if (trainingcourseid != 0) {
+                showaiting();
+                trainingdetail.load(gridurl + "?trainingcourseid=" + trainingcourseid + "&isConfirmPageNomination=true");
+            }
+        })
+
+    });
+
+
+
+
+</script>

@@ -1,0 +1,177 @@
+﻿
+@model RMS.Models.AssessmentViewModel
+
+@{
+    ViewBag.Title = "Paper Details";    
+}
+
+
+@*<script src="Content/css/jquery.js"></script>
+<script src="Content/css/jquery.simple.timer.js"></script>*@
+
+
+<div class="col-md-12">
+    <div class="training-title margin-b-10">
+        View Assessment Paper
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+<div class="col-md-12" onkeydown="return showKeyCode(event)">
+    @using (Html.BeginForm("Result", "Assessment",  FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", id = "frmAssessmentPaper" }))
+
+    {
+        @Html.AntiForgeryToken()     
+        @Html.HiddenFor(model => model.AssessmentPaper.AssessmentPaperId)   
+        
+        
+        <div class="panel-group">
+            <div class="panel panel-default" id="pnlTrainingCourse">
+                <div class="panel-heading">Assessment Paper Details</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.CourseId, "Course")</div>
+                                <div class="col-md-3">
+                                    @*@Html.DisplayFor(model => model.AssessmentPaper.CourseName)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.CourseId)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.TrainingNameId)*@
+                                    
+                                    @Html.DropDownListFor(model => model.AssessmentPaper.CourseId, Model.ListCourses, new { id = "ddlCourse", @class = "required" })
+                                    @Html.DisplayFor(model => model.AssessmentPaper.CourseName)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.CourseId)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" id="dvCourseDetail">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                   Time Duration
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="divTimeDuration"></div>
+                                </div>
+                            </div>
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    Assessment Date
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="dvAssessmentDate"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <span id="dvStartAsses"  class="buttonstyle">Start Assessment</span>
+                    </div>
+                </div>
+                    <div class="row">                       
+                           
+                 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        if (Model.AssessmentQuestions != null && Model.AssessmentQuestions.Count > 0)
+        {
+        @Html.Hidden(ViewData["PaperPrefix"] + ".AssessmentPaperId", Model.AssessmentPaper.AssessmentPaperId) 
+        }
+        <div class="panel-group" id ="dvParViewStartAssess">
+            @*@Html.RenderPartial("_StartAssessment")*@
+        </div>
+        
+    }
+</div>
+
+<script type="text/javascript">
+    //function SetHiddenValue(value, hiddenField) {
+    //    //$('[name="' + hiddenField + '"]').val(value);
+    //    //alert($('[name="' + hiddenField + '"]').val());
+    //}
+    
+    // slight update to account for browsers not supporting e.which
+    function disableF5(e) {
+        if ((e.which || e.keyCode) == 116 || e.keyCode == 123) e.preventDefault();
+    };
+    // To disable f5
+    /* jQuery < 1.7 */
+    // $(document).bind("keydown", disableF5);
+    /* OR jQuery >= 1.7 */
+    $(document).on("keydown", disableF5);
+
+    $(document).on("contextmenu", function (e) {
+        return false;
+    }); 
+
+
+    $(document).ready(function () {
+        
+        $("#divMenu").hide();
+
+
+        $('#ddlCourse').on('change', function () {
+            var courseid = $(this).val();
+            $.getJSON("@Url.Action("GetAssessCourseDetail", "Assessment")", { pcourseId: courseid },
+                function (data) {
+                    if (data.AssessmentPaper.TimeDuration != 0) {
+                        $('#divTimeDuration').html(data.AssessmentPaper.TimeDuration + ' Minutes');
+                        $('#dvAssessmentDate').html(data.AssessmentPaper.AssessmentDataDDMMYYY);
+                        $('#dvStartAsses').removeAttr('disabled');
+                    }
+                    else {
+                        $('#divTimeDuration').html('');
+                        $('#dvAssessmentDate').html('');
+                        $('#dvStartAsses').attr('disabled', 'disabled');
+                    }
+                }
+
+                )
+        }
+        );
+
+       @*  //on button click, load question
+         //Load Add Attendance Partial View
+         $('#AttendanceDate').on('change', function () {
+             var gridurl = '@Url.Action("AddAttendance", "training")';
+            var AttendanceDate = $("#AttendanceDate option:selected").text();
+            var CourseId = $("#TrainingName").val();
+            var TrainingTypeID = $("#TrainingTypeID").val();
+
+            if (AttendanceDate != 'Select') {
+                showaiting();
+                $("#dvAddAtten").load(gridurl + "?CourseId=" + CourseId + "&TrainingTypeID=" + TrainingTypeID + "&AddAttendanceDate=" + AttendanceDate);
+                $("#dvAddAtten").show();
+            } else { $("#dvAddAtten").html(''); }
+        });*@
+
+
+         $('#dvStartAsses').click(function () {
+             var gridurl = '@Url.Action("GiveAssessment", "Assessment")';
+            var CourseId = $("#ddlCourse").val();
+
+            if (CourseId != 0) {
+                showaiting();
+                $("#dvParViewStartAssess").load(gridurl + "?id=" + CourseId);
+
+                $("#dvParViewStartAssess").show();
+                if (CourseId != 0)
+                    $('#dvStartAsses').remove();
+            }
+
+         });   
+     });
+</script>

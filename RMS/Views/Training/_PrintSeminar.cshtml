@@ -1,0 +1,228 @@
+﻿@model Domain.Entities.AttendanceModel
+@using RMS.Common.Constants;
+@using System.Data;
+
+@{
+    Layout = null;
+    ViewBag.Title = "PrintAttendance";
+}
+
+
+<div class="row">
+    <div class="clearfix margin-b-10">
+        <div class="col-md-2 col-sm-6">
+            <label class="form-label">Training Name</label>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            @Html.DropDownListFor(m => m.TrainingName, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingName), new { @class = "form-control Dropdownstyle", @id = "TrainingNameSeminar" })
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="clearfix margin-b-10">
+        <div class=" col-md-2 col-sm-6">
+            <label class="form-label">Training Start Date</label>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <span id="SpanTrainingStartDate1" class="label-text" >
+                @Model.TrainingStartDate.ToString("dd-MMM-yyyy")
+                <input type="hidden" name="startDate" value="@Model.TrainingStartDate.ToString("dd-MMM-yyyy")" />
+            </span>
+        </div>
+
+        <div class=" col-md-2 col-sm-6">
+            <label class="form-label">Training End Date</label>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <span id="SpanTrainingEndDate1" class="label-text">@Model.TrainingEndDate.ToString("dd-MMM-yyyy") </span>
+            <input type="hidden" name="endDate" value="@Model.TrainingEndDate.ToString("dd-MMM-yyyy")" />
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+<div class="clearfix margin-b-10">
+    <div class=" col-md-12 col-sm-6">
+            @if (Model.SelectedAttendanceDate != null)
+            {
+                int count = 0;
+                    <span id="AttendanceDate">
+                    <table class="table">
+                        <tbody>
+                                <tr>
+                                @{
+                                    var index = 0;
+                                }
+
+                                @foreach (var item in Model.SelectedAttendanceDate)
+                                {
+                                    if ((index % 7) == 0)
+                                    {
+                                    @Html.Raw("</tr>");
+                                    @Html.Raw("<tr>");
+                                    }
+                                    try
+                                    {
+                                    <td>
+                                        @Convert.ToDateTime(item.Text).ToString("dd-MMM-yyyy").Trim()
+                                        <input id="@(Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy"))" type="checkbox" name="SelectedChoices" class="case required"  
+                                            value="@Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy")" />
+                                    </td>
+                                    }
+                                    catch { }
+                                    index++;
+                                }
+                            </tr>
+                        </tbody>
+                    </table> 
+                    </span>
+            }
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3"></div> 
+<div class="col-md-3" id="dvExportToExcel">
+    @if (Model.SelectedAttendanceDate!=null)
+    {
+        if(Model.SelectedAttendanceDate.Any())
+        {
+            <input class="btn btn-submit" id="btnExportToExcel" type="submit" value="Export To Excel" />
+        }
+    }
+</div>
+<div class="col-md-3"></div> 
+</div> 
+      
+<script type="text/javascript">
+    //var Training = TrainingType;
+    $('#TrainingNameSeminar').on('change', function () {
+        //debugger;
+        var CourseId = $(this).val();
+        var TrainingTypeId = document.querySelector('input[name="category"]:checked').value;
+
+        if (CourseId != '') {
+            var setattendanceurl = '@Url.Action("OnTrainingChange_PrintAttendanceDetail", "Training")';
+            var data = { _CourseId: CourseId, _TrainingTypeID: TrainingTypeId };
+            window.location.href = setattendanceurl + "?_CourseId=" + CourseId + "&_TrainingTypeID=" + TrainingTypeId;
+        }
+        else {
+            $("#SpanTrainerName").html('');
+            $("#SpanTrainingStartDate").html('');
+            $("#SpanTrainingEndDate").html('');
+            $("#SpanNoOfDays").html('');
+
+        }
+
+    });
+
+    $(document).ready(function () {
+        $.validator.addMethod('date',
+          function (value, element) {
+              if (this.optional(element)) {
+                  return true;
+              }
+              var valid = true;
+              try {
+                  $.datepicker.parseDate('dd/mm/yy', value);
+              }
+              catch (err) {
+                  valid = false;
+              }
+              return valid;
+          });
+
+        $(function () {
+            if ($('#SpanTrainingEndDate1').html() != "01-Jan-0001") {
+                var minDates = $('#SpanTrainingEndDate1').html();
+
+                var newdate = new Date(minDates);
+                var d = newdate.getDate();
+                var m = newdate.getMonth();
+                m += 1;  // JavaScript months are 0-11
+                var y = newdate.getFullYear();
+                minDates = d + '/' + m + '/' + y;
+            }
+
+            $("#FeedbackLastDate").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: minDates
+                }).val()
+        });
+
+        if (($.trim($('#SpanTrainingStartDate1').html()) == '01-Jan-0001') || $.trim($('#SpanTrainingEndDate1').html()) == "01-Jan-0001") {
+            $('#SpanTrainingStartDate1').html('');
+            $('#SpanTrainingEndDate1').html('');
+        }
+
+        //Page Load Hide the  controls
+        if ($('#TrainingName').val() != '') {
+            $("#dvMode").show();
+        }
+
+    });
+
+    $('#btnExportToExcel').click(function () {
+        //debugger;
+        var selectedcheckbox = $('input[name=SelectedChoices]:checked').length;
+
+        //if no checkbox is selected
+        if (selectedcheckbox == 0) {
+            $('<div></div>').appendTo('body')
+            .html('<div><h6>Please select at least one single date for exporting to excel.</h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Attendance',
+                zIndex: 10000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).remove();
+                }
+            });
+            return false;
+        }
+
+        //if more than 7 checkbox is selected
+        if (selectedcheckbox > 7) {
+            $('<div></div>').appendTo('body')
+            .html('<div><h6>Dates selected with more than 7 will not be printed in excel properly. Do you wish to Continue?</h6></div>')
+            .dialog({
+                modal: true,
+                title: 'Print Attendance',
+                zIndex: 10000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Yes: function () {
+                        $(this).dialog("close");
+                        $('form#frmPrintAttendance').submit();
+                    },
+                    No: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).remove();
+                }
+            });
+            return false;
+        }
+        return true;
+
+    });
+
+</script>

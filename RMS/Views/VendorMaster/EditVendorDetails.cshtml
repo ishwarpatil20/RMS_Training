@@ -1,0 +1,104 @@
+﻿@model Domain.Entities.VendorModel
+@{
+    ViewBag.Title = "EditVendorDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveVendorDetails", "VendorMaster", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <fieldset>
+            <legend></legend>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Vendor Details</div>
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span id="message">
+                                            @{
+        var msg = Convert.ToString(TempData["Result"]);
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+        }
+                                            }
+                                        </span>
+                                        <br />
+                                        @Html.ValidationMessageFor(model => model.ContactPersonNumber, string.Empty, new { @class = "MessageStyleFail"})
+                                        @Html.ValidationMessageFor(model => model.VendorEmailId, string.Empty, new { @class = "MessageStyleFail"})
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    @Html.HiddenFor(model=>model.VendorId)
+                                    <div class="col-md-2"><label class="Labelstyle">Vendor Name : </label><span style="color: Red;" id="spanVendorName">*</span></div>
+                                    <div class="col-md-3">@Html.TextBoxFor(model => model.VendorName, new { @class = "textstyle required" })</div>
+                                    <div class="col-md-2"><label class="Labelstyle">Vendor EmailID : </label><span style="color: Red;" id="spanVendorEmailID">*</span></div>
+                                    <div class="col-md-3">@Html.TextBoxFor(model => model.VendorEmailId, new { @class = "textstyle required" })</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-2"><label class="Labelstyle">Contact Person Name : </label><span style="color: Red;" id="spanContactPersonName">*</span></div>
+                                    <div class="col-md-3">@Html.TextBoxFor(model => model.ContactPersonName, new { @class = "textstyle required" })</div>
+                                    <div class="col-md-2"><label class="Labelstyle">Contact Person Number : </label><span style="color: Red;" id="spanContactPersonNumber">*</span></div>
+                                    <div class="col-md-3">@Html.TextBoxFor(model => model.ContactPersonNumber, new { @class = "textstyle required", msg="Contact Person Number accepts only numbers and comma" })
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-2"><label class="Labelstyle">Expertise : </label><span style="color: Red;" id="spanExpertise">*</span></div>
+                                    <div class="col-md-3">@Html.TextAreaFor(model => model.Expertise, new { @class = "textareastyle required" })</div>
+                                    <div class="col-md-2"><input type="submit" id="btnSave" value="Save" name="Command" /><input type="button" id="btnCancel" value ="Cancel" name="Command"/></div>
+                                </div>
+                            </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+}
+
+<script type="text/ecmascript">
+
+    $(document).ready(function () {
+        $(function () {
+            if ($('#VendorId').val() != 0) {
+                $('#VendorName').attr("disabled", "disabled");
+            }
+            else {
+                $('#VendorName').removeAttr("disabled");
+            }
+
+            $("#btnCancel").attr("onClick", "document.location.href='@Html.Raw(Url.Action("VendorDetails", "VendorMaster"))'");
+
+            $("form").submit(function (e) {
+                var flag = SaveClickValidation();
+                if (flag == false) {
+                    $("#message").html("Please fill mandatory details.");
+                    $("#message").addClass("MessageStyleFail");
+                    e.preventDefault();
+                }
+
+            });
+        });
+    });
+
+    function SaveClickValidation() {
+
+        Validation();
+    }
+                
+</script>

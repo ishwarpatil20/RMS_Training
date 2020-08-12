@@ -1,0 +1,174 @@
+﻿@*@model RMS.Models.NominationViewModel*@
+@model Domain.Entities.NominationModel
+@using RMS.Common.Constants
+@{
+    ViewBag.Title = "TrainingEffectiveness";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Training Effectiveness
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+@*<div class="form-group">
+                                <div class="col-md-12">
+                                    <span id="message"></span>
+                                </div>
+                            </div>*@
+
+<div class="col-md-12">
+    <span id="message">
+        @{
+            var msg = Convert.ToString(TempData[CommonConstants.Result]);
+            if (!string.IsNullOrWhiteSpace(msg))
+            {
+            @msg
+            <script>
+                $("#message").addClass("MessageStyleSuccess");
+            </script>
+            }
+        }
+    </span>
+</div>
+<div class="col-md-12 margin-b-10">
+    <div class="media">
+        <div class="media-left">
+            <div class="training-type">
+                <span>Training Type  : @*<span style="color: Red">*</span>*@</span></>
+            </div>
+        </div>
+        <div class="media-body">
+            <div class="media-heading">
+                @*Neelam issueId:60586 start*@
+                <div class="nav-div" style="color: #ffffff">
+                     <span class="training-radio-div">
+                         @Html.RadioButton("category", "1207", true, new { @class = string.Empty }) <label for="Technical">Technical</label>
+                          </span>
+                      <span class="training-radio-div">
+                        @Html.RadioButton("category", "1208", new { @class = string.Empty }) <label for="SoftSkills">Soft Skills</label>
+                        
+                          </span>
+                      @Html.HiddenFor(model => Model.TrainingTypeID)
+                  @*Neelam issueId:60586 end*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div>
+                                <div class="col-md-2">
+                                    
+                                    </div>
+                                <div class="col-md-10">
+                                       @Html.RadioButton("category", "1207", true, new { @class = string.Empty })<label for="TermsAndConditions_true">Technical</label>
+                                       @Html.RadioButton("category", "1208", new { @class = string.Empty })<label for="TermsAndConditions_true">Soft Skill</label>
+                                       @Html.HiddenFor(model => Model.TrainingTypeID)
+                                </div>
+                            </div>*@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">Training Effectiveness</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="clearfix margin-b-10">
+                    <div class="col-md-12 margin-b-10">
+                        <span class="asterisk-text">All fields marked with asterisk (*) are mandatory</span>
+                    </div>
+                    <div class=" col-md-2">
+                        <label class="form-label pull-right">Training Name <span class="asterisk-color">*</span></label>
+                    </div>
+
+                    <div class="col-md-4 ">
+                        <div id="a">
+                            @Html.DropDownListFor(m => m.TrainingNameID, Model.TrainingName, new { @class = "form-control Dropdownstyle required" })
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                    </div>
+                </div>
+            </div>
+
+            <div id="divTrainingEffectivenessDetails">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+  @*Neelam : 25/07/2017 start. IssueId 60562*@
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+  @*Neelam : 25/07/2017 end. IssueId 60562*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        hidewaiting();
+
+        var TrainingEffectivenessDetails = $("#divTrainingEffectivenessDetails");
+
+        $("#TrainingNameID").change(function () {
+
+            $('#message').html('');
+
+            var trainingnameid = $(this).val();
+
+            TrainingEffectivenessDetails.html('');
+
+            if (trainingnameid != 0) {
+
+                showaiting();
+
+                var trainingtypeid = $("input[name='category']:checked").val();
+
+                if (trainingtypeid == 1207) {
+                    var gridurl = '@Url.Action("ViewTrainingEffectiveness", "nomination")';
+                }
+                else if (trainingtypeid == 1208) {
+                    var gridurl = '@Url.Action("ViewSoftTrainingEffectiveness", "nomination")';
+                }
+
+            TrainingEffectivenessDetails.load(gridurl + "?trainingnameid=" + trainingnameid);
+        }
+        })
+
+        $("input[name='category']").click(function () {
+
+            var selectedValue = $(this).val();
+
+            $('#divTrainingEffectivenessDetails').html('');
+
+            $('#message').html('');
+
+            var gridurl = '@Url.Action("TrainingEffectiveness_Radio", "nomination")';
+
+            $.getJSON(gridurl, { TrainingTypeID: selectedValue }, function (data) {
+                var select = $("#TrainingNameID");
+                select.empty();
+                $.each(data.TrainingName, function (index, itemData) {
+                    select.append($('<option/>',
+                        {
+                            value: itemData.Value,
+                            text: itemData.Text
+                        }));
+                });
+                $("#TrainingNameID").val(data.TrainingName);
+            });
+        });
+    });
+
+    //$('#BtnSend').click(function (e) {
+
+    //    $('#message').html('');
+
+    //    var s = Validation();
+    //    alert(s);
+    //});
+</script>

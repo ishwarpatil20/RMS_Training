@@ -1,0 +1,1925 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Modules>
+  <defaulSetting>
+    <location>Mumbai</location>
+  </defaulSetting>
+  <!--Resource Plan Module-->
+  <Module ModuleTypeId="1" Name="ResourcePlan">
+    <Emails>
+      <Email EmailTypeId="1" Description="Created Resource Plan Approval Required">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Resource Plan created [Project Code: {0}, Client Name: {1}, Project Name: {2}, Resource Plan Code: {3}]
+          </Subject>
+          <Body>
+            Dear Chandran,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a new resource plan has been created for the {0} project for {1}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To approve or reject the resource plan, kindly click on the link provided.
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{2}'>{2}</a>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {3}
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Resource Plan created [Project Code: {0}, Client Name: {1}, Project Name: {2}, Resource Plan Code: {3}]
+          </Subject>
+          <Body>
+            Dear Chandran,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a new resource plan has been created for the {0} project for {1}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To approve or reject the resource plan, kindly click on the link provided.
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{2}'>{2}</a>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {3}
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="2" Description="Edited Resource Plan Approval Required">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Resource Plan Edited [Project Code : {0}, Project Name : {1}, Client Name: {2}, Resource Plan Code : {3}]
+          </Subject>
+          <Body>
+            Dear Chandran,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that resource plan {0} for project {1} of {2} has been edited.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Edited Details are as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {3}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To approve or reject the resource plan, kindly click on the link provided.
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{4}'>{4}</a>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, Please copy and paste the given URL into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMO Team
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com,vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource Plan Edited [Project Code : {0}, Project Name : {1}, Client Name: {2}, Resource Plan Code : {3}]
+          </Subject>
+          <Body>
+            Dear Chandran,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that resource plan {0} for project {1} of {2} has been edited.
+            <![CDATA[<br/>]]>
+            {3}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To approve or reject the resource plan, kindly click on the link provided.
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{4}'>{4}</a>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, Please copy and paste the given URL into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            RMO Team
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="3" Description="ApprovedRejected ResourcePlan">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>Shrinivas.Dalavi@rave-tech.com</To>
+          <CC>Shrinivas.Dalavi@rave-tech.com,vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource Plan {0} [Project Code : {1}, Client Name: {2}, Project Name : {3} Resource Plan Code : {4}]
+          </Subject>
+          <Body>
+            Dear RMO Team,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that resource plan [{0}] for project {1} for {2} has been {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            Chandran Natrajan
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource Plan {0} [Project Code : {1}, Client Name: {2}, Project Name : {3} Resource Plan Code : {4}]
+          </Subject>
+          <Body>
+            Dear RMO Team,
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that resource plan [{0}] for project {1} for {2} has been {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            Chandran Natrajan
+          </Body>
+        </Location>
+      </Email>
+    </Emails>
+  </Module>
+
+  <!--Contract Module-->
+  <Module ModuleTypeId="2" Name="Contract">
+    <Emails>
+      <Email EmailTypeId="1" Description="Add Contract">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>Contract Added.[Contract Code: {0},Contract Ref id: {1},Client Name : {2} {3}]</Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a new contract {0} of client
+            {1} has been added to the Resource Management system.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2}{3}
+            <![CDATA[<br/>]]>The details of the same can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<a href='{4}'>{4}</a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="2" Description="Edit Contract">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>Contract Edited, new Change Request added. [Contract Code: {0},Contract Ref id: {1},Client Name : {2} {3}]</Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a contract {0} (Contract Reference id: {1}) of client
+            {2} has been edited.<![CDATA[<br/>]]>
+            {3}<![CDATA[<br/>]]>{4}
+            <![CDATA[<br/>]]>To view the contract, kindly click on the following link .
+            <![CDATA[<br/>]]><![CDATA[<a href='{5}'>{5}</a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="3" Description="Delete Contract">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Contract deleted [Contract Code:{0},Contract Ref id: {1},Client Name : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that contract {0} (Contract Reference id: {1}) of client {2} has been deleted
+            from the Resource Management system due to following reason {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{4}'>{4}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+    </Emails>
+  </Module>
+
+  <!--Project Module-->
+  <Module ModuleTypeId="3" Name="Project">
+    <Emails>
+      <Email EmailTypeId="1" Description="Add Project">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject/>
+          <Body/>
+        </Location>
+      </Email>
+      <Email EmailTypeId="2" Description="Edit Project">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Project Edited [Project Code :{0}, Client Name :{1}, Project Name :{2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that the project {0} of Client {1} has been edited.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The edited details are as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To view the project details, kindly click on the link provided <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,  <![CDATA[<br/>]]>
+            RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+
+      </Email>
+      <Email EmailTypeId="3" Description="Delete Project">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Project Closed [Project Code :{0}, Client Name :{1}, Project Name :{2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that the project [{0}]of Client [{1}] has been closed.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The project details are as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            To view the project details, kindly click on the link provided <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,  <![CDATA[<br/>]]>
+            RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject/>
+          <Body/>
+        </Location>
+      </Email>
+    </Emails>
+  </Module>
+
+
+  <!--Recruitment Module-->
+  <Module ModuleTypeId="5" Name="Recruitment">
+    <Emails>
+      <Email EmailTypeId="2" Description="Candidate updated">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com </From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Expected Joinee's details edited[MRF Code: {0}] ,[Project Name: {1}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that,expected joinee’s details for MRF[{0}]
+            for [{1}] has been edited.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+			Edited Details are as follows:
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  {2}
+			  <![CDATA[<br/>]]>
+			  PM: Kindly coordinate with ITS and provide them list of software which needs 
+			  to be installed in the machine.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  Admin: Kindly identify the seating arrangement and provide to ITS.
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  ITS: Kindly coordinate with PM and Admin and make the necessary arrangements.
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  After the appropriate arrangements have been completed please confirm the same via 
+			  email to the HR Department.
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  Thanking you for your support.
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  In case of any difficulty kindly revert.
+			  <![CDATA[<br/>]]><![CDATA[<br/>]]>
+			  Regards,  
+			  <![CDATA[<br/>]]>
+			  {4}<![CDATA[<br/>]]>		
+            
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From>Shrinivas.Dalavi@rave-tech.com  </From>
+          <To>Shrinivas.Dalavi@rave-tech.com1 ,Shrinivas.Dalavi@rave-tech.com1 </To>
+          <CC>Shrinivas.Dalavi@rave-tech.com1 ,vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Expected Joinee's details edited[MRF Code: {0}] ,[Project Name: {1}]
+          </Subject>
+			<Body>
+				Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				This is to bring to your notice that,expected joinee’s details for MRF[{0}]
+				for [{1}] has been edited.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				Edited Details are as follows:
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				{2}
+				<![CDATA[<br/>]]>
+				PM: Kindly coordinate with ITS and provide them list of software which needs
+				to be installed in the machine.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				Admin: Kindly identify the seating arrangement and provide to ITS.
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				ITS: Kindly coordinate with PM and Admin and make the necessary arrangements.
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				After the appropriate arrangements have been completed please confirm the same via
+				email to the HR Department.
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				Thanking you for your support.
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				In case of any difficulty kindly revert.
+				<![CDATA[<br/>]]><![CDATA[<br/>]]>
+				Regards,
+				<![CDATA[<br/>]]>
+				{4}<![CDATA[<br/>]]>
+
+			</Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="3" Description="Candidate Joined">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com  </From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Candidate has joined against[MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please find the new joinee details as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+            HR: Kindly add the resource to the Resource Management System.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {6}<![CDATA[<br/>]]>
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {7}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Candidate has joined against[MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <!--{0} {1} has joined on {2} as {3}. <![CDATA[<br/>]]><![CDATA[<br/>]]>-->
+            Please find the new joinee details as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+            HR: Kindly add the resource to the Resource Management System.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {6}<![CDATA[<br/>]]>
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {7}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="4" Description="Candidate ExpectedTo Join">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com </From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Resource expected to join against  [MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <!--{0} {1} is expected to join on {2} as {3}. <![CDATA[<br/>]]><![CDATA[<br/>]]>-->
+            Please find the expected new joinee details as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource expected to join against  [MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <!--{0} {1} is expected to join on {2} as {3}. <![CDATA[<br/>]]><![CDATA[<br/>]]>-->
+            Please find the expected new joinee details as follows:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="5" Description="Candidate Deleted">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com </From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Candidate not joining against [MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <!--{0} {1} expected to join on {2} as {3}. <![CDATA[<br/>]]><![CDATA[<br/>]]>-->
+            Please note that the following candidate is not joining.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>Shrinivas.Dalavi@rave-tech.com </To>
+          <CC>vandana.mestri@rave-tech.com </CC>
+          <Subject>
+            Candidate not joining against [MRF Code: {0},{1} : {2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <!--{0} {1} expected to join on {2} as {3}. <![CDATA[<br/>]]><![CDATA[<br/>]]>-->
+            Please note that the following candidate is not joining.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            In case of any difficulty kindly revert.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+
+            Regards,<![CDATA[<br/>]]>
+            {5}<![CDATA[<br/>]]>
+
+          </Body>
+        </Location>
+      </Email>
+      <!--Mohamed : Issue 50306 : 09/09/2014 : Starts                        			  
+        Desc : Expected Joinee's details edited[MRF Code: MRF_Testing_SrTstA_0387] old  Joining date is default date - Mail for de-linking MRF.-->
+      <!--MRF De-Linked-->
+      <Email EmailTypeId="8" Description="Candidate MRF De-Linked">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>rave.rm.group@northgate-is.com</To>
+          <CC>
+            sushant.motghare@northgate-is.com,chanchal.chandiok@northgate-is.com,saloni.sheth@northgate-is.com,manish.nagwekar@northgate-is.com,rave.its@northgate-is.com,kedar.barve@northgate-is.com,rave.hr.team@northgate-is.com
+          </CC>
+          <Subject>
+            De-Linking of candidate from [MRF Code: {0}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} has been de-linked from {1} and linked to {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Edited Details are as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            {3}
+            <![CDATA[<br/>]]>
+            PM: Kindly coordinate with ITS and provide them list of software which needs
+            to be installed in the machine.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Admin: Kindly identify the seating arrangement and provide to ITS.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            ITS: Kindly coordinate with PM and Admin and make the necessary arrangements.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            After the appropriate arrangements have been completed please confirm the same via
+            email to the HR Department.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Thanking you for your support.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            In case of any difficulty kindly revert.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]>
+
+          </Body>
+        </Location>
+        
+      </Email>
+      <!--Mohamed : Issue 50306 : 09/09/2014 : Ends-->
+    </Emails>
+  </Module>
+
+  <!--Employee Module-->
+  <Module ModuleTypeId="6" Name="Employee">
+    <Emails>
+      <Email EmailTypeId="1" Description="AddEmployee">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>New Employee Added[EmpCode Code :{0} , Employee Name :{1}]</Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a new employee is added to the Resource Management System <![CDATA[<br/>]]>
+            against the raised MRF {0} as {1} for Department {2}.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The Employee is of Type {3}.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>New Employee Added[EmpCode Code :{0} , Employee Name :{1}]</Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that a new employee is added to the Resource Management System <![CDATA[<br/>]]>
+            against the raised MRF {0} as {1} for Department {2}.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The Employee is of Type {3}.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="2" Description="Delete Employee">
+        <Location LocationId ="1" Name="Mumbai">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject/>
+          <Body/>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="3" Description="Employee Details Update">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Employee Details Update
+          </Subject>
+          <Body>
+            Hello {0},<![CDATA[<br/>]]>
+            Requesting you to please visit the site mentioned below and update the details as per each page.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{1}'>{2}</a>]]><![CDATA[<br/>]]>
+            If you face problem opening this link, please copy and paste the given URL into your browser.<![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]>
+            Do revert if you require any help or clarification.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            {0} Resource Plan[Project Code : {1}]
+          </Subject>
+          <Body>
+            Hello,<![CDATA[<br/>]]><![CDATA[<br/>]]>This is to bring to your notice that resource plan {0} for project <![CDATA[<br/>]]>{1} has been {2}.You can view the resource plan by clicking on the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{3}'>{3}</a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>If you face problems opening this link, please copy and paste the given URL into your browser.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="4" Description="Edit Employee">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Employee details edited [EmpCode Code : {0} , Employee Name : {1}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that following employee details are edited:<![CDATA[<br/>]]><![CDATA[<br/>]]> {0}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="5" Description="Edit Employee Not Self Details">
+        <Location LocationId ="1" Name="Mumbai">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="6" Description="Approval Of Skills Rating">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Edited details of employee. [EmpCode Code : {0}, Employee Name : {1}]
+          </Subject>
+          <Body>
+            Hello,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} <![CDATA[<br/>]]>
+            has modified certain details in the “Resource Management” system.<![CDATA[<br/>]]>
+            {1} skills details have also been modified, kindly approve {2} proficiency level.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please click on the link below to approve the skills set<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<a href='{3}'>{4}</a>]]><![CDATA[<br/>]]>If you face problem opening this link, please copy and paste the given URL into your browser.
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{5}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="7" Description="Employee Project Closed">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Project is closed [Project Code : {0}, Project Name : {1}]
+          </Subject>
+          <Body>
+            Hello,<![CDATA[<br/>]]>
+            This is to bring to your notice that project [{0}] has been closed.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Project Start Date : {1} <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Project End Date  : {2} <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Client Name : {3} <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="8" Description="Employee Release From Project">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com</From>
+          <To>Shrinivas.Dalavi@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            {0} Released from Project {1}
+          </Subject>
+          <Body>
+            Hello {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that you have been released effective {1} from project {2} of Client {3}.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="9" Description="Employee Release From Department">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>ambar.fulzele@rave-tech.com</From>
+          <To>Shrinivas.Dalavi@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            {0} Released from {1}
+          </Subject>
+          <Body>
+            Hello {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that you have been released effective {1} from {2}.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="10" Description="Employee Project Allocation Updation">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            {0} Project allocation updation {1}
+          </Subject>
+          <Body>
+            Updated Employee {0} Allocation Details<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Project Name: {1}<![CDATA[<br/>]]>Resourse Name: {2}<![CDATA[<br/>]]>Utilization: {3}<![CDATA[<br/>]]>
+            Billing: {4}<![CDATA[<br/>]]>ProjectID: {5}<![CDATA[<br/>]]>Project Code: {6}<![CDATA[<br/>]]>Resourse Allocation Id from MRF: {7}
+            <![CDATA[<br/>]]>Role: {8}<![CDATA[<br/>]]>Expected Release Date: {9}<![CDATA[<br/>]]>Utilization Change Date: {10}<![CDATA[<br/>]]>
+            Billing Change Date: {11}<![CDATA[<br/>]]>Comments: {12}<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{13}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="11" Description="Employee Resign From Company">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>Shrinivas.Dalavi@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Exit of Employee[EmpCode Code : {0}, Employee Name : {1}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} ({1}) from department {2}<![CDATA[<br/>]]> has exited the organization.<![CDATA[<br/>]]><![CDATA[<br/>]]>{3} last working day is {4}.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="12" Description="Employee Seperation From Company">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Separation of Employee [EmpCode Code : {0}, Employee Name : {1}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} ({1}) from department {2}<![CDATA[<br/>]]> has separated with effect from {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Kindly perform the necessary handover activities.<![CDATA[<br/>]]><![CDATA[<br/>]]>Thank You.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject></Subject>
+          <Body></Body>
+        </Location>
+      </Email>
+
+		<Email EmailTypeId="13" Description="Employee Roll Back Resignation">
+			<Location LocationId ="1" Name="Mumbai">
+				<From></From>
+				<To>vandana.mestri@rave-tech.com</To>
+				<CC>vandana.mestri@rave-tech.com</CC>
+				<Subject>
+					RollBack of Employee [EmpCode Code : {0}, Employee Name : {1}]
+				</Subject>
+				<Body>
+					Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+					This is to bring to your notice that {0} ({1}) from department {2}<![CDATA[<br/>]]> has withdrawn the resignation.
+					<![CDATA[<br/>]]><![CDATA[<br/>]]>
+					Thank You.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>HR Team<![CDATA[<br/>]]>
+				</Body>
+			</Location>
+			<Location LocationId ="2" Name="Benguluru">
+				<From/>
+				<To/>
+				<CC/>
+				<Subject></Subject>
+				<Body></Body>
+			</Location>
+		</Email>
+    </Emails>
+  </Module>
+
+  <!--MRF Module-->
+  <Module ModuleTypeId="4" Name="MRF">
+    <Emails>
+
+      <Email EmailTypeId="1" Description="Raise MRF For Projects">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>
+            vandana.mestri@rave-tech.com,vandana.mestri@rave-tech.com
+          </CC>
+          <Subject>
+            MRF Raised. [MRF Code: {0}, Client Name: {1}, Project Name: {2} ]
+          </Subject>
+          <Body>
+            Dear RMO Team,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that MRF is raised for project [{0}] for [{1}] belonging to [{2}].
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Kindly approve the raised MRF by clicking on the link provided.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{3}'> {3} </a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            If you face problem opening this link,please copy and paste the given URL into your browser.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="2" Description="Raise MRF For Departments">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF Raised. [MRF Code: {0},Client Name: {1} ,Department Name: {2} ]
+          </Subject>
+          <Body>
+            Dear RMO Team,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that MRF is raised for Department [{0}] for [{1}].                                  <![CDATA[<br/>]]><![CDATA[<br/>]]>Kindly approve the raised MRF by clicking on the link provided.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{2}'>{2}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            If you face problem opening this link,please copy and paste the given URL into your browser.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="3" Description="Raise HeadCount">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Approval required for Head Count request. [MRF Code:  {0}, Project Name: {1}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that head count request has been raised for [{1}] position in {2},
+            as no internal resource is available.<![CDATA[<br/>]]><![CDATA[<br/>]]>Kindly approve the request by              clicking on the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or                 contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team
+            <![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="4" Description="Raise HeadCount Without Approval">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Find external resource for raised MRF. [ MRF Code: {0} ]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that head count request has been raised for  [{1}] position in [{2}]              has been approved.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            You are requested to fill in the above position by {3}.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The details of the required candidate can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{4}'>{4}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem  opening this link, please copy and paste the given URL into your browser or              contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="5" Description="Head Count Request approval to COO">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Approval required for Head Count request. [MRF Code:  {0}, Project Name: {1}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that head count request raised for [{1}] position in {2}
+            has been approved by CFO and pending for your approval.<![CDATA[<br/>]]><![CDATA[<br/>]]>Kindly                   approve the request by clicking on the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>(Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or                 contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team <![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="6" Description="Head Count Request Rejected">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Head Count request rejected. [MRF Code:  {0}, Project Name: {1}]
+          </Subject>
+          <Body>
+            Dear {0}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice, head count request for {1} position in {2} has been rejected due                 to the following reasons: <![CDATA[<br/>]]><![CDATA[<br/>]]> {3}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The details of the rejected MRF can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{4}'>{4}</a>]]>
+            <![CDATA[<br/>]]>(Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face problem opening this link, please copy and paste the given URL into your browser.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="12" Description="Replace MRF">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF raised [MRF Code: {0},{1}]
+          </Subject>
+          <Body>
+            Dear RMO Team,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice, that a replacement MRF is raised for project [{0}] for [{1}] ,
+            belonging to [{2}].<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly allocate the resource against the raised MRF by using the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards, <![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+        <Location LocationId ="2" Name="Benguluru">
+          <From/>
+          <To/>
+          <CC/>
+          <Subject/>
+          <Body/>
+        </Location>
+      </Email>
+      <!--Internal Resource Allocation mail to Whizible And RPM-->
+      <Email EmailTypeId="8" Description="Internal Resource Allocation Mail to Whizible And RPM">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com</From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource Allocation Details
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Resource {1} is being allocated to {2} {3} from {4}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>MRF Details are as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Resource Utilization % :{5}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Resource Billing  % :{6}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>ProjectID from MRF :{7}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Resource Allocation ID from MRF :{8}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>MRF Code :{9}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Role :{10}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Expected Release Date : {11}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Reporting To :{12}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,
+            <![CDATA[<br/>]]>{13}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Internal Resource Allocation Mail To Finance -->
+      <Email EmailTypeId="10" Description="Internal Resource Allocation Mail To Finance">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>vandana.mestri@rave-tech.com</From>
+          <To>vandana.mestri@rave-tech.com,Kedar.Barve@rave-tech.com1</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Approval required for allocated resource. [MRF Code: {0},{1} Name: {2},Resource name:{3}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that [{1}] has been allocated to [{2}] as [{3}]{4}].
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>The resource allocation details are as follows:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{5}
+            <![CDATA[<br/>]]>Kindly approve the allocated resource by clicking on the link provided.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{6}'>{6}</a>]]>
+            <![CDATA[<br/>]]>(Please note that above link only accessible in Rave Domain.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>If you face any problem opening this link, please copy and paste the given URL into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {7}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Resource Allocation from CFO rejected-->
+      <Email EmailTypeId="11" Description="Resource Allocation from CFO rejected">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Allocation rejected. [MRF Code:{0}, Client Name:{1},{2} Name:{3}]
+          </Subject>
+          <Body>
+            Dear RMO Team<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} cannot be allocated to {1}<![CDATA[<br/>]]>
+            project as [{2}] due to the following reasons:
+            <![CDATA[<br/>]]><![CDATA[<br/>]]> {3}<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The details of the rejected MRF can be viewed by clicking on
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{4}'>{4}</a>]]>
+            <![CDATA[<br/>]]>(Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face problem opening this link, please copy and paste the given URL into your browser.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]> {5}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Internal Resource Allocation mail for Rave Internal to Allocated Resource And his Reporting To-->
+      <Email EmailTypeId="13" Description="Internal Resource Allocated">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>Shrinivas.Dalavi@rave-tech.com</From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Resource allocation. [{0}{1}{2}Name:{3}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            You have been allocated to {1} {2} from {3}.
+            <![CDATA[<br />]]><![CDATA[<br />]]><![CDATA[<b>]]><![CDATA[<u>]]>Your tenure in the project is deemed as complete only if there is explicit email notification from MRF system in similar lines with the current notification.<![CDATA[</u>]]><![CDATA[</b>]]>
+            <![CDATA[<br />]]><![CDATA[<br />]]>During the tenure of this assignment you will be accountable to {4}<![CDATA[<b>]]><![CDATA[<u>]]> for all your project related role/tasks and your timely availability for the same.<![CDATA[</u>]]><![CDATA[</b>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Your responsibilities for the defined role <![CDATA[<b>]]><![CDATA[<u>]]>in the project are typically any/all of the following as per the requirements of the project:<![CDATA[</b>]]><![CDATA[</u>]]><![CDATA[<br/>]]>{5}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<b>]]><![CDATA[<u>]]>Your reporting (practice/resource) manager during the tenure in the project: {6}<![CDATA[</u>]]><![CDATA[</b>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Ensure that you take <![CDATA[<b>]]><![CDATA[<u>]]>prior<![CDATA[</u>]]><![CDATA[</b>]]> concurrence/approval/resolution support from both your reporting manager and project manager, whenever you take leave/permissions and anything contentious to your normal functioning in the project.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Feel free to revert for any queries regarding this allocation.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Wish you all the best in your new assignment.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>{7}
+            <![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="14" Description="Abort MRF">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>vandana.mestri1@rave-tech.com</From>
+          <To>vandana.mestri@rave-tech.com,vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF aborted [MRF Code: {0}, Client Name: {1}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that your MRF is aborted for {1} [{2}] {3} due to the following reason.
+            'Reason' : [{4}]<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The details of the aborted MRF can be viewed by using the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{5}'> {5} </a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link only accessible in Rave Domain.)<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {6}
+          </Body>
+        </Location>
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com,vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF aborted [MRF Code: {0}, Client Name: {1}, Project Name: {2}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that your MRF is aborted for {1} [{2}] for [{3}] due to the following reason.
+            'Reason' : "{4}"<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            The details of the aborted MRF can be viewed by using the following link.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<a href='{5}'> {5} </a>]]><![CDATA[<br/>]]> (mrf page link)<![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL into your browser or contact the RMS Helpdesk.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {6}
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="15" Description="Raise HeadCount Without Approval IN Group">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>vandana.mestri@rave-tech.com</From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Find external resource for raised MRF.
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that head count requests have been raised for  [{1}] position in [{2}]              has been approved.<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>The details of the raised MRF given date given below.
+            <![CDATA[<br/>]]>{3}<![CDATA[<br/>]]>
+            The details of the required candidate can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]><![CDATA[<a href='{4}'>{4}</a>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem  opening this link, please copy and paste the given URL into your browser or              contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="16" Description="MRF Status Change">
+        <Location LocationId="1" Name="Mumbai">
+          <From />
+          <To />
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>MRF Status Change. [MRF Code: {0}, Client Name: {1}, {2} Name: {3}]</Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[ <br/>]]>
+            <![CDATA[ <br/>]]>
+            This is to bring to your notice that the status has been changed from Pending External Allocation to Pending Allocation for the
+            <![CDATA[ <br/>]]>
+            MRF [{1}] for client {2} {3} {4}, as an internal resource has been identified for same.
+            <![CDATA[ <br/>]]>
+            <![CDATA[ <br/>]]>
+            Regards,
+            <![CDATA[ <br/>]]>
+            RMO Team
+            <![CDATA[ <br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <!-- when status changed to market research and complete -->
+      <Email EmailTypeId="18" Description="MRF Status Change to Closed">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF Status Change. [MRF Code: {0}, Client Name: {1}, {2} Name: {3}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that the Market Research for the MRF {1} for {2} {3} {4} has been closed.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>{5}
+          </Body>
+        </Location>
+      </Email>
+
+      <!--Mail sent to Recruitment Team when pourpose option is Market Research in case of raise head count-->
+      <Email EmailTypeId="17" Description="Raise HeadCount To Recruitment Team">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Market Research [MRF Code : {0}, Project Name: {1}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that an mrf {1} is raised for market research purpose.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly search for appropriate resumes and revert.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}
+          </Body>
+        </Location>
+      </Email>
+
+      <!-- when status changed to market research and complete -->
+      <Email EmailTypeId="19" Description="Move MRF when status is Pending Allocation">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>            
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="20" Description="Move MRF when status is PendingExternalAllocation">
+        <Location LocationId ="1" Name="Mumbai">       
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1,Ranjeev.Gautam@rave-tech.com1,Shilpa.Tungikar@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="21" Description="Move MRF when status is PendingApprovalOfFinance">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com,Kedar.Barve@rave-tech.com1
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="22" Description="Move MRF when status is PendingHeadCountApprovalOfFinance">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com,Kedar.Barve@rave-tech.com1
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="23" Description="Move MRF when status is PendingHeadCountApprovalOfCOO">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com,Chandran.Natarajan@rave-tech.com1
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="24" Description="Move MRF when status is PendingExpectedResourceJoin">        
+        <Location LocationId ="1" Name="Mumbai">          
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1,Ranjeev.Gautam@rave-tech.com1,Shilpa.Tungikar@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="25" Description="Move MRF when status is ResourceJoin">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>
+          </From>
+          <To>
+            Anusha.Date@rave-tech.com1,Chanchal.Chandiok@rave-tech.com1,Nikhil.Gadgil@rave-tech.com1,vandana.mestri@rave-tech.com
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1,Ranjeev.Gautam@rave-tech.com1,Shilpa.Tungikar@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="26" Description="Move MRF when status is PendingNewEmployeeAllocation">
+        <Location LocationId ="1" Name="Mumbai">        
+          <From>
+          </From>
+          <To>
+            vandana.mestri@rave-tech.com
+          </To>
+          <CC>Sawita.Kamat@rave-tech.com1,Niharika.Choudhary@rave-tech.com1,Mitesh.Dhande@rave-tech.com1,Ranjeev.Gautam@rave-tech.com1,Shilpa.Tungikar@rave-tech.com1</CC>
+          <Subject>
+            Move MRF: Old MRF Code: {0}, moved to new MRF Code: {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Please note that the MRF {1} has been moved to new MRF {2}
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Note: Old MRF {1} is Aborted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Kindly revert in case of any query.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>RMO
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="27" Description="Delete MRF">
+        <Location LocationId ="1" Name="Mumbai">
+          <From>vandana.mestri1@rave-tech.com</From>
+          <To>anuj.govil@rave-tech.com,vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF deleted [MRF Code: {0}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that your MRF is deleted for {1} [{2}] {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {4}
+          </Body>
+        </Location>
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>anuj.govil@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com,vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            MRF deleted [MRF Code: {0}, Client Name: {1}, Project Name: {2}]
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that your MRF is deleted for {1} [{2}] for [{3}].
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Regards,<![CDATA[<br/>]]>
+            {4}
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="28" Description="Candidate de-linked from MRF">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Candidate {0} de-linked from [MRF Code:{1}],{2} Name:{3}
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that candidate {0} has been de-linked from [MRF Code:{1}]
+            and has been linked to [MRF Code:{2}]<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            New MRF status is:<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            [MRF Code: {2}] – {3}
+            [MRF Code: {1}] – Pending external allocation
+            Regards,<![CDATA[<br/>]]>RMO Team.
+          </Body>
+        </Location>
+      </Email>
+      <!--Mohamed : Issue 51824  : 19/08/2014 : Starts                        			  
+      Desc : Provision in RMS system for a notification to be sent when an MRf is assigned  from one recruiter to another.-->
+      <!--MRF assigned  from one recruiter to another-->
+      <Email EmailTypeId="30" Description="MRF assigned  from one recruiter to another">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>​sushant.motghare@northgate-is.com,chanchal.chandiok@northgate-is.com, rave.rm.group@northgate-is.com</CC>
+          <Subject>
+            MRF Code: {0}, has been re-assigned to {1}.
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that head count request raised for [{1}] position {2} has been transferred to you from {3}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>You are requested to fill in the above position by Date {4}.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>RMO Team.
+          </Body>
+        </Location>
+      </Email>
+      <!--Mohamed : Issue 51824  : 19/08/2014 : Ends-->
+    </Emails>
+  </Module>
+
+  <!--Seat allocation Module-->
+  <Module ModuleTypeId="7" Name="SeatAllocation">
+    <Emails>
+      <Email EmailTypeId="1" Description="AllocatedSeat">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            "Employee allocated seat.[Employee Name:{0}, Seat Name:{1}];
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} has been allocated Seat No:
+            {1} from Resource Management system.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>The details of the same can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<a href='{2}'>{2}</a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <Email EmailTypeId="2" Description="ShiftedSeat">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To>vandana.mestri@rave-tech.com</To>
+          <CC>vandana.mestri@rave-tech.com</CC>
+          <Subject>
+            Employee has been Shifted. [Employee No:{0} form Seat Name:{1} to Seat No:{2}]
+          </Subject>
+          <Body>
+            Dear All,<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to bring to your notice that {0} has been shifted from Seat No:
+            {1} to Seat No: {2} from Resource Management system.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>The details of the same can be viewed by clicking on the following link.
+            <![CDATA[<br/>]]><![CDATA[<a href='{3}'>{3}</a>]]><![CDATA[<br/>]]><![CDATA[<br/>]]>
+            (Please note that above link is accessible to Rave Domain Users only.)
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            If you face any problem opening this link, please copy and paste the given URL
+            into your browser or contact the RMS Helpdesk.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {4}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+    </Emails>
+  </Module>
+
+  <!--4C-->
+  <Module ModuleTypeId="8" Name="FourC">
+    <Emails>
+      <Email EmailTypeId="1" Description="SendForReview">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>venkatesh.patange@northgate-is.com</CC>
+          <Subject>
+            4C rating submitted for review for {0} project for {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to inform you that the 4C Rating for {1} project for the month of
+            {2} has been completed and sent for your review.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Request you to kindly review and submit the rating at the earliest.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <Email EmailTypeId="2" Description="RejectRating4C">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            4C Rejected -  {0}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to inform you that the 4C Rating of {1} for the month of
+            {2} has been rejected for {3} . Reason of rejection is mentioned below:<![CDATA[<br/>]]>
+            " {4} " <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Request you to kindly update {5}'s record in RMS as per the comments and send it for review at the earliest.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {6}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+
+      <!--Venkatesh : 4C_Support : 18/3/2014 : Start-->
+      <Email EmailTypeId="3" Description="SendForReviewSupport">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC>venkatesh.patange@northgate-is.com</CC>
+          <Subject>
+            4C rating submitted for review for {0} department for {1}
+          </Subject>
+          <Body>
+            Dear {0},<![CDATA[<br/>]]><![CDATA[<br/>]]>
+            This is to inform you that the 4C Rating for {1} department for the month of
+            {2} has been completed and sent for your review.<![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Request you to kindly review and submit the rating at the earliest.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {3}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--Venkatesh : 4C_Support : 18/3/2014 : End-->
+    </Emails>
+
+
+  </Module>
+  
+  <!--Training Module-->
+  <!--Ishwar Patil : Training Module : 18/08/2014 Start-->
+  <Module ModuleTypeId="9" Name="TrainingModule">
+    <Emails>
+      <!--For Tech/Soft Skill request-->
+      <Email EmailTypeId="1" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills training request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skill request behalf of Line/Function Manager-->
+      <Email EmailTypeId="2" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills training request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training request has been raised on your behalf by RMGroup.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For KSS request-->
+      <Email EmailTypeId="3" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            KSS request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A KSS request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminar request-->
+      <Email EmailTypeId="4" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request raised
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Seminar request has been raised.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Approved Tech/Soft Skill request-->
+      <Email EmailTypeId="5" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request approved
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training request has been initiated and is in progress.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Rejected Tech/Soft Skill request-->
+      <Email EmailTypeId="6" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request rejected
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training request has been rejected.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Approved Seminar request-->
+      <Email EmailTypeId="7" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request approved
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar request has been initiated and is in progress.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>Regards,<![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Rejected Seminar request-->
+      <Email EmailTypeId="8" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request rejected
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar request has been rejected.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>{1}
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skills request updated-->
+      <Email EmailTypeId="9" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            A Technical/Soft skills training '{1}' request has been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminors request Edited-->
+      <Email EmailTypeId="12" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            '{1}' details has been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For KSS request Edited-->
+      <Email EmailTypeId="13" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Knowledge Sharing Session request edited
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Knowledge Sharing Session({1}) details has been edited.
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            To view the change please click on the link given below
+            <![CDATA[<br/>]]>
+            <![CDATA[<a href='{3}'>{3}</a>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Tech/Soft Skills request Deleted-->
+      <Email EmailTypeId="10" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Technical/Soft skills Training request deleted
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Technical/Soft skills training '{1}' request has been deleted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+      <!--For Seminors request Deleted-->
+      <Email EmailTypeId="11" Description="SendRequestRaised">
+        <Location LocationId ="1" Name="Mumbai">
+          <From></From>
+          <To></To>
+          <CC></CC>
+          <Subject>
+            Seminar request deleted
+          </Subject>
+          <Body>
+            Dear {0},
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            Your Seminar '{1}' request has been deleted.
+            <![CDATA[<br/>]]><![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            <![CDATA[<br/>]]>
+            Regards,
+            <![CDATA[<br/>]]>
+            {2}<![CDATA[<br/>]]>
+          </Body>
+        </Location>
+      </Email>
+     
+    </Emails>
+  </Module>
+  <!--Ishwar Patil : Training Module : 18/08/2014 End-->
+</Modules>
+

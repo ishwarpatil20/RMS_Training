@@ -1,0 +1,126 @@
+﻿@using RMS.Models ; 
+@model OtherMasterViewModel
+
+<div>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Other Master List</div>
+            <div class="panel-body">
+                <div id="divGrid">
+                    <table id="tblMasters" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <td style="display: none"></td>
+                                
+                                <th>Master Name
+                                </th>
+                                <th>Master Value
+                                </th>
+                                <th>Common Cost Code
+                                </th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.lstOtherMasters)
+                            {
+                                <tr>
+                                    <td style="display: none">@Html.DisplayFor(modelItem => item.OrderBy)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category)
+                                    </td>
+                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                   <td>
+                                        @Html.DisplayFor(modelItem => item.IsCommon_CostCode)
+                                    </td>
+
+                                    <td class="edit" style="text-align: center;">
+                                        @*<a href="@Url.Action("EditPlan", new { TrainingPlanId  = item.TrainingPlanId, Year= item.Year,Quarter=item.Quarter   })" >*@
+                                        <a href="@Url.Action("Edit", "AdminOtherMaster", new { id = item.MasterID })" >
+                                            <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                                        </a>
+                                    </td>
+                                    @if(item.IsMapped)
+                                    {
+                                    <td class="none" style="text-align:center;"><a href="#"><img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                                    }
+                                    else{
+                                    <td class="delete" style="text-align: center;">
+                                        <a href="@Url.Action("Delete", "AdminOtherMaster", new { id = item.MasterID })" onclick="return confirm('Are you sure want to Delete?')">
+                                            <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/>
+                                        </a>
+                                    </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    debugger;
+    var flgReset = Boolean(@Model.IsReset);
+
+    var IsRepeat = Boolean(@Model.IsRepeat);
+
+    var IsEdit = Boolean(@Model.IsEdit);
+
+
+
+    if (IsRepeat)
+    {
+        $('#message').html("Record Already Exists");
+    }
+
+   
+    $(document).ready(function () {
+
+        //if (window.location.href.indexOf("Edit") > -1) {
+        //    $("#ddlGroupMaster").prop("disabled", true);
+        //}
+
+       // alert(flgReset);
+         debugger;
+
+        if (IsEdit) {
+            $("input[type=text]").val("");
+        //       $("select").val("");
+                $('#MasterId').val('');
+            //   $('#ddlGroupMaster').attr('disabled', 'disabled');
+            
+        }
+
+        if (flgReset) {
+            debugger;
+            $("input[type=text]").val("");
+            $('#IsCommonCostCode').attr('checked', false);
+
+            
+
+
+         //   $("select").val("");
+           // $('#MasterId').val('');
+        }
+        //        $('#tblMasters').DataTable();
+
+        //  $('#tblMasters').DataTable();
+
+        $('#tblMasters').dataTable(
+            {
+                "aaSorting": [[0, 'asc']] ,"paging": false}
+            );
+        // DatatableSorting();
+    });
+
+
+</script>

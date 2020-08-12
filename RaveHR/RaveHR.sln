@@ -1,0 +1,153 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLayer", "BusinessLayer", "{0723BAAE-704C-4E63-B656-91766E817215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccessLayer", "DataAccessLayer", "{E5115814-1396-4165-8232-10CD2976F2FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5F5C27D8-B650-4E27-BC3B-7AEC0F2EBC06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UILayer", "UILayer", "{19644FBA-FB29-4CA9-8702-C606A84FB29B}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "RaveHR", "UILayer\RaveHR", "{3F774422-8373-4B48-90E4-EAAEA37D4B6A}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = ""$/Rave HR/Code/Resource Management/RaveHR", FXBAAAAA"
+		SccAuxPath = ""
+		SccLocalPath = "..\.."
+		SccProvider = "MSSCCI:Microsoft Visual SourceSafe"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		ProjectReferences = "{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}|Common.dll;{4839C292-A642-4132-B1CC-C9C0337B3ABE}|Rave.HR.BusinessLayer.dll;{EBB26310-FAFF-41C8-90BD-15F529670C4D}|Rave.HR.DataAccessLayer.dll;{13D8C31C-B93D-4232-A730-56009D57A9F0}|Rave.HR.Common.BusinessEntities.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/RaveHR"
+		Debug.AspNetCompiler.PhysicalPath = "UILayer\RaveHR\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\RaveHR\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/RaveHR"
+		Release.AspNetCompiler.PhysicalPath = "UILayer\RaveHR\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\RaveHR\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62973"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rave.HR.BusinessLayer", "BusinessLayer\Rave.HR.BusinessLayer\Rave.HR.BusinessLayer.csproj", "{4839C292-A642-4132-B1CC-C9C0337B3ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rave.HR.DataAccessLayer", "DataAccessLayer\Rave.HR.DataAccessLayer\Rave.HR.DataAccessLayer.csproj", "{EBB26310-FAFF-41C8-90BD-15F529670C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common\Common.csproj", "{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rave.HR.Common.BusinessEntities", "Common\Rave.HR.Common.BusinessEntities\Rave.HR.Common.BusinessEntities.csproj", "{13D8C31C-B93D-4232-A730-56009D57A9F0}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 5
+		SccWebProject0 = true
+		SccProjectUniqueName0 = UILayer\\RaveHR
+		SccProjectTopLevelParentUniqueName0 = RaveHR.sln
+		SccProjectName0 = \u0022$/Rave\u0020HR/Code/Resource\u0020Management/RaveHR\u0022,\u0020FXBAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectFilePathRelativizedFromConnection0 = UILayer\\RaveHR\\
+		SccProjectEnlistmentChoice0 = 2
+		SccProjectUniqueName1 = BusinessLayer\\Rave.HR.BusinessLayer\\Rave.HR.BusinessLayer.csproj
+		SccProjectTopLevelParentUniqueName1 = RaveHR.sln
+		SccProjectName1 = \u0022$/Rave\u0020HR/Code/Resource\u0020Management/RaveHR/BusinessLayer/Rave.HR.BusinessLayer\u0022,\u0020JXBAAAAA
+		SccLocalPath1 = BusinessLayer\\Rave.HR.BusinessLayer
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectUniqueName2 = DataAccessLayer\\Rave.HR.DataAccessLayer\\Rave.HR.DataAccessLayer.csproj
+		SccProjectTopLevelParentUniqueName2 = RaveHR.sln
+		SccProjectName2 = \u0022$/Rave\u0020HR/Code/Resource\u0020Management/RaveHR/DataAccessLayer/Rave.HR.DataAccessLayer\u0022,\u0020JACAAAAA
+		SccLocalPath2 = DataAccessLayer\\Rave.HR.DataAccessLayer
+		SccProvider2 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectUniqueName3 = Common\\Common\\Common.csproj
+		SccProjectTopLevelParentUniqueName3 = RaveHR.sln
+		SccProjectName3 = \u0022$/Rave\u0020HR/Code/Resource\u0020Management/RaveHR/Common/Common\u0022,\u0020VXBAAAAA
+		SccLocalPath3 = Common\\Common
+		SccProvider3 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectUniqueName4 = Common\\Rave.HR.Common.BusinessEntities\\Rave.HR.Common.BusinessEntities.csproj
+		SccProjectTopLevelParentUniqueName4 = RaveHR.sln
+		SccProjectName4 = \u0022$/Rave\u0020HR/Code/Resource\u0020Management/RaveHR/Common/Rave.HR.Common.BusinessEntities\u0022,\u0020TYBAAAAA
+		SccLocalPath4 = Common\\Rave.HR.Common.BusinessEntities
+		SccProvider4 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|.NET.Build.0 = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Release|.NET.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|.NET.Build.0 = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Release|.NET.ActiveCfg = Release|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|.NET.Build.0 = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Release|.NET.ActiveCfg = Release|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|.NET.Build.0 = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Release|.NET.ActiveCfg = Release|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|.NET.Build.0 = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Release|.NET.ActiveCfg = Release|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13D8C31C-B93D-4232-A730-56009D57A9F0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4839C292-A642-4132-B1CC-C9C0337B3ABE} = {0723BAAE-704C-4E63-B656-91766E817215}
+		{EBB26310-FAFF-41C8-90BD-15F529670C4D} = {E5115814-1396-4165-8232-10CD2976F2FE}
+		{94A76AF4-4EA7-40C3-8725-EC28D224DD6E} = {5F5C27D8-B650-4E27-BC3B-7AEC0F2EBC06}
+		{13D8C31C-B93D-4232-A730-56009D57A9F0} = {5F5C27D8-B650-4E27-BC3B-7AEC0F2EBC06}
+		{3F774422-8373-4B48-90E4-EAAEA37D4B6A} = {19644FBA-FB29-4CA9-8702-C606A84FB29B}
+	EndGlobalSection
+EndGlobal

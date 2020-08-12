@@ -1,0 +1,52 @@
+﻿<menu name="Menu1">
+
+  <menuitem>
+    <text>Passport Details*</text>
+    <url>~/EmpPassportDetails.aspx</url>
+    <id>1</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Qualification*</text>
+    <url>~/EmpQualificationDetails.aspx</url>
+    <id>2</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Professional Courses</text>
+    <url>~/EmpProfessionalCourses.aspx</url>
+    <id>3</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Certification</text>
+    <url>~/EmpCertification.aspx</url>
+    <id>4</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Organization Details</text>
+    <url>~/EmpOrganization.aspx</url>
+    <id>5</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Skills*</text>
+    <url>~/EmpSkillsDetails.aspx</url>
+    <id>6</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Project Details*</text>
+    <url>~/EmpProjectDetails.aspx</url>
+    <id>7</id>
+  </menuitem>
+
+  <menuitem>
+    <text>Other Details*</text>
+    <url>~/EmpOtherDetails.aspx</url>
+    <id>8</id>
+  </menuitem>
+
+
+</menu>

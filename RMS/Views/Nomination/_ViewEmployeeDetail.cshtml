@@ -1,0 +1,318 @@
+﻿@model RMS.Models.EmployeeNominationViewModel
+@using RMS.Common.Constants
+
+@{
+    Layout = null;
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row margin-b-10">
+            <div class=" col-md-12">
+                <span id="message"></span><br />
+                <span class="asterisk-text">All fields marked with asterisk (*) are mandatory</span><br />
+                 @*Neelam : 25/07/2017 Starts. IssueId 59568*@
+                  @{ 
+                      string RoleManager = string.Empty;
+                      if (System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+                      {
+                          System.Collections.ArrayList arrRolesForUser = new System.Collections.ArrayList();
+                          arrRolesForUser = (System.Collections.ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+
+                          if (arrRolesForUser.Contains("manager"))
+                          {
+                              RoleManager = "Manager";
+                          }
+                      } 
+                   }
+
+                
+                 @if (Model.isRMOLogin == true || (Convert.ToString(RoleManager).ToLower() == CommonConstants.ManagerRole.ToLower()))
+                 {
+                    <span class="blink" style="color:blue"><b>Please click on submit button after adding the nomination</b></span>
+               
+                 }
+                 @* Neelam : 25/07/2017 Ends. IssueId 59568 *@
+            </div>
+        </div>
+        <div>
+            @using (Ajax.BeginForm(Model.EditMode ? "UpdateNomination" : "AddNomination", "nomination", new AjaxOptions { UpdateTargetId = "employeegrid" }))
+            {       
+                @Html.ValidationSummary(true)        
+                <table style="width: 100%" border="0">
+                    <tr class="submit-form-greenbg1">
+                        <td style="padding: 10px 15px ! important;">
+                            <label class="control-label pull-right">Employee <span style="color: Red">*</span> :</label></td>
+                        <td>
+                            @{  if (Model.EditMode)
+                                {                                                                                           
+                                @Html.DropDownListFor(m => m.SelectedEmployee, Model.EmployeeList, new { @class = "Dropdownstyle required form-control", @disabled = "disabled", style = "" })
+                                @Html.HiddenFor(m => m.SelectedEmployee)
+                                }
+                                else
+                                {                                
+                                @Html.DropDownListFor(m => m.SelectedEmployee, Model.EmployeeList, new { @class = "required form-control Dropdownstyle", style = "" })
+                                }
+                            }
+                        </td>
+
+                        @*for RMO Login *@
+
+                        @{ if (Model.isRMOLogin)
+                           {
+                            <td>
+                                <label class="control-label pull-right" style="float: left">Nominated By <span style="color: Red">*</span> :</label></td>
+                            <td>
+                                @{ if (Model.EditMode)
+                                   {
+                                       //if (Model.SelectedNominator == Model.SelectedRMONominator)
+                                       if (Model.isRMOLogin)
+                                       {
+                                             @Html.DropDownListFor(m => m.SelectedNominator, Model.RMONominationList, new { @class = "required form-control Dropdownstyle", style = "" }) 
+                                       }
+                                       else
+                                       {
+                                             @Html.DropDownListFor(m => m.SelectedNominator, Model.RMONominationList, new { @class = "required form-control Dropdownstyle", @disabled = "disabled", style = "" }) 
+                                       }
+                                       @Html.HiddenFor(m => m.SelectedRMONominator)
+                                   }
+                                   else
+                                   {
+                                        @Html.DropDownListFor(m => m.SelectedNominator, Model.RMONominationList, new { @class = "required form-control Dropdownstyle", style = "" })
+                                   }
+                                }
+                                    @Html.HiddenFor(m => m.isRMOLogin)
+                            </td>
+                           }
+                           }
+
+                        <td>
+                            <label class="control-label pull-right" style="float: left">Priority <span style="color: Red">*</span> :</label></td>
+                        <td>@Html.DropDownListFor(m => m.SelectedPriority, Model.Priority, new { @class = "required form-control Dropdownstyle", style = "" })</td>
+
+                    </tr>
+
+                    <tr class="submit-form-greenbg1">
+
+                        @{  if (Model.NominationTypeID != CommonConstants.SelfNomination)
+                            {
+                                if (Model.TrainingTypeID == CommonConstants.TechnicalTrainingID)
+                                {
+                                <td>
+                                    <label class="control-label pull-right" style="float: left" id="PreTraining">Pre-Training Rating <span class="validate" style="color: Red; display: none;">*</span> :</label></td>
+                                <td>@Html.DropDownListFor(m => m.SelectedPreTrainingRating, Model.PreTrainingRating, new { @class = "nominationtype form-control Dropdownstyle ", style = "", @Id = "PreTrainingDropdown" })
+                                </td>
+                                }
+                                else
+                                {                           
+                            <td>
+                                <label class="control-label  pull-right" style="float: left">Objective/Reason For Nomination <span class="validate" style="color: Red; display: none;">*</span> :</label></td>
+                            <td>@Html.TextAreaFor(m => m.ObjectiveForSoftSkill, new { @class = "nominationtype form-control TextAreastyle" })
+                                @Html.ValidationMessageFor(m => m.ObjectiveForSoftSkill, string.Empty, new { style = "color: red" })
+                            </td>                               
+                                }
+                            }
+                        }
+
+                        <td style="text-align: left;">
+                            <label class="form-label  pull-right">Comment  :</label>
+                        </td>
+                        <td colspan="3">
+                            @Html.TextAreaFor(m => m.Comment, new { @class = "form-control TextAreastyle" })
+                            @Html.ValidationMessageFor(m => m.Comment, string.Empty, new { style = "color: red" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="text-align: center">
+                            @*<button type="button" class="btn btn-reset">Add Nomination</button>*@
+                            @if (Model.EditMode)
+                            {
+                                <input type="submit" value="Update Nomination" id="updatenomination" class="button validator btn btn-submit" />
+                            }
+                            else
+                            {
+
+                                //Neelam : 31/05/2017 Starts. IssueId 59566
+
+
+                                if (Model.NominationTypeID == 1913 && Model.isRMOLogin == false && (Convert.ToString(RoleManager).ToLower() != CommonConstants.ManagerRole.ToLower()))
+                                {
+                                     <input type="submit" class="button btn btn-submit validator" value="Submit" id="addnomination" />
+
+                                }
+                                else
+                                {
+                                <input type="submit" value="Add Nomination" id="addnomination" class="button validator btn btn-submit" />  
+                                    //Neelam : 31/05/2017 Starts. IssueId 59566 commented the code by discussing with RMS
+                                    //<input data-courseid="@Model.courseID" data-trainingnameid="@Model.TrainingNameID" type="button" class="button btn btn-submit" value="Submit" id="submitnomination1" />
+                                    // Neelam : 31/05/2017 End. IssueId 59566 commented the code by discussing with RMS
+                                }
+
+
+                                //Neelam : 31/05/2017 Ends. IssueId 59566
+
+                            }
+
+                            @Html.Hidden("trainingcourseID")
+                            @Html.Hidden("trainingnameID")
+                            @Html.HiddenFor(m => m.NominationTypeID)
+                            
+                            
+                        </td>
+                    </tr>
+                </table>                 
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src='@Url.Content("~/Content/Scripts/jquery.validate.unobtrusive.js")'  type="text/javascript"></script>
+<script type="text/javascript">
+   
+    isEditable = '@Model.EditMode'.toLowerCase();
+    //Poonam : 26/04/2016 Starts
+    //Issue : 57842 : When course is changed from self nomination to manager nomination then on submit nomination page adding nomination bypasses the mandatory validation
+    technicalTraining = '@Model.TrainingTypeID'.toString();
+    nominationTypeID = '@Model.NominationTypeID'.toString();
+    //Poonam : 26/04/2016 Ends
+    hidewaiting();
+    $(document).ready(function () {
+        $("#trainingcourseID").val($("#CourseID").val());
+        $("#trainingnameID").val($("#TrainingNameID").val());
+
+    });
+
+
+    if (validationrequired == 'true') {
+        //debugger;
+        $('.validate').show();
+        $('.nominationtype').addClass('required');
+    }
+    else {
+        //For hiding PreTraining Field if no PreTraining Record is checked while creating or editing a course.
+        $('#PreTraining').hide();
+        $('.validate').hide();
+        $('#PreTrainingDropdown').hide();
+    }
+
+    $('.validator').click(function () {
+        var flag = Validation();
+        if (flag != false) {
+            $('#message').html('');
+        }
+    })
+
+
+    $('.required').change(function () {
+        clearvalidation(this);
+    })
+
+    $("textarea.required").on('change keyup paste', function () {
+        clearvalidation(this);
+    });
+    //Poonam : 26/04/2016 Starts
+    //Issue : 57842 : When course is changed from self nomination to manager nomination then on submit nomination page adding nomination bypasses the mandatory validation
+    $("#addnomination").click(function (e) {
+        //debugger;
+        var element = document.getElementById("PreTrainingDropdown");
+        if (element.style.display == "") {
+            if (nominationTypeID == "1914") {
+                if (technicalTraining == "1207") {
+                    if ($('#PreTrainingDropdown').val() == 0) {
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+
+    });
+    //Poonam : 26/04/2016 Ends
+
+    @*//Neelam : 31/05/2017 Starts. IssueId 59566 commented the code by discussing with RMS
+    $("#submitnomination1").bind("click", function (event) {
+        debugger;
+        var SavedFlag =false;
+        
+        var item = $("#item_NominationID").val();
+        if (item == "0") {
+            alert('Kindly enter a nomination');
+            return false;
+
+        }
+        if ('@Model.isRMOLogin'.toLowerCase() == "true") {
+           
+            var confcheckboxcount = $('input[type="checkbox"]:enabled:checked.submit').length;
+
+            if (confcheckboxcount > 0) {
+
+                var conf = confirm("Are you sure you wish to submit selected nomination?");
+                if (conf == true) {
+                    $("#viewreport").dataTable().fnDestroy();
+                    table = $('#viewreport').DataTable({});
+                    var rowcollection = table.$("input[type= 'checkbox']:checked.submit", { "page": "all" }); //table.$("input[type='checkbox']:checked.submit", { "page": "all" });
+                    rowcollection.each(function (index, elem) {
+                        checkbox_value += $(elem).attr("name") + ',';
+                    });
+
+                   
+
+                    //var urlconfirmnomination = '@Url.Action("saveupdateconfirmednomination", "nomination")';
+                    var courseid = parseInt($(this).data("courseid"));
+                    var trainingnameid = parseInt($(this).data("trainingnameid"));
+                    var empid = '';
+
+                    $('#well').show();
+                    $('#well').css("top", "150%");
+                    $("#employeegrid").html('');
+                   
+                    window.location.href = submitnominationurl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid + "&selectedemployeeid=" + checkbox_value.toString();
+
+
+                } else {
+                    return false;
+                }
+
+            } else {
+                 alert('Please select atleast one nominee to be submitted');
+                return false;
+            }
+        }
+        
+        else {
+
+            $("#viewreport").dataTable().fnDestroy();
+            table = $('#viewreport').DataTable({});
+            var rowcollection = table.$("#item_SubmitStatus", { "page": "all" }); //table.$("input[type='checkbox']:checked.submit", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                if($(elem).val()=="NominationSaved")
+                {
+                    SavedFlag = true;
+                    return;
+                }
+            });
+
+            if(SavedFlag==false)
+            {
+                alert('Kindly enter a nomination');
+                return false;
+            }
+            else
+            {
+                var courseid = parseInt( $("#trainingcourseID").val());
+                var trainingnameid = parseInt($("#trainingnameID").val());
+               
+                window.location.href = submitnominationurl + "?trainingcourseID=" + courseid + "&trainingnameID=" + trainingnameid;
+                window.Location(submitnominationurl);
+            }
+           
+        }
+
+    });
+    //Neelam : 31/05/2017 Ends. IssueId 59566*@
+</script>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+   
+   
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+     @Scripts.Render("~/bundles/jquery")    
+
+     <script src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" >
+
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <img class="header" src="@Url.Content("Content/css/Images/logo.jpg")" alt="RMS" title="RMS" width="100%"/>
+            </div>
+            
+            <div style="float: right;">
+                    <span>Welcome ! <i><span class="UserNameStyle">@User.Identity.Name</span></i>&nbsp;&nbsp; </span>
+                </div>
+
+            <div class="float-right">
+                
+                <table >
+                    <tr>
+                      @*  <td style="margin: 0px auto; background-color: #FAF7F7; float: right;"></td>*@
+                    </tr>
+                    <tr>
+                        <td>
+                        @*http://apycom.com/*@
+                        <div id="menu">
+                            <ul class="menu">
+                                <li><a href="#" class="parent"><span>Training</span></a>
+                                    <div>
+                                        <ul>
+                                            <li><a href="#"><span>Raise Training Request</span></a></li>
+                                            <li><a href="@Url.Action("ViewTechnicalTrainingRequest", "training", new {category = "1207" })"><span>View Training Request</span></a></li>
+                                            <li><a href="#"><span>Approve/Reject Training Request</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                @*  <section id="login">
+                        Hello, <span class="username">@User.Identity.Name</span>!
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </nav>*@
+            </div>
+        </div>
+    </header>
+    <div id="body">
+         <div id="wait" class="wait">
+            <img src="@Url.Content("Content/css/Images/LoadingRed.gif")" alt="Wait" />
+        </div>
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                @*<p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>*@
+            </div>
+        </div>
+    </footer>
+    
+   
+</body>
+</html>

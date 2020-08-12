@@ -1,0 +1,159 @@
+﻿@model RMS.Models.InviteNominationViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm()){
+    @Html.HiddenFor(model => model.CourseID);
+
+    
+    <div class="form-horizontal">
+
+        <div class="col-md-12">
+		 <div class=" training-title margin-b-10">
+			Invite Nomination Mail 
+			<img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+		 </div>	
+		 </div>
+        <div class="col-md-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+            
+            <div class="col-md-12">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Nomination Details</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.CourseName)
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.CourseName)
+                                    </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.TrainingName)
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DisplayFor(model => model.TrainingName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.TrainingStartDate)
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.TrainingStartDate, "{0:dd/MM/yyyy}")
+                                    @Html.HiddenFor(model => model.TrainingStartDate, "{0:dd/MM/yyyy}")
+                                    <span style="display:none;" id="hdnStartDt">@Model.TrainingStartDate.ToString("dd-MMM-yyyy")</span>
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.TrainingEndDate)
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DisplayFor(model => model.TrainingEndDate, "{0:dd/MM/yyyy}")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.TrainerName)
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.TrainerName)
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.TrainingMode)
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DisplayFor(model => model.TrainingMode)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.NominationEndDate)
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(model => model.NominationEndDate, "{0:dd/MM/yyyy}", new { @readonly = true, @class = "form-control Textboxstyle datepicker required" })
+                                </div>
+                                <div class="col-md-7">
+                                    </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12" style="text-align :center ">
+                                    <input id="btnMail" type="submit" value="Send Mail" class="btn btn-submit"/> &nbsp;
+                                    <input id="btnCancel" type="button" value="Cancel" class="btn btn-reset" />
+                                </div>
+                            </div>
+            </div>
+                        </div>
+                </div>
+           
+                </div>
+    </div>
+
+}
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>  
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.addMethod('date',
+               function (value, element) {
+                   if (this.optional(element)) {
+                       return true;
+                   }
+                   var valid = true;
+                   try {
+                       $.datepicker.parseDate('dd/mm/yy', value);
+                   }
+                   catch (err) {
+                       valid = false;
+                   }
+                   return valid;
+               });
+
+        $("#NominationEndDate").datepicker(
+            {
+                dateFormat: "dd/mm/yy",
+                autoclose: true
+            })
+
+        $("#btnMail").click(function () {
+           // debugger;
+            var newdate = new Date($("#hdnStartDt").html());
+            if ($("#NominationEndDate").datepicker("getDate") > newdate) {
+                alert("Nomination End Date should not be greater than Training Start Date.");
+                return false;
+            }
+            else if ($("#TrainingStartDate"))
+
+            Validation();
+        })
+
+        $("#btnCancel").click(function () {
+            // window.location.href = '@Url.Action("ListCourse", "TrainingCourse")';
+
+            var selectedTrainingType = @Html.Raw(Json.Encode(this.TempData["trainingTypeID"]));    
+           
+            var CourseID = $("#CourseID").val();
+            var courseStatus =@Html.Raw(Json.Encode(this.ViewData["courseStatus"]));    
+            var gridurl = '@Url.Action("Responsearr", "TrainingCourse")';
+            $.ajax({
+                url: gridurl,
+                type: 'POST',
+                data: { trainingTypeID: selectedTrainingType, CourseID: CourseID,CourseStatus:courseStatus },
+                success: function (response) {
+                    //$("#divGrid").load(gridurl + "?trainingTypeID=" + selectedTrainingType);
+                       @* window.location.href = '@Request.UrlReferrer.LocalPath';*@
+                    if (response.ok)
+                        window.location = response.newurl;
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+            return false;
+        });
+    })
+</script>

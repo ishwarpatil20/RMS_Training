@@ -1,0 +1,119 @@
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\VRP\Project\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\PROJECTS\RMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\VRP\Project\RMSTrainingMerge\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\PROJECTS\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\Rakesh\Projects\TFS\RMS Training\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll.config
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.xml
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll.config
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.xml
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\1_Rave Project\Training Module MVC\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll.config
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.BusinessEntities.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\RMS.Common.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Domain.Entities.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\Infrastructure.Interfaces.pdb
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.xml
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.dll
+D:\Shared\RaveRMSTraining\Infrastructure\Infrastructure\obj\Debug\Infrastructure.pdb

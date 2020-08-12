@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Employee.master.cs" Inherits="MasterPage_Employee" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    
+    <link href="../CSS/MRFCommon.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/../JavaScript/CommonValidations.js"></script>
+    <script type="text/javascript" src="~/../JavaScript/menu.js"></script>
+</head>
+
+        
+<body>
+    <form id="form1" runat="server">
+    
+    <asp:ScriptManager ID="ScriptManagerEmployeeMaster" runat="server">
+    </asp:ScriptManager>
+
+    <div>
+        <table width="100%">
+            <tr >
+                <td style="width:100%">
+                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" Width="100%" >
+                        <LevelMenuItemStyles>
+                            <asp:MenuItemStyle BackColor="White" BorderColor="Black" BorderWidth="1px" 
+                                Font-Bold="True" Font-Underline="False" ItemSpacing="5px" Width="105px" 
+                                ForeColor="Black"/>
+                             
+                        </LevelMenuItemStyles>
+                        <%--<Items>
+                            <asp:MenuItem Text="Passport" Value="1">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Qualifi" 
+                                Value="2"></asp:MenuItem>
+                        </Items>--%>
+                    </asp:Menu>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100%">
+                    <asp:ContentPlaceHolder id="cphEmployeeContent" runat="server">            
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,390 @@
+﻿@model IEnumerable<Domain.Entities.CourseDetails>
+@using RMS.Common.Constants
+@using RMS.Helpers;
+@using System.Collections;
+@{
+    Layout = null;
+}
+
+@{var courseStatus = (int)ViewData["courseStatus"];
+ 
+}
+
+@*Changed by : Venkatesh  : Start*@
+@{
+    string Role = string.Empty;
+}
+@if (System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+{
+    ArrayList arrRolesForUser = new ArrayList();
+    arrRolesForUser = (ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+    if (arrRolesForUser.Contains("admin"))
+    {
+        Role = "Admin";
+    }
+    else if (arrRolesForUser.Contains("manager"))
+    {
+        Role = "Manager";
+    }
+}           
+@*// Changed by : Venkatesh  : End*@
+
+<table id="tblCourse" class="table table-striped">
+    <thead>
+
+        <tr class="trGrid">
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastNominationDate)
+            </th>
+
+            @if (Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower())
+            {
+                <th>
+                    @Html.Label("Edit")
+                </th>
+                <th>
+                    @Html.Label("View")
+                </th>
+                if (courseStatus == 1 || courseStatus == 4)
+                {
+                <th>
+                    @Html.Label("Delete")
+                </th>
+                <th>
+                    @Html.Label("Invite Nomination")
+                </th>
+                <th>
+                    @Html.Label("Assessment")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseCloseFlag)
+                </th>
+                }
+
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingStartDate, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingEndDate, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastNominationDate)
+                </td>
+                @if (courseStatus == 1 || courseStatus == 4)
+                {
+
+                    if (Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower())
+                    {
+                        
+                    <td class="edit" style="text-align: center;">
+                        <a href="@Url.Action("EditCourse", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), courseStatus = courseStatus })" >
+                            <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                        </a>
+                    </td>  
+                       
+                    <td class="view" style="text-align: center;">
+                        <a href="@Url.Action("EditCourse", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), pmode = CheckAccessAttribute.Encode("vW"), courseStatus = courseStatus })" >
+                            <img src="@Url.Content("~/Content/css/Images/view.png")" alt="View" title="View" />
+                        </a>
+                    </td>
+                    <td class="delete" style="text-align: center;">
+                        <a href="#" onclick="return DeleteCourse(@item.CourseID);">
+                            <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/>
+                        </a>
+                    </td>
+                        if (item.TrainingEndDate < DateTime.Now)
+                        {
+                    <td class="none" style="text-align: center;"><a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                        }
+                        else
+                        {
+                    <td style="text-align: center;">
+                        <a href="@Url.Action("InviteNomination", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), courseStatus = courseStatus })" >
+                            <img id="btnInviteNomination"  src="@Url.Content("~/Content/css/Images/send_mail.png")" style="width:32px; height:32px; cursor:pointer;" alt="Invite Nomination" title="Send Mail"/>
+                        </a>
+                    </td> 
+                        }
+
+                        if (item.IsAssessment == 1)
+                        {
+                    <td style="text-align: center;">
+                        <a href="@Url.Action("CreateAssessment", "Assessment", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), courseStatus = courseStatus })" >
+                            <img id="btnCreateAssessment"  src="@Url.Content("~/Content/css/Images/assessment.png")" style="width:32px; height:32px; cursor:pointer;" alt="Assessment" title="Assessment"/>
+                        </a>
+                    </td> 
+                        }
+                        else
+                        {
+                    <td class="none" style="text-align: center;"><a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                        }
+                        
+                            
+                    <td class="closerequest" style="text-align: center;">
+                        <a href="#" onclick="return CloseCourse(@item.CourseID);">
+                            @*<a href="@Url.Action("CloseCourse", new { courseId = item.CourseID })" >*@
+                            <img src="@Url.Content("~/Content/css/Images/Close.jpg")" alt="Close" title="Close" />
+                        </a>
+                    </td>
+                    
+                    }
+                    @*else
+                    {
+                    <td class="none" style="text-align: center;"><a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                    }*@
+
+                }
+                else
+                {
+                    if (Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower())
+                    {
+                        if (item.TrainingModeId == 1909 && item.TrainingStatusId == 1235)
+                        {
+                    <td class="edit" style="text-align: center;">
+                        <a href="@Url.Action("EditCourse", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), courseStatus = courseStatus })" >
+                            <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                        </a>
+                    </td>
+                        }
+
+                        else
+                        {
+                    <td class="none" style="text-align: center;"><a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                        }
+                        
+                        
+                    <td class="view" style="text-align: center;">
+                        <a href="@Url.Action("EditCourse", new { pcourseId = CheckAccessAttribute.Encode(Convert.ToString(item.CourseID)), pmode = CheckAccessAttribute.Encode("vW"), courseStatus = courseStatus })" >
+                            <img src="@Url.Content("~/Content/css/Images/view.png")" alt="View" title="View" />
+                        </a>
+                    </td>
+                    }
+                    @*else
+                    {
+                    <td class="none" style="text-align: center;"><a href="#">
+                        <img  src="@Url.Content("~/Content/css/Images/minus.JPG")"  width="20" /></a></td>
+                    }*@
+                }
+                <td>
+                    @item.CourseID
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    var TrainingListUrl = '@Url.Action("ListCourse", "TrainingCourse", new { trainingTypeID = CommonConstants.TechnicalTrainingID })'
+    var success = @((TempData["passedArray"] != null).ToString().ToLower())
+    
+    jQuery.fn.dataTable.Api.register('page.jumpToData()', function (data, column) {
+        var pos = this.column(column, {order: 'current'}).data().indexOf(data);
+
+        if (pos >= 0) {
+            var page = Math.floor(pos / this.page.info().length);
+            this.page(page).draw(false);
+        }
+
+        return this;
+    });
+    //Poonam : 26/04/2016 Starts
+    //Issue Desc : Sorting not working on date columns and change default sorting columns to start date and Course Name
+    $(document).ready(function () {  
+       
+        //Harsha: Issue Id: 58740- Start
+        //Description: Training module - Error occurs when Closed training request is selected on the  View course page        
+        var courseStatus =@Html.Raw(Json.Encode(this.ViewData["courseStatus"]));        
+        var userRole = @Html.Raw(Json.Encode(Role));        
+        if (courseStatus == '3') {                
+            var table =  $('#tblCourse').DataTable({
+                "aaSorting": [[2, 'asc'], [0, 'asc']],
+                "aoColumns": [
+                    null,
+                    null,
+                    { "sType": "date-uk" },
+                    { "sType": "date-uk" },
+                    null,
+                    { "sType": "date-uk" },
+                    null,
+                    null,
+                     {"visible": false },
+                ]
+            });     
+            if (success == true) {
+                var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   
+                //ar data1=[data.TrainingType,data.TrainingName,data.Quarter,data.Priority,data.Status,data.RequestedBy]
+                //var row = table.row.add(data).node();
+                // table.row(row).draw(false);
+                table.page.jumpToData( data, 8 );
+            }
+        }
+        else {            
+            //active training
+            if(userRole=="Manager") {
+                var table = $('#tblCourse').DataTable({
+                    "aaSorting": [[2, 'asc'], [0, 'asc']],
+                    "aoColumns": [
+                        null,
+                        null,
+                        { "sType": "date-uk" },
+                        { "sType": "date-uk" },
+                        null,
+                        { "sType": "date-uk" },
+                    {"visible": false }
+
+                    ]
+                });
+                if (success == true) {
+                    var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   
+                    //ar data1=[data.TrainingType,data.TrainingName,data.Quarter,data.Priority,data.Status,data.RequestedBy]
+                    //var row = table.row.add(data).node();
+                    // table.row(row).draw(false);
+                    table.page.jumpToData( data, 6 );
+                }
+            }
+            else {
+                var table =  $('#tblCourse').DataTable({
+                    "aaSorting": [[2, 'asc'], [0, 'asc']],
+                    "aoColumns": [
+                        null,
+                        null,
+                        { "sType": "date-uk" },
+                        { "sType": "date-uk" },
+                        null,
+                        { "sType": "date-uk" },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        {"visible": false }
+
+                    ]
+                });
+                if (success == true) {
+                    var data=@Html.Raw(Json.Encode(TempData["passedArray"]));
+                   
+                    //ar data1=[data.TrainingType,data.TrainingName,data.Quarter,data.Priority,data.Status,data.RequestedBy]
+                    //var row = table.row.add(data).node();
+                    // table.row(row).draw(false);
+                    table.page.jumpToData( data,12 );
+                }
+            }            
+        }
+        //Harsha: Issue Id: 58740- End
+    });
+    DatatableSorting();
+    //$(document).ready(function () {
+    //    //debugger;
+    //    //$('#tblCourse').DataTable();
+    //});
+
+
+    //Poonam : 26/04/2016 : Ends
+
+    function CloseCourse(cId) {
+        var pt;
+        if (confirm('Click OK to Close the Training Course.')) {
+            debugger;
+            $.ajax({
+                url: "@Url.Action("CloseCourse", "TrainingCourse")",
+                type: 'GET',
+                cache: false,
+                data: { courseId: cId, prompt: 'N' },
+                success: function (data) {
+                    console.log(data);
+                    if (data == 1) {
+                        alert('Course closed successfully.');
+                        window.location.href = TrainingListUrl;
+                    }
+                    else if (data == 2) {
+                        var c = confirm('Course cannot be closed at curremt stage. Make sure that Payment, Feedback or Effectiveness are completed before closing the Course. Do you still want to continue? ');
+
+                        if (c) {
+                            pt = 'Y';
+                            $.ajax({
+                                url: "@Url.Action("CloseCourse", "TrainingCourse")",
+                                type: 'GET',
+                                cache: false,
+                                data: { courseId: cId, prompt: pt },
+                                dataType: "json",
+                                success: function (data) {
+                                    console.log(data);
+                                    alert('Course closed successfully.');
+                                    window.location.href = TrainingListUrl;
+                                }
+                            });
+
+
+                            //alert('hi');
+                        }
+                        //else {
+                        //    alert('bye');
+                        //}
+                    }
+                    else {
+                        alert("Error occured while closing course.");
+                    }
+                }
+            });
+    }
+}
+
+function DeleteCourse(cId) {
+    if (confirm('Click OK to Delete the Training Course.')) {
+        $.ajax({
+            url: "@Url.Action("DeleteCourse", "TrainingCourse")",
+            type: 'GET',
+            cache: false,
+            data: { courseId: cId },
+            success: function (data) {
+                if (data) {
+                    alert("Course deleted successfully.");
+                    window.location.href = TrainingListUrl;
+                }
+                else {
+                    alert("Error occured while deleting course.");
+                }
+            }
+        });
+    }
+}
+</script>

@@ -1,0 +1,137 @@
+﻿@model RMS.Models.AssignAssessmentViewModel 
+@using System.Data;
+<span id ="message">
+    @{
+        var msg = Convert.ToString(TempData["ResultPartial"]);
+        if (!string.IsNullOrEmpty(msg))
+        {
+        @msg
+        <br />
+        <script>$("#message").addclass("MessageStyleSuccess");</script>
+        }
+    }
+</span>
+
+ 
+                    <div class="col-md-12">
+                        <div class="form-group" id="dvCourseDetail">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                   Time Duration
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="divTimeDuration"></div>
+                                </div>
+                            </div>
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    Assessment Date
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="dvAssessmentDate"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+
+               <div class="col-md-2"></div> 
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div >
+@if (Model.dtEmp != null)
+{ 
+    <table width="60%" class="table">
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.dtEmp.Columns)
+                {  
+                    if (@col.ColumnName == "SelectAll" || @col.ColumnName == "Employee Name")
+                    {
+
+                        if (@col.ColumnName == "SelectAll")
+                        {
+                            <th>
+                             <input id="SelectAll" type="checkbox" name="selectAllCheck" value="2" />
+                                Select All
+                            </th>
+                        }                        
+                        else
+                        { 
+                            <th>
+                                @col.ColumnName
+                            </th> 
+                        }
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.dtEmp.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.dtEmp.Columns)
+                    {
+                        if (@col.ColumnName == "SelectAll" || @col.ColumnName == "Employee Name")
+                        {
+                            if (@col.ColumnName == "SelectAll")
+                            {                               
+                                string Empid = row["Empid"].ToString();
+                                string Values = row["IsAssigned"].ToString();
+                                //string parameterValue2 = Empid;// +"_" + Values;
+                                bool b = false;
+                                bool disabled = false;
+                                if (Values == "1") //For Dropout
+                                {
+                                    b = true;
+                                    disabled = true;
+                                }
+                                <td>
+                                    <input id="choice2@(Empid)"type="checkbox" name="SelectedEmp" class="case"  
+                                        value="@(Empid)" checked="@b" disabled="@disabled" />
+                                </td>
+                               
+                            }                           
+                            else
+                            {
+                                <td>@row[col.ColumnName]  </td>}
+                        }
+                    }
+                </tr> 
+            }
+        </tbody>
+    </table>
+}
+
+                                    </div> 
+                            </div>
+
+
+                        </div>
+                    </div>
+                <div class="col-md-2"></div> 
+<script >
+  // add multiple select / deselect functionality
+    $("#SelectAll").click(function () {
+            $('.case').attr('checked', this.checked);
+        });
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".case").click(function () {
+
+            if ($(".case").length == $(".case:checked").length) {
+                $("#SelectAll").attr("checked", "checked");
+            } else {
+                $("#SelectAll").removeAttr("checked");
+            }
+
+        });
+
+    </script>

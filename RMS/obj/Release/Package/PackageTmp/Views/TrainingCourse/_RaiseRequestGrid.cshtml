@@ -1,0 +1,98 @@
+﻿@model RMS.Models.RaiseRequestViewModel
+@using RMS.Common.Constants
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <div class="row">
+    <table class="table table-striped" style="width:auto">
+        <thead>
+        <tr>
+            @if(Model.RaiseMode == CommonConstants.EditMode)
+            {
+            <th style="width:70px;">
+                @Html.DisplayNameFor(model => model.RaiseDetails.FirstOrDefault().RaiseID)
+            </th>
+            }
+            <th style="width:180px;">
+                @Html.DisplayNameFor(model => model.RaiseDetails.FirstOrDefault().TrainingName)
+            </th>
+            <th style="width:100px;">
+                @Html.DisplayNameFor(model => model.RaiseDetails.FirstOrDefault().QuarterValue)
+            </th>
+            <th style="width:100px;">
+                @Html.DisplayNameFor(model => model.RaiseDetails.FirstOrDefault().RaiseYear)
+            </th>
+            <th style="width:250px;">
+                @Html.DisplayNameFor(model => model.RaiseDetails.FirstOrDefault().RaiseByName)
+            </th>
+        </tr>
+            </thead>
+
+        @foreach (var item in Model.RaiseDetails)
+        {
+            <tr>                
+                @if(Model.RaiseMode == CommonConstants.EditMode)
+                { 
+                    //Poonam : 27/04/2016 Starts
+                    //Issue : 57811 : In Edit course, system should not allow to unmap when there is only 1 request mapped
+                    if(Model.RaiseDetails.Count() > 1)
+                    {
+                    <td style="text-align:center">
+                        @Html.CheckBox("RaiseID", item.IsSelected, new { @class = "RaiseID", @value = item.RaiseID })
+
+                        @if(item.IsSelected==true)
+                        {
+                            @Html.Hidden("HFRaiseID", item.RaiseID, new { @class = "RaiseID", @checked = true })
+                        }
+                    </td>
+                    }
+                    else
+                    {
+                    <td style="text-align:center">
+                        @Html.CheckBox("RaiseID", true, new { @class = "RaiseID", @value = item.RaiseID, @disabled = "disabled"})
+                        @Html.Hidden("HFRaiseID", item.RaiseID, new { @class = "RaiseID", @checked = true })
+                       
+                    </td>
+                    }
+                    //Poonam : 27/04/2016 Ends
+                }
+                else if (Model.RaiseMode.ToLower() == CommonConstants.ViewMode.ToLower())
+                {
+                    @Html.Hidden("HFRaiseID", item.RaiseID, new { @class = "RaiseID", @checked = true })
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuarterValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RaiseYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RaiseByName)
+                </td>
+            </tr>
+        }
+    </table> 
+    </div>           
+</div>
+
+<script type="text/javascript">
+    //Required for disabled checkbox when only one Raise Training Request is mapped
+    $("#RaiseTrainingIds").val($("#HFRaiseID").val());
+
+    //Required when multiple Raise Training Request is mapped
+    $(".RaiseID").click(function () {
+        var s = "";
+        $("#RaiseTrainingIds").val('');
+        $(".RaiseID:checked").each(function () {
+            s += ($(this).val() + ',');
+        })
+        if (s.length > 0) { s = s.substring(0, s.length - 1) }
+        $("#RaiseTrainingIds").val(s);
+    })
+
+</script>

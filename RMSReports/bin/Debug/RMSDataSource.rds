@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="RMSDataSource">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=RAV-DSK-313;Initial Catalog=RMS_01072018</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>bfbb95ad-932d-408e-90fd-7b58f83ee8c0</DataSourceID>
+</RptDataSource>

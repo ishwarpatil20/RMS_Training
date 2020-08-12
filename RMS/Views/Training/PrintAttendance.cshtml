@@ -1,0 +1,403 @@
+﻿@model Domain.Entities.AttendanceModel
+@*@model System.Data.DataTable *@
+@using System.Data;
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "PrintAttendance";
+}
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+
+<div class="col-md-12">
+        <div class=" training-title margin-b-10">
+           Print Attendance Details
+               <img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+        </div>
+</div>
+
+ @using (Html.BeginForm("ExportDateToExcel", "Training", FormMethod.Post, new { Id = "frmPrintAttendance" }))
+ {
+  
+     <div>
+      
+
+                 <div class="col-md-12 margin-b-10">
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="training-type">
+                                    <span>Training Type :</span>
+
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <div class="nav-div" style="color: #ffffff">
+                                        <span class="training-radio-div">
+                                            @Html.RadioButton("category", "1207", @Model.TrainingTypeID == 1207 ? true : false, new { }) @Html.Label("Technical")
+                                        </span>
+                                        <span class="training-radio-div">
+                                            @Html.RadioButton("category", "1208", @Model.TrainingTypeID == 1208 ? true : false, new { @class = string.Empty }) @Html.Label("Softskill")
+                                            </span>
+                                        <span class="training-radio-div">
+                                        
+                                            @Html.RadioButton("category", "1209", @Model.TrainingTypeID == 1209 ? true : false, new { @class = "jq_Semi" }) @Html.Label("Seminar")
+                                           </span>
+                                        <span class="training-radio-div">
+                                        
+                                            @Html.RadioButton("category", "1210", @Model.TrainingTypeID == 1210 ? true : false, new { @class = string.Empty }) @Html.Label("KSS")
+                                           </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                 <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                @*<div class="col-md-12" id="dvTechSoft"  @((Model.TrainingTypeID == 1209 || Model.TrainingTypeID == 1210) ? "style=display:none" : "style=display:block")>
+                                    @if(Model.TrainingTypeID == 1207 || Model.TrainingTypeID == 1208)
+                                    {
+                                    <div class="row">
+                                        <div class="clearfix margin-b-10">
+                                            <div class="col-md-2 col-sm-6">
+                                                <label class="form-label">Training Name</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                @Html.DropDownListFor(m => m.TrainingName, new SelectList(Model.ListTrainingName, "value", "text", Model.TrainingName), new { @class = "form-control Dropdownstyle" })
+                                            </div>
+
+                                            <div class=" col-md-2 col-sm-6">
+                                                <label class="form-label">Trainer Name</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <span id="SpanTrainerName"  class="label-text" >@Model.objTrainingCourseModel.TrainerName</span>
+                                                <input type="hidden" name="TrainerName" value="@Model.objTrainingCourseModel.TrainerName" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="clearfix margin-b-10">
+                                            <div class=" col-md-2 col-sm-6">
+                                                <label class="form-label">Training Start Date</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <span id="SpanTrainingStartDate" class="label-text" >
+                                                    @Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")
+                                                    <input type="hidden" name="startDate" value="@Model.objTrainingCourseModel.TrainingStartDate.ToString("dd-MMM-yyyy")" />
+                                                </span>
+                                            </div>
+
+                                            <div class=" col-md-2 col-sm-6">
+                                                <label class="form-label">Training End Date</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <span id="SpanTrainingEndDate" class="label-text">@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy") </span>
+                                                <input type="hidden" name="endDate" value="@Model.objTrainingCourseModel.TrainingEndDate.ToString("dd-MMM-yyyy")" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    }
+                                    <div class="row">
+                                        <div class="clearfix margin-b-10">
+                                            <div class=" col-md-12 col-sm-6">
+                                                    @if (Model.SelectedAttendanceDate != null)
+                                                    {
+                                                        int count = 0;
+                                                         <span id="AttendanceDate">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                     <tr>
+                                                                        @{
+                                                                            var index = 0;
+                                                                        }
+
+                                                                        @foreach (var item in Model.SelectedAttendanceDate)
+                                                                        {
+                                                                            if ((index % 7) == 0)
+                                                                            {
+                                                                            @Html.Raw("</tr>");
+                                                                            @Html.Raw("<tr>");
+                                                                            }
+
+                                                                            try
+                                                                            {
+                                                                            <td>
+                                                                                
+                                                                                @Convert.ToDateTime(item.Text).ToString("dd-MMM-yyyy").Trim()
+                                                                                <input id="@(Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy"))" type="checkbox" name="SelectedChoices" class="case required"  
+                                                                                    value="@Convert.ToDateTime(item.Value).ToString("dd-MMM-yyyy")" />
+                                                                            </td>
+                                                                            }
+                                                                            catch { }
+                                                                            index++;
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table> 
+                                                         </span>
+                                                    }
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="col-md-3"></div> 
+                                        <div class="col-md-3" id="dvExportToExcel">
+                                            @if (Model.SelectedAttendanceDate!=null)
+                                            {
+                                                if(Model.SelectedAttendanceDate.Any())
+                                                {
+                                                    <input class="btn btn-submit" id="btnExportToExcel" type="submit" value="Export To Excel" />
+                                                }
+                                            }
+                                        </div>
+                                        <div class="col-md-3"></div> 
+                                    </div>  
+                                </div>*@
+                                    
+                                 <div class="row">
+                                    <div class="clearfix margin-b-10">
+                                        <div class=" col-md-12 col-sm-6">
+                                            <div class="table-responsive" id="dvTechSoft"  style="overflow-x: hidden">
+                                                   @if(Model.TrainingTypeID == 1207 || Model.TrainingTypeID == 1208)
+                                                   {
+                                                       Html.RenderPartial("_PrintAttendanceTechSoft", Model);
+                                                   }
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>  
+                                    <div class="row">
+                                    <div class="clearfix margin-b-10">
+                                        <div class=" col-md-12 col-sm-6">
+                                            <div class="table-responsive" id="dvSemi"  style="overflow-x: hidden">
+                                                   @if(Model.TrainingTypeID == 1209)
+                                                   {
+                                                       Html.RenderPartial("_PrintSeminar", Model);
+                                                   }
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>  
+                                <div class="row">
+                                    <div class="clearfix margin-b-10">
+                                        <div class=" col-md-12 col-sm-6">
+                                            <div class="table-responsive" id="dvKss"  style="overflow-x: hidden">
+                                                   @if(Model.TrainingTypeID == 1210)
+                                                   {
+                                                       Html.RenderPartial("_PrintKss", Model);
+                                                   }
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>  
+
+                            </div>
+                        </div>
+                    </div>
+             </div>
+
+ }
+<script type="text/javascript">
+    //On TrainingType Load Course TrainningName
+    var TrainingType;
+    $("input[name='category']").click(function () {
+        var tID = $(this).val();
+        TrainingType = $(this).val();
+        //debugger;
+        if (tID == 1207 || tID == 1208)// For Technical and Softskill
+        {
+            $("#dvTechSoft").show();
+            $("#dvSemi").hide();
+            $("#dvKss").hide();
+            $("#SpanTrainerName").html('');
+            $("#SpanTrainingStartDate").html('');
+            $("#SpanTrainingEndDate").html('');
+            $("#SpanNoOfDays").html('');
+            $("#AttendanceDate").html('');
+
+            //$("#dvMode").hide();
+
+            var gridurl = '@Url.Action("OnRadioChangeBindConfirmedTraining", "training")';
+
+            $("#dvTechSoft").load(gridurl + "?value=" + tID + "&PageName=Print");
+            $("#dvTechSoft").show();
+            $('#TrainingTypeID').val(tID);
+            $("#TrainingName").val(data.TrainingName);
+        }
+        else if (tID == 1209 || tID == 1210)  // For Seminar and KSS
+        {
+            $("#dvTechSoft").hide();
+            if (tID == 1209) {
+                $("#dvSemi").show();
+                $("#dvKss").hide();
+            }
+            else {
+                $("#dvKss").show();
+                $("#dvSemi").hide();
+               
+            }
+            // Clean inner data
+            $("#SpanTrainerName").html('');
+            $("#SpanTrainingStartDate1").html('');
+            $("#SpanDate").html('');
+            
+            $("#SpanTrainingEndDate1").html('');
+            $("#SpanNoOfDays").html('');
+
+            //$("#dvMode").hide();
+            //showwiating();
+            var gridurl = '@Url.Action("OnRadioChangeBindConfirmedTraining", "training")';
+
+            if (tID == 1209) {
+                $("#dvSemi").load(gridurl + "?value=" + tID + "&PageName=Print");
+                $("#dvSemi").show();
+
+                $('#TrainingTypeID').val(tID);
+                $("#TrainingNameSeminar").val(data.Text);
+            }
+            else {
+                $("#dvKss").load(gridurl + "?value=" + tID + "&PageName=Print");
+                $("#dvKss").show();
+
+                $('#TrainingTypeID').val(tID);
+                $("#TrainingNameKss").val(data.Text);
+            }
+
+        }
+
+        $("#message").html();
+    });
+
+
+$('#btnExportToExcel').click(function () {
+    var selectedcheckbox = $('input[name=SelectedChoices]:checked').length;
+
+    //if no checkbox is selected
+    if (selectedcheckbox == 0) {
+        $('<div></div>').appendTo('body')
+        .html('<div><h6>Please select at least one single date for exporting to excel.</h6></div>')
+        .dialog({
+            modal: true,
+            title: 'Print Attendance',
+            zIndex: 10000,
+            autoOpen: true,
+            width: 'auto',
+            resizable: false,
+            buttons: {
+                Ok: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function (event, ui) {
+                $(this).remove();
+            }
+        });
+        return false;
+    }
+
+    //if more than 7 checkbox is selected
+    if (selectedcheckbox > 7) {
+        $('<div></div>').appendTo('body')
+        .html('<div><h6>Dates selected with more than 7 will not be printed in excel properly. Do you wish to Continue?</h6></div>')
+        .dialog({
+            modal: true,
+            title: 'Print Attendance',
+            zIndex: 10000,
+            autoOpen: true,
+            width: 'auto',
+            resizable: false,
+            buttons: {
+                Yes: function () {
+                    $(this).dialog("close");
+                    $('form#frmPrintAttendance').submit();
+                },
+                No: function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function (event, ui) {
+                $(this).remove();
+            }
+        });
+        return false;
+    }
+    return true;
+
+});
+
+//On TrainingName,Load Trainer Name
+$('#TrainingName').on('change', function () {
+    var CourseId = $(this).val();       //var selectedPriority = $("#Priority option:selected").text();
+    var TrainingTypeId = document.querySelector('input[name="category"]:checked').value;
+    if (CourseId != '') {
+        var setattendanceurl = '@Url.Action("OnTrainingChange_PrintAttendanceDetail", "Training")';
+                var data = { _CourseId: CourseId };
+                window.location.href = setattendanceurl + "?_CourseId=" + CourseId + "&_TrainingTypeID=" + TrainingTypeId;
+            }
+            else {
+                $("#SpanTrainerName").html('');
+                $("#SpanTrainingStartDate").html('');
+                $("#SpanTrainingEndDate").html('');
+                $("#SpanNoOfDays").html('');
+
+                $("#AttendanceDate").html('');
+                $("#dvExportToExcel").html('');
+            }
+    });
+
+        $(document).ready(function () {
+
+            $.validator.addMethod('date',
+              function (value, element) {
+                  if (this.optional(element)) {
+                      return true;
+                  }
+                  var valid = true;
+                  try {
+                      $.datepicker.parseDate('dd/mm/yy', value);
+                  }
+                  catch (err) {
+                      valid = false;
+                  }
+                  return valid;
+              });
+
+
+            $(function () {
+                if ($('#SpanTrainingEndDate').html() != "01-Jan-0001") {
+                    var minDates = $('#SpanTrainingEndDate').html();
+
+                    var newdate = new Date(minDates);
+                    var d = newdate.getDate();
+                    var m = newdate.getMonth();
+                    m += 1;  // JavaScript months are 0-11
+                    var y = newdate.getFullYear();
+                    minDates = d + '/' + m + '/' + y;
+                }
+
+                $("#FeedbackLastDate").datepicker(
+                    {
+                        dateFormat: "dd/mm/yy",
+                        autoclose: true,
+                        minDate: minDates
+                    }).val()
+            });
+
+            if (($.trim($('#SpanTrainingStartDate').html()) == '01-Jan-0001') || $.trim($('#SpanTrainingEndDate').html()) == "01-Jan-0001") {
+                $('#SpanTrainingStartDate').html('');
+                $('#SpanTrainingEndDate').html('');
+            }
+
+            //Page Load Hide the  controls
+            if ($('#TrainingName').val() != '') {
+                $("#dvMode").show();
+            }
+
+        });
+</script>

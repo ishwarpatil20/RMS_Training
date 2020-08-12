@@ -1,0 +1,195 @@
+﻿@*@model RMS.Models.AssessmentPaperViewModel*@
+@model RMS.Models.AssessmentViewModel
+
+@{
+    ViewBag.Title = "Create Assessment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="training-title margin-b-10">
+        Create Assessment
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+
+@using (Html.BeginForm("CreateAssessment", "Assessment", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @id = "frmCreateAssessment" }))
+        {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="col-md-12">
+        <span id="message">
+            @{
+            var msg = Convert.ToString(TempData["Result"]);
+            if (!string.IsNullOrWhiteSpace(msg))
+            {
+                @msg
+                <br />
+                <script>
+                                    $("#message").addClass("MessageStyleSuccess");
+                </script>
+            }
+            }
+        </span>
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panel-default" id="pnlTrainingCourse">
+            <div class="panel-heading">Create Assessment</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.AssessmentPaper.CourseId, "Course")<label style="color: red; padding-left: 2px;">*</label>
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.AssessmentPaper.CourseName)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.CourseId)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.AssessmentPaper.TimeDuration, "Time Duration")<label style="color: red; padding-left: 2px;">*</label>
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.AssessmentPaper.TimeDuration, new {  @class = "textstyle required" }) Minutes
+                                    @Html.ValidationMessageFor(model => model.AssessmentPaper.TimeDuration, "", new { @style = "color:red;" })
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.AssessmentPaper.AssessmentDate, "Assessment Date")<label style="color: red; padding-left: 2px;">*</label>
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.AssessmentPaper.AssessmentDate, "{0:dd/MM/yyyy}", new { @class = "datepicker required", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                @if (Model.AssessmentPaper.AssessmentPaperId != 0)
+                                {
+                                    <input id="btnQuestion" type="submit" value="Update & View Question" class="buttonstyle" />
+                                }else
+                                {
+                                    <input id="btnSave" type="submit" value="Submit Assessment & View Question" class="buttonstyle" />
+                                }
+                                &nbsp;<input id="btnCancel" type="reset" value="Reset" class="buttonstyle" />
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+            
+            
+        }
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#AssessmentPaper_AssessmentDate').val() == "01/01/1900" || $('#AssessmentPaper_AssessmentDate').val() == "01/01/1900 00:00:00"
+            || $('#AssessmentPaper_AssessmentDate').val() == "01/01/0001" || $('#AssessmentPaper_AssessmentDate').val() == "01/01/0001 00:00:00")
+        {
+            $('#AssessmentPaper_AssessmentDate').val('');
+        }
+
+
+        $.validator.addMethod('date',
+           function (value, element) {
+               if (this.optional(element)) {
+                   return true;
+               }
+               var valid = true;
+               try {
+                   $.datepicker.parseDate('dd/mm/yy', value);
+               }
+               catch (err) {
+                   valid = false;
+               }
+               return valid;
+           });
+
+        $('#AssessmentPaper_AssessmentDate').datepicker(
+             {
+                 dateFormat: "dd/mm/yy",
+                 autoclose: true,
+                 minDate: 0
+             }).val();
+
+        $("#btnCancel").click(function (e) {
+            $("#frmCreateAssessment")[0].reset();
+            $("#frmCreateAssessment").find("[data-valmsg-replace]")
+            .removeClass("field-validation-error")
+            .addClass("field-validation-valid")
+            .empty();
+            $('#AssessmentPaper_AssessmentDate').datepicker().val('');
+            ClearBorderColor();
+            $("#message").html("");
+            e.preventDefault();
+        });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("#frmCreateAssessment").submit(function (e) {
+            var flag = Validation();
+            if (flag == false) {
+                $("#message").html("Please fill mandatory details.");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+                e.preventDefault();
+            }
+            
+        });
+    });
+
+</script>

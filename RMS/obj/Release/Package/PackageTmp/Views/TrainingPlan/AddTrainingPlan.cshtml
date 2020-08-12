@@ -1,0 +1,80 @@
+﻿@model RMS.Models.TrainingPlanViewModel
+
+@{
+    ViewBag.Title = "TrainingPlan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        Training Calendar
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+            </div>
+</div>
+
+ @using (Ajax.BeginForm("InsertUpdateTrainingPlan", "TrainingPlan", new AjaxOptions { UpdateTargetId = "trainingplandetail" }))
+            //@using (Ajax.BeginForm(Model.EditMode ? "UpdateNomination" : "AddNomination", "nomination", new AjaxOptions { UpdateTargetId = "employeegrid" }))
+            {
+<div class="col-md-12 margin-b-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="clearfix margin-b-10">
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label ">Select Year</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    @Html.DropDownListFor(m => m.Year, Model.ListYear, new { @class = "required form-control  Dropdownstyle" })
+                </div>
+
+                <div class=" col-md-2 col-sm-6">
+                    <label class="form-label ">Select Quarter</label>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    @Html.DropDownListFor(m => m.Quarter, Model.ListQuarter, new { @class = "required form-control  Dropdownstyle" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="wait" style="top: 317px; right: 670px; position: absolute; display: none;">
+    <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+</div>
+<div id="trainingplandetail" class="col-md-12">
+    @{Html.RenderPartial(RMS.Common.Constants.CommonConstants._PartialViewAddPlan, Model);}
+</div>
+ }
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        var trainingplandetail = $("#trainingplandetail");
+        var link = '@Url.Action("ShowPlan", "TrainingPlan")';
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("#Quarter").change(function () {
+            $("#message").html('');
+            var _year = $("#Year").val();
+            var _quarter = $(this).val();
+            if (_quarter != 0) {
+                showaiting();
+                trainingplandetail.load(link + "?Mode=I&Quarter=" + _quarter + "&Year=" + _year);
+            }
+        })
+        $("#Year").change(function () {
+            $("#message").html('');
+            var _year = $(this).val();
+            var _Quarter = $("#Quarter").val();
+            if (_year != 0) {
+                showaiting();
+                trainingplandetail.load(link + "?Mode=I&Quarter=" + _Quarter + "&Year=" + _year);
+            }
+        })
+    });
+
+
+
+</script>

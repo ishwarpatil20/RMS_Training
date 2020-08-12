@@ -1,0 +1,231 @@
+﻿@model RMS.Models.AssessmentViewModel 
+
+<div>
+<p> 
+  <div class="timer" style="position:fixed;top:2%; right:2%; background-color:#fff5bb; padding:4px 8px; color :black"  ></div>
+    @*<div class="timer" data-minutes-left="0.1"></div>*@
+</p>
+                        
+<style>
+.days {
+  float: left;
+  margin-right: 4px;
+}
+.hours {
+  float: left;
+}
+.minutes {
+  float: left;
+}
+.seconds {
+  float: left;
+}
+.clearDiv {
+  clear: both;
+}
+</style>  
+</div>
+
+
+<div class="panel panel-default" id="pnlAssessmentQuestione">
+<div class="panel-heading">Assessment Questions</div>
+                <div class="panel-body">
+
+                    @{
+                        int index = 1;
+                    }
+                    @Html.Hidden("HfldTimeDuration", Model.AssessmentPaper.TimeDuration)
+                    @Html.Hidden( "HfldAssessmentPaperId", Model.AssessmentPaper.AssessmentPaperId)
+
+                    @foreach (var assessmentQuestion in Model.AssessmentQuestions)
+                    {
+                        var inputName = ViewData["prefix"] + ".Index";
+                        var fieldPrefix = string.Format("{0}[{1}].", ViewData["prefix"], assessmentQuestion.QuestionId);
+                        var QuestionImg = fieldPrefix + "QuestionImg";
+                        var Option1Image = fieldPrefix + "Option1Image";
+                        var Option2Image = fieldPrefix + "Option2Image";
+                        var Option3Image = fieldPrefix + "Option3Image";
+                        var Option4Image = fieldPrefix + "Option4Image";
+                        var Option5Image = fieldPrefix + "Option5Image";
+                        var Option6Image = fieldPrefix + "Option6Image";
+                        var IsOption1Correct = fieldPrefix + "IsOption1Correct";
+                        var IsOption2Correct = fieldPrefix + "IsOption2Correct";
+                        var IsOption3Correct = fieldPrefix + "IsOption3Correct";
+                        var IsOption4Correct = fieldPrefix + "IsOption4Correct";
+                        var IsOption5Correct = fieldPrefix + "IsOption5Correct";
+                        var IsOption6Correct = fieldPrefix + "IsOption6Correct";
+                        
+                        
+                        <div>
+                            @Html.Hidden(inputName, assessmentQuestion.QuestionId)
+                            @Html.Hidden(fieldPrefix + "AssessmentPaperId", assessmentQuestion.AssessmentPaperId)
+                            @Html.Hidden(fieldPrefix + "QuestionId", assessmentQuestion.QuestionId)
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-1 text-center ">@index .</div>
+                                    <div class="col-md-11">@Html.DisplayFor(model => assessmentQuestion.Question)<br />
+                                        @if (!string.IsNullOrEmpty(assessmentQuestion.QuestionImgFileName))
+                                        { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentQuestionImgPath].ToString() + "/") + assessmentQuestion.QuestionImgFileName)" width="250px" height="200px" /><br />}
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    @if (assessmentQuestion.IsMultiChoiceAnswer)
+                                    {
+                                        <div class="col-md-11">
+                                                                                        
+                                            @Html.CheckBox("Chk_" + fieldPrefix + "Option1")                                            
+                                            @Html.DisplayFor(model => assessmentQuestion.Option1Description)<br />
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option1ImageFileName))
+                                            { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option1ImageFileName)" width="250px" height="200px" /><br />}
+
+                                            @Html.CheckBox("Chk_" + fieldPrefix + "Option2")
+                                            @Html.DisplayFor(model => assessmentQuestion.Option2Description)<br />
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option2ImageFileName))
+                                            { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option2ImageFileName)" width="250px" height="200px" /><br />}
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description) || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                            {
+                                                @Html.CheckBox("Chk_" + fieldPrefix + "Option3")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option3Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option3ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                            
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description) || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                            {
+                                                @Html.CheckBox("Chk_" + fieldPrefix + "Option4")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option4Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option4ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description) || !string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                            {
+                                                @Html.CheckBox("Chk_" + fieldPrefix + "Option5")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option5Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option5ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description) || !string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                            {
+                                                @Html.CheckBox("Chk_" + fieldPrefix + "Option6")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option6Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option6ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-11">
+                                            @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 1")
+                                            @Html.DisplayFor(model => assessmentQuestion.Option1Description)<br />
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option1ImageFileName))
+                                            { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option1ImageFileName)" width="250px" height="200px" /><br />}
+
+                                           @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 2")
+                                            @Html.DisplayFor(model => assessmentQuestion.Option2Description)<br />
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option2ImageFileName))
+                                            { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option2ImageFileName)" width="250px" height="200px" /><br />}
+                                            
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description) || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                            {
+                                                @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 3")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option3Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option3ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description) || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                            {
+                                                @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 4")
+                                                @Html.DisplayFor(model => assessmentQuestion.Option4Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                                { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option4ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                            
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description) || !string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                            {
+                                                @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 5")
+                                                @*@Html.Hidden("Hfld_" + fieldPrefix+"IsOption5Correct")*@
+                                                @Html.DisplayFor(model => assessmentQuestion.Option5Description)<br />if (!string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                                                                                                      { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option5ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description) || !string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                            {
+
+                                                @Html.RadioButton("Rbtn_" + fieldPrefix + "Option", "Option 6")
+                                                @*@Html.Hidden("Hfld_" + fieldPrefix+"IsOption6Correct")*@
+                                                @Html.DisplayFor(model => assessmentQuestion.Option6Description)<br />if (!string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                                                                                                      { <img src="@(Url.Content(System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentAnswerImgPath].ToString() + "/") + assessmentQuestion.Option6ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                                    index = index + 1;
+                    }
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <input id="btnSave" type="submit" value="Save" class="buttonstyle" />&nbsp;                                    
+                                    <a href="javascript:window.opener='x';window.close();"><input id="btnCancel" type="button" value="Close" class="buttonstyle"  /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var hrs =$("#HfldTimeDuration").val();
+        $('.timer').attr('data-minutes-left', hrs);        
+    });
+
+     $('.timer').startTimer({
+                            onComplete: function () {
+                                var second = $('.seconds').val();
+                                 $("#btnSave").trigger('click');
+                                console.log('Complete');                
+                            }
+    });
+
+     $(".minutes").bind("DOMSubtreeModified", function () {
+         var min = $(".minutes").html();
+         var hours = $(".hours").html();
+         if (min == "00:" && hours == "00:")
+         {
+             if ($(this).css("color") == "rgb(255, 0, 0)") {
+                 $(".timer").css("color", "black").css("font-weight", "normal");
+             }
+             else {
+                 $(".timer").css("color", "red").css("font-weight", "Bold");
+             }
+         }
+     });
+ 
+
+     
+    
+
+      
+    
+ </script>

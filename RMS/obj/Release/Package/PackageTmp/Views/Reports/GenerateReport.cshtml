@@ -1,0 +1,62 @@
+﻿@model Domain.Entities.ITABUWiseReportModel
+@{
+    ViewBag.Title = "ReportGeneration";
+}
+    @using (Html.BeginForm("GenerateReport", "Reports", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+        <script type="text/javascript">
+            
+            function BtnClick(obj)
+            {
+                $('.form-horizontal').submit();
+                obj.disabled = true;
+                obj.value= 'Generating...';
+                return false;
+            }
+
+        </script>
+        
+
+    <div class="col-md-12">
+        <div class="training-title margin-b-10">
+            Report : ITA Individual BU Wise For All Business Verticals
+                        <img src="../Content/css/Images/down-arrow.png" alt="down" />
+        </div>
+        <div>@Model.Message </div>
+    </div>
+
+<div class="col-md-12 margin-b-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <label for="exampleInputEmail1">
+                            Quarter                         
+                        </label>
+                        @Html.DropDownListFor(model => model.Quarter, Model.ListQuarters, new { id = "ddlQuarter", @class = "form-control Dropdownstyle required" })
+
+                    </div>
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1">
+                            Start Year                        
+                        </label>
+                        @Html.DropDownListFor(model => model.YearId, Model.ListYears, new { id = "ddlYear", @class = "form-control Dropdownstyle required" })
+                    </div>
+                    <div class="col-md-4">
+                        <input id="btnSave" class="btn btn-submit " type="submit" value="Submit" style="margin-top: 25px;" onclick="return BtnClick(this)"/>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+}

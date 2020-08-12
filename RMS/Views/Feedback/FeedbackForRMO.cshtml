@@ -1,0 +1,578 @@
+﻿@model RMS.Models.FeedbackQuestionViewModel
+@{
+    ViewBag.Title = "FeedbackForRMO";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+            <div class="col-md-12">
+            <div class=" training-title margin-b-10">
+               Feedback Details
+               <img  src="~/Content/css/Images/down-arrow.png" alt="down"/>	
+            </div>
+         </div>
+<div class="col-md-12"> 
+		 <div class="panel panel-default">
+				<div class="panel-heading">Feedback Form</div>
+				  <div class="panel-body">
+
+                            <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <span id="message">
+                        @{
+                            var msg = Convert.ToString(TempData["Result"]);
+                            if (!string.IsNullOrWhiteSpace(msg))
+                            {
+                            @msg
+                            <br />
+                            <script>
+                                $("#message").addClass("MessageStyleSuccess");
+                            </script>
+                            }
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                            <div class="clearfix margin-b-10">
+                                <div class=" col-md-4 col-sm-6">
+                                    <label class="form-label pull-right">Select Training Name</label>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    @Html.DropDownListFor(model => model.CourseNames.DataValueField, Model.CourseNames, new { @class = "form-control Dropdownstyle" })
+                                </div>
+                                <div id="wait" class="col-md-4 col-sm-6 wait" style="display: none;">
+                                    <img src="/RMSTraining/Content/css/Images/LoadingRed.gif" alt="Wait">
+                                </div>
+                            </div>
+                        </div>
+
+                        @using (Html.BeginForm("FeedbackFormRMO", "Feedback", FormMethod.Post, new { name = "FeedbackForm", id = "FeedbackForm" }))
+                        {  
+                        
+                        
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <input type="text" id="CourseID" name="CourseID" hidden /><br />
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Feedback to be sent by Participants : </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        @*<input type="text" placeholder="text" class="form-control">*@
+
+                                        @Html.TextBoxFor(model => model.NominationModel.FeedbackLastDate, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Date by which feedback to be submitted to trainer : <span class="asterisk-color" id="spanFeedbackToBeSentTrainer"> *</span></label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        @*<input type="text" placeholder="text" class="form-control">*@
+                                        @* Poonam : 27/04/2016 Starts
+                                            Issue : 57554 : In the "Feedback Details" page "text" is written in the "Feedback to be submitted" and "Feedback submitted to trainer" calendar field.
+                                         *@
+                                        @Html.TextBoxFor(model => model.NominationModel.FeedbackToBeSentTrainer, new { @class = "form-control required" })
+                                        @* Poonam : 27/04/2016 Ends *@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Date on which actual feedback submitted to trainer : </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        @*<form class="form-inline">
+  <div class="form-group">
+    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+    <div class="input-group">*@
+                                        <div class="input-group pull-left" style="margin-right:5px;">
+                                        @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
+                                        @* Poonam : 27/04/2016 Starts
+                                            Issue : 57554 : In the "Feedback Details" page "text" is written in the "Feedback to be submitted" and "Feedback submitted to trainer" calendar field.
+                                         *@
+                                        @Html.TextBoxFor(model => model.NominationModel.FeedbackSentToTrainer, new { @class = "form-control", @readonly = "readonly", style = "width:245px;" })
+                                            </div>
+                                        @* Poonam : 27/04/2016 Ends *@
+                                    
+                                    
+                                        <button type="button" class="btn btn-primary"style="border-radius:0px;background-color:#707070;" id="LinCheckSLA" >Check SLA</button>
+                                        @*<a href="#" id="LinCheckSLA" class="btn btn-primary" style="border-radius:0px;background-color:#707070;" >Check SLA</a>*@
+                                    </div>
+                                </div>
+                            </div>                
+@*<button type="submit" class="btn btn-primary">Check SLA</button>*@
+                              
+@*</form>*@
+@*</div>
+					</div>
+				 </div>*@
+
+                                    
+                                
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Reason for SLA not met : </label>
+                                        <span class="asterisk-color" style="display: none" id="spanReasonSLANotMet"> *</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        @*<textarea class="form-control TextAreastyle" rows="2"></textarea>*@
+                                        @Html.TextAreaFor(model => model.NominationModel.ReasonSLANotMet, new { @class = "form-control TextAreastyle", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 margin-b-10">
+                                    <div class="divider"></div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="clearfix margin-b-30 row-gray-bg">
+                                    <div class="col-md-12">
+                                        <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">No. of Participants : </label>
+                                            </div>
+                                        <div class=" col-md-4 col-sm-6">
+                                        <input class="form-control" type="text" id="txtNoOfParticipants" hidden readonly="readonly" /></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">No. of Feedbacks Received : </label></div>
+                                        <div class=" col-md-4 col-sm-6">
+                                        <input class="form-control" type="text" id="txtNoOfFeedbacksReceived" hidden readonly="readonly" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" id="FeedbackGridTable" style="overflow:scroll;height: 292px;width: 1108px;">
+                                            <table id="FeedbackTable" class="feedback-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="3" style="border: inset">Participant Name
+                                                        </th>
+                                                        <th colspan="10" style="border: inset">Trainer
+                                                        </th>
+                                                        @*Harsha- Issue Id: 58954- Start
+                                                            Description: Need to remove training face from feedback page
+                                                        *@
+                                                        <th colspan="5" rowspan="2" style="border: inset">Content</th>
+                                                        <th colspan="3" rowspan="2" style="border: inset">Facility</th>
+                                                        <th colspan="2" rowspan="2" style="border: inset">Overall</th>
+                                                        <th colspan="4" rowspan="2" style="border: inset">Suggestions</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="4" style="border: inset">Knowledge
+                                                        </th>
+                                                        <th colspan="3" style="border: inset">Training Methodology
+                                                        </th>
+                                                        <th colspan="1" style="border: inset">Presentation Skills
+                                                        </th>
+                                                        <th colspan="2" style="border: inset">Overall
+                                                        </th>
+
+                                                    </tr>
+                                                    <tr>
+                                                        @for (int i = 0; i < 3; i++)
+                                                        {
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        }
+
+                                                        @for (int i = 3; i < 7; i++)
+                                                        {
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        }
+                                                        <th style="border: inset">@Html.DisplayFor(model => model.QuestionModel[7].Description)</th>
+                                                        @for (int i = 8; i < 10; i++)
+                                                        {
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        }
+
+                                                        @for (int i = 10; i < 15; i++)
+                                                        {
+                                                        
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        
+                                                        }
+
+                                                        @for (int i = 15; i < 18; i++)
+                                                        {
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                                                                                    
+                                                        }
+
+                                                        @for (int i = 18; i < 20; i++)
+                                                        {
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        }
+
+                                                        @for (int i = 20; i < 24; i++)
+                                                        {
+                                                            @*Harsha- Issue Id: 58954- End*@
+                                                            <th style="border: inset">
+                                                                @Html.DisplayFor(model => model.QuestionModel[i].Description)
+                                                            </th>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="FeedbackTableTbody">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 margin-b-10">
+                                    <div class="divider"></div>
+                                </div>
+
+                            </div>
+              
+                            <div class="row">
+                                <div class="clearfix margin-b-10">
+                                    <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Comments(if any) : </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        @Html.TextAreaFor(model => model.NominationModel.CommentsForFeedback, new { @class = "form-control TextAreastyle" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 margin-b-10">
+                                    <div class="divider"></div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-md-12 col-sm-6 text-center">
+                                <!-- Harsha Issue Id- 58436- Start-->
+                                <!-- Description: on training record: if no emp fill feedback the show comment in SLA Met  columns -->
+                                <input class="btn btn-submit margin-r-10" id="btnNoFeedback" type="submit" value="No Feedback Received" name="Command" disabled="disabled"/>
+                                <!-- Harsha Issue Id- 58436- End-->
+                                 <input class="btn btn-submit margin-r-10 " id="btnSave" type="submit" value="Save" name="Command" disabled="disabled" />
+                                <input class="btn btn-submit margin-r-10 " id="btnSubmit" type="submit" value="Send Feedback" name="Command" disabled="disabled" />
+                                <input class="btn btn-reset" id="btnCancel" type="button" value="Cancel" />
+
+                            </div>
+                        }
+
+                        @using (Html.BeginForm("ExportToExcel", "Feedback", FormMethod.Post))
+                        {  
+                            <div class="col-md-12 col-sm-6">
+                                <input type="text" id="NoOfParticipants" name="txtNoOfParticipants" hidden />
+                                <input type="text" id="NoOfFeedbacksReceived" name="txtNoOfFeedbacksReceived" hidden />
+                                <input type="text" id="txtCourseID" name="CourseID" hidden /><br />
+                                <input class="btn btn-submit margin-r-10" id="btnExportToExcel" type="submit" value="Export To Excel" disabled="disabled" />
+                                <input type="hidden" id="htmlstring" name="htmlstring" />
+                                <input type="hidden" id="FeedbackRecordsTable" name="FeedbackRecordsTable" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $.validator.addMethod('date', function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var valid = true;
+            try {
+                $.datepicker.parseDate('dd/mm/yy', value);
+            }
+            catch (err) {
+                valid = false;
+            }
+            return valid;
+        });
+                
+        $('#NominationModel_FeedbackLastDate').datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val();
+        $('#NominationModel_FeedbackToBeSentTrainer').datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    minDate: 0
+                }).val();
+        $('#NominationModel_FeedbackSentToTrainer').datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true,
+                    //minDate: 0
+                }).val();
+
+
+        $('#LinCheckSLA').click(function () {
+            var dateflag = ValidateDate();
+            if (dateflag == true) {
+                $('#NominationModel_ReasonSLANotMet').attr("disabled", "disabled");
+                $('#spanReasonSLANotMet').hide();
+            }
+            else {
+                $('#NominationModel_ReasonSLANotMet').removeAttr("disabled");
+                $('#spanReasonSLANotMet').show();
+            }
+        });
+
+        //var FeedbackToBeSentTrainer = $('#NominationModel_FeedbackToBeSentTrainer').val();
+        //var FeedbackSentToTrainer = $('#NominationModel_FeedbackSentToTrainer').val();
+        //if (FeedbackToBeSentTrainer == "" || FeedbackSentToTrainer == "") {
+        //    $("#btnSubmit").attr("disabled", "disabled");
+        //}
+        //else {
+        //    $("#btnSubmit").removeAttr("disabled");
+        //};
+
+
+        $("#FeedbackForm").submit(function (e) {
+            //debugger;
+            var flag;
+            flag = Validation();
+            if (flag == false) {
+                $("#message").html("Please fill mandatory details.");
+                $("#message").addClass("MessageStyleFail");
+                e.preventDefault();
+
+            }
+            
+            var FeedbackSentToTrainer = $('#NominationModel_FeedbackSentToTrainer').val();
+            var Reason = $('#NominationModel_ReasonSLANotMet').val();
+            if (FeedbackSentToTrainer != "") {
+                var dateflag = ValidateDate();
+                if (dateflag == false && Reason == '') {
+                    $("#message").html("Please fill reason for SLA not met.");
+                    $("#message").addClass("MessageStyleFail");
+                    e.preventDefault();
+                }
+
+            }
+
+        });
+     
+
+        $("#btnSubmit").click(function () {
+            //debugger;
+            var FeedbackSentToTrainer = $('#NominationModel_FeedbackSentToTrainer').val();
+            if (FeedbackSentToTrainer == "") {
+                //$('#NominationModel_FeedbackSentToTrainer').addClass("requiredHiglight");
+                $("#message").html("Please enter the feedback sent to trainer date.");
+                $('#message').addClass("MessageStyleFail");
+                return false;
+
+            }
+        });
+
+        
+
+        var gridurl = '@Url.Action("FeedbackGrid", "Feedback")';
+        var FeedbackGrid = $("#FeedbackGrid");
+
+        $("#CourseNames_DataValueField").change(function () {
+            //debugger;
+            $('#message').html('');
+            $('#FeedbackTable_details_tr').html('');
+            var CourseId;
+
+            if ($('#CourseNames_DataValueField').val() != "0") {
+                $('#btnSave').removeAttr('disabled');
+                $('#btnSubmit').removeAttr('disabled');
+                $('#btnExportToExcel').removeAttr('disabled');
+                $("#CourseID").val($(this).val());
+                $("#txtCourseID").val($(this).val());
+            }
+            else {
+                $('#btnSave').attr('disabled', 'disabled');
+                $('#btnSubmit').attr('disabled', 'disabled');
+                $('#btnExportToExcel').attr('disabled', 'disabled');
+                CourseId = 0;
+                $("#CourseID").val(CourseId);
+            }
+
+            CourseId = $(this).val();
+            //$('#CourseID').value = CourseId;
+            $('#txtNoOfParticipants').show();
+            $('#txtNoOfFeedbacksReceived').show();
+
+            //$("#FeedbackTable_details").load(gridurl + "?CourseId=" + CourseId);
+            var count1 = 0;
+            var count2 = 0;
+
+            showaiting();
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("FeedbackGrid", "Feedback")',
+                contentType: "application/json; charset=utf-8",
+                data: { CourseID: CourseId },
+                dataType: "json",
+                success: function (result) {
+
+                    $.each(result.nominationModel, function (index, NominationModel) {
+                        var jsonData1 = JSON.stringify(NominationModel);
+                        //Parse JSON
+                        var objData1 = $.parseJSON(jsonData1);
+                        var NominationModel_FeedbackLastDate = new Date(parseInt(objData1.FeedbackLastDate.toString().substr(6)));
+
+                        if (objData1.FeedbackToBeSentTrainer != null) {
+                            var NominationModel_FeedbackToBeSentTrainer = new Date(parseInt(objData1.FeedbackToBeSentTrainer.toString().substr(6)));
+                            $('#NominationModel_FeedbackToBeSentTrainer').val(NominationModel_FeedbackToBeSentTrainer.getDate() + '/' + (NominationModel_FeedbackToBeSentTrainer.getMonth() + 1) + '/' + NominationModel_FeedbackToBeSentTrainer.getFullYear());
+                        }
+                        else {
+                            $('#NominationModel_FeedbackToBeSentTrainer').val('');
+                        }
+
+                        if (objData1.FeedbackSentToTrainer != null) {
+                            var NominationModel_FeedbackSentToTrainer = new Date(parseInt(objData1.FeedbackSentToTrainer.toString().substr(6)));
+                            $('#NominationModel_FeedbackSentToTrainer').val(NominationModel_FeedbackSentToTrainer.getDate() + '/' + (NominationModel_FeedbackSentToTrainer.getMonth() + 1) + '/' + NominationModel_FeedbackSentToTrainer.getFullYear());
+                        }
+                        else {
+                            $('#NominationModel_FeedbackSentToTrainer').val('');
+                        }
+                        $('#NominationModel_ReasonSLANotMet').val(objData1.ReasonSLANotMet);
+                        $('#NominationModel_CommentsForFeedback').val(objData1.CommentsForFeedback);
+                        $('#NominationModel_FeedbackLastDate').val(NominationModel_FeedbackLastDate.getDate() + '/' + (NominationModel_FeedbackLastDate.getMonth() + 1) + '/' + NominationModel_FeedbackLastDate.getFullYear());
+
+                    });
+                    var row = "";
+                    $('#FeedbackTableTbody').html('');
+
+                    $.each(result.stringList, function (index, EmployeeName) {
+
+                        var empName = EmployeeName;
+                        row += "<tr style='border: inset'><td style='border: ridge' align='center'>" + empName + "</td>";
+                        $.each(result.objectList, function (index, Feedback) {
+                            //stringify
+                            var jsonData = JSON.stringify(Feedback);
+                            //Parse JSON
+                            var objData = $.parseJSON(jsonData);
+                            var Name = objData.EmpName;
+                            var rating = objData.Rating;
+                            var comments = objData.CommentsFeedback;
+                            if (Name == empName) {
+                                if (objData.Rating != 0) {
+                                    row += "<td style='border: ridge' align='center'>" + rating + "</td>";
+                                    count2++;
+                                }
+                                else {
+                                    row += "<td style='border: ridge' align='center'>" + comments + "</td>";
+                                    count2++;
+                                }
+                            }
+
+                        });
+                        row += "</tr>";
+                        ++count1;
+                    });
+                    row += "<tr style='border: ridge'><td style='border: ridge' align='center'><b>Total</b></td>";
+                    $.each(result.TotalRating, function (index, TotalRatings) {
+                        row += "<td style='border: ridge' align='center'>" + TotalRatings + "</td>";
+                    });
+                    row += "<tr style='border: ridge'><td align='center'>Average rating </td>";
+                    var AvgTrainerRating = result.AvgTrainer;
+                    row += "<td colspan = 4 style='border: ridge' align='center'>" + AvgTrainerRating[0] + "</td>";
+                    row += "<td colspan = 3 style='border: ridge' align='center'>" + AvgTrainerRating[1] + "</td>";
+                    row += "<td style='border: inset' align='center'>" + AvgTrainerRating[2] + "</td>";
+                    row += "<td colspan = 2 style='border: ridge' align='center'>" + AvgTrainerRating[3] + "</td>";
+                    row += "<td colspan = 5 style='border: ridge' align='center'>" + AvgTrainerRating[4] + "</td>";
+                    row += "<td colspan = 3 style='border: ridge' align='center'>" + AvgTrainerRating[5] + "</td>";
+                    row += "<td colspan = 2 style='border: ridge' align='center'>" + AvgTrainerRating[6] + "</td></tr>";
+                    row += "<tr style='border: inset'><td style='border: ridge' align='center'>Total(Trainer) </td>";
+                    row += "<td colspan = 10 style='border: ridge' align='center'>" + AvgTrainerRating[7] + "</td>";
+
+                    row += "</tr>";
+                    //debugger;
+                    $('#FeedbackTableTbody').append(row);
+                    $('#txtNoOfFeedbacksReceived').val(result.NoOfFeedbackFilled); //will have to check
+                    //Harsha Issue Id- 58436- Start
+                    //Description: on training record: if no emp fill feedback the show comment in SLA Met  columns 
+                    if (result.NoOfFeedbackFilled == "0") {
+                        $('#btnNoFeedback').prop('disabled', false);
+                        $('#btnSubmit').prop('disabled', true);
+                    }
+                    else {
+                        $('#btnNoFeedback').prop('disabled', true);                        
+                    }
+                    //Harsha Issue Id- 58436- End
+                    $('#txtNoOfParticipants').val(result.TotalParticpants);
+                    $('#NoOfParticipants').val(result.TotalParticpants);
+                    $('#NoOfFeedbacksReceived').val(result.NoOfFeedbackFilled);
+                    $('#htmlstring').val("");
+                    $('#htmlstring').val($('#FeedbackGridTable').html());
+                    hidewaiting();
+                },
+
+            });
+
+        });
+
+    });
+
+    function ValidateDate() {
+        var accomodationValid = true;
+        //debugger;
+        if ($('#NominationModel_FeedbackSentToTrainer').val() != "" && $('NominationModel_FeedbackToBeSentTrainer').val() != "") {
+            var startdate = new Date($('#NominationModel_FeedbackSentToTrainer').val().toString());
+            var enddate = new Date($('#NominationModel_FeedbackToBeSentTrainer').val().toString());
+
+            var msDateA = Date.UTC(startdate.getFullYear(), startdate.getMonth() + 1, startdate.getDate());
+            var meDateB = Date.UTC(enddate.getFullYear(), enddate.getMonth() + 1, enddate.getDate());
+
+            if (msDateA > meDateB) {
+                accomodationValid = false;
+                $('#NominationModel_ReasonSLANotMet').removeAttr("disabled");
+                $('spanReasonSLANotMet').show();
+                accomodationValid = false;
+            }
+            else if ($("#NominationModel_FeedbackToBeSentTrainer").datepicker("getDate") < $("#NominationModel_FeedbackSentToTrainer").datepicker("getDate")) {
+                $('#NominationModel_ReasonSLANotMet').removeAttr("disabled");
+                $('#spanReasonSLANotMet').show();
+                accomodationValid = false;
+            }
+            else if ($("#NominationModel_FeedbackToBeSentTrainer").datepicker("getDate") < new Date($('#NominationModel_FeedbackSentToTrainer').datepicker("getDate")) || new Date($('#NominationModel_FeedbackToBeSentTrainer').datepicker("getDate")) < $("#NominationModel_FeedbackSentToTrainer").datepicker("getDate")) {
+                $('#NominationModel_ReasonSLANotMet').removeAttr("disabled");
+                $('#spanReasonSLANotMet').show();
+                accomodationValid = false;
+            }// comparison of datepicker date and json date
+            else {
+                $('#NominationModel_ReasonSLANotMet').attr("disabled", "disabled");
+                $('#spanReasonSLANotMet').hide();
+                accomodationValid = true;
+            }
+        }
+
+        return accomodationValid;
+    }
+    //Harsha Issue Id- 58436- Start
+    //Description: on training record: if no emp fill feedback the show comment in SLA Met  columns
+    $('#btnNoFeedback').click(function () {
+        confirm("Are you sure you want to proceed with No Feedback given?");
+    });
+    //Harsha Issue Id- 58436- End
+</script>

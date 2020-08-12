@@ -1,0 +1,17 @@
+﻿ @* Neelam : 25/07/2017 start. IssueId 59566*@
+@{
+    Layout = null;
+}
+
+ <div style="text-align: center;">
+    
+        @{
+            var message = Convert.ToString(ViewData["Result"]);
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+            <span class="Messagetext" id="message" style="text-align:center">@message</span> <br />
+            }
+        }
+     
+        </div>
+  @*Neelam : 25/07/2017 start. IssueId 59566*@

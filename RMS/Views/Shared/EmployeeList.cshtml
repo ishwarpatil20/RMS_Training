@@ -1,0 +1,83 @@
+﻿@model List<Domain.Entities.CommonModel>
+
+@using RMS.Common.Constants;
+@{    
+    Layout = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmployeeList</title>
+</head>
+<body>
+    @*@using (Html.BeginForm("Index", "Common", FormMethod.Post, new { @model = Model, @id = "form1" }))
+        { 
+    *@
+    <div id="login-box">
+        @using (Html.BeginForm("Index", "Common", FormMethod.Post, new { @model = Model, @id = "form1" }))
+        {    
+            
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <input type="button" value="Select" id="BtnFirstSelect" class="buttonstyle" /></td>
+
+                </tr>
+            </table>
+@*<div style="overflow-y: scroll">*@
+            <table id="viewreport" class="table table-striped" style="border: thin;">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>EMPCode</th>
+                        <th>Full Name</th>
+                        <th>Designation</th>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div id="test"></div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="tblBody">
+                    @{
+            int i = 0;
+            foreach (var report in Model)
+            {                           
+                
+                        <tr>
+                            <td>@Html.CheckBox(Model[i].FirstName + ' ' + Model[i].LastName, Model[i].Checked, new {@class = Model[i].EmpID })</td>
+                            <td>@Html.LabelFor(m => m[i].EMPCode, Model[i].EMPCode)</td>
+                            <td>@Html.LabelFor(m => m[i].FirstName, Model[i].FirstName)  @Html.LabelFor(m => m[i].LastName, Model[i].LastName)</td>
+                            <td>@Html.LabelFor(m => m[i].Designation, Model[i].Designation)
+                                @Html.HiddenFor(m => m[i].EmpID, Model[i].EmpID)
+                                @Html.HiddenFor(m => m[i].FirstName, Model[i].FirstName)
+                                @Html.HiddenFor(m => m[i].LastName, Model[i].LastName)
+                            </td>
+                        </tr>
+                i++;
+            }
+                    }
+                </tbody>
+            </table>
+@*</div>*@
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <input type="button" value="Select" id="BtnSecondSelect" class="buttonstyle" /></td>
+
+                </tr>
+            </table>
+        }
+    </div>
+    @*}*@
+</body>
+</html>
+
+<script>
+    var table = $('#viewreport').dataTable();
+</script>
+

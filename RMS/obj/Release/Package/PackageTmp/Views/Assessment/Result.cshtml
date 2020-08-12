@@ -1,0 +1,42 @@
+﻿@model RMS.Models.AssessmentResultViewModel
+
+@{
+    ViewBag.Title = "Result";
+}
+
+
+<div class="col-md-12">
+    <div class="training-title margin-b-10">
+        Assessment Paper Result
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+<div class="col-md-12">
+   
+        <div class="panel-group">
+            <div class="panel panel-default" id="pnlTrainingCourse">
+                <div class="panel-heading">Assessment Paper Result Details</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            @if (Model.Message =="1")
+                            {
+                           <div class="MessageStyleSuccess">You have scored @Model.TotalScore.ToString() out of @Model.OutofScore.ToString() in this assessment.</div>
+                            }
+                            else
+                            {
+                                <div class="MessageStyleSuccess">You already submited your assessment.</div> 
+                            }                               
+                        </div>
+                        <div class="col-md-12" style="text-align :center">
+                            <a href="javascript:window.opener='x';window.close();"><input id="btnCancel" type="button" value="Close" class="buttonstyle"  /></a>
+                        </div> 
+                    </div>                   
+                </div>                   
+                </div>
+            </div>
+        </div>
+
+
+    

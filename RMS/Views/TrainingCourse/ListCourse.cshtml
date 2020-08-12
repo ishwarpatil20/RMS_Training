@@ -1,0 +1,134 @@
+﻿@model RMS.Models.ViewCourseViewModel
+@using RMS.Common.Constants
+@using System.Collections;
+
+
+@{
+    ViewBag.Title = "Course List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var message = TempData["Message"] ?? string.Empty;
+   
+}
+        @*Harsha Issue Id- 58975 and 58958 - Start       *@
+@{
+    string Role = string.Empty;
+}
+            @if (System.Web.HttpContext.Current. Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+            {                
+                ArrayList arrRolesForUser = new ArrayList();
+                arrRolesForUser = (ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+                if (arrRolesForUser.Contains("admin"))
+                {
+                    Role = "Admin";
+                }
+                else if (arrRolesForUser.Contains("manager"))
+                {
+                    Role = "Manager";
+                }
+            }    
+@*        Harsha Issue Id- 58975 and 58958 - Start       *@
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+    <div class="col-md-12">
+		 <div class=" training-title margin-b-10">
+			View Course
+			<img  src="~/Content/css/Images/down-arrow.png" alt="down"/>			
+		 </div>	
+		 </div>
+    @*<div class="row">
+        @Html.ActionLink("Create New Course", "CreateCourse")
+    </div>*@
+    <div class="col-md-12">
+        <div class="col-md-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-12">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Search Course </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.TrainingTypeDetails)
+                    </div>
+                    <div class="col-md-10">
+                        @foreach (var tm in Model.TrainingTypeDetails)
+                        {
+                            @Html.RadioButtonFor(model => model.TrainingTypeID, tm.Value, new {@class="training-radio-div"})
+                            @Html.Label(tm.Text)
+                        }    
+                    </div>
+                </div>
+                <div class="form-group" id="dvTrainingStatus">
+                    @*@if (Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower()) {*@
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.TrainingStatusID)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.TrainingStatusID, Model.TrainingStatusDetails, new { id = "ddlCourseStatus", @class = "form-control Dropdownstyle" })
+                    </div>
+                    @*}*@
+                    <div class="col-md-6"/>
+                </div>
+            </div>
+        </div>  
+    </div>
+    </div>
+    <div  >
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Course List</div>
+                <div class="panel-body">
+                    <div id="divGrid" >
+                        @{Html.RenderPartial(CommonConstants.ViewTrainingCourseGrid, Model.CourseDetails,new ViewDataDictionary { { "courseStatus", Model.TrainingStatusID }});}
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var gridurl = '@Url.Action("TrainingCourseGrid", "TrainingCourse")';
+        var userRole = @Html.Raw(Json.Encode(Role)); 
+        @*var qsVal = '@Model.QsTrainingTypeID';*@
+
+        //if (qsVal.length > 0) {
+        //    LoadGrid(qsVal);
+        //}
+        var trainingTypeID = @Html.Raw(Json.Encode(Convert.ToInt32(this.TempData.Peek("trainingTypeID"))));
+        $("input[name=TrainingTypeID][value=" + trainingTypeID + "]").prop('checked', true);
+
+        $("input[name='TrainingTypeID']").change(function () {
+            var selectedRadio = $("input[name='TrainingTypeID']:checked").val();
+            var courseStatus = $('#ddlCourseStatus').val();
+            LoadGrid(selectedRadio,courseStatus);
+        })
+
+        function LoadGrid(trainingType, courseStatus) {
+            $("#divGrid").html('');
+            $("#divGrid").load(gridurl + "?trainingTypeID=" + trainingType + "&courseStatusId=" + courseStatus );
+        }
+
+        $('#ddlCourseStatus').change(function () {
+            var selectedRadio = $("input[name='TrainingTypeID']:checked").val();
+            var courseStatus = $(this).val();
+            //debugger;
+            LoadGrid(selectedRadio, courseStatus);
+            //$('#tblCourse').dataTable();
+        })
+
+        //Harsha Issue Id- 58975 and 58958 - Start               
+        if(userRole == "Manager") {            
+            $('#dvTrainingStatus').hide();
+        }
+        //Harsha Issue Id- 58975 and 58958 - End
+    });
+</script>

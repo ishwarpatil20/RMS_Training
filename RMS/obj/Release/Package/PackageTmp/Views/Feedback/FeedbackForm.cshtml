@@ -1,0 +1,259 @@
+﻿@model RMS.Models.FeedbackQuestionViewModel
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+         <div class="col-md-12">
+            <div class=" training-title margin-b-10">
+               Feedback Form
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+            </div>
+    </div>
+		<div class="col-md-12"> 
+		 <div class="panel panel-default">
+				<div class="panel-heading">Feedback Form</div>
+				  <div class="panel-body">
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span id="message">
+                                            @{
+        var msg = Convert.ToString(TempData["Result"]);
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+                                                @msg
+                                                <br />
+                                                <script>
+                                                    $("#message").addClass("MessageStyleSuccess");
+                                                </script>
+        }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                </div>
+                      <div class="row">
+					 <div class="clearfix margin-b-10">
+					 <div class=" col-md-4 col-sm-6">
+                                        <label class="form-label pull-right">Select Training Name : </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+@Html.DropDownListFor(model => model.CourseName, Model.CourseName, new { @class = "form-control Dropdownstyle" })</div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               @using (Html.BeginForm("FeedbackForm", "Feedback", FormMethod.Post))
+    {    
+                   <div class="col-md-12"> 
+
+                <div class="panel panel-default" id="Feedback" hidden>
+                <div class="panel-heading">
+                    Feedback Form
+                        <input id="CourseID" name="CourseID" type="text" hidden />
+                </div>
+                    <div class="panel-body">
+                            <div class="row">
+
+                                <div class="clearfix margin-b-10">
+						 <div class="col-md-10">
+                                <p>Dear Participant, </p>
+							<p>We request you to provide us with open feedback to make this training process more effective.</p>
+							<p>We shall really appreciate your time in filling up this form.</p>
+                                <p class="rating-text rating-bg">The rating scale is : <span>5-Strongly Agree </span><span>4-Agree	 </span><span>3-Moderately Agree	 </span><span>2-Disagree </span><span>1-Non Applicable </span></p>
+	
+						<div class="margin-b-20 margin-t-20">
+						 <div class=" col-md-2 col-sm-6">
+
+                                        <label class="form-label">Participant Name : </label>
+                             </div>
+                             <div class="col-md-3 col-sm-6">
+
+                             <label class="label-text">@ViewBag.empName</label>
+                                    </div>
+                                    <div class=" col-md-2 col-sm-6">
+							   <label class="form-label">Trainer Name : </label>
+                                        </div>
+						 <div class="col-md-3 col-sm-6">
+
+                                        <input id="TrainerName" type="text" readonly="readonly" class="form-control" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                                    <div class="search-icon col-md-2 img-responsive"></div> 
+
+                            </div>
+				 </div>	
+
+				
+				
+				<div class="row">
+				<div class="col-md-12 margin-b-20">
+                        <div class="divider"></div>
+                </div>
+				</div>
+				
+				            @* Harsha- Issue Id: 58954- Start
+                                Description: Need to remove training face from feedback page *@
+                            @for (int i = 0; i < 20; i++)
+                            {
+                                 @* Harsha- Issue Id: 58954- End*@
+                                if (Model.QuestionModel[i].QuestionMasterID == 1)
+                                {
+                                <div class="row">
+                                    <div class="overall-rating">
+                                        <span>TRAINER</span>
+                                        
+                                    </div>
+                                </div>
+                                }
+                                
+                                <div class="row">
+                                    <div class="clearfix margin-b-20">
+						<div class="col-md-12 margin-b-10 green-text">
+
+                                        <div hidden>@Html.EditorFor(model => model.QuestionModel[i].QuestionMasterID)</div>
+                                        @Html.DisplayTextFor(model => model.QuestionModel[i].Description)
+                                    </div>
+                                        <div class="col-md-2 margin-b-10">@Html.RadioButtonFor(model => model.FeedbackModel[i].Rating, 5)
+                                            <label class="Labelstyle">5</label>
+
+                                        </div>
+                                        <div class="col-md-2 margin-b-10">@Html.RadioButtonFor(model => model.FeedbackModel[i].Rating, 4)
+                                            <label class="Labelstyle">4</label>
+
+                                        </div>
+                                        <div class="col-md-2 margin-b-10">@Html.RadioButtonFor(model => model.FeedbackModel[i].Rating, 3)
+                                            <label class="Labelstyle">3</label>
+
+                                        </div>
+                                        <div class="col-md-2 margin-b-10">@Html.RadioButtonFor(model => model.FeedbackModel[i].Rating, 2)
+                                            <label class="Labelstyle">2</label>
+
+                                        </div>
+                                        <div class="col-md-2 margin-b-10">@Html.RadioButtonFor(model => model.FeedbackModel[i].Rating, 1)
+                                            <label class="Labelstyle">1</label>
+
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+				<div class="col-md-12 margin-b-20">
+                        <div class="divider"></div>
+                </div>
+				</div>
+
+                                if (Model.QuestionModel[i].QuestionMasterID == 10)
+                                {
+                                <div class="row">				
+                      <div class="overall-rating"><span>COURSE CONTENT</span></div>                 
+				</div>
+                                
+                                }
+
+                                if (Model.QuestionModel[i].QuestionMasterID == 16)
+                                {
+                                <div class="row">				
+                      <div class="overall-rating"><span>TRAINING FACILITY</span></div>                 
+				</div>
+                                
+                                }
+
+                                if (Model.QuestionModel[i].QuestionMasterID == 19)
+                                {
+                                <div class="row">				
+                      <div class="overall-rating"><span>OVERALL RATING</span></div>                 
+				</div>
+
+                                }
+
+                            }
+
+                            @*Harsha- Issue Id: 58954- Start
+                              Description: Need to remove training face from feedback page
+                            *@
+                            @for (int i = 20; i < 24; i++)
+                            {
+                                @*Harsha- Issue Id: 58954- End*@
+                                <div class="row">
+					<div class="clearfix margin-b-10">
+						<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12 margin-b-10">
+
+                                        <div hidden>@Html.EditorFor(model => model.QuestionModel[i].QuestionMasterID)</div>
+                                        @Html.DisplayTextFor(model => model.QuestionModel[i].Description)
+                                    </div>
+                                </div>
+                                <br />
+            
+                                <div class="col-md-12 margin-b-10">
+                                        @Html.TextAreaFor(model => model.FeedbackModel[i].CommentsFeedback, new { @class = "form-control TextAreastyle" })
+                                    </div>
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                                    </div>
+                            }
+                            <hr />
+                            <div class="row">		
+		 <div class="col-md-12 text-center">
+                            <input id="Submit" class="btn btn-submit margin-r-10 " type="submit" value="Submit" />
+                            <input id="Cancel" class="btn btn-reset" type="button" value="Cancel" />
+             
+		 </div>
+		</div> 
+			
+                                       
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                                
+    }
+
+                 
+   
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#CourseName").on("change", function () {
+            if ($("#CourseName").val() != "0") {
+                $("#CourseID").val($(this).val());
+                var CourseId = $("#CourseID").val();
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetTrainerName", "Feedback")',
+                    contentType: "application/json; charset=utf-8",
+                    data: { CourseID: CourseId },
+                    dataType: "json",
+                    success: function (result) {
+                        var TrainerName = result.Trainername;
+                        $('#TrainerName').val(TrainerName);
+                    }
+                });
+                $('#Feedback').show();
+            }
+            else {
+                $('#Feedback').hide();
+            }
+        });
+
+        //$('#Submit1').click(function () {
+        //    $("form").submit();
+        //});
+
+    });
+
+</script>

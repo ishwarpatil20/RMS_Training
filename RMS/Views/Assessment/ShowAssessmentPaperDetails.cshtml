@@ -1,0 +1,230 @@
+﻿@model RMS.Models.AssessmentViewModel
+@using RMS.Helpers;
+@{
+    ViewBag.Title = "Show Assessment Paper Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class=" training-title margin-b-10">
+        View Assessment Paper
+		<img src="~/Content/css/Images/down-arrow.png" alt="down" />	
+    </div>
+</div>
+
+<div class="col-md-12">
+    @using (Html.BeginForm("AddAssessmentDetails", "Assessment", new { id = CheckAccessAttribute.Encode(Convert.ToString(Model.AssessmentPaper.AssessmentPaperId)), course = CheckAccessAttribute.Encode(Convert.ToString(Model.AssessmentPaper.CourseId)), trainingNameId = CheckAccessAttribute.Encode(Convert.ToString(Model.AssessmentPaper.TrainingNameId)) }, FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", id = "frmAssessmentDetails" }))
+    {
+        @Html.AntiForgeryToken()     
+        @Html.HiddenFor(model => model.AssessmentPaper.AssessmentPaperId)      
+        <div class="panel-group">
+            <div class="panel panel-default" id="pnlTrainingCourse">
+                <div class="panel-heading">Assessment Paper Details</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.CourseId, "Course")</div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.AssessmentPaper.CourseName)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.CourseId)
+                                    @Html.HiddenFor(model => model.AssessmentPaper.TrainingNameId)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.AssessmentDate, "Assessment Date")</div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.AssessmentPaper.AssessmentDate, "{0:dd/MM/yyyy}")
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-2">@Html.LabelFor(model => model.AssessmentPaper.TimeDuration, "Time Duration")</div>
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(model => model.AssessmentPaper.TimeDuration) Minutes
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <input id="btnAddNew" type="submit" name="submitButton" value="Add New Question" class="buttonstyle" />&nbsp;
+                                                <input id="btnExistingAssessment" type="submit" name="submitButton" value="Use Existing Assessment" class="buttonstyle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        if (Model.AssessmentQuestions != null && Model.AssessmentQuestions.Count > 0)
+        {
+        
+            <div class="panel-group">
+                <div class="panel panel-default" id="pnlAssessmentQuestione">
+                    <div class="panel-heading">Assessment Questions</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-1 text-center "><b>Sr.No</b></div>
+                                    <div class="col-md-4 "><b>Question</b></div>
+                                    <div class="col-md-3">
+                                        <b>Options</b>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Correct Answer</b>
+                                    </div>
+                                    <div class="col-md-1 text-center "><b>Edit</b></div>
+                                    <div class="col-md-1 text-center "><b>Delete</b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <hr style="margin: 0px;" />
+                                </div>
+                            </div>
+                        </div>
+                        @{
+            int index = 1;
+                        }
+                        @foreach (var assessmentQuestion in Model.AssessmentQuestions)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-1 text-center ">@index</div>
+                                        <div class="col-md-4">@Html.DisplayFor(model => assessmentQuestion.Question)<br />
+                                            @if(!string.IsNullOrEmpty( assessmentQuestion.QuestionImgFileName)){ <img src="@(Url.Content( System.Configuration.ConfigurationManager.AppSettings[RMS.Common.Constants.CommonConstants.AssessmentQuestionImgPath].ToString() + "/") + assessmentQuestion.QuestionImgFileName)" width="250px" height="200px" /><br />}
+                                            
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.Label("A", "A.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option1Description)<br />
+                                            @if(!string.IsNullOrEmpty( assessmentQuestion.Option1ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option1ImageFileName)" width="250px" height="200px" /><br />}
+                                            
+                                            @Html.Label("B", "B.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option2Description)<br />
+                                            @if(!string.IsNullOrEmpty( assessmentQuestion.Option2ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option2ImageFileName)" width="250px" height="200px" /><br />}
+                                            
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description) || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                            {
+                                                @Html.Label("C", "C.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option3Description)<br />
+                                                if(!string.IsNullOrEmpty( assessmentQuestion.Option3ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option3ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description) || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                            {
+                                                @Html.Label("D", "D.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option4Description)<br />
+                                                if(!string.IsNullOrEmpty( assessmentQuestion.Option4ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option4ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description) || !string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                            {
+                                                @Html.Label("E", "E.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option5Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option5ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description) || !string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                            {
+                                                @Html.Label("F", "F.", new { @style = "padding-right:10px;" })@Html.DisplayFor(model => assessmentQuestion.Option6Description)<br />
+                                                if (!string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName)){ <img src="@(Url.Content("~/Assessment_Files/AnswerImg/") + assessmentQuestion.Option6ImageFileName)" width="250px" height="200px" /><br />}
+                                            }
+                                        </div>
+                                        <div class="col-md-2">
+                                            @if (assessmentQuestion.IsOption1Correct)
+                                            {@Html.Label("Option A", "Option A")}
+                                            @if (assessmentQuestion.IsOption2Correct)
+                                            {@Html.Label("Option B", "Option B")}
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option3Description) || !string.IsNullOrEmpty(assessmentQuestion.Option3ImageFileName))
+                                            {
+                                                if (assessmentQuestion.IsOption3Correct)
+                                                {@Html.Label("Option C", "Option C")}
+                                            }
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option4Description) || !string.IsNullOrEmpty(assessmentQuestion.Option4ImageFileName))
+                                            {
+                                                if (assessmentQuestion.IsOption4Correct)
+                                                {@Html.Label("Option D", "Option D")}
+                                            }
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option5Description) || !string.IsNullOrEmpty(assessmentQuestion.Option5ImageFileName))
+                                            {
+                                                if (assessmentQuestion.IsOption5Correct)
+                                                {@Html.Label("Option E", "Option E")}
+                                            }
+                                            @if (!string.IsNullOrEmpty(assessmentQuestion.Option6Description) || !string.IsNullOrEmpty(assessmentQuestion.Option6ImageFileName))
+                                            {
+                                                if (assessmentQuestion.IsOption6Correct)
+                                                {@Html.Label("Option F", "Option F")}
+                                            }
+                                        </div>
+                                        <div class="col-md-1 text-center ">
+                                            @if (Model.AssessmentPaperDetails[index - 1].IsNewQuestion)
+                                            {
+                                                <a href="@Url.Action("EditAssessmentQuestion", new { QuestionId = CheckAccessAttribute.Encode(Convert.ToString(assessmentQuestion.QuestionId)), PaperId = CheckAccessAttribute.Encode(Convert.ToString(assessmentQuestion.AssessmentPaperId ))})" >
+                                                <img src="@Url.Content("~/Content/css/Images/Edit.gif")" alt="Edit" title="Edit"/>
+                                            </a>
+                                            }
+                                            else
+                                            {
+                                                <img src="@Url.Content("~/Content/css/Images/minus.JPG")" alt="minus" title="minus" width="20px"/>
+                                            }
+                                        </div>
+                                        <div class="col-md-1 text-center ">
+                                            @*<a onclick="return DeleteAssessmentQuestion(@assessmentQuestion.QuestionId,@assessmentQuestion.AssessmentPaperId);" href="#" >*@
+                                            <a onclick="return DeleteAssessmentQuestion('@CheckAccessAttribute.Encode(Convert.ToString(@assessmentQuestion.QuestionId))','@CheckAccessAttribute.Encode(Convert.ToString(@assessmentQuestion.AssessmentPaperId))')" href="#" >
+                                                <img  src="@Url.Content("~/Content/css/Images/Delete.gif")" alt="Delete" title="Delete"/>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                            index = index + 1;
+                        }
+                    </div>
+                </div>
+            </div>
+        
+        }
+    }
+</div>
+<script type="text/javascript">
+    var TrainingListUrl = '@Url.Action("ShowAssessmentPaperDetails", "Assessment", new { Id = CheckAccessAttribute.Encode(Convert.ToString(@Model.AssessmentPaper.AssessmentPaperId)) })'
+    function DeleteAssessmentQuestion(questionId, paperId) {
+        debugger;
+
+        if (confirm('Click OK to Delete the question for the selected Course.')) {
+            $.ajax({
+                url: "@Url.Action("DeleteAssessmentQuestion", "Assessment")",
+                type: 'GET',
+                cache: false,
+                data: { questionId: questionId, paperId: paperId },
+                success: function (data) {
+                    if (data) {
+
+                        window.location.href = TrainingListUrl;
+                        alert("Question for the selected course deleted successfully.");
+                    }
+                    else {
+                        alert("Error occured while deleting question.");
+                    }
+                }
+            });
+        }
+    }
+</script>

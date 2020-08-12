@@ -1,0 +1,222 @@
+﻿@model RMS.Models.AssignAssessmentViewModel
+@{
+    ViewBag.Title = "Assessment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="training-title margin-b-10">
+        Assign Assessment
+               <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+    </div>
+</div>
+
+@using (Html.BeginForm("AssignAssessment", "Assessment", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @id = "frmCreateAssessment" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="col-md-12">
+        <span id="message">
+            @{
+    var msg = Convert.ToString(TempData["Result"]);
+    if (!string.IsNullOrWhiteSpace(msg))
+    {
+                @msg
+                <br />
+                <script>
+                                    $("#message").addClass("MessageStyleSuccess");
+                </script>
+    }
+            }
+        </span>
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panel-default" id="pnlTrainingCourse">
+            <div class="panel-heading">Assign Assessment Details</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.CourseId, "Course")<label style="color: red; padding-left: 2px;">*</label>
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.CourseId, Model.ListCourses, new { id = "ddlCourse", @class = "required" })
+                                    @Html.DisplayFor(model => model.CourseName)
+                                    @Html.HiddenFor(model => model.CourseId)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+
+                @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" id="dvCourseDetail">
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                   Time Duration
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="divTimeDuration"></div>
+                                </div>
+                            </div>
+                            <div class="editor-label">
+                                <div class="col-md-2">
+                                    Assessment Date
+                                </div>
+                            </div>
+                            <div class="editor-field">
+                                <div class="col-md-4">
+                                    <div id="dvAssessmentDate"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                <div class="table-responsive" id="dvEmp" style="display: none">
+                                       @{Html.RenderPartial("_ShowEmployee",Model);}
+                                 </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                    <input id="btnSave" type="submit" value="Assign to Employees" class="buttonstyle"  />
+                                @*&nbsp;<input id="btnCancel" type="reset" value="Reset" class="buttonstyle" />*@
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+            
+            
+        }
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#AssessmentPaper_AssessmentDate').val() == "01/01/1900" || $('#AssessmentPaper_AssessmentDate').val() == "01/01/1900 00:00:00"
+            || $('#AssessmentPaper_AssessmentDate').val() == "01/01/0001" || $('#AssessmentPaper_AssessmentDate').val() == "01/01/0001 00:00:00")
+        {
+            $('#AssessmentPaper_AssessmentDate').val('');
+        }
+        //$('#dvAssessmentDate').inn() = $('#dvAssessmentDate').val().
+
+
+        $.validator.addMethod('date',
+           function (value, element) {
+               if (this.optional(element)) {
+                   return true;
+               }
+               var valid = true;
+               try {
+                   $.datepicker.parseDate('dd/mm/yy', value);
+               }
+               catch (err) {
+                   valid = false;
+               }
+               return valid;
+           });
+
+        $('#AssessmentPaper_AssessmentDate').datepicker(
+             {
+                 dateFormat: "dd/mm/yy",
+                 autoclose: true,
+                 minDate: 0
+             }).val();
+
+        $("#btnCancel").click(function (e) {
+            $("#frmCreateAssessment")[0].reset();
+            $("#frmCreateAssessment").find("[data-valmsg-replace]")
+            .removeClass("field-validation-error")
+            .addClass("field-validation-valid")
+            .empty();
+            $('#AssessmentPaper_AssessmentDate').datepicker().val('');
+            ClearBorderColor();
+            $("#message").html("");
+            e.preventDefault();
+        });
+
+        $('.required').change(function () {
+            clearvalidation(this);
+        });
+
+        $("#frmCreateAssessment").submit(function (e) {
+            var flag = Validation();
+            if (flag == false) {
+                $("#message").html("Please fill mandatory details.");
+                $("#message").addClass("MessageStyleFail");
+                $(".requiredHiglight").first().focus();
+                e.preventDefault();
+            }
+            
+        });
+
+
+        //$("#ddlCourse").change(function () {
+        $('#ddlCourse').on('change', function () {
+            var tID = $(this).val();            
+            var gridurl = '@Url.Action("ViewAssesmentCourse", "Assessment")';
+            
+            if (tID != 0) {
+                showaiting();
+                $("#dvEmp").load(gridurl + "?pcourseId=" + tID);
+                $("#dvEmp").show();
+            } else { $("#dvEmp").html(''); }
+
+
+            
+            $.getJSON("@Url.Action("GetAssessCourseDetail", "Assessment")", { pcourseId: tID },
+                    function (data) {
+                        if (data.AssessmentPaper.TimeDuration != 0) {
+
+                            $('#divTimeDuration').html(data.AssessmentPaper.TimeDuration + ' Minutes');
+                            $('#dvAssessmentDate').html(data.AssessmentPaper.AssessmentDataDDMMYYY);
+                            $('#btnSave').removeAttr('disabled');
+                            $('#dvEmp').show();
+                        }
+                        else {                            
+                            $('#divTimeDuration').html('');
+                            $('#dvAssessmentDate').html('');
+                            $('#btnSave').attr('disabled', 'disabled');
+                            $('#dvEmp').hide();
+                            if (pcourseId != 0)
+                                alert('Please add the Assessment date & Durationm from List Course Page.');
+                        }   
+                    });
+        });
+
+        
+    });
+
+</script>

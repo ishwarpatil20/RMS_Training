@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <title>Error Page</title>
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="bootstrapcss/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width" />
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    @Styles.Render("~/Content/css")
+
+
+</head>
+<body>
+    <header>
+        <div class="header-right-image img-responsive margin-b5">
+            <div class="pull-left logo">
+                <img src="~/Content/css/Images/Rave-logo.png" class="img-responsive">
+            </div>
+            <div class="pull-right rm">
+                Resource Management
+            </div>
+        </div>
+        <div class="header-strip margin-b-10">
+        </div>
+    </header>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="pull-right">Welcome! <span class="UserNameStyle"><i>@User.Identity.Name.ToString()</i></span></p>
+            </div>
+        </div>
+        <div class="content-wrapper">
+
+            <div class="float-right menu-bg">
+
+                <ul>                    
+                    <li ><a href="@Url.Action("TrainingModule", "training")">
+                          <span class="UserNameStyle"> Home</span> </a> </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="body">
+                    <div id="wait" class="wait">
+                        <img src="@Url.Content("~/Content/css/Images/LoadingRed.gif")" alt="Wait" />
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class=" training-title margin-b-10">
+                                <br />
+                                Error occured while handling your request. Kindly contact system administrator		
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div> 
+        
+</body>
+</html>

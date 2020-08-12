@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSource2">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=RAV-VM-SRV-008;Initial Catalog=RMSTraining</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>b3202d50-f258-4e2a-a44f-29253ac38489</DataSourceID>
+</RptDataSource>

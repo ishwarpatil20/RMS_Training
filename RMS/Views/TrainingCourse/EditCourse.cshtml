@@ -1,0 +1,1117 @@
+﻿@model RMS.Models.TrainingCourseViewModel
+@using RMS.Common.Constants;
+@using System.Collections;
+
+@{
+    ViewBag.Title = "View Course Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="divCourse">
+    <div class="col-md-12">
+        <div class=" training-title margin-b-10">
+            @{var lt = (Model.PageMode != CommonConstants.EditMode) ? "View Course" : "Edit Course"; }
+            @lt
+            <img src="~/Content/css/Images/down-arrow.png" alt="down" />
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("EditCourse", "TrainingCourse", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", id = "form0" }))
+{
+    @Html.AntiForgeryToken()     
+    @Html.HiddenFor(model => model.CourseID)      
+    @Html.HiddenFor(model => model.RaiseTrainingIds)
+    @Html.Hidden("hdnTrainingMode", Model.TrainingModeID);
+                                                         // @Html.Hidden("hdnTrainingStartDate", Model.TrainingStartDate);
+                                                         // @Html.Hidden("hdnTrainingEndDate",Model.TrainingEndDate)
+                
+             
+            
+   
+    <div class="col-md-12">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-12">
+        <span id="message"></span>
+    </div>
+            
+    <div class="col-md-12">
+        @*<fieldset>
+                    @{var lt = (Model.PageMode != CommonConstants.EditMode) ? "View Course" : "Edit Course"; }
+                    <legend>@lt</legend>*@
+        <div class="panel panel-default" id="pnlTrainingCourse">
+            <div class="panel-heading">Training Course Details</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">@Html.LabelFor(model => model.TrainingTypeID)<span class="asterisk-color"> *</span></label>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            @Html.DropDownListFor(model => model.TrainingTypeID, Model.TrainingTypeDetails, new { id = "ddlTrainingType", @class = "form-control Dropdownstyle required" })
+                            @*@Html.ValidationMessageFor(model => model.TrainingTypeID, "", new { @style = "color:red;" })*@
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingNameID)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.DropDownListFor(model => model.TrainingNameID, Model.TrainingNameDetails, new { id = "ddlTrainingName", @class = "form-control Dropdownstyle required" })
+                            @*@Html.ValidationMessageFor(model => model.TrainingNameID, "", new { @style = "color:red;" })*@
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6" id="divGrid">
+                            @{Html.RenderPartial(CommonConstants.RaiseRequestGrid, Model.RaiseRequestDetails);}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.CourseName) <span class="asterisk-color">*</span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+
+                            @Html.TextBoxFor(model => model.CourseName, new { @class = "form-control required", disabled = "disabled" })
+
+                            @Html.ValidationMessageFor(model => model.CourseName, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingModeID)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @foreach (var tm in Model.TrainingModeDetails)
+                            {
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.TrainingModeID, tm.Value)
+                                    @Html.Label(tm.Text)
+                                </label>
+                            }
+                            @*@Html.ValidationMessageFor(model => model.TrainingModeID, "", new { @style = "color:red;" })*@
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.CourseContentFileDetails)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+
+                            <div id="divCourseContent">
+                                @{
+                            Html.RenderPartial(CommonConstants.FileHelperView, Model.CourseContentFileDetails);
+                                }
+                            </div>
+                            @if (Model.PageMode == CommonConstants.EditMode)
+                            {
+                                        
+                                <input type="file" id="fileCourseContents" name="fileCourseContents" multiple="multiple" class="fileUpload" />
+                                            
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10" id="divDAR">
+
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.DARFormFileDetails)</label>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div id="divCourseDAR">
+
+                                @{Html.RenderPartial(CommonConstants.FileHelperView, Model.DARFormFileDetails);}
+
+                            </div>
+                            @if (Model.PageMode == CommonConstants.EditMode)
+                            {
+                                        
+                                <input type="file" id="fileDAR" name="fileDAR" class="fileUpload" />
+                                           
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10" id="divTechPanel">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label1">@Html.LabelFor(model => model.TechnicalPanelName)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+
+                            <div class="input-group input-group-unstyled">
+                                @Html.TextAreaFor(model => model.TechnicalPanelName, new { @class = "form-control TextAreastyle" })
+                                @Html.HiddenFor(model => model.TechnicalPanelID)
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search search-bg">
+                                        <a href="#login-box" id="check">
+                                            <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/></a></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row" id="divTrainerName">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainerName)<span class="asterisk-color"> *</span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TrainerName, new { @class = "form-control required" })
+                            @Html.ValidationMessageFor(model => model.TrainerName, "", new { @style = "color:red;" })
+
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" id="divTrainerNameInternal">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainerName)<span class="asterisk-color"> *</span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="input-group input-group-unstyled">
+                                @Html.TextAreaFor(model => model.TrainerNameInternal, (object)new { @class = "form-control TextAreastyle", disabled = "true" })
+                                @Html.HiddenFor(model => model.TrainerNameInternalID)
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search search-bg"><a href="#login-box" class="login-window" id="TrainerNameInternalDialogbox">
+                                        <img  src="@Url.Content("~/Content/css/Images/find.png")" alt="Find" title="Find"/>
+                                    </a>
+                                    </span>
+                                </span>
+                                @Html.ValidationMessageFor(m => m.TrainerNameInternal)
+                            </div>
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="clearfix margin-b-10" id="divTrainerProfile">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainerProfileFileDetails)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div id="divCourseTrainer">
+
+                                @{Html.RenderPartial(CommonConstants.FileHelperView, Model.TrainerProfileFileDetails);}
+
+                            </div>
+                            @if (Model.PageMode == CommonConstants.EditMode)
+                            {
+                                        
+                                <input type="file" id="fileTrainerProfiles" name="fileTrainerProfiles" multiple="multiple" class="fileUpload" />
+                                           
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingStartDate)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TrainingStartDate, "{0:dd/MM/yyyy}", new { @readonly = true, @class = "form-control datepicker required" })
+                            @*@Html.ValidationMessageFor(model => model.TrainingStartDate)*@
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingEndDate)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TrainingEndDate, "{0:dd/MM/yyyy}", new { @readonly = true, @class = "form-control datepicker required" })
+                            <span style="display: none;" id="hdnEndDt">@Convert.ToDateTime(Model.TrainingEndDate).ToString("dd-MMM-yyyy")</span>
+                            @*@Html.ValidationMessageFor(model => model.TrainingEndDate)*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingComments)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextAreaFor(model => model.TrainingComments, new { @class = "form-control TextAreastyle" })
+                            @Html.ValidationMessageFor(model => model.TrainingComments, "", new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="clearfix margin-b-30">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.NoOfdays)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.NoOfdays, new { @class = "form-control required" })
+                            @Html.ValidationMessageFor(model => model.NoOfdays, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TotalTrainingHours)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TotalTrainingHours, new { @class = "form-control required" })
+                            @Html.ValidationMessageFor(model => model.TotalTrainingHours, "", new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.NominationTypeID)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-10 col-sm-6">
+                            @foreach (var nm in Model.NominationDetails)
+                            {
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.NominationTypeID, nm.Value)
+                                    @Html.Label(nm.Text)
+                                </label>
+                            }
+                            @*@Html.ValidationMessageFor(model => model.NominationTypeID)*@
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10" id="divAllEffectivenessDetails">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.AllEffectivenessDetails)</label>
+                        </div>
+                        <div class="col-md-10 col-sm-6">
+                            @Html.CheckBoxListFor(model => model.PostedEffectiveness.EffectivenessIds,
+                                                  model => model.AllEffectivenessDetails,
+                                                  eff => eff.EffectivenessID,
+                                                  eff => eff.EffectivenessName,
+                                                  model => model.SelectedEffectiveness,
+                                                  MvcCheckBoxList.Model.Position.Horizontal)
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.SoftwareDetails)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextAreaFor(model => model.SoftwareDetails, new { @class = "form-control TextAreastyle" })
+                            @Html.ValidationMessageFor(model => model.SoftwareDetails, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.RequestedBy)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.RequestedBy, new { @class = "form-control required" })
+                            @*@Html.DropDownListFor(model => model.RequestedByID, Model.EmployeeDetails, new { id = "ddlRequestedBy", @class = "required" })*@
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.RequestedFor)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextAreaFor(model => model.RequestedFor, 3, 70, new { @class = "form-control TextAreastyle required" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.TrainingLocation)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TrainingLocation, new { @class = "form-control required" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default" id="pnlVendor">
+            <div class="panel-heading">Vendor Details</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">@Html.LabelFor(model => model.VendorID)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.DropDownListFor(model => model.VendorID, Model.VendorDetails, new { @class = "form-control Dropdownstyle" })
+                            @Html.ValidationMessageFor(model => model.VendorID, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">@Html.LabelFor(model => model.VendorEmailId)<span class="asterisk-color"> *</span></label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.VendorEmailId, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VendorEmailId, "", new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                            // Changed by : Venkatesh  : Start
+                            string Role = string.Empty;
+                            if (System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES] != null)
+                            {
+                                ArrayList arrRolesForUser = new ArrayList();
+                                arrRolesForUser = (ArrayList)System.Web.HttpContext.Current.Session[AuthorizationManagerConstants.AZMAN_ROLES];
+                                if (arrRolesForUser.Contains("admin"))
+                                {
+                                    Role = "Admin";
+                                }
+                            }
+                            // Changed by : Venkatesh  : End
+
+
+                            if (Convert.ToString(Role).ToLower() == CommonConstants.AdminRole.ToLower())
+                            {       
+    <div class="col-md-12">
+        <div class="panel panel-default" id="pnlPayment">
+            <div class="panel-heading">Payment Details</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label External">
+                                @Html.LabelFor(model => model.TotalCost)<span class="asterisk-color"> *</span>
+
+                            </label>
+                            <label class="form-label Internal" style="display: none">
+                                Acknowledgement Cost 
+                            </label>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.TotalCost, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TotalCost, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6 External">
+                            <label class="form-label">@Html.LabelFor(model => model.PaymentMadeID)</label>
+
+                        </div>
+                        <div class="col-md-4 col-sm-6 External">
+                            @foreach (var te in Model.PaymentMadeDetails)
+                            {
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.PaymentMadeID, te.Value)
+                                    @Html.Label(te.Text)
+                                </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row External">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.PaymentDueDt)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.PaymentDueDt, "{0:dd/MM/yyyy}", new { @readonly = true, @class = "form-control datepicker" })
+                            @Html.ValidationMessageFor(model => model.PaymentDueDt)
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.PaymentComments)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextAreaFor(model => model.PaymentComments, new { @class = "form-control TextAreastyle" })
+                            @Html.ValidationMessageFor(model => model.PaymentComments, "", new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.PaymentDates)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.TextBoxFor(model => model.PaymentDates, "{0:dd/MM/yyyy}", new { @readonly = true, @class = "form-control datepicker" })
+                            @Html.ValidationMessageFor(model => model.PaymentDates, "", new { @style = "color:red;" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6 External">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.IndividualPayementTraining)
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-sm-6 External">
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(model => model.IndividualPayementTraining, true)
+                                @Html.Label("Yes")
+                            </label>
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(model => model.IndividualPayementTraining, false)
+                                @Html.Label("No")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row External">
+                    <div class="clearfix margin-b-10" id="divInvoice">
+
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.InvoiceFileDetails)</label>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div id="divCourseInvoice">
+
+                                @{Html.RenderPartial(CommonConstants.FileHelperView, Model.InvoiceFileDetails);}
+
+                            </div>
+                            @if (Model.PageMode == CommonConstants.EditMode)
+                            {
+                                        
+                                <input type="file" id="fileInvoice" name="fileInvoice" class="fileUpload" />
+                                           
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row External">
+                    <div class="clearfix margin-b-10">
+                        <div class=" col-md-2 col-sm-6">
+                            <label class="form-label">
+                                @Html.LabelFor(model => model.PaymentModeID)</label>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            @Html.DropDownListFor(model => model.PaymentModeID, Model.PaymentModeDetails, new { @class = "form-control Dropdownstyle" })
+                        </div>
+                        <div class=" col-md-2 col-sm-6">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                            }
+                            
+    <div class="col-md-12 text-center">
+        @if (Model.PageMode == CommonConstants.EditMode)
+        {
+            <input id="btnUpdate" class="btn btn-submit margin-r-10 " type="submit" value="Update" />
+        }
+        <input id="btnCancel" class="btn btn-reset" type="button" value="Cancel" />
+
+    </div>
+                            
+
+
+}
+<div class="row">
+    @if (Model.PageMode == CommonConstants.EditMode)
+    {
+        if (Model.objCommonModel != null)
+        {
+            Html.RenderPartial("EmployeeList", Model.objCommonModel);
+        }
+    }
+</div>
+
+
+
+<script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+<style>
+    .overlay {
+        background: url(http://img52.imageshack.us/img52/2659/degrade.png) top left no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var gridurl = '@Url.Action("RaiseRequestGrid", "TrainingCourse")';
+        var CancelUrl = '@Url.Action("ListCourse", "TrainingCourse")';
+        var externalTrainer = '@CommonConstants.ExternalTrainer'
+        var internalTrainer = '@CommonConstants.InternalTrainer'
+        var SoftskillTraining = '@CommonConstants.SoftSkillsTrainingID'
+        var preEffVal = '@CommonConstants.PreTrainingEffectiveness'
+        var externalRequired = ["VendorID", "VendorEmailId"]
+        var paymentRequired = ["TotalCost"]
+
+        // Rakesh : Maintain TotalCost and PaymentDates 
+        //var paymentDetails = ["TotalCost", "PaymentDueDt", "PaymentComments", "PaymentDates"]
+
+        var paymentDetails = ["PaymentDueDt", "PaymentComments"]
+
+        if ($("input[name='NominationTypeID']:checked").val() == 1913) {
+            $("#divAllEffectivenessDetails").hide();
+            //$("input:checked[name = PostedEffectiveness.EffectivenessIds]").checked = false;
+        }
+        else {
+            $("#divAllEffectivenessDetails").show();
+        }
+
+        var id = $("input[name='TrainingModeID']:checked").val();
+        if (id == 1909) {
+            $("#TrainerName").removeClass("form-control required"); //for removing the validation of Trainer Name textbox when internal is selected
+            $("#divTrainerName").hide();
+            //$("#TrainerName").val('');
+            $("#divTrainerNameInternal").show();
+            //By Rakesh To Remove Total Cost Validation
+            $("#TotalCost").rules("remove", "required");
+
+        } else if (id == 1910) {
+            $("#divTrainerName").show();
+            $("#divTrainerNameInternal").hide();
+            //$("#TrainerName").val('');
+        }
+
+        $("input[name='NominationTypeID']").change(function () {
+
+            if ($("input[name='NominationTypeID']:checked").val() == 1913) {
+                $("#divAllEffectivenessDetails").hide();
+                $('#divAllEffectivenessDetails :checked').removeAttr('checked');
+
+            }
+            else {
+                $("#divAllEffectivenessDetails").show();
+            }
+        });
+
+        $("input[name='TrainingModeID']").click(function () {
+            var id = $("input[name='TrainingModeID']:checked").val();
+            if (id == 1909) {
+                $("#TrainerName").removeClass("form-control required"); //for removing the validation of Trainer Name textbox when internal is selected
+                $("#divTrainerName").hide();
+                $("#TrainerName").val('');
+                $("#TechnicalPanelName").val('');
+                $("#TechnicalPanelID").val('');
+                $("#divTrainerNameInternal").show();
+                $("#TrainerNameInternal").addClass("required");
+                //Adding Internal Trainer Cost
+                $('.External').hide();
+                $('.Internal').show();
+            } else if (id == 1910) {
+                $("#divTrainerName").show();
+                $("#TrainerName").addClass("form-control required");
+                $("#divTrainerNameInternal").hide();
+                $("#TrainerNameInternal").removeClass("required");
+                $("#TrainerNameInternal").val('');
+                $("#TrainerNameInternalID").val('');
+                //$('#divTrainerNameInternal :checked').removeAttr('checked');
+
+                //Adding Internal Trainer Cost
+                $('.External').show();
+                $('.Internal').hide();
+            }
+        })
+
+        $(function () {
+            $.validator.addMethod('date',
+               function (value, element) {
+                   if (this.optional(element)) {
+                       return true;
+                   }
+                   var valid = true;
+                   try {
+                       $.datepicker.parseDate('dd/mm/yy', value);
+                   }
+                   catch (err) {
+                       valid = false;
+                   }
+                   return valid;
+               });
+            $("#TrainingStartDate").datepicker(
+                {
+                    beforeShow: function () {
+                        setTimeout(function () {
+                            $('.ui-datepicker').css('z-index', 99999999999999);
+                        }, 0);
+                    },
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                })
+
+            $("#TrainingEndDate").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                })
+
+            $("#PaymentDueDt").datepicker(
+                {
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                })
+            $("#PaymentDates").datepicker(
+               {
+                   dateFormat: "dd/mm/yy",
+                   autoclose: true
+               })
+        });
+
+        $(function () {
+            var dialog, form
+            dialog = $("#login-box").dialog({
+                autoOpen: false,
+                height: 750,
+                width: 1000,
+                left: 500,
+                modal: true,
+                dialogClass: 'dlgfixed',
+                //position: ['center', 'top'],
+                //position: ({ my: 'center', of: 'center', collison: 'fit' }),
+                close: function () {
+                    //form[0].reset();
+                    //allFields.removeClass("ui-state-error");
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+
+            });
+
+            $("#check").bind("click", function () {
+                dialog.dialog("open");
+            });
+
+            $("#TrainerNameInternalDialogbox").bind("click", function () {
+                dialog.dialog("open");
+            });
+        });
+
+        if ('@Model.PageMode' == '@CommonConstants.EditMode') {
+            //debugger;
+            //$("#ddlTrainingType").prop("disabled", true);
+            //$("#ddlTrainingName").prop("disabled", true);
+            //$("#ddlTrainingType").attr('readonly', 'readonly');
+            //$("#ddlTrainingName").attr('readonly', 'readonly');
+            $('#ddlTrainingType option:not(:selected)').attr('disabled', true);
+            $('#ddlTrainingName option:not(:selected)').attr('disabled', true);
+            var trEndDtStr = $("#hdnEndDt").html();
+            var trEndDt = new Date(trEndDtStr.replace(/-/g, ' '));
+            if (new Date() > trEndDt) {
+                $("#pnlTrainingCourse :input").prop("disabled", true);
+
+
+                $("#pnlVendor :input").prop("disabled", true);
+                $("#check").off('click');
+
+                //Enable only start date and end date if no attendance exist
+                if ('@Model.FeedbackSent' == "False") {
+                    $('#TrainingStartDate').removeAttr("disabled");
+                    $('#TrainingEndDate').removeAttr("disabled");
+                }
+
+                $('#form0').attr('action', '/TrainingCourse/UpdatePaymentDetails');
+
+                if ($("input[name='TrainingModeID']:checked").val() == internalTrainer) {
+                    //$("#btnUpdate").hide()
+                    //Commented By Rakesh to Update Internal Training
+                };
+
+
+            }
+        }
+        else if ('@Model.PageMode' == '@CommonConstants.ViewMode') {
+            $("#form0 :input").prop("disabled", true);
+            $("#check").off('click');
+
+            $('#btnCancel').removeAttr("disabled");
+            //$(".actionlink a").fadeTo("fast", .5).removeAttr("href");
+            //$(".actionLink").prop("disabled", true);
+        }
+
+        //Harsha- Issue Id- 58975 & 58958 - Start
+        //Description- Making Training Cost Editable for Internal Training after Closed status of the training
+        //Disabling Number of Hours and Days field once the after training's status is feedback sent      
+
+        if ('@Model.PageMode' == '@CommonConstants.EditMode') {
+            @*if ('@Model.TrainingStatus' == '2028' || '@Model.TrainingStatus' == '1938') { //1938- Feedback Sent
+                $('#btnUpdate').prop('disabled', true);
+            }*@
+            if ('@Model.TrainingStatus' == '2028') {       //Feedback Completed         
+                $('#TotalTrainingHours').prop("disabled", true);
+                $('#NoOfdays').prop("disabled", true);
+            }
+            else if ('@Model.TrainingStatus' == '1235') { //Training Closed
+                if ('@Model.TrainingModeID' == '1909') { // Internal Training
+
+                    $("#check").off('click');
+                    $('#TotalCost').prop('disabled', false);
+                    $('#btnUpdate').prop('disabled', false);
+                    $('#btnCancel').prop('disabled', false);
+
+
+                    $('#ddlTrainingType').prop('disabled', true);
+                    $('#ddlTrainingName').prop('disabled', true);
+                    $('#CourseName').prop('disabled', true);
+                    $('#TrainingModeID').prop('disabled', true);
+                    $('#fileCourseContents').prop('disabled', true);
+                    $('#TrainerNameInternalDialogbox').prop('disabled', true);
+                    $('#TrainingStartDate').prop('disabled', true);
+                    $('#TrainingEndDate').prop('disabled', true);
+                    $('#TrainingComments').prop('disabled', true);
+                    $('#NominationTypeID').prop('disabled', true);
+                    $('#PostedEffectiveness_EffectivenessIds81').prop('disabled', true);
+                    $('#PostedEffectiveness_EffectivenessIds82').prop('disabled', true);
+                    $('#PostedEffectiveness_EffectivenessIds83').prop('disabled', true);
+                    $('#SoftwareDetails').prop('disabled', true);
+                    $('#RequestedBy').prop('disabled', true);
+                    $('#RequestedFor').prop('disabled', true);
+                    $('#TrainingLocation').prop('disabled', true);
+                    $('#PaymentDates').prop('disabled', true);
+
+                    $('#NoOfdays').prop('disabled', true);
+                    $('#TotalTrainingHours').prop("disabled", true);
+                    $('input[type=checkbox]').prop('disabled', true);
+                    $('input[type=radio]').prop('disabled', true);
+
+                    $('#form0').attr('action', '/TrainingCourse/EditCourse');
+                }
+            }
+            else {
+                $('#TotalTrainingHours').prop("disabled", false);
+                $('#NoOfdays').prop("disabled", false);
+            }
+    }
+
+
+
+        //Harsha Issue Id- 58975 and 58958 - End
+
+        function LoadGrid(trainingName) {
+            $("#divGrid").html('');
+            $("#divGrid").load(gridurl + "?trainingNameID=" + trainingName);
+        }
+
+        function setPanels(trainingMode) {
+            if (trainingMode == externalTrainer) {
+                //   $("#pnlPayment").show();
+                $("#pnlVendor").show();
+                $("#divDAR").show();
+                $("#divTechPanel").show();
+                $("#divTrainerProfile").show();
+                $.each(externalRequired, function (index, value) {
+                    $("#" + value).addClass('required');
+                })
+                $.each(paymentRequired, function (index, value) {
+                    $("#" + value).addClass('required');
+                })
+
+
+            } else {
+                $('.External').hide();
+                $('.Internal').show();
+                // $("#pnlPayment").hide();
+                $("#pnlVendor").hide();
+                $("#divDAR").hide();
+                $("#divTechPanel").hide();
+                $("#divTrainerProfile").hide();
+
+                $("#fileTrainerProfiles").val('');
+                $("#fileDAR").val('');
+                //$('input:checkbox').removeAttr('checked');
+
+                $.each(externalRequired, function (index, value) {
+                    $("#" + value).removeClass('required requiredHiglight');
+                    $("#" + value).val('');
+                });
+                $.each(paymentRequired, function (index, value) {
+                    $("#" + value).removeClass('required requiredHiglight');
+                });
+                $.each(paymentDetails, function (index, value) {
+                    $("#" + value).val('');
+                });
+                $("#PaymentModeID").val(0);
+                $('input:radio[name=PaymentMadeID]')[1].checked = true;
+                $('input:radio[name=IndividualPayementTraining]')[1].checked = true;
+
+            }
+        }
+
+        function SetEffectivenessText() {
+            var objEffId = $(":input[value=" + preEffVal + "]").attr('id');
+            if ($('#ddlTrainingType').val() == SoftskillTraining) {
+                $("label[for=" + objEffId + "]").html('Objective');
+            }
+            else {
+                $("label[for=" + objEffId + "]").html('Pre Rating');
+            }
+        }
+
+        setPanels($("input[name='TrainingModeID']:checked").val());
+        SetEffectivenessText();
+
+        $("input[name='TrainingModeID']").change(function () {
+            setPanels($("input[name='TrainingModeID']:checked").val());
+        })
+
+        $("#VendorID").change(function () {
+            var vId = $(this).val();
+            if (vId == "-1") {
+                $("#VendorEmailId").val("");
+            } else {
+                $.ajax({
+                    url: "@Url.Action("GetVendorEmailID", "TrainingCourse")",
+                    type: 'GET',
+                    cache: false,
+                    data: { vendorId: vId },
+                    success: function (data) {
+                        //console.log("Vendor Email:" + data);
+                        $("#VendorEmailId").val(data);
+                    }
+                });
+            }
+        })
+
+        $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+            checkbox_id = '';
+            checkbox_value = '';
+            var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                checkbox_value += ',' + $(elem).attr("name");
+                checkbox_id += ',' + $(elem).attr("class");
+            });
+            checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+            checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+            $('#TechnicalPanelID').val(checkbox_id);
+            $('#TechnicalPanelName').val(checkbox_value);
+            $('#login-box').dialog('close');
+
+        })
+
+        $("#BtnFirstSelect,#BtnSecondSelect").click(function () {
+            checkbox_id = '';
+            checkbox_value = '';
+            var rowcollection = table.$("input[type='checkbox']:checked", { "page": "all" });
+            rowcollection.each(function (index, elem) {
+                checkbox_value += ',' + $(elem).attr("name");
+                checkbox_id += ',' + $(elem).attr("class");
+            });
+            checkbox_id = checkbox_id.replace(checkbox_id.charAt(checkbox_id.indexOf(",")), "");
+            checkbox_value = checkbox_value.replace(checkbox_value.charAt(checkbox_value.indexOf(",")), "");
+
+            $('#TrainerNameInternalID').val(checkbox_id);
+            $("#TrainerNameInternal").val(checkbox_value);
+            $('#login-box').dialog('close');
+
+        })
+
+        $("#btnUpdate").click(function (e) {
+
+            if (Validation() == false) {
+                return false;
+            };
+
+            if ($('#RaiseTrainingIds').val() == "") {
+                alert("At least one Raise Training Request detail is mandatory.");
+                return false;
+            }
+
+            if ($("#TrainingEndDate").datepicker("getDate") < $("#TrainingStartDate").datepicker("getDate")) {
+                alert("Training End Date should not be less than Training Start Date.");
+                return false;
+            }
+
+            var startDate = $("#TrainingStartDate").datepicker("getDate");
+            var endDate = $("#TrainingEndDate").datepicker("getDate");
+            var oneDay = 24 * 60 * 60 * 1000;
+
+            var days = Math.abs((endDate.getTime() - startDate.getTime()) / oneDay) + 1;
+
+            if ($("#NoOfdays").val() > days) {
+                alert("Training No.Of days should lie in the range of training start date and training end date");
+                return false;
+            }
+
+        });
+
+        $("#btnCancel").click(function (e) {
+            //   window.location.href = '@Url.Action("ListCourse", "TrainingCourse")';
+
+            var selectedTrainingType = $("#ddlTrainingType option:selected").val();
+            if (selectedTrainingType == "") {
+                selectedTrainingType = 0;
+            }
+            var CourseID = $("#CourseID").val();
+            var courseStatus =@Html.Raw(Json.Encode(this.ViewData["courseStatus"]));    
+            var gridurl = '@Url.Action("Responsearr", "TrainingCourse")';
+            $.ajax({
+                url: gridurl,
+                type: 'POST',
+                data: { trainingTypeID: selectedTrainingType, CourseID: CourseID,CourseStatus:courseStatus },
+                success: function (response) {
+                    //$("#divGrid").load(gridurl + "?trainingTypeID=" + selectedTrainingType);
+                       @* window.location.href = '@Request.UrlReferrer.LocalPath';*@
+                        if (response.ok)
+                            window.location = response.newurl;
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            return false;
+
+        });
+
+        $(".fileUpload").change(function () {
+            // Get the file upload control file extension
+            var ext = $(this).val().split('.').pop().toLowerCase();
+
+            // Create array with the files extensions to upload
+            var fileListToUpload = new Array('pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'gif');
+
+            //Check the file extension is in the array.               
+            var isValidFile = $.inArray(ext, fileListToUpload);
+
+            // isValidFile gets the value -1 if the file extension is not in the list.  
+            if (isValidFile == -1) {
+                alert('Please select a valid file of type pdf/txt/doc/docx/xls/xlsx/jpg/jpeg/png/gif.');
+                $(this).replaceWith($(this).val('').clone(true));
+            }
+            else {
+                // Restrict the file size to 10 MB.
+                if ($(this).get(0).files[0].size > (1024 * 1024 * 10)) {
+                    alert('File size should not exceed 10MB.');
+                    $(this).replaceWith($(this).val('').clone(true));
+                }
+                //else {
+                //    alert('Thank you for selecting a valid file.');
+                //}
+            }
+        })
+    });
+</script>
