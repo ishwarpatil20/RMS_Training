@@ -38,6 +38,7 @@ namespace Services
         {
 
             string strUserIdentity = HttpContext.Current.User.Identity.Name;
+            //string strUserIdentity = "vaibhav.morje"; -- Uncomment this,put your name here and comment the one above
 
             try
             {
@@ -46,6 +47,7 @@ namespace Services
                 strUserIdentity = strUserIdentity.Replace(AuthorizationManagerConstants.RAVEDOMAIN + @"\", "");
 
                 string domainName = string.Empty;
+                //string domainName = "necsws.com";-- Uncomment this and comment the one above
                 strUserIdentity = _Commrepository.GetWindowsUsernameAsPerNorthgate(strUserIdentity, out domainName);
                 strUserIdentity = strUserIdentity + "@" + domainName;
             }

@@ -363,6 +363,7 @@ namespace RMS.Common.AuthorizationManager
         public string getLoggedInUserEmailId()
         {
             string strUserIdentity = HttpContext.Current.User.Identity.Name; //HttpContext.Current.Request.LogonUserIdentity.Name;
+            //string strUserIdentity = "vaibhav.morje"; -- Uncomment this,put your name here and comment the one above
             //GoogleMail
             try
             {
@@ -371,6 +372,8 @@ namespace RMS.Common.AuthorizationManager
                 strUserIdentity = strUserIdentity.Replace(AuthorizationManagerConstants.RAVEDOMAIN + @"\", "");
 
                 string domainName = string.Empty;
+                //string domainName = "necsws.com";-- Uncomment this and comment the one above
+
                 ////strUserIdentity = GetWindowsUsernameAsPerNorthgate(strUserIdentity);
                 //if (HttpContext.Current.ApplicationInstance == null || HttpContext.Current.ApplicationInstance.Session["WindowsUsername"] == null)
                 //{
