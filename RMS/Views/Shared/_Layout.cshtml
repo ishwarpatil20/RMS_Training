@@ -43,7 +43,9 @@
             <div class="col-md-12">
                 <p class="pull-right">
                     Welcome! <span class="UserNameStyle"><i>@{
-                        string[] words = User.Identity.Name.ToString().Replace("RAVE-TECH.CO.IN\\", "").Split('.');
+                        string user = "vaibhav.morje"; //Made changes by Vaibhav Just to run the project .Need to fix this
+                        //string[] words = User.Identity.Name.ToString().Replace("RAVE-TECH.CO.IN\\", "").Split('.');
+                        string[] words = user.Split('.');//Made changes by Vaibhav Just to run the project .Need to fix this
                         string a = words[0].Substring(0, 1).ToUpper() + words[0].Substring(1) + "." + words[1].Substring(0, 1).ToUpper() + words[1].Substring(1);
                         @a;
                     }
