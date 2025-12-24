@@ -90,31 +90,15 @@ namespace RMS.Common.Constants
         public const string NAVYANISEmailId = "navya.annamraju@northgateps.com";
         // Mohamed : NIS-RMS : 02/01/2015 : Ends
         #endregion Modified By Mohamed Dangra
-
-       public static string EmailIdOfRMOGroup;
-        public static string EmailIdForKSS;
+        public static string EmailIdOfRMOGroup = ConfigurationManager.AppSettings["RMOGroupEmail"]; //added by vaibhav morje    
+        public static string EmailIdForKSS = ConfigurationManager.AppSettings["EmailIdForKSSs"]; // added by vaibhav morje
+      
         //  public const string EmailIdOfRMOGroup = "rave.rm.group@northgateps.com"; Commented by vaibhav Morje
-        public static string EmailIdOfRMOGroups 
-            {
-            get
-            {
-                if (string.IsNullOrEmpty(EmailIdOfRMOGroup))
-                    EmailIdOfRMOGroup = ConfigurationManager.AppSettings["EmailIdOfRMOGroup"];
-                return EmailIdOfRMOGroup;
-            }
-            }
+     
         //Ishwar Patil : Training Module : 20/08/2014 Start
         // public const string EmailIdForKSS = "nitin.madkaikar@northgateps.com";Commented by vaibhav Morje
-        public static string GetterEmailIdForKSS
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(EmailIdForKSS))
-                    EmailIdForKSS = ConfigurationManager.AppSettings["EmailIdForKSSs"];
-                return EmailIdForKSS;
-            }
-        }
-        //Ishwar Patil : Training Module : 20/08/2014 End
+     
+       //Ishwar Patil : Training Module : 20/08/2014 End
 
         /// <summary>
         /// Date Format variable
